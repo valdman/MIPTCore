@@ -1,0 +1,49 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/Users/boris/Projects/Sharp/MIPTCore/MIPTCore/MIPTCore.csproj",
+    "projectName": "MIPTCore",
+    "projectPath": "/Users/boris/Projects/Sharp/MIPTCore/MIPTCore/MIPTCore.csproj",
+    "outputPath": "/Users/boris/Projects/Sharp/MIPTCore/MIPTCore/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netcoreapp2.0"
+    ],
+    "frameworks": {
+      "netcoreapp2.0": {
+        "projectReferences": {
+          "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/DataAccess.csproj": {
+            "projectPath": "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/DataAccess.csproj"
+          }
+        }
+      }
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Microsoft.AspNetCore": {
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Microsoft.AspNetCore.Mvc": {
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Microsoft.Extensions.Logging.Debug": {
+          "target": "Package",
+          "version": "2.0.0"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
