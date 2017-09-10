@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace DataAccess
 {
     public interface IRepository<T> where T : PersistentEntity
     {
-        T GetById(int objectToGetId);
-        IEnumerable<T> GetByPredicate(Expression<Func<bool, T>> predicate = null);
+        Task<T> GetByIdAsync(int objectToGetId);
+        Task<IEnumerable<T>> GetByPredicateAsync(Expression<Func<T, bool>> predicate = null);
 
-        int Create(T objectToCreate);
-        void Update(T objectToUpdate);
-        void Delete(int objectToDeleteId);
+        Task<int> CreateAsync(T objectToCreate);
+        Task UpdateAsync(T objectToUpdate);
+        Task DeleteAsync(int objectToDeleteId);
     }
 }

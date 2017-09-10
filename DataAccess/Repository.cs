@@ -1,35 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Journalist;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
     public class Repository<T> : IRepository<T> where T : PersistentEntity
     {
+        private readonly DbSessionProvider<T> _sessionProvider;
+
+        public Repository(DbSessionProvider<T> sessionProvider)
+        {
+            _sessionProvider = sessionProvider;
+        }
         
-        public T GetById(int objectToGetId)
+        public async Task<T> GetByIdAsync(int objectToGetId)
         {
-            throw new NotImplementedException();
+            Require.Positive(objectToGetId, nameof(objectToGetId));
+            
+            using (var sessionContext = _sessionProvider.GetEntityContext())
+            {
+                return await sessionContext.DbSet.FindAsync(objectToGetId);
+            }
         }
 
-        public IEnumerable<T> GetByPredicate(Expression<Func<bool, T>> predicate = null)
+        public async Task<IEnumerable<T>> GetByPredicateAsync(Expression<Func<T, bool>> predicate = null)
         {
-            throw new NotImplementedException();
+            using (var sessionContext = _sessionProvider.GetEntityContext())
+            {
+                return predicate == null ? 
+                    await sessionContext.DbSet.ToListAsync() : 
+                    await sessionContext.DbSet.Where(predicate).ToListAsync();
+            }  
         }
 
-        public int Create(T objectToCreate)
+        public async Task<int> CreateAsync(T objectToCreate)
         {
-            throw new NotImplementedException();
+            using (var sessionContext = _sessionProvider.GetEntityContext())
+            {
+                await sessionContext.DbSet.AddAsync(objectToCreate);
+                await sessionContext.SaveChangesAsync();
+                return objectToCreate.Id;
+            }
         }
 
-        public void Update(T objectToUpdate)
+        public async Task UpdateAsync(T objectToUpdate)
         {
-            throw new NotImplementedException();
+            using (var sessionContext = _sessionProvider.GetEntityContext())
+            {
+                await UpdateByValues(objectToUpdate, sessionContext);
+                await sessionContext.SaveChangesAsync();
+            }
         }
 
-        public void Delete(int objectToDeleteId)
+        public async Task DeleteAsync(int objectToDeleteId)
         {
-            throw new NotImplementedException();
+            using (var sessionContext = _sessionProvider.GetEntityContext())
+            {
+                var @object = await GetByIdAsync(objectToDeleteId);
+                if (@object == null)
+                {
+                    return;
+                }
+                @object.IsDeleted = true;
+                await UpdateAsync(@object);
+            }
+        }
+
+        private async Task UpdateByValues(T item, DbSessionProvider<T>.EntityContext<T> context)
+        {
+            var collection = context.DbSet;
+            var entity = await collection.FindAsync(item.Id);
+            if (entity == null)
+            {
+                return;
+            }
+
+            context.Entry(entity).CurrentValues.SetValues(item);
         }
     }
 }

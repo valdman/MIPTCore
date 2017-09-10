@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/DataAccess.csproj",
+    "projectUniqueName": "/Users/boris/Projects/Net/MIPTCore/DataAccess/DataAccess.csproj",
     "projectName": "DataAccess",
-    "projectPath": "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/DataAccess.csproj",
-    "outputPath": "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/obj/",
+    "projectPath": "/Users/boris/Projects/Net/MIPTCore/DataAccess/DataAccess.csproj",
+    "outputPath": "/Users/boris/Projects/Net/MIPTCore/DataAccess/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netstandard2.0"
@@ -18,6 +18,10 @@
   "frameworks": {
     "netstandard2.0": {
       "dependencies": {
+        "Journalist.LanguageExtensions": {
+          "target": "Package",
+          "version": "0.18.0"
+        },
         "Microsoft.EntityFrameworkCore": {
           "target": "Package",
           "version": "2.0.0"

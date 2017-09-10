@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,8 +19,17 @@ namespace MIPTCore
 
         public void Configure()
         {
+            ConfigureDatebase();
             _services
+                .AddEntityFramework()
+                .AddSingleton<DbContextOptions>(new DbContextOptions(_configuration["ConnectionString"]))
                 .AddSingleton(typeof(DbSessionProvider<>));
+        }
+
+        private void ConfigureDatebase()
+        {
+            var connection = _configuration["DbConnectionString"];
+            var optionsBuilder = DbContextOptions
         }
     }
 }

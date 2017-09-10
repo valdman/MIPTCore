@@ -1,47 +1,36 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DataAccess
 {
     public class DbSessionProvider<T> where T : PersistentEntity
     {
-        private readonly DbContextOptions _connectionOptions;
-        private InnerContext _currentInnerContext;
+        private readonly DbContextOptions _dbContextOptions;
 
-        public DbSessionProvider(DbContextOptions connectionOptions)
+        public DbSessionProvider(DbContextOptions dbContextOptions)
         {
-            _connectionOptions = connectionOptions;
+            _dbContextOptions = dbContextOptions;
         }
 
-
-        public DbSet<T> CurrentSession { get; private set; }
-
-        public void OpenSession()
+        public EntityContext<T> GetEntityContext()
         {
-            _currentInnerContext = new InnerContext(_connectionOptions);
-            CurrentSession = _currentInnerContext.Objects;
+            return new EntityContext<T>(_dbContextOptions);
         }
 
-        public void CloseSession()
+        public class EntityContext<TR> : DbContext, IDisposable where TR : PersistentEntity
         {
-            if (CurrentSession == null)
+            public EntityContext(DbContextOptions connetcionOptions) : base(connetcionOptions)
             {
-                Debug.WriteLine("Attend to close closed session");
+                
             }
+            
+            public DbSet<TR> DbSet { get; private set; }
 
-            CurrentSession = null;
-            _currentInnerContext.Dispose();
-        }
 
-        private class InnerContext : DbContext
-        {
-            public InnerContext(DbContextOptions connectionOptions) : base(connectionOptions)
+            public new void Dispose()
             {
+                base.Dispose();
             }
-
-            public DbSet<T> Objects { get; private set; }
         }
     }
 }

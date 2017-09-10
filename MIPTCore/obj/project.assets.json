@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "Journalist.LanguageExtensions/0.18.0": {
+        "type": "package",
+        "compile": {
+          "lib/net451/Journalist.LanguageExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Journalist.LanguageExtensions.dll": {}
+        }
+      },
       "Libuv/1.10.0": {
         "type": "package",
         "dependencies": {
@@ -3021,6 +3030,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Journalist.LanguageExtensions": "0.18.0",
           "Microsoft.EntityFrameworkCore": "2.0.0",
           "NETStandard.Library": "2.0.0"
         },
@@ -3034,6 +3044,16 @@
     }
   },
   "libraries": {
+    "Journalist.LanguageExtensions/0.18.0": {
+      "sha512": "CBhp6ywVSYoc1Lba9GI5KcSWayKSolw4MhZdR6FZHHzCNP0K6vQg73r4+PWuNO02aPCbcexFPgQOp8TwTiHWrw==",
+      "type": "package",
+      "path": "journalist.languageextensions/0.18.0",
+      "files": [
+        "journalist.languageextensions.0.18.0.nupkg.sha512",
+        "journalist.languageextensions.nuspec",
+        "lib/net451/Journalist.LanguageExtensions.dll"
+      ]
+    },
     "Libuv/1.10.0": {
       "sha512": "GsCf4q+eyaI49rCPlgYxdxa1SQCysXFFdSJWdstrwxytg4+VPYLYrXD4AT2rjHVJ+UF7SSWX9CapWEYaU4ejVQ==",
       "type": "package",
@@ -8547,11 +8567,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/boris/Projects/Sharp/MIPTCore/MIPTCore/MIPTCore.csproj",
+      "projectUniqueName": "/Users/boris/Projects/Net/MIPTCore/MIPTCore/MIPTCore.csproj",
       "projectName": "MIPTCore",
-      "projectPath": "/Users/boris/Projects/Sharp/MIPTCore/MIPTCore/MIPTCore.csproj",
+      "projectPath": "/Users/boris/Projects/Net/MIPTCore/MIPTCore/MIPTCore.csproj",
       "packagesPath": "/Users/boris/.nuget/packages/",
-      "outputPath": "/Users/boris/Projects/Sharp/MIPTCore/MIPTCore/obj/",
+      "outputPath": "/Users/boris/Projects/Net/MIPTCore/MIPTCore/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/boris/.config/NuGet/NuGet.Config"
@@ -8566,8 +8586,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/DataAccess.csproj": {
-              "projectPath": "/Users/boris/Projects/Sharp/MIPTCore/DataAccess/DataAccess.csproj"
+            "/Users/boris/Projects/Net/MIPTCore/DataAccess/DataAccess.csproj": {
+              "projectPath": "/Users/boris/Projects/Net/MIPTCore/DataAccess/DataAccess.csproj"
             }
           }
         }
@@ -8600,5 +8620,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Journalist.LanguageExtensions 0.18.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Journalist.LanguageExtensions",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    }
+  ]
 }
