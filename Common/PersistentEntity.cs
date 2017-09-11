@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Entities
+namespace Common
 {
     public abstract class PersistentEntity
     {

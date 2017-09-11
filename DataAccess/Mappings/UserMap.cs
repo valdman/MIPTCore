@@ -1,16 +1,22 @@
-﻿using Common.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using UserManagment;
 
 namespace DataAccess.Mappings
 {
     public class UserMap
     {
-        public UserMap(EntityTypeBuilder<User> entityBuilder)
+        public UserMap(EntityTypeBuilder<User> e)
         {
-            entityBuilder.HasKey(t => t.Id);
-            entityBuilder.Property(t => t.FirstName).IsRequired();
-            entityBuilder.Property(t => t.LastName).IsRequired();
-            entityBuilder.Property(t => t.Email).IsRequired();           
+            e.HasKey(t => t.Id);
+            e.Property(t => t.FirstName).IsRequired();
+            e.Property(t => t.LastName).IsRequired();
+            e.Property(t => t.Email).IsRequired();
+            e.Property(t => t.Password).IsRequired();
+            e.Property(t => t.IsMiptAlumni).IsRequired();
+            e.Property(t => t.AlumniProfile);
+            e.Property(t => t.Role);
+            e.Property(t => t.AuthentificatedAt);
         }
     }
 }

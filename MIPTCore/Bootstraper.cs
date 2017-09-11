@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
+using Common;
+using Common.Infrastructure;
 using DataAccess;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
+using UserManagment;
 
 namespace MIPTCore
 {
@@ -28,14 +32,14 @@ namespace MIPTCore
 
         private void ConfigureDatebase()
         {
-            var options = new DbContextOptionsBuilder()
+            var contextOptions = new DbContextOptionsBuilder()
                 .UseNpgsql(_configuration.GetConnectionString("Postgres"))
                 .Options;
-            var sessionProvider = new DbSessionProvider(options);
+            var sessionProvider = new DbSessionProvider(contextOptions);
             
             _services
                 .AddEntityFrameworkNpgsql()
-                .AddScoped(typeof(DbSessionProvider), _ => new DbSessionProvider(options))
+                .AddScoped(typeof(DbSessionProvider), _ => new DbSessionProvider(contextOptions))
                 .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             sessionProvider.Database.EnsureCreated();

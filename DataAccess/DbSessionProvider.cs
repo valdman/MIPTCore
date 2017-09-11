@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using Common.Entities;
 using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
+using UserManagment;
 
 namespace DataAccess
 {
@@ -14,7 +14,7 @@ namespace DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            new UserMap(modelBuilder.Entity<User>());
+            var userMap = new UserMap(modelBuilder.Entity<User>());
         }
     }
 }

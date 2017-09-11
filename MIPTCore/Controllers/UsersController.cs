@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Common.Entities;
+using Common;
+using Common.Infrastructure;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using UserManagment;
 
 namespace MIPTCore.Controllers
 {

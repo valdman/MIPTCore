@@ -4,7 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Common.Entities;
+using Common;
+using Common.Infrastructure;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +40,7 @@ namespace DataAccess
             return await _db.Where(@object => !@object.IsDeleted).ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
@@ -62,11 +63,11 @@ namespace DataAccess
             
             var objectToDelete = await GetById(objectId);
             objectToDelete.IsDeleted = true;
-            await Update(objectToDelete);
+            await UpdateAsync(objectToDelete);
             await Save();
         }
 
-        public virtual async Task Update(T @object)
+        public virtual async Task UpdateAsync(T @object)
         {
             Require.NotNull(@object, nameof(@object));
             
@@ -84,9 +85,5 @@ namespace DataAccess
         {
             await _sessionProvider.SaveChangesAsync();
         }
-    }
-
-    public class ConnectionToDatabaseUnstabledException : Exception
-    {
     }
 }

@@ -30,6 +30,11 @@ namespace MIPTCore
         {
             // Add framework services.
             services.AddMvc();
+            services.AddAuthentication("MIPTCoreCookieAuthenticationScheme")
+                .AddCookie(options =>
+                {
+                    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                });
             
             //Add DI starter
             new Bootstraper(services, Configuration).Configure();
@@ -46,6 +51,7 @@ namespace MIPTCore
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

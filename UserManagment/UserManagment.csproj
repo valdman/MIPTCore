@@ -3,9 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{56AF59F4-2501-4632-9155-D2D09C9C76C2}</Project>
-      <Name>DataAccess</Name>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{5DE8D936-65E3-491B-9D33-77FA12858515}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
