@@ -3,12 +3,14 @@ using System.Diagnostics;
 using Common;
 using Common.Infrastructure;
 using DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MIPTCore.Authentification.Handlers;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using UserManagment;
 
@@ -28,6 +30,11 @@ namespace MIPTCore
         public void Configure()
         {
             ConfigureDatebase();
+            
+            _services
+                //Register auth middleware
+                .AddSingleton<IAuthorizationHandler, IsAuthentificatedAuthHandler>()
+                .AddSingleton<IAuthorizationHandler, IsInRoleRoleAuthHandler>();
         }
 
         private void ConfigureDatebase()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Common;
 using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
 using UserManagment;

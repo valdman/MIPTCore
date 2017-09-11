@@ -9,6 +9,7 @@ using DataAccess;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MIPTCore.Authentification;
 using MIPTCore.Models;
 using UserManagment;
 
@@ -23,7 +24,7 @@ namespace MIPTCore.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost("user/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Credentials credentials)
         {
             var intentedUser = (await _userRepository.FindByAsync(user => user.Email == credentials.Email)).SingleOrDefault();
@@ -42,32 +43,42 @@ namespace MIPTCore.Controllers
             intentedUser.AuthentificatedAt = DateTimeOffset.Now;
 
             await _userRepository.UpdateAsync(intentedUser);
+            
+            var myclaims = new List<Claim>(new Claim[] 
+            { 
+                new Claim(ClaimTypes.NameIdentifier, intentedUser.Id.ToString()),
+                new Claim(ClaimTypes.Role, intentedUser.Role.ToString())
+            });
 
-            var claimsPrincipal = new ClaimsPrincipal(intentedUser);
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(myclaims, "MIPTCoreCookieAuthenticationScheme"));
 
             await HttpContext.SignInAsync("MIPTCoreCookieAuthenticationScheme", claimsPrincipal);
 
             return Ok(UserMapper.UserToUserModel(intentedUser));
         }
 
-        [HttpPost("user/logout")]
+        [HttpPost("logout")]
         [Authorize("User")]
         public async Task<IActionResult> Logout()
         {
-            var currentUser = (User)User.Identity;
+            var currentUserId = User.GetId();
+
+            var currentUser = await _userRepository.GetById(currentUserId);
+            
             currentUser.AuthentificatedAt = null;
 
             await _userRepository.UpdateAsync(currentUser);
             
-            await HttpContext.SignOutAsync("MyCookieAuthenticationScheme");
+            await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
             return Ok();
         }
 
-        [HttpGet("user/current")]
+        [HttpGet("me")]
         [Authorize("User")]
-        public IActionResult Current()
+        public async Task<IActionResult> Current()
         {
-            var currentUser = (User)User.Identity;
+            var currentUserId = User.GetId();
+            var currentUser = await _userRepository.GetById(currentUserId);
 
             if (currentUser == null)
             {

@@ -14,4 +14,7 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\UserManagment\UserManagment.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Authentifications" />
+  </ItemGroup>
 </Project>
