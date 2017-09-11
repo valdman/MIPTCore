@@ -1,36 +1,20 @@
 ﻿using System;
+using System.Diagnostics;
+using Common.Entities;
+using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
-    public class DbSessionProvider<T> where T : PersistentEntity
+    public class DbSessionProvider : DbContext
     {
-        private readonly DbContextOptions _dbContextOptions;
-
-        public DbSessionProvider(DbContextOptions dbContextOptions)
+        public DbSessionProvider(DbContextOptions connectionOptions) : base(connectionOptions)
         {
-            _dbContextOptions = dbContextOptions;
         }
 
-        public EntityContext<T> GetEntityContext()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            return new EntityContext<T>(_dbContextOptions);
-        }
-
-        public class EntityContext<TR> : DbContext, IDisposable where TR : PersistentEntity
-        {
-            public EntityContext(DbContextOptions connetcionOptions) : base(connetcionOptions)
-            {
-                
-            }
-            
-            public DbSet<TR> DbSet { get; private set; }
-
-
-            public new void Dispose()
-            {
-                base.Dispose();
-            }
+            new UserMap(modelBuilder.Entity<User>());
         }
     }
 }

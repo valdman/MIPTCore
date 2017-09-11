@@ -9,6 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{56AF59F4-2501-4632-9155-D2D09C9C76C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{79DDA439-A139-45AF-B517-5DB126E2C0D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment", "UserManagment\UserManagment.csproj", "{4380F1D5-BC93-4A3E-83CA-4464F086ACC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5DE8D936-65E3-491B-9D33-77FA12858515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +29,20 @@ Global
 		{56AF59F4-2501-4632-9155-D2D09C9C76C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56AF59F4-2501-4632-9155-D2D09C9C76C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56AF59F4-2501-4632-9155-D2D09C9C76C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4380F1D5-BC93-4A3E-83CA-4464F086ACC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4380F1D5-BC93-4A3E-83CA-4464F086ACC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4380F1D5-BC93-4A3E-83CA-4464F086ACC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4380F1D5-BC93-4A3E-83CA-4464F086ACC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE8D936-65E3-491B-9D33-77FA12858515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE8D936-65E3-491B-9D33-77FA12858515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE8D936-65E3-491B-9D33-77FA12858515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE8D936-65E3-491B-9D33-77FA12858515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{56AF59F4-2501-4632-9155-D2D09C9C76C2} = {E2FE57A9-FB33-4D04-901A-FB15C5D04372}
+		{4380F1D5-BC93-4A3E-83CA-4464F086ACC4} = {79DDA439-A139-45AF-B517-5DB126E2C0D7}
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,12 @@
-﻿using DataAccess;
+﻿using System;
+using System.Diagnostics;
+using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace MIPTCore
 {
@@ -20,16 +24,34 @@ namespace MIPTCore
         public void Configure()
         {
             ConfigureDatebase();
-            _services
-                .AddEntityFramework()
-                .AddSingleton<DbContextOptions>(new DbContextOptions(_configuration["ConnectionString"]))
-                .AddSingleton(typeof(DbSessionProvider<>));
         }
 
         private void ConfigureDatebase()
         {
-            var connection = _configuration["DbConnectionString"];
-            var optionsBuilder = DbContextOptions
+            var options = new DbContextOptionsBuilder()
+                .UseNpgsql(_configuration.GetConnectionString("Postgres"))
+                .Options;
+            var sessionProvider = new DbSessionProvider(options);
+            
+            _services
+                .AddEntityFrameworkNpgsql()
+                .AddScoped(typeof(DbSessionProvider), _ => new DbSessionProvider(options))
+                .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            sessionProvider.Database.EnsureCreated();
+            
+            //ForceCreateSchema();
+
+            void ForceCreateSchema()
+            {
+                var databaseCreator =
+                (RelationalDatabaseCreator)sessionProvider.Database.GetService<IDatabaseCreator>();
+                if (!databaseCreator.EnsureCreated())
+                {
+                    databaseCreator.CreateTables();
+                }
+                
+            }
         }
     }
 }

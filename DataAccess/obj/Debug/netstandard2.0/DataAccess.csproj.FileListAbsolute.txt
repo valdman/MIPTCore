@@ -1,8 +1,0 @@
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/bin/Debug/netstandard2.0/DataAccess.deps.json
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/bin/Debug/netstandard2.0/DataAccess.dll
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/bin/Debug/netstandard2.0/DataAccess.pdb
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.CoreCompileInputs.cache
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfoInputs.cache
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfo.cs
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/obj/Debug/netstandard2.0/DataAccess.dll
-/Users/boris/Projects/Sharp/MIPTCore/DataAccess/obj/Debug/netstandard2.0/DataAccess.pdb

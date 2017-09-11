@@ -2,39 +2,210 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="355af278-a296-4439-827b-95e139edd75f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.MIPTCore/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/DataAccess.deps.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/DataAccess.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/DataAccess.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfo.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfoInputs.cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.CoreCompileInputs.cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/DataAccess.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/DataAccess.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.deps.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.runtimeconfig.dev.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.runtimeconfig.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.AssemblyInfo.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.AssemblyInfoInputs.cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.csproj.CoreCompileInputs.cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.csprojResolveAssemblyReference.cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.pdb" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Debug/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Debug/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Debug/netstandard2.0/publish/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Debug/netstandard2.0/publish/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Release/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Release/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Common.csproj.nuget.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Debug/netstandard2.0/Common.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Debug/netstandard2.0/Common.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Debug/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Debug/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Release/netstandard2.0/Common.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Release/netstandard2.0/Common.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Release/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Release/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Journalist.LanguageExtensions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.EntityFrameworkCore.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Caching.Abstractions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Caching.Memory.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.DependencyInjection.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Logging.Abstractions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Logging.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Options.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Primitives.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/Remotion.Linq.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Collections.Immutable.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.ComponentModel.Annotations.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Diagnostics.DiagnosticSource.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Interactive.Async.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Linq.Expressions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Linq.Queryable.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Linq.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.ObjectModel.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Reflection.Emit.ILGeneration.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Reflection.Emit.Lightweight.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Reflection.Emit.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Reflection.TypeExtensions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Runtime.CompilerServices.Unsafe.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/System.Threading.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Release/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Release/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Release/netstandard2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Release/netstandard2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.CopyComplete" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.csproj.CopyComplete" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/MIPTCore.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/MIPTCore.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.csproj.CopyComplete" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Journalist.LanguageExtensions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.EntityFrameworkCore.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Caching.Abstractions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Caching.Memory.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.DependencyInjection.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Logging.Abstractions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Logging.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Options.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Microsoft.Extensions.Primitives.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/Remotion.Linq.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Collections.Immutable.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.ComponentModel.Annotations.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Diagnostics.DiagnosticSource.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Interactive.Async.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Linq.Expressions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Linq.Queryable.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Linq.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.ObjectModel.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Reflection.Emit.ILGeneration.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Reflection.Emit.Lightweight.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Reflection.Emit.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Reflection.TypeExtensions.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Runtime.CompilerServices.Unsafe.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/System.Threading.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/Common.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/Common.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/DataAccess.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/DataAccess.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.csproj.CopyComplete" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.AssemblyInfoInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.csproj.CopyComplete" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.csproj.CoreCompileInputs.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.pdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/UserManagment.csproj.nuget.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/Common.csproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/Entities/User.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Debug/netstandard2.0/Common.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Debug/netstandard2.0/publish/Common.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/bin/Release/netstandard2.0/Common.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Common.csproj.nuget.g.props" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Common.csproj.nuget.g.targets" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Debug/netstandard2.0/Common.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Debug/netstandard2.0/Common.csproj.FileListAbsolute.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Release/netstandard2.0/Common.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/Release/netstandard2.0/Common.csproj.FileListAbsolute.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/project.assets.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/obj/project.packagespec.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/GenericRepository.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/IGenericRepository.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/DataAccess.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Debug/netstandard2.0/publish/DataAccess.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/bin/Release/netstandard2.0/DataAccess.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/obj/Release/netstandard2.0/DataAccess.csproj.FileListAbsolute.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.runtimeconfig.dev.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Debug/netcoreapp2.0/MIPTCore.runtimeconfig.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/MIPTCore.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/MIPTCore.runtimeconfig.dev.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/bin/Release/netcoreapp2.0/MIPTCore.runtimeconfig.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MIPTCore/obj/Release/netcoreapp2.0/MIPTCore.csproj.FileListAbsolute.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/UserManagment.csproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/UserManagment.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Debug/netstandard2.0/publish/UserManagment.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/bin/Release/netstandard2.0/UserManagment.deps.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Debug/netstandard2.0/UserManagment.csproj.FileListAbsolute.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.AssemblyInfo.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/Release/netstandard2.0/UserManagment.csproj.FileListAbsolute.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/UserManagment.csproj.nuget.g.props" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/UserManagment.csproj.nuget.g.targets" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/project.assets.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserManagment/obj/project.packagespec.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/IRepository.cs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DataAccess/Repository.cs" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/DataAccess/PersistentEntity.cs" afterPath="$PROJECT_DIR$/Common/Entities/PersistentEntity.cs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs" afterPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/obj/DataAccess.csproj.nuget.cache" afterPath="$PROJECT_DIR$/DataAccess/obj/DataAccess.csproj.nuget.cache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/obj/MIPTCore.csproj.nuget.cache" afterPath="$PROJECT_DIR$/MIPTCore/obj/MIPTCore.csproj.nuget.cache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.MIPTCore/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.MIPTCore/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.MIPTCore/riderModule.iml" afterPath="$PROJECT_DIR$/.idea/.idea.MIPTCore/riderModule.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" afterPath="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/IRepository.cs" afterPath="$PROJECT_DIR$/DataAccess/IRepository.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/Repository.cs" afterPath="$PROJECT_DIR$/DataAccess/Repository.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/obj/DataAccess.csproj.nuget.g.props" afterPath="$PROJECT_DIR$/DataAccess/obj/DataAccess.csproj.nuget.g.props" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.FileListAbsolute.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/obj/project.assets.json" afterPath="$PROJECT_DIR$/DataAccess/obj/project.assets.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/obj/project.packagespec.json" afterPath="$PROJECT_DIR$/DataAccess/obj/project.packagespec.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore.sln" afterPath="$PROJECT_DIR$/MIPTCore.sln" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" afterPath="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/MIPTCore.csproj" afterPath="$PROJECT_DIR$/MIPTCore/MIPTCore.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/Startup.cs" afterPath="$PROJECT_DIR$/MIPTCore/Startup.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/appsettings.Development.json" afterPath="$PROJECT_DIR$/MIPTCore/appsettings.Development.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/MIPTCore/obj/Debug/netcoreapp2.0/MIPTCore.csproj.FileListAbsolute.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/obj/MIPTCore.csproj.nuget.g.props" afterPath="$PROJECT_DIR$/MIPTCore/obj/MIPTCore.csproj.nuget.g.props" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/obj/project.assets.json" afterPath="$PROJECT_DIR$/MIPTCore/obj/project.assets.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/obj/project.packagespec.json" afterPath="$PROJECT_DIR$/MIPTCore/obj/project.packagespec.json" />
@@ -49,46 +220,60 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Repository.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataAccess/Repository.cs">
+      <file leaf-file-name="Bootstraper.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            <state relative-caret-position="258">
+              <caret line="37" column="67" lean-forward="false" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
               <folding>
-                <marker date="1505053524000" expanded="true" signature="6:182" ph="..." />
-                <marker date="1505053524000" expanded="true" signature="204:2744" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="281:2742" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="416:484" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="554:836" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="722:826" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="943:1257" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="1030:1245" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="1319:1612" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="1406:1602" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="1669:1921" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="1756:1911" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="1982:2362" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="2069:2352" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="2188:2252" ph="{...}" />
-                <marker date="1505053524000" expanded="false" signature="2460:2736" ph="{...}" />
-                <marker date="1505053524000" expanded="true" signature="2608:2660" ph="{...}" />
+                <marker date="1505070054000" expanded="false" signature="6:326" ph="..." />
+                <marker date="1505070054000" expanded="true" signature="346:1789" ph="{...}" />
+                <marker date="1505070054000" expanded="true" signature="377:1787" ph="{...}" />
+                <marker date="1505070054000" expanded="true" signature="589:687" ph="{...}" />
+                <marker date="1505070054000" expanded="true" signature="720:773" ph="{...}" />
+                <marker date="1505070054000" expanded="true" signature="815:1781" ph="{...}" />
+                <marker date="1505070054000" expanded="true" signature="1652:1740" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bootstraper.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs">
+      <file leaf-file-name="GenericRepository.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataAccess/GenericRepository.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="49" />
+            <state relative-caret-position="180">
+              <caret line="20" column="47" lean-forward="false" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
               <folding>
-                <marker date="1505054513000" expanded="false" signature="6:196" ph="..." />
-                <marker date="1505054513000" expanded="true" signature="216:1056" ph="{...}" />
-                <marker date="1505054513000" expanded="true" signature="247:1054" ph="{...}" />
-                <marker date="1505054513000" expanded="true" signature="459:557" ph="{...}" />
-                <marker date="1505054513000" expanded="true" signature="590:869" ph="{...}" />
-                <marker date="1505054513000" expanded="true" signature="911:1048" ph="{...}" />
+                <marker date="1505068368000" expanded="false" signature="6:231" ph="..." />
+                <marker date="1505068368000" expanded="true" signature="253:2672" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="352:2589" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="527:643" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="689:1006" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="879:945" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="1066:1167" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="1254:1444" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="1502:1764" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="1820:2082" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="2135:2463" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="2297:2349" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="2508:2583" ph="{...}" />
+                <marker date="1505068368000" expanded="true" signature="2658:2670" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DbSessionProvider.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataAccess/DbSessionProvider.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+              <folding>
+                <marker date="1505068804000" expanded="false" signature="6:126" ph="..." />
+                <marker date="1505068804000" expanded="true" signature="148:476" ph="{...}" />
+                <marker date="1505068804000" expanded="true" signature="197:474" ph="{...}" />
+                <marker date="1505068804000" expanded="true" signature="298:318" ph="{...}" />
+                <marker date="1505068804000" expanded="true" signature="394:468" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -101,6 +286,7 @@
       <find>CreateDefaultBuilder</find>
       <find>dispose</find>
       <find>dispose()</find>
+      <find>Context</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -114,32 +300,42 @@
     <setting file="file://$PROJECT_DIR$/MIPTCore/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B3824083-29EE-4512-A838-FCA9F4A05F42/25/1d175f02/ServiceCollectionServiceExtensions.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Common/Entities/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e1/6f1de7ff/DbSet`1.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/DataAccess/PersistentEntity.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/DataAccess/IRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/DataAccess/Repository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Common/Entities/PersistentEntity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/IGenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Class1.cs" />
         <option value="$PROJECT_DIR$/DataAccess/DataAccess.csproj" />
         <option value="$PROJECT_DIR$/DataAccess/PersistentEntity.cs" />
         <option value="$PROJECT_DIR$/DataAccess/SessionProvider.cs" />
         <option value="$PROJECT_DIR$/DataAccess/DbSession.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/MIPTCore.csproj" />
-        <option value="$PROJECT_DIR$/MIPTCore/appsettings.Development.json" />
-        <option value="$PROJECT_DIR$/MIPTCore/Startup.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Program.cs" />
         <option value="$PROJECT_DIR$/DataAccess/EntityContext.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Middlewares/ScopeActions.cs" />
         <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/02/fe5fd790/DbContext.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" />
         <option value="$PROJECT_DIR$/DataAccess/IRepository.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Repository.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/IGenericRepository.cs" />
+        <option value="$PROJECT_DIR$/UserManagment/Class1.cs" />
+        <option value="$PROJECT_DIR$/UserManagment/User.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Meddle.cs" />
+        <option value="$PROJECT_DIR$/Common/Class1.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/GenericRepository.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Startup.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/appsettings.Development.json" />
         <option value="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" />
       </list>
     </option>
@@ -178,7 +374,7 @@
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="MIPTCore (2 projects)" />
+              <option name="myItemId" value="MIPTCore (4 projects)" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -192,7 +388,17 @@
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="MIPTCore (2 projects)" />
+              <option name="myItemId" value="MIPTCore (4 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MIPTCore (4 projects)" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -201,6 +407,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DataAccess" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MIPTCore (4 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Infrastructure" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataAccess" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mappings" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
           </PATH>
@@ -214,7 +442,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;upda&#9;ACTION&#9;WelcomeScreen.Update&#10;format &#9;ACTION&#9;CodeFormatGroup&#10;forma&#9;ACTION&#9;ReformatCode&#10;format&#9;ACTION&#9;ReformatCode" />
+    <property name="SearchEverywhereHistoryKey" value="ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;gene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;collapse&#9;ACTION&#9;CollapseRegion&#10;pers&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/PersistentEntity.cs&#10;upda&#9;ACTION&#9;WelcomeScreen.Update&#10;format &#9;ACTION&#9;CodeFormatGroup&#10;forma&#9;ACTION&#9;ReformatCode&#10;format&#9;ACTION&#9;ReformatCode" />
     <property name="settings.editor.selected.configurable" value="preferences.updates" />
   </component>
   <component name="RunDashboard">
@@ -305,6 +533,7 @@
       </envs>
       <method />
     </configuration>
+    <configuration />
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue=".NET Project.Default" />
     </list>
@@ -327,12 +556,12 @@
       <workItem from="1504976958772" duration="6056000" />
       <workItem from="1504984325922" duration="796000" />
       <workItem from="1504986636440" duration="2552000" />
-      <workItem from="1505047725813" duration="6049000" />
+      <workItem from="1505047725813" duration="19258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16966000" />
+    <option name="totallyTimeSpent" value="30175000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -345,21 +574,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5083333" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3200469" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34349355" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3200469" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34349355" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22638889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30361447" sideWeight="0.49166667" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3024619" sideWeight="0.49166667" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39976552" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28370458" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -377,7 +606,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="7" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -399,12 +630,13 @@
         <state relative-caret-position="75">
           <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <marker date="1504991877000" expanded="false" signature="6:294" ph="..." />
-            <marker date="1504991877000" expanded="true" signature="314:1594" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="341:1592" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="395:783" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="1010:1208" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="1426:1586" ph="{...}" />
+            <marker date="1505068667000" expanded="false" signature="6:312" ph="..." />
+            <marker date="1505068667000" expanded="true" signature="332:1739" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="359:1737" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="413:801" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1028:1226" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1444:1731" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1617:1694" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -414,12 +646,13 @@
         <state relative-caret-position="315">
           <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
           <folding>
-            <marker date="1505054513000" expanded="false" signature="6:196" ph="..." />
-            <marker date="1505054513000" expanded="true" signature="216:1056" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="247:1054" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="459:557" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="590:869" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="911:1048" ph="{...}" />
+            <marker date="1505070054000" expanded="false" signature="6:326" ph="..." />
+            <marker date="1505070054000" expanded="true" signature="346:1789" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="377:1787" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="589:687" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="720:773" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="815:1781" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="1652:1740" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -442,12 +675,13 @@
         <state relative-caret-position="375">
           <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
           <folding>
-            <marker date="1504991877000" expanded="false" signature="6:294" ph="..." />
-            <marker date="1504991877000" expanded="true" signature="314:1594" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="341:1592" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="395:783" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="1010:1208" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="1426:1586" ph="{...}" />
+            <marker date="1505068667000" expanded="false" signature="6:312" ph="..." />
+            <marker date="1505068667000" expanded="true" signature="332:1739" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="359:1737" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="413:801" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1028:1226" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1444:1731" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1617:1694" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -470,17 +704,18 @@
         <state relative-caret-position="285">
           <caret line="22" column="59" lean-forward="false" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
           <folding>
-            <marker date="1505054513000" expanded="false" signature="6:196" ph="..." />
-            <marker date="1505054513000" expanded="true" signature="216:1056" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="247:1054" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="459:557" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="590:869" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="911:1048" ph="{...}" />
+            <marker date="1505070054000" expanded="false" signature="6:326" ph="..." />
+            <marker date="1505070054000" expanded="true" signature="346:1789" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="377:1787" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="589:687" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="720:773" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="815:1781" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="1652:1740" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/Repository.cs">
+    <entry file="file://$PROJECT_DIR$/DataAccess/GenericRepository.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="11" column="48" lean-forward="false" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
@@ -492,26 +727,23 @@
         <state relative-caret-position="450">
           <caret line="33" column="34" lean-forward="true" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
           <folding>
-            <marker date="1505051979000" expanded="true" signature="6:50" ph="..." />
-            <marker date="1505051979000" expanded="true" signature="72:908" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="139:906" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="275:345" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="397:477" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="570:900" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="675:720" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="830:890" ph="{...}" />
+            <marker date="1505068804000" expanded="false" signature="6:126" ph="..." />
+            <marker date="1505068804000" expanded="true" signature="148:476" ph="{...}" />
+            <marker date="1505068804000" expanded="true" signature="197:474" ph="{...}" />
+            <marker date="1505068804000" expanded="true" signature="298:318" ph="{...}" />
+            <marker date="1505068804000" expanded="true" signature="394:468" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs">
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs">
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -519,24 +751,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataAccess/Class1.cs" />
-    <entry file="file://$PROJECT_DIR$/DataAccess/PersistentEntity.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataAccess/DataAccess.csproj">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -545,13 +763,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="99" lean-forward="false" selection-start-line="3" selection-start-column="99" selection-end-line="3" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/appsettings.Development.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="99" lean-forward="false" selection-start-line="1" selection-start-column="99" selection-end-line="1" selection-end-column="99" />
         </state>
       </provider>
     </entry>
@@ -571,10 +782,88 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e1/6f1de7ff/DbSet`1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1222">
+          <caret line="44" column="29" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/share/dotnet/sdk/2.0.0/Sdks/Microsoft.NET.Sdk/build/Microsoft.NET.Sdk.DefaultItems.targets">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="198" column="4" lean-forward="false" selection-start-line="198" selection-start-column="4" selection-end-line="198" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/MIPTCore.csproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="34" lean-forward="false" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B3824083-29EE-4512-A838-FCA9F4A05F42/25/1d175f02/ServiceCollectionServiceExtensions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="344" column="49" lean-forward="false" selection-start-line="344" selection-start-column="37" selection-end-line="344" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserManagment/Class1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Meddle.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/Class1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/Entities/PersistentEntity.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding>
+            <marker date="1505061509000" expanded="true" signature="40:237" ph="{...}" />
+            <marker date="1505061509000" expanded="true" signature="85:235" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/Entities/User.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="19" lean-forward="false" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding>
+            <marker date="1505061525000" expanded="true" signature="25:215" ph="{...}" />
+            <marker date="1505061525000" expanded="true" signature="68:213" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/02/fe5fd790/DbContext.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="527" column="18" lean-forward="false" selection-start-line="527" selection-start-column="11" selection-end-line="527" selection-end-column="18" />
+        <state relative-caret-position="209">
+          <caret line="83" column="5" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="5" />
           <folding>
             <marker date="1505050257000" expanded="true" signature="0:384" ph="/* Decompiled with JetBrains decompiler ... */" />
             <marker date="1505050257000" expanded="false" signature="392:1039" ph="..." />
@@ -721,61 +1010,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e1/6f1de7ff/DbSet`1.cs">
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1222">
-          <caret line="44" column="29" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="495">
+          <caret line="44" column="56" lean-forward="false" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+          <folding>
+            <marker date="1505065432000" expanded="false" signature="6:169" ph="..." />
+            <marker date="1505065432000" expanded="true" signature="201:1255" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="277:1253" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="423:489" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="581:683" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="791:869" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="966:999" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="1111:1131" ph="{...}" />
+            <marker date="1505065432000" expanded="true" signature="1227:1247" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/share/dotnet/sdk/2.0.0/Sdks/Microsoft.NET.Sdk/build/Microsoft.NET.Sdk.DefaultItems.targets">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="198" column="4" lean-forward="false" selection-start-line="198" selection-start-column="4" selection-end-line="198" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/MIPTCore.csproj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="34" lean-forward="false" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/IRepository.cs">
+    <entry file="file://$PROJECT_DIR$/DataAccess/IGenericRepository.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
           <folding>
-            <marker date="1505052103000" expanded="true" signature="6:108" ph="..." />
-            <marker date="1505052103000" expanded="true" signature="130:494" ph="{...}" />
-            <marker date="1505052103000" expanded="true" signature="195:492" ph="{...}" />
+            <marker date="1505058561000" expanded="false" signature="6:153" ph="..." />
+            <marker date="1505058561000" expanded="true" signature="175:501" ph="{...}" />
+            <marker date="1505058561000" expanded="true" signature="236:499" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MIPTCore/Startup.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        <state relative-caret-position="184">
+          <caret line="34" column="65" lean-forward="false" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="65" />
           <folding>
-            <marker date="1504991877000" expanded="false" signature="6:294" ph="..." />
-            <marker date="1504991877000" expanded="true" signature="314:1594" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="341:1592" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="395:783" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="1010:1208" ph="{...}" />
-            <marker date="1504991877000" expanded="true" signature="1426:1586" ph="{...}" />
+            <marker date="1505068667000" expanded="false" signature="6:312" ph="..." />
+            <marker date="1505068667000" expanded="true" signature="332:1739" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="359:1737" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="413:801" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1028:1226" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1444:1731" ph="{...}" />
+            <marker date="1505068667000" expanded="true" signature="1617:1694" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/appsettings.Development.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="35" lean-forward="false" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+          <folding>
+            <marker date="1505061625000" expanded="false" signature="6:77" ph="..." />
+            <marker date="1505061625000" expanded="true" signature="108:483" ph="{...}" />
+            <marker date="1505061625000" expanded="true" signature="135:481" ph="{...}" />
+            <marker date="1505061625000" expanded="true" signature="203:475" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MIPTCore/Program.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        <state relative-caret-position="210">
+          <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
             <marker date="1504991978000" expanded="false" signature="6:63" ph="..." />
             <marker date="1504991978000" expanded="true" signature="83:412" ph="{...}" />
@@ -785,68 +1090,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B3824083-29EE-4512-A838-FCA9F4A05F42/25/1d175f02/ServiceCollectionServiceExtensions.cs">
+    <entry file="file://$PROJECT_DIR$/DataAccess/GenericRepository.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="344" column="49" lean-forward="false" selection-start-line="344" selection-start-column="37" selection-end-line="344" selection-end-column="49" />
-          <folding />
+        <state relative-caret-position="180">
+          <caret line="20" column="47" lean-forward="false" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+          <folding>
+            <marker date="1505068368000" expanded="false" signature="6:231" ph="..." />
+            <marker date="1505068368000" expanded="true" signature="253:2672" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="352:2589" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="527:643" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="689:1006" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="879:945" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="1066:1167" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="1254:1444" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="1502:1764" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="1820:2082" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="2135:2463" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="2297:2349" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="2508:2583" ph="{...}" />
+            <marker date="1505068368000" expanded="true" signature="2658:2670" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataAccess/DbSessionProvider.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="49" />
+        <state relative-caret-position="210">
+          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
           <folding>
-            <marker date="1505051979000" expanded="true" signature="6:50" ph="..." />
-            <marker date="1505051979000" expanded="true" signature="72:908" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="139:906" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="275:345" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="397:477" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="570:900" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="675:720" ph="{...}" />
-            <marker date="1505051979000" expanded="true" signature="830:890" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/Repository.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-          <folding>
-            <marker date="1505053524000" expanded="true" signature="6:182" ph="..." />
-            <marker date="1505053524000" expanded="true" signature="204:2744" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="281:2742" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="416:484" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="554:836" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="722:826" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="943:1257" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="1030:1245" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="1319:1612" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="1406:1602" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="1669:1921" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="1756:1911" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="1982:2362" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="2069:2352" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="2188:2252" ph="{...}" />
-            <marker date="1505053524000" expanded="false" signature="2460:2736" ph="{...}" />
-            <marker date="1505053524000" expanded="true" signature="2608:2660" ph="{...}" />
+            <marker date="1505068804000" expanded="false" signature="6:126" ph="..." />
+            <marker date="1505068804000" expanded="true" signature="148:476" ph="{...}" />
+            <marker date="1505068804000" expanded="true" signature="197:474" ph="{...}" />
+            <marker date="1505068804000" expanded="true" signature="298:318" ph="{...}" />
+            <marker date="1505068804000" expanded="true" signature="394:468" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="49" />
+        <state relative-caret-position="258">
+          <caret line="37" column="67" lean-forward="false" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
           <folding>
-            <marker date="1505054513000" expanded="false" signature="6:196" ph="..." />
-            <marker date="1505054513000" expanded="true" signature="216:1056" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="247:1054" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="459:557" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="590:869" ph="{...}" />
-            <marker date="1505054513000" expanded="true" signature="911:1048" ph="{...}" />
+            <marker date="1505070054000" expanded="false" signature="6:326" ph="..." />
+            <marker date="1505070054000" expanded="true" signature="346:1789" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="377:1787" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="589:687" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="720:773" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="815:1781" ph="{...}" />
+            <marker date="1505070054000" expanded="true" signature="1652:1740" ph="{...}" />
           </folding>
         </state>
       </provider>

@@ -2,31 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common.Entities;
+using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MIPTCore.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("[controller]")]
+    public class UsersController : Controller
     {
+        private readonly IGenericRepository<User> _userRepository;
+
+        public UsersController(IGenericRepository<User> userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] {"value1", "value2"};
+            var all = await _userRepository.GetAll();
+            return Ok(all);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await _userRepository.GetById(id));
         }
 
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            
         }
 
         // PUT api/values/5
