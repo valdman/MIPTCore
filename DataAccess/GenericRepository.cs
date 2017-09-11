@@ -28,7 +28,7 @@ namespace DataAccess
             Require.Positive(id, nameof(id));
             
             var foundedObject = await _sessionProvider.Set<T>().FindAsync(id);
-            if (!foundedObject.IsDeleted)
+            if (foundedObject == null || !foundedObject.IsDeleted)
             {
                 return foundedObject;
             }
@@ -47,7 +47,7 @@ namespace DataAccess
             return await _db.Where(predicate).Where(@object => !@object.IsDeleted).ToListAsync();
         }
 
-        public virtual async Task<int> Create(T @object)
+        public virtual async Task<int> CreateAsync(T @object)
         {
             Require.NotNull(@object, nameof(@object));
             
@@ -57,7 +57,7 @@ namespace DataAccess
             return @object.Id;
         }
 
-        public virtual async Task Delete(int objectId)
+        public virtual async Task DeleteAsync(int objectId)
         {
             Require.Positive(objectId, nameof(objectId));
             

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MIPTCore.Authentification;
+using UserManagment;
 
 namespace MIPTCore
 {
@@ -31,10 +33,23 @@ namespace MIPTCore
             // Add framework services.
             services.AddMvc();
             services.AddAuthentication("MIPTCoreCookieAuthenticationScheme")
-                .AddCookie(options =>
+                .AddCookie("MIPTCoreCookieAuthenticationScheme", options =>
                 {
                     options.ExpireTimeSpan = TimeSpan.FromDays(1);
                 });
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "Admin",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new IsInRole(UserRole.Admin)));
+                options.AddPolicy(
+                    "User",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new IsAuthentificated()));
+            });
+
             
             //Add DI starter
             new Bootstraper(services, Configuration).Configure();

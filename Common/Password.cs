@@ -7,7 +7,7 @@ using Journalist;
 namespace Common
 {
     public class Password
-    {
+    {   
         public Password(string pass)
         {
             if (Regex.IsMatch(pass, "^.{8,18}$"))
@@ -29,10 +29,8 @@ namespace Common
                 throw new ArgumentException("Password does not satisfy security requirements");
             }
         }
-
-        public Password()
-        {
-        }
+        
+        private Password() {}
 
         public virtual string Hash { get; protected set; }
 
@@ -48,7 +46,7 @@ namespace Common
             return new Password(Hash);
         }
 
-        protected bool Equals(Password other)
+        private bool Equals(Password other)
         {
             return string.Equals(Hash, other.Hash);
         }

@@ -1,4 +1,5 @@
-﻿using UserManagment;
+﻿using Common;
+using UserManagment;
 
 namespace MIPTCore.Models
 {
@@ -26,12 +27,28 @@ namespace MIPTCore.Models
 
             return new User
             {
-                Id = userModel.Id,
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,
+                IsMiptAlumni = userModel.IsIsMiptAlumni,
                 AlumniProfile = userModel.AlumniProfile
             };
+        }
+
+        public static User UserRegistrationModelToUser(UserRegistrationModel userRegistrationModel)
+        {
+            if (userRegistrationModel == null) return null;
+
+            return new User
+            {
+                FirstName = userRegistrationModel.FirstName,
+                LastName = userRegistrationModel.LastName,
+                Email = userRegistrationModel.Email,
+                Password = new Password(userRegistrationModel.Password),
+                IsMiptAlumni = userRegistrationModel.IsMiptAlumni,
+                AlumniProfile = userRegistrationModel.AlumniProfile
+            };
+
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Common.Infrastructure
         Task<T> GetById(int id);
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
-        Task<int> Create(T @object);
-        Task Delete(int objectId);
+        Task<int> CreateAsync(T @object);
+        Task DeleteAsync(int objectId);
         Task UpdateAsync(T @object);
     }
 }
