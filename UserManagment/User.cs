@@ -5,7 +5,7 @@ using Common;
 
 namespace UserManagment
 {
-    public class User : PersistentEntity, IIdentity
+    public class User : PersistentEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,11 +17,5 @@ namespace UserManagment
         public UserRole Role { get; set; }
 
         public DateTimeOffset? AuthentificatedAt { get; set; }
-
-        public string AuthenticationType => $"Defaul auth type";
-
-        public bool IsAuthenticated => AuthentificatedAt != null;
-
-        public string Name => $"{FirstName} {LastName}";
     }
 }

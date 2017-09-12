@@ -65,7 +65,8 @@ namespace Common
 
         public static bool IsStringCorrectPassword(string passwordToCheck)
         {
-            return Regex.IsMatch(passwordToCheck, "^.{8,18}$");
+            return !string.IsNullOrEmpty(passwordToCheck)
+                   && Regex.IsMatch(passwordToCheck, "^.{8,18}$");
         }
     }
 }
