@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MIPTCore.Authentification.Handlers;
+using MIPTCore.Models.ModelValidators;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using UserManagment;
 
@@ -36,7 +37,7 @@ namespace MIPTCore
                 .AddSingleton<IAuthorizationHandler, IsAuthentificatedAuthHandler>()
                 .AddSingleton<IAuthorizationHandler, IsInRoleRoleAuthHandler>();
         }
-
+        
         private void ConfigureDatebase()
         {
             var contextOptions = new DbContextOptionsBuilder()

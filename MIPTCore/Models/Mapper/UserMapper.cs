@@ -30,7 +30,7 @@ namespace MIPTCore.Models
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,
-                IsMiptAlumni = userModel.IsIsMiptAlumni,
+                IsMiptAlumni = userModel.IsMiptAlumni,
                 AlumniProfile = userModel.AlumniProfile
             };
         }

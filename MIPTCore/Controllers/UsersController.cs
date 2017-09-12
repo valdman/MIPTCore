@@ -7,6 +7,7 @@ using Common.Infrastructure;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
+using MIPTCore.Models.ModelValidators;
 using UserManagment;
 
 namespace MIPTCore.Controllers
