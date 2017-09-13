@@ -17,6 +17,7 @@ namespace DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             new AlumniProfileMap(modelBuilder.Entity<AlumniProfile>());
             new UserMap(modelBuilder.Entity<User>());
         }

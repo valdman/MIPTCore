@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Common;
 using Common.Infrastructure;
 using DataAccess;
@@ -44,6 +45,34 @@ namespace IntegrationTestProject
             //Assert
             Assert.Equal(updatedUser, notAlumniUser);
             Assert.NotNull(updatedUser.AlumniProfile);
+        }
+        
+        [Fact]
+        public async void CreatingAndThanDoubleUpdatingUserCreateAndThanDoubleUpdateUser()
+        {
+            //Act
+            var id = await _genericRepository.CreateAsync(notAlumniUser);
+
+            notAlumniUser.IsMiptAlumni = true;
+            notAlumniUser.AlumniProfile = alumniUser.AlumniProfile;
+            await _genericRepository.UpdateAsync(notAlumniUser);
+            
+            var updatedUser = await _genericRepository.GetById(id);
+
+            notAlumniUser.FirstName = Guid.NewGuid().ToString().Substring(0, 10);
+            notAlumniUser.AlumniProfile.Faculty = FacultyType.Faculty3;
+            await _genericRepository.UpdateAsync(notAlumniUser);
+            Thread.Sleep(5000);
+            
+            var secondTimeUpdatedUser = await _genericRepository.GetById(id);
+            
+            await _genericRepository.DeleteAsync(id);
+            
+            //Assert
+            Assert.Equal(updatedUser, notAlumniUser);
+            Assert.Equal(secondTimeUpdatedUser, notAlumniUser);
+            Assert.NotNull(updatedUser.AlumniProfile);
+            Assert.NotNull(secondTimeUpdatedUser.AlumniProfile);
         }
 
         public RepositoryAndMappingTestsForUser()

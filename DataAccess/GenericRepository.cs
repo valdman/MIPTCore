@@ -44,7 +44,7 @@ namespace DataAccess
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return await _db.Where(predicate).Where(@object => !@object.IsDeleted).ToListAsync();
+            return await _db.Where(predicate).ToListAsync();
         }
 
         public virtual async Task<int> CreateAsync(T @object)

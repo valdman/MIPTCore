@@ -47,8 +47,8 @@ namespace MIPTCore
             
             _services
                 .AddEntityFrameworkNpgsql()
-                .AddScoped(typeof(DbSessionProvider), _ => new DbSessionProvider(contextOptions))
-                .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+                .AddSingleton(typeof(DbSessionProvider), _ => new DbSessionProvider(contextOptions))
+                .AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             sessionProvider.Database.EnsureCreated();
             

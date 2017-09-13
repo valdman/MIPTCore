@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UserManagment;
 
 namespace DataAccess.Mappings
@@ -7,17 +8,13 @@ namespace DataAccess.Mappings
     {
         public UserMap(EntityTypeBuilder<User> e)
         {
+            e.HasQueryFilter(@object => !@object.IsDeleted);
             e.HasKey(t => t.Id);
             e.Property(t => t.FirstName).IsRequired();
             e.Property(t => t.LastName).IsRequired();
             e.HasIndex(t => t.Email).IsUnique();
             e.Property(t => t.IsMiptAlumni).IsRequired();
-
-            e
-                .HasOne(t => t.AlumniProfile)
-                .WithOne(u => u.User)
-                .HasForeignKey<AlumniProfile>(p => p.UserId)
-                .IsRequired(true);
+            e.Property<int?>("AlumniProfileFK_Shadow");
             
             e.OwnsOne(t => t.Password, p =>
             {

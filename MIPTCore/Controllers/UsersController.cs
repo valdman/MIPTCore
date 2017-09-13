@@ -80,7 +80,7 @@ namespace MIPTCore.Controllers
             userToUpdate.LastName = userModel.LastName;
             userToUpdate.Email = userModel.EmailAddress;
             userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
-            userToUpdate.AlumniProfile = userModel.AlumniProfile;
+            userToUpdate.AlumniProfile = UserMapper.AlumniProfileModelToAlumniProfile(userModel.AlumniProfile);
 
             await _userRepository.UpdateAsync(userToUpdate);
             
