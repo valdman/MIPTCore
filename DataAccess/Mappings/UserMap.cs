@@ -15,8 +15,9 @@ namespace DataAccess.Mappings
 
             e
                 .HasOne(t => t.AlumniProfile)
-                .WithMany()
-                .HasForeignKey(u => u.AlumniProfileId);
+                .WithOne(u => u.User)
+                .HasForeignKey<AlumniProfile>(p => p.UserId)
+                .IsRequired(true);
             
             e.OwnsOne(t => t.Password, p =>
             {

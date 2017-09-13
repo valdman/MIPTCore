@@ -13,7 +13,6 @@ namespace UserManagment
         public Password Password { get; set; }
         public bool IsMiptAlumni { get; set; }
 
-        public int? AlumniProfileId { get; set; }
         public virtual AlumniProfile AlumniProfile { get; set; }
         
         public UserRole Role { get; set; }

@@ -83,8 +83,11 @@ namespace MIPTCore.Controllers
             userToUpdate.AlumniProfile = userModel.AlumniProfile;
 
             await _userRepository.UpdateAsync(userToUpdate);
+            
+            //!!!
+            var updatedUser = await _userRepository.GetById(id);
 
-            return Ok();
+            return Ok(UserMapper.UserToUserModel(updatedUser));
         }
 
         // DELETE api/values/5
