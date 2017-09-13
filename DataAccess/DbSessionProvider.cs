@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using Common;
+using DataAccess.EFLogging;
 using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using UserManagment;
 
 namespace DataAccess
@@ -15,7 +17,15 @@ namespace DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var userMap = new UserMap(modelBuilder.Entity<User>());
+            new AlumniProfileMap(modelBuilder.Entity<AlumniProfile>());
+            new UserMap(modelBuilder.Entity<User>());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var lf = new LoggerFactory();
+            lf.AddProvider(new EfToNpgsqlLoggerProvider());
+            optionsBuilder.UseLoggerFactory(lf);
         }
     }
 }

@@ -2,6 +2,11 @@
 {
     public class AlumniProfile
     {
+        public int Id { get; set; }
+
+        public int UserFk { get; set; }
+        public User User { get; set; }
+        
         public int YearOfGraduation { get; set; }
         public FacultyType Faculty { get; set; }
         public DiplomaType Diploma { get; set; }

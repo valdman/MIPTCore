@@ -14,9 +14,9 @@ namespace MIPTCore.Models.ModelValidators
             RuleSet("UserBaseRuleset", () =>
             {
                 RuleFor(_ => _).NotNull();
+                RuleFor(userModel => userModel.EmailAddress).NotEmpty().EmailAddress();
                 RuleFor(userModel => userModel.FirstName).NotEmpty();
                 RuleFor(userModel => userModel.LastName).NotEmpty();
-                RuleFor(userModel => userModel.Email).Must(UserValidationPredicateService.BeValidEmail);
             });
 
             RuleFor(userModel => userModel.Id).GreaterThan(0);
@@ -37,9 +37,9 @@ namespace MIPTCore.Models.ModelValidators
             RuleSet("UserBaseRuleset", () =>
             {
                 RuleFor(_ => _).NotNull();
+                RuleFor(userModel => userModel.EmailAddress).EmailAddress();
                 RuleFor(userModel => userModel.FirstName).NotEmpty();
                 RuleFor(userModel => userModel.LastName).NotEmpty();
-                RuleFor(userModel => userModel.Email).Must(UserValidationPredicateService.BeValidEmail);
             });
 
             RuleFor(userModel => userModel.FirstName)
@@ -59,9 +59,9 @@ namespace MIPTCore.Models.ModelValidators
             RuleSet("UserBaseRuleset", () =>
             {
                 RuleFor(_ => _).NotNull();
-                RuleFor(userModel => userModel.FirstName).NotEmpty();
+                RuleFor(userModel => userModel.EmailAddress).NotEmpty().EmailAddress();
+                RuleFor(userModel => userModel.FirstName).NotEmpty().Must(UserValidationPredicateService.BeValidEmail);
                 RuleFor(userModel => userModel.LastName).NotEmpty();
-                RuleFor(userModel => userModel.Email).Must(UserValidationPredicateService.BeValidEmail);
             });
 
             RuleFor(userModel => userModel.FirstName)

@@ -14,7 +14,7 @@ namespace MIPTCore.Models
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Email = user.Email,
+                EmailAddress = user.Email,
                 Role = user.Role,
                 AlumniProfile = user.AlumniProfile,
                 CreatingDate = user.CreatedTime
@@ -29,7 +29,7 @@ namespace MIPTCore.Models
             {
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
-                Email = userModel.Email,
+                Email = userModel.EmailAddress,
                 IsMiptAlumni = userModel.IsMiptAlumni,
                 AlumniProfile = userModel.AlumniProfile
             };
@@ -43,7 +43,7 @@ namespace MIPTCore.Models
             {
                 FirstName = userRegistrationModel.FirstName,
                 LastName = userRegistrationModel.LastName,
-                Email = userRegistrationModel.Email,
+                Email = userRegistrationModel.EmailAddress,
                 Password = new Password(userRegistrationModel.Password),
                 IsMiptAlumni = userRegistrationModel.IsMiptAlumni,
                 AlumniProfile = userRegistrationModel.AlumniProfile

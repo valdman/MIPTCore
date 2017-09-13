@@ -77,7 +77,7 @@ namespace DataAccess
                 return;
             }
 
-            _sessionProvider.Entry(entity).CurrentValues.SetValues(@object);
+            _sessionProvider.Update(@object);
             await Save();
         }
 

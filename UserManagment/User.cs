@@ -10,10 +10,12 @@ namespace UserManagment
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public virtual Password Password { get; set; }
+        public Password Password { get; set; }
         public bool IsMiptAlumni { get; set; }
 
+        public int? AlumniProfileId { get; set; }
         public virtual AlumniProfile AlumniProfile { get; set; }
+        
         public UserRole Role { get; set; }
 
         public DateTimeOffset? AuthentificatedAt { get; set; }

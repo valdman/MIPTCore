@@ -62,7 +62,7 @@ namespace MIPTCore.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] UserModel userModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UserUpdateModel userModel)
         {
             if (!ModelState.IsValid)
             {
@@ -75,9 +75,12 @@ namespace MIPTCore.Controllers
             {
                 return NotFound("User not found");
             }
-            
-            userToUpdate = UserMapper.UserModelToUser(userModel);
-            userToUpdate.Id = id;
+
+            userToUpdate.FirstName = userModel.FirstName;
+            userToUpdate.LastName = userModel.LastName;
+            userToUpdate.Email = userModel.EmailAddress;
+            userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
+            userToUpdate.AlumniProfile = userModel.AlumniProfile;
 
             await _userRepository.UpdateAsync(userToUpdate);
 
