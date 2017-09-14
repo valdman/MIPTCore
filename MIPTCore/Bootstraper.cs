@@ -35,8 +35,7 @@ namespace MIPTCore
             _services
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<UserContext>(options => options
-                    .UseNpgsql(_configuration.GetConnectionString("Postgres"))
-                    .EnableSensitiveDataLogging())
+                    .UseNpgsql(_configuration.GetConnectionString("Postgres")))
                 .AddScoped<GenericRepository<User>, UserRepository>()
                 .AddScoped<UserRepository>();
 
