@@ -1,5 +1,4 @@
-﻿using DataAccess.EFLogging;
-using DataAccess.Mappings;
+﻿using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using UserManagment;
@@ -19,13 +18,7 @@ namespace DataAccess.Contexts
         {
             new UserMap(modelBuilder.Entity<User>());
             new AlumniProfileMap(modelBuilder.Entity<AlumniProfile>());
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var lf = new LoggerFactory();
-            lf.AddProvider(new EfToNpgsqlLoggerProvider());
-            optionsBuilder.UseLoggerFactory(lf);
+            
         }
     }
 }

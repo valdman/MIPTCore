@@ -15,4 +15,7 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\UserManagment\UserManagment.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="efcore-mipt-log.txt" />
+  </ItemGroup>
 </Project>
