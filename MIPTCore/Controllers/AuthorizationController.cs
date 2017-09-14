@@ -70,6 +70,7 @@ namespace MIPTCore.Controllers
             await _userRepository.UpdateAsync(currentUser);
             
             await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
+            
             return Ok();
         }
 

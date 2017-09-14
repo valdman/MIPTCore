@@ -16,9 +16,9 @@ namespace MIPTCore.Controllers
     [Route("[controller]")]
     public class UsersController : Controller
     {
-        private readonly UserRepository _userRepository;
+        private readonly IGenericRepository<User> _userRepository;
 
-        public UsersController(UserRepository userRepository)
+        public UsersController(IGenericRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }

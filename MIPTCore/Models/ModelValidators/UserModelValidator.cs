@@ -1,31 +1,44 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using Common;
+﻿using Common;
 using FluentValidation;
-using FluentValidation.Results;
-using FluentValidation.Validators;
 
 namespace MIPTCore.Models.ModelValidators
 {
+    public class AbstractUserModelValidator<T> : AbstractValidator<T> where T : AbstractUserModel
+    {
+        public AbstractUserModelValidator()
+        {
+            RuleFor(_ => _).NotNull();
+            
+            RuleFor(userModel => userModel.EmailAddress)
+                .NotEmpty().EmailAddress()
+                .WithMessage(p => $"'{nameof(p.EmailAddress)}' must be valid Email. {p.EmailAddress} is not");
+             
+            RuleFor(userModel => userModel.AlumniProfile).NotNull()
+                .When(user => user.IsMiptAlumni)
+                .WithMessage(p => $"MIPT Alumni should provide '{nameof(p.AlumniProfile)}'");
+            
+            RuleFor(userModel => userModel.IsMiptAlumni).NotEqual(false)
+                .When(userModel => userModel.AlumniProfile != null)
+                .WithMessage(p => $"'{nameof(p.IsMiptAlumni)}' is false but AlumniProfile presented");
+                
+            RuleFor(userModel => userModel.FirstName)
+                .NotEmpty()
+                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30))
+                .WithMessage(p => $"'{nameof(p.FirstName)}' should be between 1 and 30 characters long. {p.FirstName} is not");
+            RuleFor(userModel => userModel.LastName)
+                .NotEmpty()
+                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30))
+                .WithMessage(p => $"'{nameof(p.LastName)}' should be between 1 and 30 characters long. {p.LastName} is not");
+        }
+    }
+        
     public class UserModelValidator : AbstractValidator<UserModel>
     {
         public UserModelValidator()
         {
-            RuleSet("UserBaseRuleset", () =>
-            {
-                RuleFor(_ => _).NotNull();
-                RuleFor(userModel => userModel.EmailAddress).NotEmpty().EmailAddress();
-                RuleFor(userModel => userModel.FirstName).NotEmpty();
-                RuleFor(userModel => userModel.LastName).NotEmpty();
-            });
-
+            Include(new AbstractUserModelValidator<UserModel>());
+            
             RuleFor(userModel => userModel.Id).GreaterThan(0);
-            RuleFor(userModel => userModel.FirstName)
-                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30));
-            RuleFor(userModel => userModel.LastName)
-                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30));
-
-            RuleFor(userModel => userModel.AlumniProfile).NotNull().When(user => user.IsMiptAlumni);
             RuleFor(userModel => userModel.CreatingDate);
         }
     }
@@ -34,21 +47,10 @@ namespace MIPTCore.Models.ModelValidators
     {
         public UserRegistrationModelValidator()
         {
-            RuleSet("UserBaseRuleset", () =>
-            {
-                RuleFor(_ => _).NotNull();
-                RuleFor(userModel => userModel.EmailAddress).EmailAddress();
-                RuleFor(userModel => userModel.FirstName).NotEmpty();
-                RuleFor(userModel => userModel.LastName).NotEmpty();
-            });
+            Include(new AbstractUserModelValidator<UserRegistrationModel>());
 
-            RuleFor(userModel => userModel.FirstName)
-                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30));
-            RuleFor(userModel => userModel.LastName)
-                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30));
-            RuleFor(userModel => userModel.Password).Must(Password.IsStringCorrectPassword);
-
-            RuleFor(userModel => userModel.AlumniProfile).NotNull().When(user => user.IsMiptAlumni);
+            RuleFor(userModel => userModel.Password).Must(Password.IsStringCorrectPassword)
+                .WithMessage(p => $"'{nameof(p.Password)}' is not corresponding security rules. It should be between 8 and 16 characters");
         }
     }
 
@@ -56,20 +58,7 @@ namespace MIPTCore.Models.ModelValidators
     {
         public UserUpdateModelValidator()
         {
-            RuleSet("UserBaseRuleset", () =>
-            {
-                RuleFor(_ => _).NotNull();
-                RuleFor(userModel => userModel.EmailAddress).NotEmpty().EmailAddress();
-                RuleFor(userModel => userModel.FirstName).NotEmpty().Must(UserValidationPredicateService.BeValidEmail);
-                RuleFor(userModel => userModel.LastName).NotEmpty();
-            });
-
-            RuleFor(userModel => userModel.FirstName)
-                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30));
-            RuleFor(userModel => userModel.LastName)
-                .Must(_ => UserValidationPredicateService.BeLengthStronglyBetween(_, 1, 30));
-
-            RuleFor(userModel => userModel.AlumniProfile).NotNull().When(user => user.IsMiptAlumni);
+            Include(new AbstractUserModelValidator<UserUpdateModel>());
         }
     }
 
@@ -79,14 +68,6 @@ namespace MIPTCore.Models.ModelValidators
         {
             return strinToTest != null && !strinToTest.Equals(string.Empty) && strinToTest.Length > min &&
                    strinToTest.Length < max;
-        }
-
-        public static bool BeValidEmail(string email)
-        {
-            var regex = new Regex(
-                "^((([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+(\\.([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(\\x22)))@((([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-||_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)+(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+|(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+([a-z]+|\\d|-|\\.{0,1}|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])?([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))$",
-                RegexOptions.IgnoreCase);
-            return email != null && regex.IsMatch(email);
         }
     }
 }

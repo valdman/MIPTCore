@@ -1,4 +1,5 @@
-﻿using DataAccess.Contexts;
+﻿using Common.Infrastructure;
+using DataAccess.Contexts;
 using DataAccess.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -36,8 +37,7 @@ namespace MIPTCore
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<UserContext>(options => options
                     .UseNpgsql(_configuration.GetConnectionString("Postgres")))
-                .AddScoped<GenericRepository<User>, UserRepository>()
-                .AddScoped<UserRepository>();
+                .AddScoped<IGenericRepository<User>, UserRepository>();
 
         }
     }
