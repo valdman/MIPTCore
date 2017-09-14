@@ -1,7 +1,7 @@
 ﻿using Common;
 using UserManagment;
 
-namespace MIPTCore.Models
+namespace MIPTCore.Models.Mapper
 {
     public static class UserMapper
     {

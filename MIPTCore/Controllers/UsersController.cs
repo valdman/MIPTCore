@@ -6,8 +6,11 @@ using Common;
 using Common.Infrastructure;
 using DataAccess;
 using DataAccess.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MIPTCore.Authentification;
 using MIPTCore.Models;
+using MIPTCore.Models.Mapper;
 using MIPTCore.Models.ModelValidators;
 using UserManagment;
 
@@ -63,6 +66,7 @@ namespace MIPTCore.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize("User")]
         public async Task<IActionResult> Put(int id, [FromBody] UserUpdateModel userModel)
         {
             if (!ModelState.IsValid)
@@ -75,6 +79,11 @@ namespace MIPTCore.Controllers
             if (userToUpdate == null)
             {
                 return NotFound("User not found");
+            }
+            
+            if (userToUpdate.Id != User.GetId() && User.IsInRole("User"))
+            {
+                return Unauthorized();
             }
 
             userToUpdate.FirstName = userModel.FirstName;
@@ -93,6 +102,7 @@ namespace MIPTCore.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize("User")]
         public async Task<IActionResult> Delete(int id)
         {
             if (!ModelState.IsValid)
@@ -100,11 +110,16 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var userToUpdate = await _userRepository.GetByIdAsync(id);
-
-            if (userToUpdate == null)
+            var userToDelete = await _userRepository.GetByIdAsync(id);
+            
+            if (userToDelete == null)
             {
                 return NotFound("User not found");
+            }
+
+            if (userToDelete.Id != User.GetId() && User.IsInRole("User"))
+            {
+                return Unauthorized();
             }
 
             await _userRepository.DeleteAsync(id);
