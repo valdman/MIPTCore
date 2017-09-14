@@ -63,7 +63,7 @@ namespace MIPTCore.Controllers
         {
             var currentUserId = User.GetId();
 
-            var currentUser = await _userRepository.GetById(currentUserId);
+            var currentUser = await _userRepository.GetByIdAsync(currentUserId);
             
             currentUser.AuthentificatedAt = null;
 
@@ -78,7 +78,7 @@ namespace MIPTCore.Controllers
         public async Task<IActionResult> Current()
         {
             var currentUserId = User.GetId();
-            var currentUser = await _userRepository.GetById(currentUserId);
+            var currentUser = await _userRepository.GetByIdAsync(currentUserId);
 
             if (currentUser == null)
             {
