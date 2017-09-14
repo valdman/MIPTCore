@@ -1,17 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using Common;
-using Common.Infrastructure;
-using DataAccess;
+﻿using Common.Infrastructure;
+using DataAccess.Contexts;
+using DataAccess.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MIPTCore.Authentification.Handlers;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 using UserManagment;
 
 namespace MIPTCore
@@ -36,33 +30,15 @@ namespace MIPTCore
                 .AddSingleton<IAuthorizationHandler, IsAuthentificatedAuthHandler>()
                 .AddSingleton<IAuthorizationHandler, IsInRoleRoleAuthHandler>();
         }
-
+        
         private void ConfigureDatebase()
         {
-            var contextOptions = new DbContextOptionsBuilder()
-                .UseNpgsql(_configuration.GetConnectionString("Postgres"))
-                .Options;
-            var sessionProvider = new DbSessionProvider(contextOptions);
-            
             _services
                 .AddEntityFrameworkNpgsql()
-                .AddScoped(typeof(DbSessionProvider), _ => new DbSessionProvider(contextOptions))
-                .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+                .AddDbContext<UserContext>(options => options
+                    .UseNpgsql(_configuration.GetConnectionString("Postgres")))
+                .AddScoped<IGenericRepository<User>, UserRepository>();
 
-            sessionProvider.Database.EnsureCreated();
-            
-            //ForceCreateSchema();
-
-            void ForceCreateSchema()
-            {
-                var databaseCreator =
-                (RelationalDatabaseCreator)sessionProvider.Database.GetService<IDatabaseCreator>();
-                if (!databaseCreator.EnsureCreated())
-                {
-                    databaseCreator.CreateTables();
-                }
-                
-            }
         }
     }
 }

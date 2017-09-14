@@ -3,8 +3,8 @@ using UserManagment;
 
 namespace MIPTCore.Models
 {
-    public class UserRegistrationModel : AbstractUserModel
+    public class UserUpdateModel : AbstractUserModel
     {
-        public string Password { get; set; }
+        //All props are inherited
     }
 }

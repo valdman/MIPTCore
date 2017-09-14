@@ -63,13 +63,14 @@ namespace MIPTCore.Controllers
         {
             var currentUserId = User.GetId();
 
-            var currentUser = await _userRepository.GetById(currentUserId);
+            var currentUser = await _userRepository.GetByIdAsync(currentUserId);
             
             currentUser.AuthentificatedAt = null;
 
             await _userRepository.UpdateAsync(currentUser);
             
             await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
+            
             return Ok();
         }
 
@@ -78,7 +79,7 @@ namespace MIPTCore.Controllers
         public async Task<IActionResult> Current()
         {
             var currentUserId = User.GetId();
-            var currentUser = await _userRepository.GetById(currentUserId);
+            var currentUser = await _userRepository.GetByIdAsync(currentUserId);
 
             if (currentUser == null)
             {

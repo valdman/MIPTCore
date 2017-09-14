@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Common;
 using Common.Infrastructure;
 using DataAccess;
+using DataAccess.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
+using MIPTCore.Models.ModelValidators;
 using UserManagment;
 
 namespace MIPTCore.Controllers
@@ -33,7 +35,7 @@ namespace MIPTCore.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var userToReturn = await _userRepository.GetById(id);
+            var userToReturn = await _userRepository.GetByIdAsync(id);
 
             if (userToReturn == null)
             {
@@ -61,26 +63,32 @@ namespace MIPTCore.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] UserModel userModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UserUpdateModel userModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var userToUpdate = await _userRepository.GetById(id);
+            var userToUpdate = await _userRepository.GetByIdAsync(id);
 
             if (userToUpdate == null)
             {
                 return NotFound("User not found");
             }
-            
-            userToUpdate = UserMapper.UserModelToUser(userModel);
-            userToUpdate.Id = id;
+
+            userToUpdate.FirstName = userModel.FirstName;
+            userToUpdate.LastName = userModel.LastName;
+            userToUpdate.Email = userModel.EmailAddress;
+            userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
+            userToUpdate.AlumniProfile = UserMapper.AlumniProfileModelToAlumniProfile(userModel.AlumniProfile);
 
             await _userRepository.UpdateAsync(userToUpdate);
+            
+            //!!!
+            var updatedUser = await _userRepository.GetByIdAsync(id);
 
-            return Ok();
+            return Ok(UserMapper.UserToUserModel(updatedUser));
         }
 
         // DELETE api/values/5
@@ -92,7 +100,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var userToUpdate = await _userRepository.GetById(id);
+            var userToUpdate = await _userRepository.GetByIdAsync(id);
 
             if (userToUpdate == null)
             {

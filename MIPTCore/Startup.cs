@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.Contexts;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MIPTCore.Authentification;
+using MIPTCore.Models;
+using MIPTCore.Models.ModelValidators;
 using UserManagment;
 
 namespace MIPTCore
@@ -29,9 +34,12 @@ namespace MIPTCore
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddFluentValidation()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            
             services.AddAuthentication("MIPTCoreCookieAuthenticationScheme")
                 .AddCookie("MIPTCoreCookieAuthenticationScheme", options =>
                 {
@@ -68,6 +76,13 @@ namespace MIPTCore
 
             app.UseAuthentication();
             app.UseMvc();
+
+            var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = serviceScopeFactory.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<UserContext>();
+                dbContext.Database.EnsureCreated();
+            }
         }
     }
 }
