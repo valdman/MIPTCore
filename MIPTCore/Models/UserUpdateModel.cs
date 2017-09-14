@@ -13,6 +13,6 @@ namespace MIPTCore.Models
 
         public bool IsMiptAlumni { get; set; }
 
-        public AlumniProfile AlumniProfile { get; set; }
+        public AlumniProfileModel AlumniProfile { get; set; }
     }
 }

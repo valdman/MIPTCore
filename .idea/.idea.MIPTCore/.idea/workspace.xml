@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="355af278-a296-4439-827b-95e139edd75f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DataAccess/Repositories/UserRepository.cs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" afterPath="$PROJECT_DIR$/DataAccess/Contexts/UserContext.cs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/DataAccess/GenericRepository.cs" afterPath="$PROJECT_DIR$/DataAccess/Repositories/GenericRepository.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.MIPTCore/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.MIPTCore/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/Infrastructure/IGenericRepository.cs" afterPath="$PROJECT_DIR$/Common/Infrastructure/IGenericRepository.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/Mappings/AlumniProfileMap.cs" afterPath="$PROJECT_DIR$/DataAccess/Mappings/AlumniProfileMap.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" afterPath="$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs" afterPath="$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" afterPath="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/Controllers/AuthorizationController.cs" afterPath="$PROJECT_DIR$/MIPTCore/Controllers/AuthorizationController.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" afterPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/efcore-mipt-log.txt" afterPath="$PROJECT_DIR$/MIPTCore/efcore-mipt-log.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MIPTCore/Startup.cs" afterPath="$PROJECT_DIR$/MIPTCore/Startup.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserManagment/AlumniProfile.cs" afterPath="$PROJECT_DIR$/UserManagment/AlumniProfile.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserManagment/User.cs" afterPath="$PROJECT_DIR$/UserManagment/User.cs" />
     </list>
@@ -17,116 +26,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AlumniProfile.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserManagment/AlumniProfile.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-              <folding>
-                <marker date="1505316911000" expanded="true" signature="23:603" ph="{...}" />
-                <marker date="1505316911000" expanded="true" signature="56:349" ph="{...}" />
-                <marker date="1505316911000" expanded="true" signature="378:472" ph="{...}" />
-                <marker date="1505316911000" expanded="true" signature="501:601" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbSessionProvider.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataAccess/DbSessionProvider.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-              <folding>
-                <marker date="1505310031000" expanded="false" signature="6:202" ph="..." />
-                <marker date="1505310031000" expanded="true" signature="224:882" ph="{...}" />
-                <marker date="1505310031000" expanded="true" signature="273:880" ph="{...}" />
-                <marker date="1505310031000" expanded="true" signature="374:394" ph="{...}" />
-                <marker date="1505310031000" expanded="true" signature="470:616" ph="{...}" />
-                <marker date="1505310031000" expanded="true" signature="703:874" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UsersController.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="89" column="60" lean-forward="false" selection-start-line="89" selection-start-column="60" selection-end-line="89" selection-end-column="60" />
-              <folding>
-                <marker date="1505317612000" expanded="false" signature="6:272" ph="..." />
-                <marker date="1505317612000" expanded="true" signature="304:3207" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="380:3205" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="526:592" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="684:821" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="929:1228" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="1044:1140" ph="{...}" />
-                <marker date="1505317612000" expanded="false" signature="1365:1687" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="1412:1487" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="1833:2675" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="1880:1955" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="2061:2140" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="2792:3199" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="2839:2914" ph="{...}" />
-                <marker date="1505317612000" expanded="true" signature="3032:3111" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RepositoryAndMappingTestsForUser.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-              <folding>
-                <marker date="1505316241000" expanded="false" signature="6:162" ph="..." />
-                <marker date="1505316241000" expanded="true" signature="196:3274" ph="{...}" />
-                <marker date="1505316241000" expanded="true" signature="248:3272" ph="{...}" />
-                <marker date="1505316241000" expanded="true" signature="348:803" ph="{...}" />
-                <marker date="1505316241000" expanded="true" signature="898:1470" ph="{...}" />
-                <marker date="1505316241000" expanded="false" signature="1521:1954" ph="{...}" />
-                <marker date="1505316241000" expanded="false" signature="1994:3006" ph="{...}" />
-                <marker date="1505316241000" expanded="true" signature="2051:2594" ph="{...}" />
-                <marker date="1505316241000" expanded="true" signature="2404:2580" ph="{...}" />
-                <marker date="1505316241000" expanded="true" signature="2658:2995" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlumniProfileMap.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DataAccess/Mappings/AlumniProfileMap.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-              <folding>
-                <marker date="1505317898000" expanded="false" signature="6:75" ph="..." />
-                <marker date="1505317898000" expanded="true" signature="106:257" ph="{...}" />
-                <marker date="1505317898000" expanded="true" signature="142:255" ph="{...}" />
-                <marker date="1505317898000" expanded="true" signature="216:249" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserManagment/User.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-              <folding>
-                <marker date="1505316929000" expanded="false" signature="6:90" ph="..." />
-                <marker date="1505316929000" expanded="true" signature="115:581" ph="{...}" />
-                <marker date="1505316929000" expanded="true" signature="158:579" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -146,6 +46,7 @@
       <find>updat</find>
       <find>UPDAT</find>
       <find>;</find>
+      <find>EntityTypeBuilder&lt;TEntity&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>async Task&lt;IActionResult&gt;</replace>
@@ -179,17 +80,23 @@
     <setting file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsInRoleAuthHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserModelValidator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF43D361-B03B-4229-9EE0-02B260A4A920/ae/e8afc2d7/DataAnnotationsModelValidator.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/5b/e47e8b15/ModelBuilder.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Models/Mapper/UserMapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0279B6E2-D194-4600-B7FB-29D814B3491E/4f/09f876f8/IIdentity.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0E2274C-D704-4516-B530-AE069B19B7FF/6c/c4639e5c/ClaimsPrincipal.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/62/4fd31238/DefaultValidatorExtensions.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/AlumniProfileModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/b1/1aa191d7/NotEmptyValidator.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/IntegrationTestProject/ValidatorTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/96/e101d5d5/EmailValidator.cs" root0="SKIP_INSPECTION" />
     <setting file="file:///var/folders/30/vms7dmk924x8c390llwf01040000gn/T/.NETStandard,Version=v2.0.AssemblyAttributes.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/da/b651c358/EmailAddressAttribute.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e6/a23c7677/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/16/8380a7c8/DbContextOptions`1.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/36/b8f93dad/IEmailValidator.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/71D9D043-AEF0-4336-ABA3-DDEB79C061D9/04/85039797/RelationalEntityTypeBuilderExtensions.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/4d/99204e7e/IPropertyValidator.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Program.cs" root0="FORCE_HIGHLIGHTING" />
@@ -206,30 +113,18 @@
     <setting file="file://$PROJECT_DIR$/IntegrationTestProject/UsersWebDefaultRequestShould.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/Contexts/UserContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e1/6f1de7ff/DbSet`1.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Common/PersistentEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Common/Infrastructure/IGenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/DataAccess/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/Repositories/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Common/Password.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MIPTCore/Middlewares/ScopeActions.cs" />
-        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/02/fe5fd790/DbContext.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/IRepository.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/Repository.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/IGenericRepository.cs" />
-        <option value="$PROJECT_DIR$/UserManagment/Class1.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Meddle.cs" />
-        <option value="$PROJECT_DIR$/Common/Class1.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Controllers/ValuesController.cs" />
-        <option value="$PROJECT_DIR$/IntegrationTestProject/UnitTest1.cs" />
-        <option value="$PROJECT_DIR$/IntegrationTestProject/UsersWebDefaultRequestShould.cs" />
         <option value="$PROJECT_DIR$/Common/Entities/User.cs" />
         <option value="$PROJECT_DIR$/UserManagment/UserRole.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Models/Credentials.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/AuthentificationExtensions/ClaimPrincipal.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Models/UserMapper.cs" />
         <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/49/d84abbf2/PropertyBuilder`1.cs" />
@@ -244,29 +139,41 @@
         <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/47/f87334f9/RequiredAttribute.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Addons.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserValidator.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Startup.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" />
         <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/da/b651c358/EmailAddressAttribute.cs" />
         <option value="$PROJECT_DIR$/Common/Password.cs" />
         <option value="$PROJECT_DIR$/IntegrationTestProject/ValidatorTests.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Models/UserUpdateModel.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Models/UserModel.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserModelValidator.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/Models/UserRegistrationModel.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/appsettings.Development.json" />
         <option value="$PROJECT_DIR$/DataAccess/MyLogger.cs" />
         <option value="$PROJECT_DIR$/Common/Infrastructure/IGenericRepository.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/GenericRepository.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/efcore-mipt-log.txt" />
         <option value="$PROJECT_DIR$/DataAccess/SQLLogger.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" />
-        <option value="$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs" />
-        <option value="$PROJECT_DIR$/UserManagment/User.cs" />
-        <option value="$PROJECT_DIR$/UserManagment/AlumniProfile.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Models/UserUpdateModel.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Models/UserRegistrationModel.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Models/UserModel.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Models/Mapper/UserMapper.cs" />
+        <option value="$PROJECT_DIR$/IntegrationTestProject/UsersWebDefaultRequestShould.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/5b/e47e8b15/ModelBuilder.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/DbSessionProvider.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/UserContext.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Contexts/IEntityContext.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Models/AlumniProfileModel.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Models/Credentials.cs" />
+        <option value="$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/IEntitySetProvider.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/EntitySetProvider.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/GenericRepository.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Startup.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Mappings/AlumniProfileMap.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" />
+        <option value="$PROJECT_DIR$/UserManagment/AlumniProfile.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Contexts/AlumniProfileContext.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Contexts/UserContext.cs" />
+        <option value="$PROJECT_DIR$/MIPTCore/Bootstraper.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Repositories/UserRepository.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Repositories/GenericRepository.cs" />
+        <option value="$PROJECT_DIR$/UserManagment/User.cs" />
       </list>
     </option>
   </component>
@@ -296,6 +203,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <PATH>
@@ -307,19 +215,46 @@
               <option name="myItemId" value="MIPTCore (5 projects)" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MIPTCore" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MIPTCore (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MIPTCore (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Infrastructure" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="a&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;user&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/User.cs&#10;co&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;mapp&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs&#10;use&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/User.cs&#10;al&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;gene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;ige&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Infrastructure/IGenericRepository.cs&#10;ene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;con&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;userma&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;alum&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;shortcut&#9;null&#9;null&#10;pass&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Password.cs&#10;contr&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;us&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/User.cs&#10;alu&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;ma&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;sess&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/DbSessionProvider.cs&#10;policy&#9;null&#9;null&#10;replace&#9;ACTION&#9;Replace&#10;docker&#9;null&#9;null&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;collapse&#9;ACTION&#9;CollapseRegion&#10;pers&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/PersistentEntity.cs&#10;upda&#9;ACTION&#9;WelcomeScreen.Update&#10;format &#9;ACTION&#9;CodeFormatGroup&#10;forma&#9;ACTION&#9;ReformatCode&#10;format&#9;ACTION&#9;ReformatCode" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="SearchEverywhereHistoryKey" value="us&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/User.cs&#10;сщте&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;deb&#9;ACTION&#9;ActivateDebugToolWindow&#10;user&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;al&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;alum&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;boo&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Bootstraper.cs&#10;re&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;alu&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;co&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;gene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;еуые&#9;ACTION&#9;RiderUnitTestRunContextAction&#10;фд&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;a&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;mapp&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs&#10;use&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/User.cs&#10;ige&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Infrastructure/IGenericRepository.cs&#10;ene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;con&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;userma&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;shortcut&#9;null&#9;null&#10;pass&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Password.cs&#10;contr&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;ma&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;sess&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/DbSessionProvider.cs&#10;policy&#9;null&#9;null&#10;replace&#9;ACTION&#9;Replace&#10;docker&#9;null&#9;null&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;collapse&#9;ACTION&#9;CollapseRegion&#10;pers&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/PersistentEntity.cs&#10;upda&#9;ACTION&#9;WelcomeScreen.Update&#10;format &#9;ACTION&#9;CodeFormatGroup&#10;forma&#9;ACTION&#9;ReformatCode&#10;format&#9;ACTION&#9;ReformatCode" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -409,10 +344,12 @@
       </envs>
       <method />
     </configuration>
-    <configuration />
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue=".NET Project.Default" />
     </list>
+    <configuration />
+    <configuration />
+    <configuration />
     <configuration />
     <configuration />
     <configuration />
@@ -439,12 +376,13 @@
       <workItem from="1505145106212" duration="18863000" />
       <workItem from="1505208282844" duration="12602000" />
       <workItem from="1505240471580" duration="14013000" />
-      <workItem from="1505314781108" duration="3028000" />
+      <workItem from="1505314781108" duration="15117000" />
+      <workItem from="1505389525959" duration="12157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80695000" />
+    <option name="totallyTimeSpent" value="104941000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -461,23 +399,23 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5083333" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4513482" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3774912" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3200469" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34349355" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22638889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3024619" sideWeight="0.49166667" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39507622" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35052755" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24501759" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -510,132 +448,36 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs</url>
-          <line>44</line>
-          <properties startOffset="1364" endOffset="1405" documentPath="$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs" />
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs</url>
-          <line>33</line>
-          <properties startOffset="939" endOffset="1000" documentPath="$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs" />
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs</url>
-          <line>66</line>
-          <properties startOffset="1856" endOffset="1955" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
+          <line>67</line>
+          <properties startOffset="1872" endOffset="1971" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs</url>
-          <line>73</line>
-          <properties startOffset="2036" endOffset="2140" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
+          <line>74</line>
+          <properties startOffset="2057" endOffset="2161" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs</url>
-          <line>84</line>
-          <properties startOffset="2456" endOffset="2504" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
+          <line>85</line>
+          <properties startOffset="2523" endOffset="2571" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
           <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs</url>
-          <line>38</line>
-          <properties startOffset="1019" endOffset="1140" documentPath="$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" />
-          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="40" />
+      <option name="time" value="46" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MIPTCore/AuthentificationExtensions/ClaimPrincipal.cs" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0279B6E2-D194-4600-B7FB-29D814B3491E/4f/09f876f8/IIdentity.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="77" lean-forward="false" selection-start-line="12" selection-start-column="77" selection-end-line="12" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0E2274C-D704-4516-B530-AE069B19B7FF/6c/c4639e5c/ClaimsPrincipal.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="63" column="11" lean-forward="false" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/49/d84abbf2/PropertyBuilder`1.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="217" column="22" lean-forward="true" selection-start-line="217" selection-start-column="22" selection-end-line="217" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5AFDC70D-980C-4033-B387-8286F754D091/cd/854b99e8/UserPreferenceCategory.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Program.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/89/814f71cb/CompareAttribute.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="53" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/f2/8d94b446/ReferenceOwnershipBuilder.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="50" column="46" lean-forward="false" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Authentification/Requirements.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsAuthentificatedAuthHandler.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Authentification/AuthentificationExtensions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsInRoleAuthHandler.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/AuthorizationController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="77" column="40" lean-forward="false" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -781,13 +623,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MIPTCore/Addons.cs" />
     <entry file="file://$PROJECT_DIR$/MIPTCore/Addons.cs" />
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/Credentials.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/b1/1aa191d7/NotEmptyValidator.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -854,70 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/UserUpdateModel.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserModelValidator.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="23" column="40" lean-forward="false" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
-          <folding>
-            <marker date="1505240912000" expanded="false" signature="6:156" ph="..." />
-            <marker date="1505240912000" expanded="true" signature="268:1200" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="310:1194" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="365:663" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="1292:2197" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="1346:2191" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="1401:1688" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="2277:3144" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="2325:3138" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="2380:2728" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="3202:4745" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="3297:3469" ph="{...}" />
-            <marker date="1505240912000" expanded="true" signature="3524:4739" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/UserRegistrationModel.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="13" column="48" lean-forward="false" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/UserModel.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/GenericRepository.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding>
-            <marker date="1505306549000" expanded="false" signature="6:251" ph="..." />
-            <marker date="1505306549000" expanded="true" signature="372:2628" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="547:663" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="709:1051" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="924:990" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="1111:1212" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="1304:1494" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="1557:1819" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="1880:2147" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="2205:2502" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="2367:2419" ph="{...}" />
-            <marker date="1505306549000" expanded="true" signature="2547:2622" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataAccess/SQLLogger.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -936,11 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="81" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="81" />
-          <folding>
-            <marker date="1505304749000" expanded="true" signature="26:115" ph="{...}" />
-            <marker date="1505304749000" expanded="true" signature="132:311" ph="{...}" />
-            <marker date="1505304749000" expanded="true" signature="186:305" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,31 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="37" column="109" lean-forward="false" selection-start-line="37" selection-start-column="109" selection-end-line="37" selection-end-column="109" />
-          <folding>
-            <marker date="1505232104000" expanded="false" signature="6:206" ph="..." />
-            <marker date="1505232104000" expanded="true" signature="240:1937" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="274:1935" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="314:503" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="366:437" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="579:820" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="664:810" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="726:796" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="904:1929" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-          <folding>
-            <marker date="1505315261000" expanded="false" signature="6:75" ph="..." />
-            <marker date="1505315261000" expanded="true" signature="106:789" ph="{...}" />
-            <marker date="1505315261000" expanded="true" signature="133:787" ph="{...}" />
-            <marker date="1505315261000" expanded="true" signature="189:781" ph="{...}" />
-            <marker date="1505315261000" expanded="true" signature="700:769" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -980,41 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="2028" column="30" lean-forward="true" selection-start-line="2028" selection-start-column="30" selection-end-line="2028" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Startup.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="36" column="12" lean-forward="false" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
-          <folding>
-            <marker date="1505232104000" expanded="false" signature="6:401" ph="..." />
-            <marker date="1505232104000" expanded="true" signature="421:2698" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="448:2696" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="502:890" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="1117:2148" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="1462:1565" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="1629:2027" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="2366:2690" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="2539:2616" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="52" column="53" lean-forward="false" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="53" />
-          <folding>
-            <marker date="1505232104000" expanded="false" signature="6:550" ph="..." />
-            <marker date="1505232104000" expanded="true" signature="570:2286" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="601:2284" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="813:911" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="944:1241" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="1291:2278" ph="{...}" />
-            <marker date="1505232104000" expanded="true" signature="2149:2237" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1022,7 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,139 +735,366 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <marker date="1505306288000" expanded="false" signature="6:108" ph="..." />
-            <marker date="1505306288000" expanded="true" signature="141:487" ph="{...}" />
-            <marker date="1505306288000" expanded="true" signature="202:485" ph="{...}" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/UserUpdateModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/UserModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MIPTCore/Models/Mapper/UserMapper.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-          <folding>
-            <marker date="1505240911000" expanded="false" signature="6:34" ph="..." />
-            <marker date="1505240911000" expanded="true" signature="61:1664" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="98:1662" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="163:582" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="263:571" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="647:1028" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="747:1017" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="1129:1656" ph="{...}" />
-            <marker date="1505240911000" expanded="true" signature="1241:1644" ph="{...}" />
-          </folding>
+        <state relative-caret-position="-359">
+          <caret line="19" column="59" lean-forward="false" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IntegrationTestProject/UsersWebDefaultRequestShould.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        <state relative-caret-position="195">
+          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/5b/e47e8b15/ModelBuilder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="83" column="43" lean-forward="false" selection-start-line="83" selection-start-column="43" selection-end-line="83" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/71D9D043-AEF0-4336-ABA3-DDEB79C061D9/04/85039797/RelationalEntityTypeBuilderExtensions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="55" column="40" lean-forward="false" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e6/a23c7677/EntityFrameworkServiceCollectionExtensions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="64" column="41" lean-forward="true" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/16/8380a7c8/DbContextOptions`1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-104">
+          <caret line="21" column="70" lean-forward="true" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/UserRegistrationModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
           <folding>
-            <marker date="1505147543000" expanded="false" signature="6:260" ph="..." />
-            <marker date="1505147543000" expanded="true" signature="294:1360" ph="{...}" />
-            <marker date="1505147543000" expanded="true" signature="342:1358" ph="{...}" />
-            <marker date="1505147543000" expanded="true" signature="493:681" ph="{...}" />
-            <marker date="1505147543000" expanded="true" signature="759:1351" ph="{...}" />
-            <marker date="1505147543000" expanded="true" signature="1263:1341" ph="{...}" />
+            <marker date="1505340864000" expanded="false" signature="6:65" ph="..." />
+            <marker date="1505340864000" expanded="true" signature="92:454" ph="{...}" />
+            <marker date="1505340864000" expanded="true" signature="133:452" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs">
+    <entry file="file://$PROJECT_DIR$/MIPTCore/MIPTCore.csproj.DotSettings">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="89" column="60" lean-forward="false" selection-start-line="89" selection-start-column="60" selection-end-line="89" selection-end-column="60" />
-          <folding>
-            <marker date="1505317612000" expanded="false" signature="6:272" ph="..." />
-            <marker date="1505317612000" expanded="true" signature="304:3207" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="380:3205" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="526:592" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="684:821" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="929:1228" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="1044:1140" ph="{...}" />
-            <marker date="1505317612000" expanded="false" signature="1365:1687" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="1412:1487" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="1833:2675" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="1880:1955" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="2061:2140" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="2792:3199" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="2839:2914" ph="{...}" />
-            <marker date="1505317612000" expanded="true" signature="3032:3111" ph="{...}" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserManagment/AlumniProfile.cs">
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/AlumniProfileModel.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+        <state relative-caret-position="150">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
           <folding>
-            <marker date="1505316911000" expanded="true" signature="23:603" ph="{...}" />
-            <marker date="1505316911000" expanded="true" signature="56:349" ph="{...}" />
-            <marker date="1505316911000" expanded="true" signature="378:472" ph="{...}" />
-            <marker date="1505316911000" expanded="true" signature="501:601" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserManagment/User.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <marker date="1505316929000" expanded="false" signature="6:90" ph="..." />
-            <marker date="1505316929000" expanded="true" signature="115:581" ph="{...}" />
-            <marker date="1505316929000" expanded="true" signature="158:579" ph="{...}" />
+            <marker date="1505396420000" expanded="true" signature="47:247" ph="{...}" />
+            <marker date="1505396420000" expanded="true" signature="85:245" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+        <state relative-caret-position="1170">
+          <caret line="88" column="69" lean-forward="false" selection-start-line="88" selection-start-column="69" selection-end-line="88" selection-end-column="69" />
           <folding>
-            <marker date="1505316241000" expanded="false" signature="6:162" ph="..." />
-            <marker date="1505316241000" expanded="true" signature="196:3274" ph="{...}" />
-            <marker date="1505316241000" expanded="true" signature="248:3272" ph="{...}" />
-            <marker date="1505316241000" expanded="true" signature="348:803" ph="{...}" />
-            <marker date="1505316241000" expanded="true" signature="898:1470" ph="{...}" />
-            <marker date="1505316241000" expanded="false" signature="1521:1954" ph="{...}" />
-            <marker date="1505316241000" expanded="false" signature="1994:3006" ph="{...}" />
-            <marker date="1505316241000" expanded="true" signature="2051:2594" ph="{...}" />
-            <marker date="1505316241000" expanded="true" signature="2404:2580" ph="{...}" />
-            <marker date="1505316241000" expanded="true" signature="2658:2995" ph="{...}" />
+            <marker date="1505406855000" expanded="false" signature="6:244" ph="..." />
+            <marker date="1505406855000" expanded="true" signature="278:4576" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="330:4574" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="430:895" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="990:1567" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="1682:2748" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="2799:3256" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="3296:4308" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="3353:3896" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="3706:3882" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="3960:4297" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/DbSessionProvider.cs">
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/Credentials.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+        <state relative-caret-position="60">
+          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
           <folding>
-            <marker date="1505310031000" expanded="false" signature="6:202" ph="..." />
-            <marker date="1505310031000" expanded="true" signature="224:882" ph="{...}" />
-            <marker date="1505310031000" expanded="true" signature="273:880" ph="{...}" />
-            <marker date="1505310031000" expanded="true" signature="374:394" ph="{...}" />
-            <marker date="1505310031000" expanded="true" signature="470:616" ph="{...}" />
-            <marker date="1505310031000" expanded="true" signature="703:874" ph="{...}" />
+            <marker date="1505396432000" expanded="true" signature="71:322" ph="{...}" />
+            <marker date="1505396432000" expanded="true" signature="102:320" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserModelValidator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="23" column="40" lean-forward="false" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+          <folding>
+            <marker date="1505240912000" expanded="false" signature="6:156" ph="..." />
+            <marker date="1505240912000" expanded="true" signature="199:4747" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="268:1200" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="310:1194" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="365:663" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="1292:2197" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="1346:2191" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="1401:1688" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="2277:3144" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="2325:3138" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="2380:2728" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="3202:4745" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="3297:3469" ph="{...}" />
+            <marker date="1505240912000" expanded="true" signature="3524:4739" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/AuthorizationController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="29" column="105" lean-forward="false" selection-start-line="29" selection-start-column="100" selection-end-line="29" selection-end-column="105" />
+          <folding>
+            <marker date="1505406855000" expanded="false" signature="6:381" ph="..." />
+            <marker date="1505406855000" expanded="true" signature="413:2867" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="472:2865" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="629:695" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="807:1938" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="981:1044" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="1177:1244" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="1466:1637" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="2046:2438" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="2542:2859" ph="{...}" />
+            <marker date="1505406855000" expanded="true" signature="2717:2784" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/EntitySetProvider.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Program.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <marker date="1504991978000" expanded="false" signature="6:63" ph="..." />
+            <marker date="1504991978000" expanded="true" signature="83:412" ph="{...}" />
+            <marker date="1504991978000" expanded="true" signature="117:410" ph="{...}" />
+            <marker date="1504991978000" expanded="true" signature="170:228" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Contexts/IEntityContext.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Startup.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="64" column="39" lean-forward="false" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
+          <folding>
+            <marker date="1505397443000" expanded="false" signature="6:428" ph="..." />
+            <marker date="1505397443000" expanded="true" signature="448:3073" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="475:3071" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="529:917" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="1144:2175" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="1489:1592" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="1656:2054" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="2393:3065" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="2566:2643" ph="{...}" />
+            <marker date="1505397443000" expanded="true" signature="2887:3055" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Contexts/AlumniProfileContext.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="18" column="28" lean-forward="false" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserManagment/AlumniProfile.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <folding>
+            <marker date="1505401982000" expanded="true" signature="38:521" ph="{...}" />
+            <marker date="1505401982000" expanded="true" signature="71:267" ph="{...}" />
+            <marker date="1505401982000" expanded="true" signature="296:390" ph="{...}" />
+            <marker date="1505401982000" expanded="true" signature="419:519" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+          <folding>
+            <marker date="1505401612000" expanded="false" signature="6:75" ph="..." />
+            <marker date="1505401612000" expanded="true" signature="106:743" ph="{...}" />
+            <marker date="1505401612000" expanded="true" signature="133:741" ph="{...}" />
+            <marker date="1505401612000" expanded="true" signature="189:735" ph="{...}" />
+            <marker date="1505401612000" expanded="true" signature="579:648" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataAccess/Mappings/AlumniProfileMap.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        <state relative-caret-position="165">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
           <folding>
-            <marker date="1505317898000" expanded="false" signature="6:75" ph="..." />
-            <marker date="1505317898000" expanded="true" signature="106:257" ph="{...}" />
-            <marker date="1505317898000" expanded="true" signature="142:255" ph="{...}" />
-            <marker date="1505317898000" expanded="true" signature="216:249" ph="{...}" />
+            <marker date="1505401159000" expanded="false" signature="6:75" ph="..." />
+            <marker date="1505401159000" expanded="true" signature="106:277" ph="{...}" />
+            <marker date="1505401159000" expanded="true" signature="142:275" ph="{...}" />
+            <marker date="1505401159000" expanded="true" signature="216:269" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="38" column="49" lean-forward="true" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
+          <folding>
+            <marker date="1505407229000" expanded="false" signature="6:289" ph="..." />
+            <marker date="1505407229000" expanded="true" signature="309:1433" ph="{...}" />
+            <marker date="1505407229000" expanded="true" signature="340:1431" ph="{...}" />
+            <marker date="1505407229000" expanded="true" signature="552:650" ph="{...}" />
+            <marker date="1505407229000" expanded="true" signature="683:980" ph="{...}" />
+            <marker date="1505407229000" expanded="true" signature="1030:1425" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Repositories/GenericRepository.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="44" column="59" lean-forward="false" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
+          <folding>
+            <marker date="1505407309000" expanded="false" signature="6:225" ph="..." />
+            <marker date="1505407309000" expanded="true" signature="260:2577" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="386:2575" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="544:596" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="661:1007" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="874:940" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="1073:1173" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="1285:1437" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="1506:1766" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="1827:2099" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="2163:2457" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="2330:2382" ph="{...}" />
+            <marker date="1505407309000" expanded="true" signature="2502:2569" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <marker date="1505406971000" expanded="false" signature="6:303" ph="..." />
+            <marker date="1505406971000" expanded="true" signature="335:3284" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="411:3282" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="537:603" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="695:832" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="940:1244" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="1060:1156" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="1381:1703" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="1428:1503" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="1849:2747" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="1896:1971" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="2082:2161" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="2864:3276" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="2911:2986" ph="{...}" />
+            <marker date="1505406971000" expanded="true" signature="3109:3188" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserManagment/User.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="15" column="14" lean-forward="false" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding>
+            <marker date="1505407321000" expanded="false" signature="6:90" ph="..." />
+            <marker date="1505407321000" expanded="true" signature="115:573" ph="{...}" />
+            <marker date="1505407321000" expanded="true" signature="158:571" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Repositories/UserRepository.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding>
+            <marker date="1505407324000" expanded="true" signature="6:230" ph="..." />
+            <marker date="1505407324000" expanded="true" signature="265:513" ph="{...}" />
+            <marker date="1505407324000" expanded="true" signature="325:511" ph="{...}" />
+            <marker date="1505407324000" expanded="true" signature="401:453" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/Contexts/UserContext.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="20" column="71" lean-forward="false" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
+          <folding>
+            <marker date="1505406287000" expanded="false" signature="6:148" ph="..." />
+            <marker date="1505406287000" expanded="true" signature="179:967" ph="{...}" />
+            <marker date="1505406287000" expanded="true" signature="222:965" ph="{...}" />
+            <marker date="1505406287000" expanded="true" signature="459:479" ph="{...}" />
+            <marker date="1505406287000" expanded="true" signature="555:701" ph="{...}" />
+            <marker date="1505406287000" expanded="true" signature="788:959" ph="{...}" />
           </folding>
         </state>
       </provider>

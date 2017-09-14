@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Threading;
 using Common;
 using Common.Infrastructure;
 using DataAccess;
+using DataAccess.Contexts;
+using DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using UserManagment;
 using Xunit;
@@ -16,11 +19,11 @@ namespace IntegrationTestProject
         {
             //Act
             var id = await _genericRepository.CreateAsync(alumniUser);
-            var createdUser = await _genericRepository.GetById(id);
+            var createdUser = await _genericRepository.GetByIdAsync(id);
             alumniUser.Id = id;
 
             await _genericRepository.DeleteAsync(id);
-            var deletedUser = await _genericRepository.GetById(id);
+            var deletedUser = await _genericRepository.GetByIdAsync(id);
             
             //Assert
             Assert.Equal(alumniUser, createdUser);
@@ -37,7 +40,7 @@ namespace IntegrationTestProject
             notAlumniUser.AlumniProfile = alumniUser.AlumniProfile;
 
             await _genericRepository.UpdateAsync(notAlumniUser);
-            var updatedUser = await _genericRepository.GetById(id);
+            var updatedUser = await _genericRepository.GetByIdAsync(id);
             
             await _genericRepository.DeleteAsync(id);
             
@@ -45,16 +48,45 @@ namespace IntegrationTestProject
             Assert.Equal(updatedUser, notAlumniUser);
             Assert.NotNull(updatedUser.AlumniProfile);
         }
+        
+        [Fact]
+        public async void CreatingAndThanDoubleUpdatingUserCreateAndThanDoubleUpdateUser()
+        {
+            //Act
+            var id = await _genericRepository.CreateAsync(notAlumniUser);
+
+            notAlumniUser.IsMiptAlumni = true;
+            notAlumniUser.AlumniProfile = alumniUser.AlumniProfile;
+            await _genericRepository.UpdateAsync(notAlumniUser);
+            
+            var updatedUser = await _genericRepository.GetByIdAsync(id);
+
+            notAlumniUser.FirstName = Guid.NewGuid().ToString().Substring(0, 10);
+            notAlumniUser.AlumniProfile.Faculty = FacultyType.Faculty3;
+            await _genericRepository.UpdateAsync(notAlumniUser);
+            Thread.Sleep(5000);
+            
+            var secondTimeUpdatedUser = await _genericRepository.GetByIdAsync(id);
+            
+            await _genericRepository.DeleteAsync(id);
+            
+            //Assert
+            Assert.Equal(updatedUser, notAlumniUser);
+            Assert.Equal(secondTimeUpdatedUser, notAlumniUser);
+            Assert.NotNull(updatedUser.AlumniProfile);
+            Assert.NotNull(secondTimeUpdatedUser.AlumniProfile);
+        }
 
         public RepositoryAndMappingTestsForUser()
         {
+            throw new NotImplementedException();
             
             var contextOptions = new DbContextOptionsBuilder()
                 .UseNpgsql(ConnectionString)
                 .Options;
-            var sessionProvider = new DbSessionProvider(contextOptions);
+            var sessionProvider = new UserContext(null);
             
-            _genericRepository = new GenericRepository<User>(sessionProvider);
+            _genericRepository = new UserRepository(sessionProvider);
             
             sessionProvider.Database.EnsureCreated();
 

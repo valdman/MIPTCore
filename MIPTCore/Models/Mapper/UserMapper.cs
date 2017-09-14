@@ -16,7 +16,8 @@ namespace MIPTCore.Models
                 LastName = user.LastName,
                 EmailAddress = user.Email,
                 Role = user.Role,
-                AlumniProfile = user.AlumniProfile,
+                IsMiptAlumni = user.IsMiptAlumni,
+                AlumniProfile = AlumniProfileToModel(user.AlumniProfile),
                 CreatingDate = user.CreatedTime
             };
         }
@@ -31,7 +32,7 @@ namespace MIPTCore.Models
                 LastName = userModel.LastName,
                 Email = userModel.EmailAddress,
                 IsMiptAlumni = userModel.IsMiptAlumni,
-                AlumniProfile = userModel.AlumniProfile
+                AlumniProfile = AlumniProfileModelToAlumniProfile(userModel.AlumniProfile)
             };
         }
 
@@ -46,9 +47,33 @@ namespace MIPTCore.Models
                 Email = userRegistrationModel.EmailAddress,
                 Password = new Password(userRegistrationModel.Password),
                 IsMiptAlumni = userRegistrationModel.IsMiptAlumni,
-                AlumniProfile = userRegistrationModel.AlumniProfile
+                AlumniProfile = AlumniProfileModelToAlumniProfile(userRegistrationModel.AlumniProfile)
             };
 
+        }
+
+        public static AlumniProfileModel AlumniProfileToModel(AlumniProfile profile)
+        {
+            if (profile == null) return null;
+
+            return new AlumniProfileModel
+            {
+                Diploma = profile.Diploma,
+                Faculty = profile.Faculty,
+                YearOfGraduation = profile.YearOfGraduation
+            };
+        }
+        
+        public static AlumniProfile AlumniProfileModelToAlumniProfile(AlumniProfileModel profile)
+        {
+            if (profile == null) return null;
+
+            return new AlumniProfile
+            {
+                Diploma = profile.Diploma,
+                Faculty = profile.Faculty,
+                YearOfGraduation = profile.YearOfGraduation
+            };
         }
     }
 }

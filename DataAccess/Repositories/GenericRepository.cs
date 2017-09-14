@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -9,50 +8,49 @@ using Common.Infrastructure;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess
+namespace DataAccess.Repositories
 {
-    public class GenericRepository<T> :
-        IGenericRepository<T> where T : PersistentEntity
+    public abstract class GenericRepository<TEntity> :
+        IGenericRepository<TEntity> where TEntity : PersistentEntity
     {
-        private readonly DbSessionProvider _sessionProvider;
-        private readonly DbSet<T> _db;
+        private readonly DbContext _context;
+        protected abstract DbSet<TEntity> Db { get; }
 
-        public GenericRepository(DbSessionProvider sessionProvider)
-        {   
-            _sessionProvider = sessionProvider;
-            _db = _sessionProvider.Set<T>();
+        public GenericRepository(DbContext context)
+        {
+            _context = context;
         }
 
-        public async Task<T> GetById(int id)
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
             Require.Positive(id, nameof(id));
             
-            var foundedObject = await _sessionProvider.Set<T>().FindAsync(id);
+            var foundedObject = await _context.Set<TEntity>().FindAsync(id);
             if (foundedObject == null || !foundedObject.IsDeleted)
             {
                 return foundedObject;
             }
-            return await Task.FromResult<T>(null);
+            return await Task.FromResult<TEntity>(null);
         }
 
-        public virtual async Task<IEnumerable<T>> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await _db.Where(@object => !@object.IsDeleted).ToListAsync();
+            return await Db.Where(@object => !@object.IsDeleted).ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<IEnumerable<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return await _db.Where(predicate).Where(@object => !@object.IsDeleted).ToListAsync();
+            return await Db.Where(predicate).ToListAsync();
         }
 
-        public virtual async Task<int> CreateAsync(T @object)
+        public virtual async Task<int> CreateAsync(TEntity @object)
         {
             Require.NotNull(@object, nameof(@object));
             
             @object.CreatedTime = DateTimeOffset.Now;
-            await _sessionProvider.Set<T>().AddAsync(@object);
+            await _context.Set<TEntity>().AddAsync(@object);
             await Save();
             return @object.Id;
         }
@@ -61,29 +59,29 @@ namespace DataAccess
         {
             Require.Positive(objectId, nameof(objectId));
             
-            var objectToDelete = await GetById(objectId);
+            var objectToDelete = await GetByIdAsync(objectId);
             objectToDelete.IsDeleted = true;
             await UpdateAsync(objectToDelete);
             await Save();
         }
 
-        public virtual async Task UpdateAsync(T @object)
+        public virtual async Task UpdateAsync(TEntity @object)
         {
             Require.NotNull(@object, nameof(@object));
             
-            var entity = await GetById(@object.Id);
+            var entity = await GetByIdAsync(@object.Id);
             if (entity == null)
             {
                 return;
             }
 
-            _sessionProvider.Update(@object);
+            _context.Update(@object);
             await Save();
         }
 
         protected virtual async Task Save()
         {
-            await _sessionProvider.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

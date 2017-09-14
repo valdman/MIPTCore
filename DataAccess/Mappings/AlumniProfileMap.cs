@@ -7,7 +7,7 @@ namespace DataAccess.Mappings
     {
         public AlumniProfileMap(EntityTypeBuilder<AlumniProfile> e)
         {
-            
+            e.HasKey(t => t.Id);
         }
     }
 }
