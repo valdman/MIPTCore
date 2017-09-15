@@ -1,12 +1,16 @@
-﻿using Common;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using Common;
 using FluentValidation;
+using UserManagment;
 
 namespace MIPTCore.Models.ModelValidators
 {
     public class AbstractUserModelValidator<T> : AbstractValidator<T> where T : AbstractUserModel
     {
         public AbstractUserModelValidator()
-        {
+        {   
             RuleFor(_ => _).NotNull();
             
             RuleFor(userModel => userModel.EmailAddress)
@@ -14,7 +18,9 @@ namespace MIPTCore.Models.ModelValidators
                 .WithMessage(p => $"'{nameof(p.EmailAddress)}' must be valid Email. {p.EmailAddress} is not");
              
             RuleFor(userModel => userModel.AlumniProfile).NotNull()
+                .SetValidator(new AlumniProfileModelValidator())
                 .When(user => user.IsMiptAlumni)
+                .WithMessage(p => $"'{nameof(p.AlumniProfile)}' must be fully filled. Fields are {typeof(AlumniProfileModel).GetProperties().Select(_ => _.Name)}")
                 .WithMessage(p => $"MIPT Alumni should provide '{nameof(p.AlumniProfile)}'");
             
             RuleFor(userModel => userModel.IsMiptAlumni).NotEqual(false)
@@ -48,6 +54,8 @@ namespace MIPTCore.Models.ModelValidators
         public UserRegistrationModelValidator()
         {
             Include(new AbstractUserModelValidator<UserRegistrationModel>());
+            
+            RuleFor(userModel => userModel.EmailAddress);//.Must(BeUniqueEmail);
 
             RuleFor(userModel => userModel.Password).Must(Password.IsStringCorrectPassword)
                 .WithMessage(p => $"'{nameof(p.Password)}' is not corresponding security rules. It should be between 8 and 16 characters");
@@ -59,6 +67,7 @@ namespace MIPTCore.Models.ModelValidators
         public UserUpdateModelValidator()
         {
             Include(new AbstractUserModelValidator<UserUpdateModel>());
+            RuleFor(userModel => userModel.EmailAddress);//.Must(BeUniqueEmail);
         }
     }
 

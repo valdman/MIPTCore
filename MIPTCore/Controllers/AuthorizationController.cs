@@ -27,6 +27,11 @@ namespace MIPTCore.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Credentials credentials)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
             var intentedUser = (await _userRepository.FindByAsync(user => user.Email == credentials.Email)).SingleOrDefault();
             if(intentedUser == null)
             {

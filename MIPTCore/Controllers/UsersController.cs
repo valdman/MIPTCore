@@ -7,6 +7,8 @@ using Common.Infrastructure;
 using DataAccess;
 using DataAccess.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MIPTCore.Authentification;
+using MIPTCore.Extensions;
 using MIPTCore.Models;
 using MIPTCore.Models.ModelValidators;
 using UserManagment;
@@ -35,6 +37,12 @@ namespace MIPTCore.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
+            this.CheckIdViaModel(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
             var userToReturn = await _userRepository.GetByIdAsync(id);
 
             if (userToReturn == null)
@@ -65,6 +73,7 @@ namespace MIPTCore.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] UserUpdateModel userModel)
         {
+            this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -95,6 +104,7 @@ namespace MIPTCore.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+            this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
