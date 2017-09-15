@@ -28,7 +28,9 @@ namespace MIPTCore
             _services
                 //Register auth middleware
                 .AddSingleton<IAuthorizationHandler, IsAuthentificatedAuthHandler>()
-                .AddSingleton<IAuthorizationHandler, IsInRoleRoleAuthHandler>();
+                .AddSingleton<IAuthorizationHandler, IsInRoleRoleAuthHandler>()
+                //Register settings
+                .Configure<BackendSettings>(_configuration.GetSection("BackendSettings"));
         }
         
         private void ConfigureDatebase()

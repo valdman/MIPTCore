@@ -68,59 +68,36 @@
     <setting file="file://$PROJECT_DIR$/MIPTCore/Models/ModelValidators/CredentialsValidator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Extensions/ControllerExtension.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Authentification/Requirements.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/47/f87334f9/RequiredAttribute.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/04/ff6d7636/EntityTypeBuilder`1.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/UserRegistrationModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/1a/d4f2eb65/SR.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B3824083-29EE-4512-A838-FCA9F4A05F42/25/1d175f02/ServiceCollectionServiceExtensions.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/89/814f71cb/CompareAttribute.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/f2/8d94b446/ReferenceOwnershipBuilder.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/ce/fe743932/ValidationAttribute.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/AbstractUserModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsAuthentificatedAuthHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/UserUpdateModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsInRoleAuthHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserModelValidator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF43D361-B03B-4229-9EE0-02B260A4A920/ae/e8afc2d7/DataAnnotationsModelValidator.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/5b/e47e8b15/ModelBuilder.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/Mapper/UserMapper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0279B6E2-D194-4600-B7FB-29D814B3491E/4f/09f876f8/IIdentity.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0E2274C-D704-4516-B530-AE069B19B7FF/6c/c4639e5c/ClaimsPrincipal.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/62/4fd31238/DefaultValidatorExtensions.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/AlumniProfileModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/b1/1aa191d7/NotEmptyValidator.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/IntegrationTestProject/ValidatorTests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/96/e101d5d5/EmailValidator.cs" root0="SKIP_INSPECTION" />
-    <setting file="file:///var/folders/30/vms7dmk924x8c390llwf01040000gn/T/.NETStandard,Version=v2.0.AssemblyAttributes.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/da/b651c358/EmailAddressAttribute.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e6/a23c7677/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/16/8380a7c8/DbContextOptions`1.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/36/b8f93dad/IEmailValidator.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Startup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/71D9D043-AEF0-4336-ABA3-DDEB79C061D9/04/85039797/RelationalEntityTypeBuilderExtensions.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/UserRegistrationModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/4d/99204e7e/IPropertyValidator.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Bootstraper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UserManagment/User.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/b9/765e3bd0/AbstractValidator`1.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EBB73DB9-76D4-423B-90D0-3A8FC0E1FA16/46/83041fbc/AfterTestFinished.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/49/d84abbf2/PropertyBuilder`1.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/AbstractUserModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsAuthentificatedAuthHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/UserUpdateModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/ModelValidators/UserModelValidator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Authentification/Handlers/IsInRoleAuthHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/Mapper/UserMapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UserManagment/AlumniProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/02/fe5fd790/DbContext.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/UserManagment/UserRole.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Controllers/AuthorizationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Models/Credentials.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/IntegrationTestProject/UsersWebDefaultRequestShould.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0E2274C-D704-4516-B530-AE069B19B7FF/6c/c4639e5c/ClaimsPrincipal.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Mappings/UserMap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/Models/AlumniProfileModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MIPTCore/Controllers/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Contexts/UserContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e1/6f1de7ff/DbSet`1.cs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Common/PersistentEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Common/Infrastructure/IGenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/DataAccess/Repositories/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MIPTCore/BackendSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Common/Password.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/IntegrationTestProject/ValidatorTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataAccess/Repositories/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -134,7 +111,6 @@
         <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/da/b651c358/EmailAddressAttribute.cs" />
         <option value="$PROJECT_DIR$/Common/Password.cs" />
         <option value="$PROJECT_DIR$/IntegrationTestProject/ValidatorTests.cs" />
-        <option value="$PROJECT_DIR$/MIPTCore/appsettings.Development.json" />
         <option value="$PROJECT_DIR$/DataAccess/MyLogger.cs" />
         <option value="$PROJECT_DIR$/Common/Infrastructure/IGenericRepository.cs" />
         <option value="$PROJECT_DIR$/MIPTCore/efcore-mipt-log.txt" />
@@ -206,7 +182,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <PATH>
@@ -237,12 +212,14 @@
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistoryKey" value="us&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;auth&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/AuthorizationController.cs&#10;con&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/AuthorizationController.cs&#10;alum&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Models/AlumniProfileModel.cs&#10;cont&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/AuthorizationController.cs&#10;user&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;IG&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Infrastructure/IGenericRepository.cs&#10;boo&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Bootstraper.cs&#10;loggi&#9;null&#9;null&#10;userrol&#9;null&#9;null&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;сщте&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;deb&#9;ACTION&#9;ActivateDebugToolWindow&#10;al&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;re&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;alu&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;co&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;gene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;еуые&#9;ACTION&#9;RiderUnitTestRunContextAction&#10;фд&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;a&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/AlumniProfile.cs&#10;mapp&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/IntegrationTestProject/RepositoryAndMappingTestsForUser.cs&#10;use&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/UserManagment/User.cs&#10;ige&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Infrastructure/IGenericRepository.cs&#10;ene&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/GenericRepository.cs&#10;userma&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;shortcut&#9;null&#9;null&#10;pass&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/Common/Password.cs&#10;contr&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/MIPTCore/Controllers/UsersController.cs&#10;ma&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/Mappings/UserMap.cs&#10;sess&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/DbSessionProvider.cs&#10;policy&#9;null&#9;null&#10;replace&#9;ACTION&#9;Replace&#10;docker&#9;null&#9;null&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;collapse&#9;ACTION&#9;CollapseRegion&#10;pers&#9;FILE&#9;file:///Users/boris/Projects/Net/MIPTCore/DataAccess/PersistentEntity.cs&#10;upda&#9;ACTION&#9;WelcomeScreen.Update&#10;format &#9;ACTION&#9;CodeFormatGroup&#10;forma&#9;ACTION&#9;ReformatCode&#10;format&#9;ACTION&#9;ReformatCode" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -390,7 +367,7 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3024619" sideWeight="0.51111114" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30186334" sideWeight="0.51111114" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3774912" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -399,16 +376,16 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22638889" sideWeight="0.48886284" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3024619" sideWeight="0.4888889" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41383353" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3915592" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22638889" sideWeight="0.5067437" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22638889" sideWeight="0.5111372" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41383353" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -448,13 +425,13 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/1a/d4f2eb65/SR.cs</url>
           <line>305</line>
-          <properties startOffset="7823" endOffset="7910" documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43A45627-8E0F-48C5-8459-652CAA7B26D0/1a/d4f2eb65/SR.cs" />
+          <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/96/e101d5d5/EmailValidator.cs</url>
           <line>24</line>
-          <properties startOffset="3002" endOffset="3093" documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/96/e101d5d5/EmailValidator.cs" />
+          <properties />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
@@ -474,51 +451,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/b9/765e3bd0/AbstractValidator`1.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="158" column="45" lean-forward="false" selection-start-line="158" selection-start-column="45" selection-end-line="158" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/62/4fd31238/DefaultValidatorExtensions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="243" column="64" lean-forward="false" selection-start-line="243" selection-start-column="64" selection-end-line="243" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/96/e101d5d5/EmailValidator.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="1098" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="1098" />
-          <folding>
-            <marker date="1505225635000" expanded="true" signature="0:348" ph="/* Decompiled with JetBrains decompiler ... */" />
-            <marker date="1505225635000" expanded="false" signature="356:421" ph="..." />
-            <marker date="1505225635000" expanded="true" signature="460:4232" ph="{...}" />
-            <marker date="1505225635000" expanded="true" signature="578:4230" ph="{...}" />
-            <marker date="1505225635000" expanded="true" signature="1807:2918" ph="{...}" />
-            <marker date="1505225635000" expanded="true" signature="2989:3099" ph="{...}" />
-            <marker date="1505225635000" expanded="true" signature="3129:4226" ph="{...}" />
-            <marker date="1505225635000" expanded="true" signature="3145:4220" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/04/ff6d7636/EntityTypeBuilder`1.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="277" column="71" lean-forward="false" selection-start-line="277" selection-start-column="71" selection-end-line="277" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MIPTCore/appsettings.Development.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="81" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/b9/765e3bd0/AbstractValidator`1.cs" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/62/4fd31238/DefaultValidatorExtensions.cs" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49B9C23B-9B33-400B-B816-CE9A6BE7A69A/96/e101d5d5/EmailValidator.cs" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/04/ff6d7636/EntityTypeBuilder`1.cs" />
     <entry file="file://$PROJECT_DIR$/IntegrationTestProject/ValidatorTests.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -533,13 +469,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EBB73DB9-76D4-423B-90D0-3A8FC0E1FA16/46/83041fbc/AfterTestFinished.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EBB73DB9-76D4-423B-90D0-3A8FC0E1FA16/46/83041fbc/AfterTestFinished.cs" />
     <entry file="file://$PROJECT_DIR$/IntegrationTestProject/UsersWebDefaultRequestShould.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -547,34 +477,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/5b/e47e8b15/ModelBuilder.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="83" column="43" lean-forward="false" selection-start-line="83" selection-start-column="43" selection-end-line="83" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/71D9D043-AEF0-4336-ABA3-DDEB79C061D9/04/85039797/RelationalEntityTypeBuilderExtensions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="55" column="40" lean-forward="false" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e6/a23c7677/EntityFrameworkServiceCollectionExtensions.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="64" column="41" lean-forward="true" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/16/8380a7c8/DbContextOptions`1.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-104">
-          <caret line="21" column="70" lean-forward="true" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/5b/e47e8b15/ModelBuilder.cs" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/71D9D043-AEF0-4336-ABA3-DDEB79C061D9/04/85039797/RelationalEntityTypeBuilderExtensions.cs" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/e6/a23c7677/EntityFrameworkServiceCollectionExtensions.cs" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0998BF91-1F01-4E78-84D2-695C95A67016/16/8380a7c8/DbContextOptions`1.cs" />
     <entry file="file://$PROJECT_DIR$/MIPTCore/MIPTCore.csproj.DotSettings">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -610,21 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="40" column="110" lean-forward="false" selection-start-line="40" selection-start-column="110" selection-end-line="40" selection-end-column="110" />
-          <folding>
-            <marker date="1505407663000" expanded="false" signature="6:225" ph="..." />
-            <marker date="1505407663000" expanded="true" signature="260:2577" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="386:2575" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="544:596" ph="{...}" />
-            <marker date="1505407663000" expanded="false" signature="661:1007" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="874:940" ph="{...}" />
-            <marker date="1505407663000" expanded="false" signature="1073:1173" ph="{...}" />
-            <marker date="1505407663000" expanded="false" signature="1285:1437" ph="{...}" />
-            <marker date="1505407663000" expanded="false" signature="1506:1766" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="1827:2099" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="2163:2457" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="2330:2382" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="2502:2569" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -632,12 +523,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="35" />
-          <folding>
-            <marker date="1505414012000" expanded="true" signature="38:530" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="71:276" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="305:399" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="428:528" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -645,10 +530,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding>
-            <marker date="1505148787000" expanded="true" signature="23:112" ph="{...}" />
-            <marker date="1505148787000" expanded="true" signature="50:110" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,37 +537,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="30" column="86" lean-forward="false" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="86" />
-          <folding>
-            <marker date="1505414012000" expanded="false" signature="6:230" ph="..." />
-            <marker date="1505414012000" expanded="true" signature="265:1167" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="325:1165" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="387:553" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="617:710" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="817:987" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="1055:1107" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/SQLLogger.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/SQLLogger.cs" />
     <entry file="file://$PROJECT_DIR$/DataAccess/Contexts/UserContext.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-          <folding>
-            <marker date="1505414012000" expanded="true" signature="6:120" ph="..." />
-            <marker date="1505414012000" expanded="true" signature="151:694" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="194:692" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="431:451" ph="{...}" />
-            <marker date="1505414012000" expanded="true" signature="527:686" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -719,10 +577,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
-          <folding>
-            <marker date="1505396432000" expanded="true" signature="71:322" ph="{...}" />
-            <marker date="1505396432000" expanded="true" signature="102:320" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -730,13 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding>
-            <marker date="1505407663000" expanded="false" signature="6:75" ph="..." />
-            <marker date="1505407663000" expanded="true" signature="106:743" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="133:741" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="189:735" ph="{...}" />
-            <marker date="1505407663000" expanded="true" signature="579:648" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -744,11 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-          <folding>
-            <marker date="1505414454000" expanded="false" signature="6:102" ph="..." />
-            <marker date="1505414454000" expanded="true" signature="129:330" ph="{...}" />
-            <marker date="1505414454000" expanded="true" signature="178:328" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,11 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="6" column="5" lean-forward="false" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-          <folding>
-            <marker date="1505414493000" expanded="false" signature="6:65" ph="..." />
-            <marker date="1505414493000" expanded="true" signature="92:212" ph="{...}" />
-            <marker date="1505414493000" expanded="true" signature="153:210" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -782,11 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-          <folding>
-            <marker date="1505414468000" expanded="false" signature="6:65" ph="..." />
-            <marker date="1505414468000" expanded="true" signature="92:195" ph="{...}" />
-            <marker date="1505414468000" expanded="true" signature="147:193" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>

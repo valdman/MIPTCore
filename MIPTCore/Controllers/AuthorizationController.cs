@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Authentification;
 using MIPTCore.Models;
+using MIPTCore.Models.Mapper;
 using UserManagment;
 
 namespace MIPTCore.Controllers
