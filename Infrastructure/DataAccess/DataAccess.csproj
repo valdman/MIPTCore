@@ -9,7 +9,6 @@
     <PackageReference Include="NETStandard.Library" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Common\Common.csproj" />
-    <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
+    <ProjectReference Include="..\..\Domain\UserManagment\UserManagment.csproj" />
   </ItemGroup>
 </Project>

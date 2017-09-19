@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MIPTCore.Authentification;
+using MIPTCore.Extensions;
+using MIPTCore.Middlewares;
 using UserManagment;
 
 namespace MIPTCore
@@ -66,6 +68,9 @@ namespace MIPTCore
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            //Domain exception wrapper middleware
+            app.DomainErrorHandlingMiddleware();
 
             app.UseAuthentication();
             app.UseMvc();

@@ -14,18 +14,18 @@ namespace MIPTCore.Controllers
     [Route("[controller]")]
     public class UsersController : Controller
     {
-        private readonly IGenericRepository<User> _userRepository;
+        private readonly IUserManager _userManager;
 
-        public UsersController(IGenericRepository<User> userRepository)
+        public UsersController(IUserManager userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         // GET api/values
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var all = await _userRepository.GetAll();
+            var all = await _userManager.GetAllUsersAsync();
             return Ok(all.Select(UserMapper.UserToUserModel));
         }
 
@@ -39,7 +39,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var userToReturn = await _userRepository.GetByIdAsync(id);
+            var userToReturn = await _userManager.GetUserByIdAsync(id);
 
             if (userToReturn == null)
             {
@@ -60,7 +60,7 @@ namespace MIPTCore.Controllers
 
             var userToCreate = UserMapper.UserRegistrationModelToUser(userModel);
 
-            var userId = await _userRepository.CreateAsync(userToCreate);
+            var userId = await _userManager.CreateUserAsync(userToCreate);
 
             return Ok(userId);
         }
@@ -76,7 +76,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userToUpdate = await _userRepository.GetByIdAsync(id);
+            var userToUpdate = await _userManager.GetUserByIdAsync(id);
 
             if (userToUpdate == null)
             {
@@ -94,10 +94,10 @@ namespace MIPTCore.Controllers
             userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
             userToUpdate.AlumniProfile = UserMapper.AlumniProfileModelToAlumniProfile(userModel.AlumniProfile);
 
-            await _userRepository.UpdateAsync(userToUpdate);
+            await _userManager.UpdateUserAsync(userToUpdate);
             
             //!!!
-            var updatedUser = await _userRepository.GetByIdAsync(id);
+            var updatedUser = await _userManager.GetUserByIdAsync(id);
 
             return Ok(UserMapper.UserToUserModel(updatedUser));
         }
@@ -113,7 +113,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var userToDelete = await _userRepository.GetByIdAsync(id);
+            var userToDelete = await _userManager.GetUserByIdAsync(id);
             
             if (userToDelete == null)
             {
@@ -125,7 +125,7 @@ namespace MIPTCore.Controllers
                 return Unauthorized();
             }
 
-            await _userRepository.DeleteAsync(id);
+            await _userManager.DeleteUserAsync(id);
 
             return Ok();
         }

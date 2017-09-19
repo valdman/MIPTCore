@@ -18,11 +18,11 @@ namespace MIPTCore.Controllers
 {
     public class AuthentificationController : Controller
     {
-        private readonly IGenericRepository<User> _userRepository;
+        private readonly IUserManager _userManager;
 
-        public AuthentificationController(IGenericRepository<User> userRepository)
+        public AuthentificationController(IUserManager userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         [HttpPost("login")]
@@ -33,7 +33,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var intentedUser = (await _userRepository.FindByAsync(user => user.Email == credentials.Email)).SingleOrDefault();
+            var intentedUser = await _userManager.GetUserByEmailAsync(credentials.Email);
             if(intentedUser == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace MIPTCore.Controllers
             
             intentedUser.AuthentificatedAt = DateTimeOffset.Now;
 
-            await _userRepository.UpdateAsync(intentedUser);
+            await _userManager.UpdateUserAsync(intentedUser);
             
             var myclaims = new List<Claim>(new Claim[] 
             { 
@@ -69,11 +69,11 @@ namespace MIPTCore.Controllers
         {
             var currentUserId = User.GetId();
 
-            var currentUser = await _userRepository.GetByIdAsync(currentUserId);
+            var currentUser = await _userManager.GetUserByIdAsync(currentUserId);
             
             currentUser.AuthentificatedAt = null;
 
-            await _userRepository.UpdateAsync(currentUser);
+            await _userManager.UpdateUserAsync(currentUser);
             
             await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
             
@@ -85,7 +85,7 @@ namespace MIPTCore.Controllers
         public async Task<IActionResult> Current()
         {
             var currentUserId = User.GetId();
-            var currentUser = await _userRepository.GetByIdAsync(currentUserId);
+            var currentUser = await _userManager.GetUserByIdAsync(currentUserId);
 
             if (currentUser == null)
             {
