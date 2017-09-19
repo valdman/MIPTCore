@@ -1,6 +1,5 @@
 ﻿using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using UserManagment;
 
 namespace DataAccess.Contexts
