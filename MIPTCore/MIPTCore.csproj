@@ -12,8 +12,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\UserManagment\UserManagment.csproj" />
+    <ProjectReference Include="..\Infrastructure\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="efcore-mipt-log.txt" />

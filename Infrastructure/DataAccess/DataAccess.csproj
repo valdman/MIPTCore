@@ -9,14 +9,7 @@
     <PackageReference Include="NETStandard.Library" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{5DE8D936-65E3-491B-9D33-77FA12858515}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\UserManagment\UserManagment.csproj">
-      <Project>{4380F1D5-BC93-4A3E-83CA-4464F086ACC4}</Project>
-      <Name>UserManagment</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Domain\Common\Common.csproj" />
+    <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
   </ItemGroup>
 </Project>

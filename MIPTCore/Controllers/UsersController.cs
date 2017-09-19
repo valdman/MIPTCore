@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Common;
 using Common.Infrastructure;
-using DataAccess;
-using DataAccess.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Authentification;
 using MIPTCore.Extensions;
 using MIPTCore.Models;
 using MIPTCore.Models.Mapper;
-using MIPTCore.Models.ModelValidators;
 using UserManagment;
 
 namespace MIPTCore.Controllers
