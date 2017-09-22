@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using Common;
 
 namespace CapitalManagment
 {
@@ -14,5 +15,8 @@ namespace CapitalManagment
 
         public decimal Need { get; set; }
         public decimal Given { get; set; }
+
+        public IEnumerable<Person> Founders { get; set; }
+        public IEnumerable<Person> Recivers { get; set; }
     }
 }

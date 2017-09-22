@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -88,7 +89,9 @@ namespace MIPTCore.Controllers
             capitalToUpdate.Name = capitalModel.Name;
             capitalToUpdate.Need = capitalModel.Need;
             capitalToUpdate.Description = capitalModel.Description;
-            capitalToUpdate.Image = capitalModel.Image;
+            capitalToUpdate.Image = Mapper.Map<Image>(capitalModel.Image);
+            capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);
+            capitalToUpdate.Recivers = Mapper.Map<IEnumerable<Person>>(capitalModel.Recivers);
 
             await _capitalManager.UpdateCapitalAsync(capitalToUpdate);
 

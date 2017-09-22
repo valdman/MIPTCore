@@ -12,12 +12,14 @@ namespace SchemaCreator
 
         public static IEnumerable<DbContext> GetDbContextsFromAssemblyWith<T>(params object[] constructorArgs) where T : class
         {
-            var objects = Assembly.GetAssembly(typeof(T))
+            var typesOfContexts = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
-                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(DbContext)))
-                .Select(type => (DbContext) Activator.CreateInstance(type, constructorArgs))
-                .ToList();
-            return objects;
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(DbContext))).ToArray();
+
+            var constructors =
+                typesOfContexts.Select(type => type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).First());
+            var objectsOfTheseTypes = constructors.Select(ctor => (DbContext)ctor.Invoke(constructorArgs));
+            return objectsOfTheseTypes;
         }
     }
 }

@@ -13,13 +13,14 @@ namespace DataAccess.Contexts
         {
         }
 
-        public CapitalContext(DbContextOptions connectionOptions) : base(connectionOptions)
+        private CapitalContext(DbContextOptions connectionOptions) : base(connectionOptions)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new CapitalMap(modelBuilder.Entity<Capital>());
+            new PersonMap(modelBuilder.Entity<Person>());
         }
     }
 }

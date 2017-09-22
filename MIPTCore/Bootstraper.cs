@@ -60,6 +60,12 @@ namespace MIPTCore
                 cfg.CreateMap<CapitalUpdatingModel, Capital>();
                 cfg.CreateMap<CapitalCreatingModel, Capital>();
                 cfg.CreateMap<Capital, CapitalModel>();
+
+                cfg.CreateMap<Image, ImageModel>();
+                cfg.CreateMap<ImageModel, Image>();
+                
+                cfg.CreateMap<PersonModel, Person>();
+                cfg.CreateMap<Person, PersonModel>();
             });
             
         }

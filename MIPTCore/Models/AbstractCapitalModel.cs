@@ -1,4 +1,6 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using CapitalManagment;
+using Common;
 
 namespace MIPTCore.Models
 {
@@ -10,8 +12,11 @@ namespace MIPTCore.Models
         //public object Content { get; set; }
         public string Description { get; set; }
 
-        public Image Image {get; set;}
+        public ImageModel Image {get; set;}
 
         public decimal Need { get; set; }
+
+        public IEnumerable<PersonModel> Founders { get; set; }
+        public IEnumerable<PersonModel> Recivers { get; set; }
     }
 }

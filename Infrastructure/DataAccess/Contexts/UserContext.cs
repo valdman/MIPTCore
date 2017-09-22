@@ -13,7 +13,7 @@ namespace DataAccess.Contexts
         {
         }
         
-        public UserContext(DbContextOptions connectionOptions) : base(connectionOptions)
+        private UserContext(DbContextOptions connectionOptions) : base(connectionOptions)
         {
         }
 

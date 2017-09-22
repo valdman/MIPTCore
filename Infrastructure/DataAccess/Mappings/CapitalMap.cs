@@ -16,6 +16,9 @@ namespace DataAccess.Mappings
             e.Property(t => t.Given).IsRequired();
 
             e.HasOne(c => c.Image).WithMany().IsRequired(false);
+
+            e.HasMany(c => c.Founders).WithOne().HasForeignKey("FoundedCapitalId").IsRequired(false);
+            e.HasMany(c => c.Recivers).WithOne().HasForeignKey("ReciverOfCapitalId").IsRequired(false);
         }
     }
 }
