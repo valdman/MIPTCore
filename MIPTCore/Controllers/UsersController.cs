@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Common.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Authentification;
 using MIPTCore.Extensions;
 using MIPTCore.Models;
-using MIPTCore.Models.Mapper;
 using UserManagment;
+using Mapper = AutoMapper.Mapper;
 
 namespace MIPTCore.Controllers
 {
@@ -21,15 +20,16 @@ namespace MIPTCore.Controllers
             _userManager = userManager;
         }
 
-        // GET api/values
+        // GET users
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var all = await _userManager.GetAllUsersAsync();
-            return Ok(all.Select(UserMapper.UserToUserModel));
+            
+            return Ok(all.Select(Mapper.Map<UserModel>));
         }
 
-        // GET api/values/5
+        // GET users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -46,10 +46,10 @@ namespace MIPTCore.Controllers
                 return NotFound("User with this ID is not exists");
             }
             
-            return Ok(UserMapper.UserToUserModel(userToReturn));
+            return Ok(Mapper.Map<UserModel>(userToReturn));
         }
 
-        // POST api/values
+        // POST users
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] UserRegistrationModel userModel)
         {
@@ -58,14 +58,14 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userToCreate = UserMapper.UserRegistrationModelToUser(userModel);
+            var userToCreate = Mapper.Map<User>(userModel);
 
             var userId = await _userManager.CreateUserAsync(userToCreate);
 
             return Ok(userId);
         }
 
-        // PUT api/values/5
+        // PUT users/5
         [HttpPut("{id}")]
         [Authorize("User")]
         public async Task<IActionResult> Put(int id, [FromBody] UserUpdateModel userModel)
@@ -90,19 +90,19 @@ namespace MIPTCore.Controllers
 
             userToUpdate.FirstName = userModel.FirstName;
             userToUpdate.LastName = userModel.LastName;
-            userToUpdate.Email = userModel.EmailAddress;
+            userToUpdate.Email = userModel.Email;
             userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
-            userToUpdate.AlumniProfile = UserMapper.AlumniProfileModelToAlumniProfile(userModel.AlumniProfile);
-
+            userToUpdate.AlumniProfile = Mapper.Map<AlumniProfile>(userModel.AlumniProfile);
+            
             await _userManager.UpdateUserAsync(userToUpdate);
             
             //!!!
             var updatedUser = await _userManager.GetUserByIdAsync(id);
 
-            return Ok(UserMapper.UserToUserModel(updatedUser));
+            return Ok(Mapper.Map<UserModel>(updatedUser));
         }
 
-        // DELETE api/values/5
+        // DELETE users/5
         [HttpDelete("{id}")]
         [Authorize("User")]
         public async Task<IActionResult> Delete(int id)

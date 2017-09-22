@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Common;
-using Common.Infrastructure;
-using DataAccess;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Authentification;
 using MIPTCore.Models;
-using MIPTCore.Models.Mapper;
 using UserManagment;
 
 namespace MIPTCore.Controllers
@@ -25,6 +22,7 @@ namespace MIPTCore.Controllers
             _userManager = userManager;
         }
 
+        // POST login
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Credentials credentials)
         {
@@ -60,9 +58,10 @@ namespace MIPTCore.Controllers
 
             await HttpContext.SignInAsync("MIPTCoreCookieAuthenticationScheme", claimsPrincipal);
 
-            return Ok(UserMapper.UserToUserModel(intentedUser));
+            return Ok(Mapper.Map<UserModel>(intentedUser));
         }
 
+        // POST logout
         [HttpPost("logout")]
         [Authorize("User")]
         public async Task<IActionResult> Logout()
@@ -80,6 +79,7 @@ namespace MIPTCore.Controllers
             return Ok();
         }
 
+        // POST me
         [HttpGet("me")]
         [Authorize("User")]
         public async Task<IActionResult> Current()
@@ -92,7 +92,7 @@ namespace MIPTCore.Controllers
                 return Unauthorized();
             }
 
-            return Ok(UserMapper.UserToUserModel(currentUser));
+            return Ok(Mapper.Map<UserModel>(currentUser));
         }
     }
 }

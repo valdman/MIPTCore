@@ -16,6 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../Domain/FileManagment" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Domain/UserManagment" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Infrastructure/DataAccess" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Infrastructure/SchemaCreator" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../IntegrationTestProject" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../MIPTCore" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../Domain/CapitalManagment/bin" />
@@ -28,6 +29,8 @@
       <excludeFolder url="file://$MODULE_DIR$/../../Domain/UserManagment/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Infrastructure/DataAccess/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../Infrastructure/DataAccess/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Infrastructure/SchemaCreator/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Infrastructure/SchemaCreator/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../IntegrationTestProject/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../IntegrationTestProject/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../MIPTCore/bin" />

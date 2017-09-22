@@ -15,9 +15,9 @@ namespace MIPTCore.Models.ModelValidators
         {   
             RuleFor(_ => _).NotNull();
             
-            RuleFor(userModel => userModel.EmailAddress)
+            RuleFor(userModel => userModel.Email)
                 .NotEmpty().EmailAddress()
-                .WithMessage(p => $"'{nameof(p.EmailAddress)}' must be valid Email. {p.EmailAddress} is not");
+                .WithMessage(p => $"'{nameof(p.Email)}' must be valid Email. {p.Email} is not");
 
             RuleFor(userModel => userModel.AlumniProfile)
                 .SetValidator(new AlumniProfileModelValidator());
@@ -40,7 +40,7 @@ namespace MIPTCore.Models.ModelValidators
             Include(new AbstractUserModelValidator<UserModel>());
             
             RuleFor(userModel => userModel.Id).GreaterThan(0);
-            RuleFor(userModel => userModel.CreatingDate);
+            RuleFor(userModel => userModel.CreatingTime);
         }
     }
 

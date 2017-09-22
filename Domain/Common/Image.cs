@@ -3,10 +3,10 @@ using System.IO;
 
 namespace Common
 {
-    public class Image
+    public class Image : AbstractIdentifyable
     {
         public Image(){}
-
+        
         public Image(string bigPhotoUri, string smallPhotoUri)
         {
             Original = bigPhotoUri;

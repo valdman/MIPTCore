@@ -11,6 +11,6 @@ namespace MIPTCore.Models
 
         public UserRole Role { get; set; }
 
-        public DateTimeOffset CreatingDate { get; set; }
+        public DateTimeOffset CreatingTime { get; set; }
     }
 }

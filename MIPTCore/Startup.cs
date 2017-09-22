@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -34,6 +39,8 @@ namespace MIPTCore
             services.AddMvc()
                 .AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            services.AddAntiforgery();
             
             services.AddAuthentication("MIPTCoreCookieAuthenticationScheme")
                 .AddCookie("MIPTCoreCookieAuthenticationScheme", options =>
@@ -72,15 +79,49 @@ namespace MIPTCore
             //Domain exception wrapper middleware
             app.DomainErrorHandlingMiddleware();
 
-            app.UseAuthentication();
-            app.UseMvc();
+            EnsureSchemaCreated(app);
 
+            app.UseAuthentication();
+            
+            app.UseCors(
+                options => options.WithOrigins("http://192.168.1.240").AllowAnyMethod()
+            );
+
+            app.UseMvc();
+        }
+
+        private void EnsureSchemaCreated(IApplicationBuilder app)
+        {
+            //Ensure schema created
             var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var serviceScope = serviceScopeFactory.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetService<UserContext>();
-                dbContext.Database.EnsureCreated();
+                var dbCapitalContext = serviceScope.ServiceProvider.GetService<CapitalContext>();
+                var dbUsersContext = serviceScope.ServiceProvider.GetService<UserContext>();
+
+                EnsureSchemaFor(dbCapitalContext, dbUsersContext).Wait();
+                //ForceCreateTablesFor(dbCapitalContext, dbUsersContext).Wait();
+            }
+            
+
+            async Task EnsureSchemaFor(params DbContext[] contexts)
+            {
+                foreach (var dbContext in contexts)
+                {
+                    await dbContext.Database.EnsureCreatedAsync();
+                }
+            }
+        
+            async Task ForceCreateTablesFor(params DbContext[] contexts)
+            {
+                foreach (var dbContext in contexts)
+                {
+                    var databaseCreator = 
+                        (RelationalDatabaseCreator) dbContext.Database.GetService<IDatabaseCreator>();
+                    await databaseCreator.CreateTablesAsync();
+                }
             }
         }
+       
     }
 }
