@@ -9,7 +9,10 @@
     <PackageReference Include="NETStandard.Library" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Common\Common.csproj" />
-    <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
+    <ProjectReference Include="..\..\Domain\CapitalManagment\CapitalManagment.csproj">
+      <Project>{8E1A98F3-560A-476B-91D6-014793FE91A4}</Project>
+      <Name>CapitalManagment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Domain\UserManagment\UserManagment.csproj" />
   </ItemGroup>
 </Project>

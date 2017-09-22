@@ -12,6 +12,10 @@ namespace DataAccess.Contexts
         public UserContext(DbContextOptions<UserContext> connectionOptions) : base(connectionOptions)
         {
         }
+        
+        public UserContext(DbContextOptions connectionOptions) : base(connectionOptions)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

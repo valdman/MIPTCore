@@ -20,7 +20,7 @@ namespace IntegrationTestProject
             //Act
             var id = await _genericRepository.CreateAsync(alumniUser);
             var createdUser = await _genericRepository.GetByIdAsync(id);
-            alumniUser.Id = id;
+            //alumniUser.Id = id;
 
             await _genericRepository.DeleteAsync(id);
             var deletedUser = await _genericRepository.GetByIdAsync(id);
@@ -103,7 +103,7 @@ namespace IntegrationTestProject
                 LastName = "Ermagambet",
                 Email = Guid.NewGuid().ToString() + "@test.ru",
                 Password = new Password("qwerty1234"),
-                CreatedTime = DateTimeOffset.Now,
+                CreatingTime = DateTimeOffset.Now,
                 IsMiptAlumni = true,
                 AlumniProfile = new AlumniProfile
                 {
@@ -119,7 +119,7 @@ namespace IntegrationTestProject
                 LastName = "Ermagambet",
                 Email = Guid.NewGuid().ToString() + "@test.ru",
                 Password = new Password("qwerty1234"),
-                CreatedTime = DateTimeOffset.Now,
+                CreatingTime = DateTimeOffset.Now,
                 IsMiptAlumni = false,
                 AlumniProfile = null
             };

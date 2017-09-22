@@ -10,7 +10,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Infrastructure\DataAccess\DataAccess.csproj"/>
     <ProjectReference Include="..\MIPTCore\MIPTCore.csproj">
       <Project>{294C45BF-DD65-49CC-AC22-C5E8570B1765}</Project>
       <Name>MIPTCore</Name>
