@@ -268,3 +268,7 @@ __pycache__/
 # tools/
 
 MIPTCore/efcore-mipt-log\.txt
+
+**/app/
+
+MIPTCore/appsettings\.Production\.json
