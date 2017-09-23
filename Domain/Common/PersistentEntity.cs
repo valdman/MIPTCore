@@ -2,11 +2,9 @@
 
 namespace Common
 {
-    public abstract class PersistentEntity
+    public abstract class PersistentEntity : AbstractIdentifyable
     {
-        public int Id { get; set; }
-
-        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset CreatingTime { get; set; }
 
         public bool IsDeleted { get; set; }
     }

@@ -49,8 +49,8 @@ namespace DataAccess.Repositories
         {
             Require.NotNull(@object, nameof(@object));
             
-            @object.CreatedTime = DateTimeOffset.Now;
-            await _context.Set<TEntity>().AddAsync(@object);
+            @object.CreatingTime = DateTimeOffset.Now;
+            _context.Set<TEntity>().Add(@object);
             await Save();
             return @object.Id;
         }
