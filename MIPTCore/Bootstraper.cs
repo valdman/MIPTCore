@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using CapitalManagment;
+using CapitalManagment.Infrastructure;
 using Common;
 using Common.Infrastructure;
 using DataAccess.Contexts;
 using DataAccess.Repositories;
+using FileManagment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using MIPTCore.Authentification.Handlers;
 using MIPTCore.Middlewares;
 using MIPTCore.Models;
@@ -42,7 +45,11 @@ namespace MIPTCore
 
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
-                .AddScoped<ICapitalManager, CapitalManager>();
+                .AddScoped<ICapitalManager, CapitalManager>()
+                .AddScoped<IImageResizer, ImageResizer>()
+                .AddScoped<IFileManager, FileManager>();
+
+            _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
         }
 
         private void ConfigureAutoMapper()
@@ -72,17 +79,23 @@ namespace MIPTCore
 
         private void ConfigureDatebase()
         {
+            var connectionString = _configuration.GetConnectionString("Postgres");
+            
             _services
                 .AddEntityFrameworkNpgsql()
+                .AddDbContext<DomainOptionsContext>(options => options
+                    .UseNpgsql(connectionString))
                 .AddDbContext<UserContext>(options => options
-                    .UseNpgsql(_configuration.GetConnectionString("Postgres")))
+                    .UseNpgsql(connectionString))
                 .AddDbContext<CapitalContext>(options => options
-                    .UseNpgsql(_configuration.GetConnectionString("Postgres"))
-                    .EnableSensitiveDataLogging())
+                    .UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
-                .AddScoped<IGenericRepository<Capital>, CapitalRepository>();
+                .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
+                .AddScoped<ICapitalRepository, CapitalRepository>()
+                .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>();
 
+            
         }
     }
 }

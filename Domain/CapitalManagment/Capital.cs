@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Common;
 
 namespace CapitalManagment
@@ -15,6 +16,9 @@ namespace CapitalManagment
 
         public decimal Need { get; set; }
         public decimal Given { get; set; }
+
+        [DataType(DataType.Url)]
+        public string FullPageUri { get; set; }
 
         public IEnumerable<Person> Founders { get; set; }
         public IEnumerable<Person> Recivers { get; set; }

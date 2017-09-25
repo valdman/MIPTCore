@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CapitalManagment.Exceptions;
+using CapitalManagment.Infrastructure;
+using Common;
 using Common.Infrastructure;
 using Journalist;
 
@@ -10,11 +12,13 @@ namespace CapitalManagment
 {
     public class CapitalManager : ICapitalManager
     {
-        private readonly IGenericRepository<Capital> _capitalRepository;
+        private readonly ICapitalRepository _capitalRepository;
+        private readonly DomainOptions _domainOptions;
 
-        public CapitalManager(IGenericRepository<Capital> capitalRepository)
+        public CapitalManager(ICapitalRepository capitalRepository, IDomainOptionsRepository domainOptionsRepository)
         {
             _capitalRepository = capitalRepository;
+            _domainOptions = domainOptionsRepository.GetDomainOptions();
         }
 
         public Task<Capital> GetCapitalByIdAsync(int capitalId)
@@ -36,6 +40,15 @@ namespace CapitalManagment
             return _capitalRepository.FindByAsync(predicate);
         }
 
+        public Volume GetFundVolumeCapital()
+        {
+            return new Volume
+            {
+                Need = _domainOptions.SizeOfFund,
+                Given = _capitalRepository.CoutSumGivenToWholeFund()
+            };
+        }
+
         public async Task GiveMoneyToCapitalAsync(int capitalToGiveId, decimal sumToGive)
         {
             Require.Positive(capitalToGiveId, nameof(capitalToGiveId));
@@ -49,16 +62,6 @@ namespace CapitalManagment
             capitalToGive.Given += sumToGive;
 
             await _capitalRepository.UpdateAsync(capitalToGive);
-        }
-
-        public Task GiveMoneyToFundAsync(decimal sumToGive)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Capital> GetFundCapital()
-        {
-            throw new NotImplementedException();
         }
 
         public Task<int> CreateCapitalAsync(Capital capitalToCreate)

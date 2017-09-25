@@ -9,11 +9,12 @@ namespace DataAccess.Mappings
         public CapitalMap(EntityTypeBuilder<Capital> e)
         {
             e.HasKey(t => t.Id);
-            e.Property(t => t.Name).IsRequired();
+            e.HasIndex(t => t.Name).IsUnique();
             e.Property(t => t.Description).IsRequired();
 
             e.Property(t => t.Need).IsRequired();
             e.Property(t => t.Given).IsRequired();
+            e.Property(t => t.FullPageUri);
 
             e.HasOne(c => c.Image).WithMany().IsRequired(false);
 

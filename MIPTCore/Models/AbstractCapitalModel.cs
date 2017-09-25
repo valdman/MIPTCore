@@ -16,6 +16,8 @@ namespace MIPTCore.Models
 
         public decimal Need { get; set; }
 
+        public string FullPageUri { get; set; }
+        
         public IEnumerable<PersonModel> Founders { get; set; }
         public IEnumerable<PersonModel> Recivers { get; set; }
     }

@@ -4,14 +4,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CapitalManagment;
-using Common;
+using CapitalManagment.Infrastructure;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace DataAccess.Repositories
 {
-    public class CapitalRepository : GenericRepository<Capital>
+    public class CapitalRepository : GenericRepository<Capital>, ICapitalRepository
     {
         public override async Task<Capital> GetByIdAsync(int id)
         {
@@ -64,6 +65,18 @@ namespace DataAccess.Repositories
             
             Db.Update(@object);
             await Save();
+        }
+
+        public async Task<Capital> GetcapitalByNameAsync(string name)
+        {
+            Require.NotEmpty(name, nameof(name));
+
+            return await Db.SingleOrDefaultAsync(c => c.Name.Equals(name));
+        }
+
+        public decimal CoutSumGivenToWholeFund()
+        {
+            return Db.Sum(c => c.Given);
         }
 
         public CapitalRepository(CapitalContext context) : base(context)

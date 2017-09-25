@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CapitalManagment;
 using Common;
-using Common.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Extensions;
@@ -29,6 +27,15 @@ namespace MIPTCore.Controllers
         {
             var capitalsToReturn = await _capitalManager.GetAllCapitalsAsync();
             return Ok(capitalsToReturn.Select(Mapper.Map<CapitalModel>));
+        }
+        
+        // GET capitals/volume
+        [HttpGet]
+        [Route("volume")]
+        public IActionResult GetVolume()
+        {
+            var fundVolume = _capitalManager.GetFundVolumeCapital();
+            return Ok(fundVolume);
         }
         
         // GET capitals/5
@@ -92,6 +99,7 @@ namespace MIPTCore.Controllers
             capitalToUpdate.Image = Mapper.Map<Image>(capitalModel.Image);
             capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);
             capitalToUpdate.Recivers = Mapper.Map<IEnumerable<Person>>(capitalModel.Recivers);
+            capitalToUpdate.FullPageUri = capitalModel.FullPageUri;
 
             await _capitalManager.UpdateCapitalAsync(capitalToUpdate);
 
