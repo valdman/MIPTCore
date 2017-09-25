@@ -4,7 +4,7 @@ using MIPTCore.Middlewares;
 
 namespace MIPTCore.Extensions
 {   
-    public static class ErrorHandlingMiddlewareExtension
+    public static class MiddlewareExtension
     {
         public static IApplicationBuilder DomainErrorHandlingMiddleware(this IApplicationBuilder app)
         {

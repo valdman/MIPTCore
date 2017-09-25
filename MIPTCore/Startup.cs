@@ -2,9 +2,12 @@
 using System.Threading.Tasks;
 using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -41,11 +44,16 @@ namespace MIPTCore
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddAntiforgery();
-            
+
             services.AddAuthentication("MIPTCoreCookieAuthenticationScheme")
                 .AddCookie("MIPTCoreCookieAuthenticationScheme", options =>
                 {
                     options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                    options.Events.OnRedirectToLogin = context =>
+                    {
+                        context.Response.StatusCode = 401;
+                        return Task.FromResult(0);
+                    };
                 });
             
             services.AddAuthorization(options =>
@@ -59,7 +67,6 @@ namespace MIPTCore
                     policyBuilder => policyBuilder.AddRequirements(
                         new IsAuthentificated()));
             });
-
             
             //Add DI starter
             new Bootstraper(services, Configuration).Configure();
@@ -76,7 +83,7 @@ namespace MIPTCore
                 app.UseDeveloperExceptionPage();
             }
             
-            //Domain exception wrapper middleware
+            //Middlewares
             app.DomainErrorHandlingMiddleware();
 
             EnsureSchemaCreated(app);
@@ -84,7 +91,10 @@ namespace MIPTCore
             app.UseAuthentication();
             
             app.UseCors(
-                options => options.WithOrigins("http://192.168.1.240").AllowAnyMethod()
+                options => options
+                    .WithOrigins("http://localhost:3000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://127.0.0.1:5000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://185.204.0.35:5000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
             );
 
             app.UseMvc();
