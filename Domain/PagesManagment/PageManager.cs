@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Journalist;
 using PagesManagment.Infrastructure;
@@ -25,6 +26,9 @@ namespace PagesManagment
         {
             Require.NotEmpty(pageUrl, nameof(pageUrl));
             
+            if (pageUrl.Last() == '/')
+                pageUrl = pageUrl.Remove(pageUrl.Length - 1);
+            
             var pagesWithThisName = await _pageRepository.FindByAsync(c => c.Url == pageUrl);
             return pagesWithThisName.SingleOrDefault();
         }
@@ -39,7 +43,12 @@ namespace PagesManagment
             }
             return tree;
         }
-        
+
+        public Task<IEnumerable<Page>> GetAllPagesAsync()
+        {
+            return _pageRepository.GetAll();
+        }
+
         public async Task<int> CreatePageByAddressAsync(Page pageToCreate)
         {
             Require.NotNull(pageToCreate, nameof(pageToCreate));

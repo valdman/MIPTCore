@@ -28,6 +28,13 @@ namespace CapitalManagment
             return _capitalRepository.GetByIdAsync(capitalId);
         }
 
+        public Task<Capital> GetCapitalByNameAsync(string capitalName)
+        {
+            Require.NotEmpty(capitalName, nameof(capitalName));
+
+            return _capitalRepository.GetCapitalByNameAsync(capitalName);
+        }
+
         public Task<IEnumerable<Capital>> GetAllCapitalsAsync()
         {
             return _capitalRepository.GetAll();

@@ -67,7 +67,7 @@ namespace DataAccess.Repositories
             await Save();
         }
 
-        public async Task<Capital> GetcapitalByNameAsync(string name)
+        public async Task<Capital> GetCapitalByNameAsync(string name)
         {
             Require.NotEmpty(name, nameof(name));
 

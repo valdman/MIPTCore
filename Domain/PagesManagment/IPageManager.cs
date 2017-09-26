@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PagesManagment
 {
@@ -7,8 +8,10 @@ namespace PagesManagment
         Task<Page> GetPageByIdAsync(int pageId); 
         Task<Page> GetPageByUrlAsync(string pageUrl);
         Task<PageTreeNode> GetTreeOfPages();
-
+        Task<IEnumerable<Page>> GetAllPagesAsync();
+        
         Task<int> CreatePageByAddressAsync(Page pageToCreate);
+        
         Task UpdatePageAsync(Page pageToUpadte);
         Task DeletePageAsync(int idPageToDelete);
     }

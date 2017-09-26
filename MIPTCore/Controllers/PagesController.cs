@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -34,38 +35,34 @@ namespace MIPTCore.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            throw new NotImplementedException();
+            var allPages = await _pagesManager.GetAllPagesAsync();
+
+            return Ok(allPages.Select(Mapper.Map<PageModel>));
         }
 
-        // GET pages/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        // GET pages/5 or pages/page/url
+        [HttpGet("{*pageIndex}")]
+        public async Task<IActionResult> Get(string pageIndex)
         {
-            this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
-            var pageToReturn = await _pagesManager.GetPageByIdAsync(id);
 
-            if (pageToReturn == null)
+            Page pageToReturn;
+            if (int.TryParse(pageIndex, out var pageId))
             {
-                return NotFound("Page with this ID is not exists");
+                this.CheckIdViaModel(pageId);
+                pageToReturn = await _pagesManager.GetPageByIdAsync(pageId);
             }
-            
-            return Ok(Mapper.Map<PageModel>(pageToReturn));
-        }
-
-        // GET pages/pageuri
-        [HttpGet("url/{*url}")]
-        public async Task<IActionResult> Get(string url)
-        {
-            var pageToReturn = await _pagesManager.GetPageByUrlAsync(url);
+            else
+            {
+               pageToReturn = await _pagesManager.GetPageByUrlAsync(pageIndex);
+            }
 
             if (pageToReturn == null)
             {
-                return NotFound("Page with this URL is not exists");
+                return NotFound("Page with this ID or Name is not exists");
             }
             
             return Ok(Mapper.Map<PageModel>(pageToReturn));

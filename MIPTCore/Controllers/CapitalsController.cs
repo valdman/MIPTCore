@@ -38,21 +38,29 @@ namespace MIPTCore.Controllers
             return Ok(fundVolume);
         }
         
-        // GET capitals/5
-        [HttpGet("{capitalId}")]
-        public async Task<IActionResult> Get(int capitalId)
+        // GET capitals/5 or capitals/nameOfCapital
+        [HttpGet("{capitalIndex}")]
+        public async Task<IActionResult> Get(string capitalIndex)
         {
-            this.CheckIdViaModel(capitalId);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
-            var capitalToReturn = await _capitalManager.GetCapitalByIdAsync(capitalId);
 
+            Capital capitalToReturn;
+            if (int.TryParse(capitalIndex, out var capitalId))
+            {
+                this.CheckIdViaModel(capitalId);
+                capitalToReturn = await _capitalManager.GetCapitalByIdAsync(capitalId);
+            }
+            else
+            {
+                capitalToReturn = await _capitalManager.GetCapitalByNameAsync(capitalIndex);
+            }
+            
             if (capitalToReturn == null)
             {
-                return NotFound("Capital with this ID is not exists");
+                return NotFound("Capital with this ID or Name is not exists");
             }
             
             return Ok(Mapper.Map<CapitalModel>(capitalToReturn));
