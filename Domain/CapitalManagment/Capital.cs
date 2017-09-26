@@ -8,7 +8,6 @@ namespace CapitalManagment
     {
         public string Name { get; set; }
         
-        //todo: to component
         public string Content { get; set; }
         public string Description { get; set; }
 

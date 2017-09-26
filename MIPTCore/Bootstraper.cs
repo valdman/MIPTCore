@@ -14,6 +14,9 @@ using Microsoft.Extensions.Options;
 using MIPTCore.Authentification.Handlers;
 using MIPTCore.Middlewares;
 using MIPTCore.Models;
+using MIPTCore.Models.ComplexMappers;
+using PagesManagment;
+using PagesManagment.Infrastructure;
 using UserManagment;
 
 namespace MIPTCore
@@ -47,7 +50,8 @@ namespace MIPTCore
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<ICapitalManager, CapitalManager>()
                 .AddScoped<IImageResizer, ImageResizer>()
-                .AddScoped<IFileManager, FileManager>();
+                .AddScoped<IFileManager, FileManager>()
+                .AddScoped<IPageManager, PageManager>();
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
         }
@@ -73,6 +77,10 @@ namespace MIPTCore
                 
                 cfg.CreateMap<PersonModel, Person>();
                 cfg.CreateMap<Person, PersonModel>();
+
+                cfg.CreateMap<Page, PageModel>();
+                cfg.CreateMap<PageUpdateModel, Page>();
+                cfg.CreateMap<PageCreationModel, Page>();
             });
             
         }
@@ -89,11 +97,14 @@ namespace MIPTCore
                     .UseNpgsql(connectionString))
                 .AddDbContext<CapitalContext>(options => options
                     .UseNpgsql(connectionString))
+                .AddDbContext<PageContext>(options => options
+                    .UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
-                .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>();
+                .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
+                .AddScoped<IPageRepository, PageRepository>();
 
             
         }

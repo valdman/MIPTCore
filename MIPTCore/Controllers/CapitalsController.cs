@@ -100,6 +100,7 @@ namespace MIPTCore.Controllers
             capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);
             capitalToUpdate.Recivers = Mapper.Map<IEnumerable<Person>>(capitalModel.Recivers);
             capitalToUpdate.FullPageUri = capitalModel.FullPageUri;
+            capitalToUpdate.Content = capitalModel.Content;
 
             await _capitalManager.UpdateCapitalAsync(capitalToUpdate);
 

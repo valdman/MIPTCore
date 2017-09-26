@@ -42,7 +42,7 @@ namespace DataAccess.Repositories
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return await Db.Where(predicate).ToListAsync();
+            return await Db.Where(predicate).Where(@object => !@object.IsDeleted).ToListAsync();
         }
 
         public virtual async Task<int> CreateAsync(TEntity @object)

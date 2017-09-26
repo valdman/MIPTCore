@@ -54,6 +54,7 @@ namespace MIPTCore
                         context.Response.StatusCode = 401;
                         return Task.FromResult(0);
                     };
+                    options.Cookie.SameSite = SameSiteMode.None;
                 });
             
             services.AddAuthorization(options =>
