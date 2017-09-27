@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CapitalManagment;
-using Common;
 
 namespace MIPTCore.Models
 {
