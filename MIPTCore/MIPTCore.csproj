@@ -23,6 +23,7 @@
     <ProjectReference Include="..\Domain\FileManagment\FileManagment.csproj" />
     <ProjectReference Include="..\Infrastructure\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
+    <ProjectReference Include="..\Infrastructure\Mailer\Mailer.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="efcore-mipt-log.txt" />

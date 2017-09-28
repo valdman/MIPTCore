@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaCreator", "Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PagesManagment", "Domain\PagesManagment\PagesManagment.csproj", "{12BC374A-D7B8-4ACB-8F30-4123810E8FB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mailer", "Infrastructure\Mailer\Mailer.csproj", "{55271995-1984-4B5A-B9CA-5B2F6C1752AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{12BC374A-D7B8-4ACB-8F30-4123810E8FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12BC374A-D7B8-4ACB-8F30-4123810E8FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12BC374A-D7B8-4ACB-8F30-4123810E8FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55271995-1984-4B5A-B9CA-5B2F6C1752AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55271995-1984-4B5A-B9CA-5B2F6C1752AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55271995-1984-4B5A-B9CA-5B2F6C1752AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55271995-1984-4B5A-B9CA-5B2F6C1752AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +88,6 @@ Global
 		{8E1A98F3-560A-476B-91D6-014793FE91A4} = {79DDA439-A139-45AF-B517-5DB126E2C0D7}
 		{FB383027-C928-46EB-9CAF-8021C236F3F6} = {E2FE57A9-FB33-4D04-901A-FB15C5D04372}
 		{12BC374A-D7B8-4ACB-8F30-4123810E8FB9} = {79DDA439-A139-45AF-B517-5DB126E2C0D7}
+		{55271995-1984-4B5A-B9CA-5B2F6C1752AF} = {E2FE57A9-FB33-4D04-901A-FB15C5D04372}
 	EndGlobalSection
 EndGlobal
