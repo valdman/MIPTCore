@@ -13,21 +13,6 @@ namespace DataAccess.Repositories
     {
         public PageRepository(PageContext context) : base(context)
         {
-            Db = context.Pages;
         }
-        
-        public override async Task<Page> GetByIdAsync(int id)
-        {
-            Require.Positive(id, nameof(id));
-            
-            var foundedObject = await Db.FindAsync(id);
-            if (foundedObject == null || !foundedObject.IsDeleted)
-            {
-                return foundedObject;
-            }
-            return await Task.FromResult<Page>(null);
-        }
-        
-        protected override DbSet<Page> Db { get; }
     }
 }

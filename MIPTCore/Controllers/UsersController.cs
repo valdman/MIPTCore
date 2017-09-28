@@ -179,6 +179,11 @@ namespace MIPTCore.Controllers
             var emailToRecoverPassword = await _userMailerService.GetUserEmailByPasswordRecoveyToken(token);
             var userToChangePassword = await _userManager.GetUserByEmailAsync(emailToRecoverPassword);
 
+            if (emailToRecoverPassword.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             Password password;
             try
             {

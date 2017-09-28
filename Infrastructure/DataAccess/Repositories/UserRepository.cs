@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Common;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
@@ -38,11 +39,22 @@ namespace DataAccess.Repositories
                 .Where(predicate).ToListAsync();
         }
 
-        public UserRepository(UserContext context) : base(context)
+        public override async Task UpdateAsync(User @object)
         {
-            Db = context.Users;
+            Require.NotNull(@object, nameof(@object));
+
+
+            var newPassword = @object.Password;
+            Context.Entry(@object).State = EntityState.Detached;
+            @object.Password = newPassword;
+            Context.Entry(@object).State = EntityState.Modified;
+
+            
+            await Save();
         }
 
-        protected override DbSet<User> Db { get; }
+        public UserRepository(UserContext context) : base(context)
+        {
+        }
     }
 }

@@ -11,13 +11,12 @@ namespace DataAccess.Repositories
     {
         public TicketRepository(TicketContext context) : base(context)
         {
-            Db = context.Tickets;
         }
 
-        protected override DbSet<Ticket> Db { get; }
         public async Task UpdateManyTicketsAsync(IEnumerable<Ticket> tickets)
         {
             Db.UpdateRange(tickets);
+            
             await Save();
         }
     }
