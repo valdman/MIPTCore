@@ -10,6 +10,7 @@ using MIPTCore.Authentification;
 using MIPTCore.Extensions;
 using MIPTCore.Models;
 using UserManagment;
+using UserManagment.Application;
 using Mapper = AutoMapper.Mapper;
 
 namespace MIPTCore.Controllers
@@ -19,11 +20,15 @@ namespace MIPTCore.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly IUserMailerService _userMailerService;
+        private readonly IUserService _userService;
+        private readonly ITicketService _ticketService;
 
-        public UsersController(IUserManager userManager, IUserMailerService userMailerService)
+        public UsersController(IUserManager userManager, IUserMailerService userMailerService, IUserService userService, ITicketService ticketService)
         {
             _userManager = userManager;
             _userMailerService = userMailerService;
+            _userService = userService;
+            _ticketService = ticketService;
         }
 
         // GET users
@@ -138,18 +143,18 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var emailToconfirm = await _userMailerService.GetUserEmailByEmailConfirmationToken(token);
+            var emailToconfirm = await _ticketService.GetUserEmailByEmailConfirmationToken(token);
 
             if (emailToconfirm.IsNullOrEmpty())
             {
                 return NotFound("Email confirmation token not found");
             }
             
-            await _userMailerService.ConfirmEmail(emailToconfirm);
+            await _userService.ConfirmEmail(emailToconfirm);
             return Ok();
         }
         
-        // POST users/recovery/5
+        // POST users/recovery/
         [HttpPost("recovery/{emailToRecover}")]
         public async Task<IActionResult> BeginRecoveringPassword(string emailToRecover)
         {
@@ -176,12 +181,18 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var emailToRecoverPassword = await _userMailerService.GetUserEmailByPasswordRecoveyToken(token);
-            var userToChangePassword = await _userManager.GetUserByEmailAsync(emailToRecoverPassword);
-
+            var emailToRecoverPassword = await _ticketService.GetUserEmailByPasswordRecoveyToken(token);
+            
             if (emailToRecoverPassword.IsNullOrEmpty())
             {
-                return NotFound();
+                return NotFound("Token already used or not found");
+            }
+
+            var userToChangePassword = await _userManager.GetUserByEmailAsync(emailToRecoverPassword);
+
+            if (userToChangePassword == null)
+            {
+                return NotFound("Email extracted, but user not found. Token broken");
             }
 
             Password password;
@@ -194,7 +205,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(e.Message);
             }
             
-            await _userMailerService.ChangePassword(userToChangePassword.Id, password);
+            await _userService.ChangePassword(userToChangePassword.Id, password);
             return Ok();
         }
         

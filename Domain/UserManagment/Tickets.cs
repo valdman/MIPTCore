@@ -4,14 +4,9 @@ namespace UserManagment
 {
     public class Ticket : PersistentEntity
     {
-        public Ticket(TicketType ticketType)
-        {
-            TicketType = ticketType;
-        }
-        
         public Ticket() {}
 
-        public TicketType TicketType { get; private set; }
+        public TicketType TicketType { get; set; }
         public string EmailToSend { get; set; }
         public string Token { get; set; }
         public bool IsCompleted { get; set; }
@@ -19,7 +14,7 @@ namespace UserManagment
 
     public enum TicketType
     {
-        EmailConfirmation,
-        PasswordRecovery
+        EmailConfirmation = 2,
+        PasswordRecovery = 3
     }
 }

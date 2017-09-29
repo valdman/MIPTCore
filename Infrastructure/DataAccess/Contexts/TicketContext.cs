@@ -16,7 +16,13 @@ namespace DataAccess.Contexts
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   
+        {
+            var e = modelBuilder.Entity<Ticket>();
+
+            e.HasQueryFilter(ticket => !ticket.IsDeleted && !ticket.IsCompleted);
+            
+            e.HasKey(t => t.Id);
+            e.HasIndex(t => t.Token);
         }
     }
 }

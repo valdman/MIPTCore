@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace UserManagment
+namespace UserManagment.Application
 {
     public interface IUserManager
     {

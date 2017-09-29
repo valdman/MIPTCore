@@ -23,6 +23,7 @@ namespace DataAccess.Contexts
         {
             new UserMap(modelBuilder.Entity<User>());
             new AlumniProfileMap(modelBuilder.Entity<AlumniProfile>());
+            new PasswordMap(modelBuilder.Entity<Password>());
         }
     }
 }

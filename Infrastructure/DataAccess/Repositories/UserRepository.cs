@@ -19,6 +19,7 @@ namespace DataAccess.Repositories
 
             return Db
                 .Include(u => u.AlumniProfile)
+                .Include(u => u.Password)
                 .Where(u => u.Id == id)
                 .SingleOrDefaultAsync();
         }
@@ -36,6 +37,7 @@ namespace DataAccess.Repositories
 
             return await Db
                 .Include(u => u.AlumniProfile)
+                .Include(u => u.Password)                
                 .Where(predicate).ToListAsync();
         }
 
@@ -43,13 +45,6 @@ namespace DataAccess.Repositories
         {
             Require.NotNull(@object, nameof(@object));
 
-
-            var newPassword = @object.Password;
-            Context.Entry(@object).State = EntityState.Detached;
-            @object.Password = newPassword;
-            Context.Entry(@object).State = EntityState.Modified;
-
-            
             await Save();
         }
 

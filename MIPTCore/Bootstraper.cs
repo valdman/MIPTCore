@@ -20,6 +20,7 @@ using MIPTCore.Models.ComplexMappers;
 using PagesManagment;
 using PagesManagment.Infrastructure;
 using UserManagment;
+using UserManagment.Application;
 using UserManagment.Infrastructure;
 
 namespace MIPTCore
@@ -52,6 +53,9 @@ namespace MIPTCore
                 
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<ITicketSender, TicketSender>()
+                .AddScoped<ITicketService, TicketService>()
                 .AddScoped<IUserMailerService, UserMailerService>()
                 .AddScoped<ITicketSender, TicketSender>()
                 .AddScoped<ICapitalManager, CapitalManager>()

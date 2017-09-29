@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Authentification;
 using MIPTCore.Models;
 using UserManagment;
+using UserManagment.Application;
 
 namespace MIPTCore.Controllers
 {
