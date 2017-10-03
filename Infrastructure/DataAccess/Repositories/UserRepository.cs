@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Common;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace DataAccess.Repositories
 
             return Db
                 .Include(u => u.AlumniProfile)
+                .Include(u => u.Password)
                 .Where(u => u.Id == id)
                 .SingleOrDefaultAsync();
         }
@@ -35,14 +37,19 @@ namespace DataAccess.Repositories
 
             return await Db
                 .Include(u => u.AlumniProfile)
+                .Include(u => u.Password)                
                 .Where(predicate).ToListAsync();
+        }
+
+        public override async Task UpdateAsync(User @object)
+        {
+            Require.NotNull(@object, nameof(@object));
+
+            await Save();
         }
 
         public UserRepository(UserContext context) : base(context)
         {
-            Db = context.Users;
         }
-
-        protected override DbSet<User> Db { get; }
     }
 }

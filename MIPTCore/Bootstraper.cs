@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using CapitalManagment;
 using CapitalManagment.Infrastructure;
 using Common;
@@ -6,6 +7,7 @@ using Common.Infrastructure;
 using DataAccess.Contexts;
 using DataAccess.Repositories;
 using FileManagment;
+using Mailer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,8 @@ using MIPTCore.Models.ComplexMappers;
 using PagesManagment;
 using PagesManagment.Infrastructure;
 using UserManagment;
+using UserManagment.Application;
+using UserManagment.Infrastructure;
 
 namespace MIPTCore
 {
@@ -45,9 +49,15 @@ namespace MIPTCore
                 .AddScoped<ErrorHandlingMiddleware>()
                 //Register settings
                 .Configure<BackendSettings>(_configuration.GetSection("BackendSettings"))
-
+                .Configure<MailerSettings>(_configuration.GetSection("MailerSettings"))
+                
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<ITicketSender, TicketSender>()
+                .AddScoped<ITicketService, TicketService>()
+                .AddScoped<IUserMailerService, UserMailerService>()
+                .AddScoped<ITicketSender, TicketSender>()
                 .AddScoped<ICapitalManager, CapitalManager>()
                 .AddScoped<IImageResizer, ImageResizer>()
                 .AddScoped<IFileManager, FileManager>()
@@ -91,22 +101,18 @@ namespace MIPTCore
             
             _services
                 .AddEntityFrameworkNpgsql()
-                .AddDbContext<DomainOptionsContext>(options => options
-                    .UseNpgsql(connectionString))
-                .AddDbContext<UserContext>(options => options
-                    .UseNpgsql(connectionString))
-                .AddDbContext<CapitalContext>(options => options
-                    .UseNpgsql(connectionString))
-                .AddDbContext<PageContext>(options => options
-                    .UseNpgsql(connectionString))
+                .AddDbContext<DomainOptionsContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<UserContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<CapitalContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<PageContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<TicketContext>(options => options.UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
-                .AddScoped<IPageRepository, PageRepository>();
-
-            
+                .AddScoped<IPageRepository, PageRepository>()
+                .AddScoped<ITicketRepository, TicketRepository>();
         }
     }
 }

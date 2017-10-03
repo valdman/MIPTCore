@@ -6,7 +6,7 @@ using Journalist;
 
 namespace Common
 {
-    public class Password
+    public class Password : AbstractIdentifyable
     {   
         public Password(string pass)
         {

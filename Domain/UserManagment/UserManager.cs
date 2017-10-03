@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Common.Infrastructure;
 using Journalist;
+using UserManagment.Application;
 using UserManagment.Exceptions;
 
 namespace UserManagment

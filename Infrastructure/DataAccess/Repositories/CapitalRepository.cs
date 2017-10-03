@@ -60,8 +60,8 @@ namespace DataAccess.Repositories
                 return;
             }
 
-            _capitalContext.TryUpdateManyToMany(model.Founders, founders ,a => a.Id);
-            _capitalContext.TryUpdateManyToMany(model.Recivers, recievers,a => a.Id);
+            Context.TryUpdateManyToMany(model.Founders, founders ,a => a.Id);
+            Context.TryUpdateManyToMany(model.Recivers, recievers,a => a.Id);
             
             Db.Update(@object);
             await Save();
@@ -81,11 +81,7 @@ namespace DataAccess.Repositories
 
         public CapitalRepository(CapitalContext context) : base(context)
         {
-            Db = context.Capitals;
-            _capitalContext = context;
         }
 
-        protected override DbSet<Capital> Db { get; }
-        private readonly CapitalContext _capitalContext;
     }
 }

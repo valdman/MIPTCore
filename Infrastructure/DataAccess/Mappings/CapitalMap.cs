@@ -8,6 +8,8 @@ namespace DataAccess.Mappings
     {
         public CapitalMap(EntityTypeBuilder<Capital> e)
         {
+            e.HasQueryFilter(t => !t.IsDeleted);
+            
             e.HasKey(t => t.Id);
             e.HasIndex(t => t.Name).IsUnique();
             e.Property(t => t.Description).IsRequired();

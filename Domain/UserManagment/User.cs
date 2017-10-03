@@ -14,6 +14,7 @@ namespace UserManagment
         public bool IsMiptAlumni { get; set; }
 
         public AlumniProfile AlumniProfile { get; set; }
+        public bool IsEmailConfirmed { get; set; }
         
         public UserRole Role { get; set; }
 

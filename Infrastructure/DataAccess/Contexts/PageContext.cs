@@ -19,6 +19,7 @@ namespace DataAccess.Contexts
         {
             var e = modelBuilder.Entity<Page>();
 
+            e.HasQueryFilter(ticket => !ticket.IsDeleted);
             e.HasKey(c => c.Id);
             e.HasIndex(c => c.Name).IsUnique();
             e.HasIndex(c => c.Url).IsUnique();
