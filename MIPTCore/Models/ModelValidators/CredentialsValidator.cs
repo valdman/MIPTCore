@@ -1,5 +1,6 @@
 ﻿using Common;
 using FluentValidation;
+using UserManagment;
 
 namespace MIPTCore.Models.ModelValidators
 {

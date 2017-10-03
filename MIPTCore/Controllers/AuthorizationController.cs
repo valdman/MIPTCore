@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
-using Common;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,45 +10,45 @@ using MIPTCore.Authentification;
 using MIPTCore.Models;
 using UserManagment;
 using UserManagment.Application;
+using UserManagment.Exceptions;
 
 namespace MIPTCore.Controllers
 {
     public class AuthentificationController : Controller
     {
         private readonly IUserManager _userManager;
+        private readonly IAuthentificationService _authentificationService;
 
-        public AuthentificationController(IUserManager userManager)
+        public AuthentificationController(IUserManager userManager, IAuthentificationService authentificationService)
         {
             _userManager = userManager;
+            _authentificationService = authentificationService;
         }
 
         // POST login
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] Credentials credentials)
+        public async Task<IActionResult> Login([FromBody] CredentialsModel credentials)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
-            var intentedUser = await _userManager.GetUserByEmailAsync(credentials.Email);
-            if(intentedUser == null)
+
+            User intentedUser;
+            try
             {
-                return NotFound();
+                intentedUser = await _authentificationService.AuthentificateAsync(Mapper.Map<Credentials>(credentials));
             }
-
-            var intendedHash = new Password(credentials.Password).Hash;
-
-            if(intentedUser.Password.Hash != intendedHash)
+            catch (OperationOnUserThatNotExistsException)
+            {
+                return NotFound("User with that email not found");
+            }
+            catch (WrongPasswordException)
             {
                 return Unauthorized();
             }
             
-            intentedUser.AuthentificatedAt = DateTimeOffset.Now;
-
-            await _userManager.UpdateUserAsync(intentedUser);
-            
-            var myclaims = new List<Claim>(new Claim[] 
+            var myclaims = new List<Claim>(new[] 
             { 
                 new Claim(ClaimTypes.NameIdentifier, intentedUser.Id.ToString()),
                 new Claim(ClaimTypes.Role, intentedUser.Role.ToString())
@@ -68,12 +67,8 @@ namespace MIPTCore.Controllers
         public async Task<IActionResult> Logout()
         {
             var currentUserId = User.GetId();
-
-            var currentUser = await _userManager.GetUserByIdAsync(currentUserId);
             
-            currentUser.AuthentificatedAt = null;
-
-            await _userManager.UpdateUserAsync(currentUser);
+            await _authentificationService.DeauthentificateAsync(currentUserId);
             
             await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
             

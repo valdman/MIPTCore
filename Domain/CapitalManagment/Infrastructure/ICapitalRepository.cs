@@ -5,7 +5,7 @@ namespace CapitalManagment.Infrastructure
 {
     public interface ICapitalRepository : IGenericRepository<Capital>
     {
-        Task<Capital> GetCapitalByNameAsync(string name);
+        Task<Capital> GetCapitalByFullUriAsync(string name);
         decimal CoutSumGivenToWholeFund();
     }
 }

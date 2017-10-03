@@ -68,7 +68,7 @@ namespace PagesManagment
         {
             Require.Positive(idPageToDelete, nameof(idPageToDelete));
 
-            await _pageRepository.DeleteAsync(idPageToDelete);
+            await _pageRepository.DeleteIfExistsAsync(idPageToDelete);
         }
         
     }

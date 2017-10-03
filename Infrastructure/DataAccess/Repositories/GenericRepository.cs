@@ -61,12 +61,13 @@ namespace DataAccess.Repositories
             return @object.Id;
         }
 
-        public virtual async Task DeleteAsync(int objectId)
+        public virtual async Task DeleteIfExistsAsync(int objectId)
         {
             Require.Positive(objectId, nameof(objectId));
             
             var objectToDelete = await GetByIdAsync(objectId);
-            objectToDelete.IsDeleted = true;
+            if(objectToDelete != null)
+                objectToDelete.IsDeleted = true;
             
             await Save();
         }

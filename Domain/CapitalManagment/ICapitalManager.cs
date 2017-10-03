@@ -8,7 +8,7 @@ namespace CapitalManagment
     public interface ICapitalManager
     {
         Task<Capital> GetCapitalByIdAsync(int capitalId);
-        Task<Capital> GetCapitalByNameAsync(string capitalName);
+        Task<Capital> GetCapitalByFullUriAsync(string capitalName);
         Task<IEnumerable<Capital>> GetAllCapitalsAsync();
         Task<IEnumerable<Capital>> GetCapitalsByPredicateAsync(Expression<Func<Capital, bool>> predicate);
 

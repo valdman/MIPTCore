@@ -16,10 +16,21 @@ namespace SchemaCreator
                 .GetTypes()
                 .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(DbContext))).ToArray();
 
+            LogFoundedContext(typesOfContexts);
+            
             var constructors =
                 typesOfContexts.Select(type => type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).First());
             var objectsOfTheseTypes = constructors.Select(ctor => (DbContext)ctor.Invoke(constructorArgs));
             return objectsOfTheseTypes;
+        }
+
+        private static void LogFoundedContext(IEnumerable<Type> types)
+        {
+            foreach (var context in types)
+            {
+                Console.WriteLine($"{context.Name} founded");
+            }
+            Console.WriteLine();
         }
     }
 }

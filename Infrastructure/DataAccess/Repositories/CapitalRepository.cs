@@ -67,11 +67,11 @@ namespace DataAccess.Repositories
             await Save();
         }
 
-        public async Task<Capital> GetCapitalByNameAsync(string name)
+        public async Task<Capital> GetCapitalByFullUriAsync(string name)
         {
             Require.NotEmpty(name, nameof(name));
 
-            return await Db.SingleOrDefaultAsync(c => c.Name.Equals(name));
+            return await Db.SingleOrDefaultAsync(c => c.FullPageUri.Equals(name));
         }
 
         public decimal CoutSumGivenToWholeFund()
