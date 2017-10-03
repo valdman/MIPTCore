@@ -22,7 +22,7 @@ namespace IntegrationTestProject
             var createdUser = await _genericRepository.GetByIdAsync(id);
             //alumniUser.Id = id;
 
-            await _genericRepository.DeleteIfExistsAsync(id);
+            await _genericRepository.DeleteAsync(id);
             var deletedUser = await _genericRepository.GetByIdAsync(id);
             
             //Assert
@@ -42,7 +42,7 @@ namespace IntegrationTestProject
             await _genericRepository.UpdateAsync(notAlumniUser);
             var updatedUser = await _genericRepository.GetByIdAsync(id);
             
-            await _genericRepository.DeleteIfExistsAsync(id);
+            await _genericRepository.DeleteAsync(id);
             
             //Assert
             Assert.Equal(updatedUser, notAlumniUser);
@@ -68,7 +68,7 @@ namespace IntegrationTestProject
             
             var secondTimeUpdatedUser = await _genericRepository.GetByIdAsync(id);
             
-            await _genericRepository.DeleteIfExistsAsync(id);
+            await _genericRepository.DeleteAsync(id);
             
             //Assert
             Assert.Equal(updatedUser, notAlumniUser);

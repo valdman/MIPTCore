@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using CapitalsTableHelper;
 using Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -19,8 +20,11 @@ namespace MIPTCore.Middlewares
             
             
             if      (exception is DuplicateEmailException)                 code = HttpStatusCode.Conflict;
+            else if (exception is EmailAlreadyConfirmedException)          code = HttpStatusCode.Conflict;
+            else if (exception is OperationOnUserThatNotExistsException)   code = HttpStatusCode.BadRequest;            
             else if (exception is ProfileNotProvidedException)             code = HttpStatusCode.BadRequest;
-            else if (exception is ProfileShouldNotBeProvidedException)     code = HttpStatusCode.BadRequest;
+            else if (exception is ProfileShouldNotBeProvidedException)     code = HttpStatusCode.BadRequest;    
+            else if (exception is RelatedCapitalNotExists)                 code = HttpStatusCode.BadRequest;    
             else return Task.CompletedTask;
 
             var result = JsonConvert.SerializeObject(new KeyValuePair<string, string>(exception.FieldName, exception.Message));

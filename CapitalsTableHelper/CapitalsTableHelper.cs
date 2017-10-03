@@ -8,10 +8,10 @@ namespace CapitalsTableHelper
 {
     public class CapitalsTableHelper : ICapitalsTableHelper
     {
-        private readonly IGenericRepository<CapitalsTableEntry> _captalsTableRepository;
+        private readonly ICapitalsTableEntryRepository _captalsTableRepository;
         private readonly ICapitalManager _capitalsManager;
 
-        public CapitalsTableHelper(IGenericRepository<CapitalsTableEntry> captalsTableRepository, ICapitalManager capitalsManager)
+        public CapitalsTableHelper(ICapitalsTableEntryRepository captalsTableRepository, ICapitalManager capitalsManager)
         {
             _captalsTableRepository = captalsTableRepository;
             _capitalsManager = capitalsManager;
@@ -22,35 +22,19 @@ namespace CapitalsTableHelper
             return _captalsTableRepository.GetAll();
         }
 
-        public Task<CapitalsTableEntry> GetEntryForCapital(int capitalId)
-        {
-            return _captalsTableRepository.GetByIdAsync(capitalId);
-        }
-
-        public async Task UpdateEntryForCapital(CapitalsTableEntry capitalsTableEntry)
-        {
-            var relatedCapital = await _capitalsManager.GetCapitalByIdAsync(capitalsTableEntry.CapitalId);
-
-            if (relatedCapital == null)
-            {
-                throw new RelatedCapitalNotExists();
-            }
-
-            await SaveCaitalsEntry(capitalsTableEntry);
-        }
-
         public async Task SaveTable(IEnumerable<CapitalsTableEntry> table)
         {
+            await _captalsTableRepository.DeleteAllCapitalTableEntriesAsync();
+            
             foreach (var capitalsTableEntry in table)
             {
-                await UpdateEntryForCapital(capitalsTableEntry);
+                var relatedCapital = await _capitalsManager.GetCapitalByIdAsync(capitalsTableEntry.CapitalId);
+                if (relatedCapital == null)
+                {
+                    throw new RelatedCapitalNotExists();
+                }
+                await _captalsTableRepository.CreateAsync(capitalsTableEntry);
             }
-        }
-
-        private async Task<int> SaveCaitalsEntry(CapitalsTableEntry capitalsTableEntry)
-        {
-            await _captalsTableRepository.DeleteIfExistsAsync(capitalsTableEntry.CapitalId);
-            return await _captalsTableRepository.CreateAsync(capitalsTableEntry);
         }
     }
 }

@@ -93,7 +93,7 @@ namespace CapitalManagment
         {
             Require.Positive(capitalToDeleteId, nameof(capitalToDeleteId));
 
-            return _capitalRepository.DeleteIfExistsAsync(capitalToDeleteId);
+            return _capitalRepository.DeleteAsync(capitalToDeleteId);
         }
     }
 }

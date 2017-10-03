@@ -79,7 +79,7 @@ namespace UserManagment
         {
             Require.Positive(userToDeleteId, nameof(userToDeleteId));
 
-            await _userRepository.DeleteIfExistsAsync(userToDeleteId);
+            await _userRepository.DeleteAsync(userToDeleteId);
         }
 
         private async Task MustHaveUniqueEmail(User userToCheck)

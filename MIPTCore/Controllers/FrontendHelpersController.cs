@@ -11,7 +11,7 @@ using MIPTCore.Models;
 
 namespace MIPTCore.Controllers
 {
-    [Route("[controller]")]
+    [Route("capitals-layout")]
     public class FrontendHelpersController : Controller
     {
         private readonly ICapitalsTableHelper _capitalsTableHelper;
@@ -21,14 +21,14 @@ namespace MIPTCore.Controllers
             _capitalsTableHelper = capitalsTableHelper;
         }
 
-        [HttpGet("capitalsTable")]
+        [HttpGet]
         public async Task<IActionResult> GetProjectsTable()
         {
             var capitalsTable = await _capitalsTableHelper.GetTableForCapitals();
             return Ok(capitalsTable.Select(Mapper.Map<CapitalsTableEntryModel>));
         }
         
-        [HttpPut("capitalsTable")]
+        [HttpPut]
         [Authorize("Admin")]
         public async Task<IActionResult> CreateWholeTable([FromBody] IEnumerable<CapitalsTableEntryModel> capitalsTable)
         {

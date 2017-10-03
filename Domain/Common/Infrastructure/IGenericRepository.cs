@@ -12,7 +12,7 @@ namespace Common.Infrastructure
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
         Task<int> CreateAsync(T @object);
-        Task DeleteIfExistsAsync(int objectId);
+        Task DeleteAsync(int objectId);
         Task UpdateAsync(T @object);
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class CapitalsTableRepository : IGenericRepository<CapitalsTableEntry>
+    public class CapitalsTableRepository : ICapitalsTableEntryRepository
     {
         private readonly CapitalContext _context;
         private readonly DbSet<CapitalsTableEntry> _db;
@@ -50,7 +50,7 @@ namespace DataAccess.Repositories
             return @object.CapitalId;
         }
 
-        public async Task DeleteIfExistsAsync(int objectId)
+        public async Task DeleteAsync(int objectId)
         {
             var entryToDelete = await GetByIdAsync(objectId);
             if(entryToDelete != null)
@@ -62,6 +62,12 @@ namespace DataAccess.Repositories
         {
             _db.Update(@object);
 
+            return _context.SaveChangesAsync();
+        }
+
+        public Task DeleteAllCapitalTableEntriesAsync()
+        {
+            _db.RemoveRange(_db);
             return _context.SaveChangesAsync();
         }
     }

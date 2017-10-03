@@ -114,7 +114,7 @@ namespace MIPTCore
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
-                .AddScoped<IGenericRepository<CapitalsTableEntry>, CapitalsTableRepository>()
+                .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
                 .AddScoped<IPageRepository, PageRepository>()
