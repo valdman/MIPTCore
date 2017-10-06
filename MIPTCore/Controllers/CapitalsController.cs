@@ -39,7 +39,7 @@ namespace MIPTCore.Controllers
         }
         
         // GET capitals/5 or capitals/nameOfCapital
-        [HttpGet("{capitalIndex}")]
+        [HttpGet("{*capitalIndex}")]
         public async Task<IActionResult> Get(string capitalIndex)
         {
             if (!ModelState.IsValid)
@@ -55,7 +55,7 @@ namespace MIPTCore.Controllers
             }
             else
             {
-                capitalToReturn = await _capitalManager.GetCapitalByNameAsync(capitalIndex);
+                capitalToReturn = await _capitalManager.GetCapitalByFullUriAsync(capitalIndex);
             }
             
             if (capitalToReturn == null)
@@ -102,7 +102,6 @@ namespace MIPTCore.Controllers
             }
 
             capitalToUpdate.Name = capitalModel.Name;
-            capitalToUpdate.Need = capitalModel.Need;
             capitalToUpdate.Description = capitalModel.Description;
             capitalToUpdate.Image = Mapper.Map<Image>(capitalModel.Image);
             capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);

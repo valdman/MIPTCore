@@ -12,8 +12,6 @@ namespace MIPTCore.Models
 
         public ImageModel Image { get; set; }
 
-        public decimal Need { get; set; }
-
         public string FullPageUri { get; set; }
 
         public IEnumerable<PersonModel> Founders { get; set; }

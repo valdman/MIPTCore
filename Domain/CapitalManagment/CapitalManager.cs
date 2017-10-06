@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CapitalManagment.Exceptions;
@@ -28,11 +29,14 @@ namespace CapitalManagment
             return _capitalRepository.GetByIdAsync(capitalId);
         }
 
-        public Task<Capital> GetCapitalByNameAsync(string capitalName)
+        public Task<Capital> GetCapitalByFullUriAsync(string capitalName)
         {
             Require.NotEmpty(capitalName, nameof(capitalName));
+            
+            if (capitalName.Last() == '/')
+                capitalName = capitalName.Remove(capitalName.Length - 1);
 
-            return _capitalRepository.GetCapitalByNameAsync(capitalName);
+            return _capitalRepository.GetCapitalByFullUriAsync(capitalName);
         }
 
         public Task<IEnumerable<Capital>> GetAllCapitalsAsync()

@@ -2,7 +2,7 @@
 
 namespace MIPTCore.Models
 {
-    public class Credentials
+    public class CredentialsModel
     {
         [Required]
         [DataType(DataType.EmailAddress)]

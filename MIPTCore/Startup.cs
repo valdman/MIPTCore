@@ -109,9 +109,12 @@ namespace MIPTCore
             {
                 var dbCapitalContext = serviceScope.ServiceProvider.GetService<CapitalContext>();
                 var dbUsersContext = serviceScope.ServiceProvider.GetService<UserContext>();
+                var dbPageContext = serviceScope.ServiceProvider.GetService<PageContext>();
+                var dbTicketContext = serviceScope.ServiceProvider.GetService<TicketContext>();
+                var dbDomainOptionsContext = serviceScope.ServiceProvider.GetService<DomainOptionsContext>();
 
-                EnsureSchemaFor(dbCapitalContext, dbUsersContext).Wait();
-                //ForceCreateTablesFor(dbCapitalContext, dbUsersContext).Wait();
+                EnsureSchemaFor(dbCapitalContext, dbUsersContext, dbPageContext, dbTicketContext, dbDomainOptionsContext).Wait();
+                //ForceCreateTablesFor(dbFrontendHelperContext).Wait();
             }
             
 

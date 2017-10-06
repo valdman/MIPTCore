@@ -35,7 +35,7 @@ namespace SchemaCreator
                     ForceCreateTablesFor(dbContext).Wait();
                     Console.WriteLine($"{dbContext.GetType().Name} schema created");
                 }
-                catch (AggregateException e)
+                catch (Exception e)
                 {
                     errors.Add(e);
                 }

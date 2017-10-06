@@ -1,7 +1,7 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using CapitalManagment;
 using CapitalManagment.Infrastructure;
+using CapitalsTableHelper;
 using Common;
 using Common.Infrastructure;
 using DataAccess.Contexts;
@@ -12,11 +12,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using MIPTCore.Authentification.Handlers;
 using MIPTCore.Middlewares;
 using MIPTCore.Models;
-using MIPTCore.Models.ComplexMappers;
 using PagesManagment;
 using PagesManagment.Infrastructure;
 using UserManagment;
@@ -54,6 +52,7 @@ namespace MIPTCore
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<IAuthentificationService, AuthentificationService>()
                 .AddScoped<ITicketSender, TicketSender>()
                 .AddScoped<ITicketService, TicketService>()
                 .AddScoped<IUserMailerService, UserMailerService>()
@@ -61,7 +60,8 @@ namespace MIPTCore
                 .AddScoped<ICapitalManager, CapitalManager>()
                 .AddScoped<IImageResizer, ImageResizer>()
                 .AddScoped<IFileManager, FileManager>()
-                .AddScoped<IPageManager, PageManager>();
+                .AddScoped<IPageManager, PageManager>()
+                .AddScoped<ICapitalsTableHelper, CapitalsTableHelper.CapitalsTableHelper>();
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
         }
@@ -76,7 +76,9 @@ namespace MIPTCore
                     .ForMember(t => t.Password, o => o.ResolveUsing(p => new Password(p.Password)));
                 cfg.CreateMap<UserUpdateModel, User>();
                 cfg.CreateMap<AlumniProfile, AlumniProfileModel>();
-                cfg.CreateMap<AlumniProfileModel, AlumniProfile>();
+                cfg.CreateMap<AlumniProfileModel, AlumniProfile>();                
+                cfg.CreateMap<CredentialsModel, Credentials>();
+
 
                 cfg.CreateMap<CapitalUpdatingModel, Capital>();
                 cfg.CreateMap<CapitalCreatingModel, Capital>();
@@ -91,6 +93,9 @@ namespace MIPTCore
                 cfg.CreateMap<Page, PageModel>();
                 cfg.CreateMap<PageUpdateModel, Page>();
                 cfg.CreateMap<PageCreationModel, Page>();
+                
+                cfg.CreateMap<CapitalsTableEntry, CapitalsTableEntryModel>();
+                cfg.CreateMap<CapitalsTableEntryModel, CapitalsTableEntry>();
             });
             
         }
@@ -109,6 +114,7 @@ namespace MIPTCore
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
+                .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
                 .AddScoped<IPageRepository, PageRepository>()

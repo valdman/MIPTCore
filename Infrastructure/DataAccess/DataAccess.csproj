@@ -9,6 +9,10 @@
     <PackageReference Include="NETStandard.Library" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CapitalsTableHelper\CapitalsTableHelper.csproj">
+      <Project>{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860}</Project>
+      <Name>CapitalsTableHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domain\CapitalManagment\CapitalManagment.csproj">
       <Project>{8E1A98F3-560A-476B-91D6-014793FE91A4}</Project>
       <Name>CapitalManagment</Name>

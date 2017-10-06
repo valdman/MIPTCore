@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common;
 using Journalist.Extensions;
-using Journalist.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Authentification;

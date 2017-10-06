@@ -66,7 +66,8 @@ namespace DataAccess.Repositories
             Require.Positive(objectId, nameof(objectId));
             
             var objectToDelete = await GetByIdAsync(objectId);
-            objectToDelete.IsDeleted = true;
+            if(objectToDelete != null)
+                objectToDelete.IsDeleted = true;
             
             await Save();
         }

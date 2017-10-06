@@ -15,9 +15,6 @@ namespace MIPTCore.Models.ModelValidators
                 .WithMessage(c => $"'{nameof(c.Name)}' should not be empty");
             RuleFor(c => c.Name).Must(name => name?.Length < 60)
                 .WithMessage(c => $"'{nameof(c.Name)}' should not be shorther than 60 characters");
-            
-            RuleFor(c => c.Need).NotEmpty()
-                .WithMessage(c => $"'{nameof(c.Need)}' should not be empty");
         }
     }
 
