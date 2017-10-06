@@ -66,7 +66,7 @@ namespace FileManagment
                 await content.CopyToAsync(fileStream);
 			}
 
-			if (!allowedExtensions.Contains(extension))
+			if (!allowedExtensions.Contains(extension.ToLower()))
 			{
 				await Task.Factory.StartNew(() => File.Delete(fullFileName));
                 throw new InvalidDataException($"Extension {extension} is not allowed");
