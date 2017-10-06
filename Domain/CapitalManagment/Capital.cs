@@ -13,7 +13,6 @@ namespace CapitalManagment
 
         public Image Image {get; set;}
 
-        public decimal Need { get; set; }
         public decimal Given { get; set; }
 
         [DataType(DataType.Url)]

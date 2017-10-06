@@ -14,7 +14,6 @@ namespace DataAccess.Mappings
             e.HasIndex(t => t.Name).IsUnique();
             e.Property(t => t.Description).IsRequired();
 
-            e.Property(t => t.Need).IsRequired();
             e.Property(t => t.Given).IsRequired();
             e.Property(t => t.FullPageUri);
 

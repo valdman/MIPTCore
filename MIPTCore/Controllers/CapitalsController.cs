@@ -102,7 +102,6 @@ namespace MIPTCore.Controllers
             }
 
             capitalToUpdate.Name = capitalModel.Name;
-            capitalToUpdate.Need = capitalModel.Need;
             capitalToUpdate.Description = capitalModel.Description;
             capitalToUpdate.Image = Mapper.Map<Image>(capitalModel.Image);
             capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);
