@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MIPTCore.Authentification.Handlers;
 using MIPTCore.Middlewares;
 using MIPTCore.Models;
+using NewsManagment;
 using PagesManagment;
 using PagesManagment.Infrastructure;
 using UserManagment;
@@ -52,6 +53,7 @@ namespace MIPTCore
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<INewsManager, NewsManager>()
                 .AddScoped<IDomainOptionsService, DomainOptionsService>()
                 .AddScoped<IAuthentificationService, AuthentificationService>()
                 .AddScoped<ITicketSender, TicketSender>()
@@ -97,6 +99,9 @@ namespace MIPTCore
                 
                 cfg.CreateMap<CapitalsTableEntry, CapitalsTableEntryModel>();
                 cfg.CreateMap<CapitalsTableEntryModel, CapitalsTableEntry>();
+
+                cfg.CreateMap<News, NewsModel>();
+                cfg.CreateMap<NewsCreationModel, News>();
             });
             
         }
@@ -109,12 +114,13 @@ namespace MIPTCore
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<DomainOptionsContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<UserContext>(options => options.UseNpgsql(connectionString))
-                .AddDbContext<CapitalContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<WithImageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<PageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<TicketContext>(options => options.UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
+                .AddScoped<IGenericRepository<News>, NewsRepository>()
                 .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()

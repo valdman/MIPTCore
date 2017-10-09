@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using CapitalsTableHelper;
-using Common.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
 
 namespace MIPTCore.Controllers
 {
-    [Route("capitals-layout")]
     public class FrontendHelpersController : Controller
     {
         private readonly ICapitalsTableHelper _capitalsTableHelper;
@@ -21,14 +18,14 @@ namespace MIPTCore.Controllers
             _capitalsTableHelper = capitalsTableHelper;
         }
 
-        [HttpGet]
+        [HttpGet("capitals-layout")]
         public async Task<IActionResult> GetProjectsTable()
         {
             var capitalsTable = await _capitalsTableHelper.GetTableForCapitals();
             return Ok(capitalsTable.Select(Mapper.Map<CapitalsTableEntryModel>));
         }
         
-        [HttpPut]
+        [HttpPut("capitals-layout")]
         [Authorize("Admin")]
         public async Task<IActionResult> CreateWholeTable([FromBody] IEnumerable<CapitalsTableEntryModel> capitalsTable)
         {

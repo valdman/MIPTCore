@@ -13,10 +13,10 @@ namespace DataAccess.Repositories
 {
     public class CapitalsTableRepository : ICapitalsTableEntryRepository
     {
-        private readonly CapitalContext _context;
+        private readonly WithImageContext _context;
         private readonly DbSet<CapitalsTableEntry> _db;
         
-        public CapitalsTableRepository(CapitalContext context)
+        public CapitalsTableRepository(WithImageContext context)
         {
             _context = context;
             _db = context.CapitalsTableEntries;

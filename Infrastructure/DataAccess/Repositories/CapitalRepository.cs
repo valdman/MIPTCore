@@ -79,7 +79,7 @@ namespace DataAccess.Repositories
             return Db.Sum(c => c.Given);
         }
 
-        public CapitalRepository(CapitalContext context) : base(context)
+        public CapitalRepository(WithImageContext context) : base(context)
         {
         }
 

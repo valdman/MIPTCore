@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontendHelpers", "Frontend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapitalsTableHelper", "CapitalsTableHelper\CapitalsTableHelper.csproj", "{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsManagment", "Domain\NewsManagment\NewsManagment.csproj", "{30914315-6EB7-4540-8177-968160C0F97C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30914315-6EB7-4540-8177-968160C0F97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30914315-6EB7-4540-8177-968160C0F97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30914315-6EB7-4540-8177-968160C0F97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30914315-6EB7-4540-8177-968160C0F97C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +104,6 @@ Global
 		{12BC374A-D7B8-4ACB-8F30-4123810E8FB9} = {79DDA439-A139-45AF-B517-5DB126E2C0D7}
 		{55271995-1984-4B5A-B9CA-5B2F6C1752AF} = {E2FE57A9-FB33-4D04-901A-FB15C5D04372}
 		{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860} = {6CE31403-F84B-4C23-BF3B-662053383E95}
+		{30914315-6EB7-4540-8177-968160C0F97C} = {79DDA439-A139-45AF-B517-5DB126E2C0D7}
 	EndGlobalSection
 EndGlobal

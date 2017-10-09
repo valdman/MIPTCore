@@ -17,6 +17,10 @@
       <Project>{8E1A98F3-560A-476B-91D6-014793FE91A4}</Project>
       <Name>CapitalManagment</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Domain\NewsManagment\NewsManagment.csproj">
+      <Project>{30914315-6EB7-4540-8177-968160C0F97C}</Project>
+      <Name>NewsManagment</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domain\PagesManagment\PagesManagment.csproj">
       <Project>{12BC374A-D7B8-4ACB-8F30-4123810E8FB9}</Project>
       <Name>PagesManagment</Name>

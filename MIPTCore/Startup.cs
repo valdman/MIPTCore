@@ -107,7 +107,7 @@ namespace MIPTCore
             var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var serviceScope = serviceScopeFactory.CreateScope())
             {
-                var dbCapitalContext = serviceScope.ServiceProvider.GetService<CapitalContext>();
+                var dbCapitalContext = serviceScope.ServiceProvider.GetService<WithImageContext>();
                 var dbUsersContext = serviceScope.ServiceProvider.GetService<UserContext>();
                 var dbPageContext = serviceScope.ServiceProvider.GetService<PageContext>();
                 var dbTicketContext = serviceScope.ServiceProvider.GetService<TicketContext>();
@@ -123,6 +123,7 @@ namespace MIPTCore
                 foreach (var dbContext in contexts)
                 {
                     await dbContext.Database.EnsureCreatedAsync();
+                    await dbContext.Database.MigrateAsync();
                 }
             }
         
