@@ -14,12 +14,14 @@ namespace CapitalManagment
     public class CapitalManager : ICapitalManager
     {
         private readonly ICapitalRepository _capitalRepository;
+        private readonly IDomainOptionsService _domainOptionsService;
         private readonly DomainOptions _domainOptions;
-
-        public CapitalManager(ICapitalRepository capitalRepository, IDomainOptionsRepository domainOptionsRepository)
+        
+        public CapitalManager(ICapitalRepository capitalRepository, IDomainOptionsService domainOptionsService)
         {
             _capitalRepository = capitalRepository;
-            _domainOptions = domainOptionsRepository.GetDomainOptions();
+            _domainOptionsService = domainOptionsService;
+            _domainOptions = _domainOptionsService.GetDomainOptions();
         }
 
         public Task<Capital> GetCapitalByIdAsync(int capitalId)

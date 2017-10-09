@@ -23,6 +23,7 @@ namespace DataAccess.Repositories
         public void UpdateDomainOptions(DomainOptions newOptions)
         {
             _domainOptionsContext.DomainOptionsDB.Update(newOptions);
+            _domainOptionsContext.SaveChanges();
         }
     }
 }

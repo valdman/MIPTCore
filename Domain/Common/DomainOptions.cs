@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public class DomainOptions : PersistentEntity
+    public class DomainOptions : AbstractIdentifyable
     {
         public decimal SizeOfFund { get; set; }
     }

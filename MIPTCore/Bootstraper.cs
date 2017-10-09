@@ -52,6 +52,7 @@ namespace MIPTCore
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<IDomainOptionsService, DomainOptionsService>()
                 .AddScoped<IAuthentificationService, AuthentificationService>()
                 .AddScoped<ITicketSender, TicketSender>()
                 .AddScoped<ITicketService, TicketService>()
