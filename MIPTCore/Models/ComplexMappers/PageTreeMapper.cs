@@ -18,6 +18,7 @@ namespace MIPTCore.Models.ComplexMappers
         {
             var modelOfThisLevel = new PageTreeModel
             {
+                Id = tree.Id,
                 PageName = tree.Path ?? "",
                 Nodes = new List<PageTreeModel>()
             };

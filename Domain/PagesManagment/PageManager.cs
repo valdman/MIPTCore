@@ -37,9 +37,9 @@ namespace PagesManagment
         {
             var tree = new PageTreeNode();
             var allPages = await _pageRepository.GetAll();
-            foreach (var path in allPages.Select(p => p.Url))
+            foreach (var path in allPages.Select(p => new {p.Url, p.Id}))
             {
-                tree.AddPath(path);
+                tree.AddPath(path.Id, path.Url);
             }
             return tree;
         }

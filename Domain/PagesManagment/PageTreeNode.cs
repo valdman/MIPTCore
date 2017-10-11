@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PagesManagment
 {
@@ -17,7 +18,7 @@ namespace PagesManagment
             new Dictionary<string, PageTreeNode>();
         }
         
-        public void AddPath(string path)
+        public void AddPath(int id, string path)
         {
             var charSeparators = new char[] {'/'};
 
@@ -51,6 +52,22 @@ namespace PagesManagment
                 // Set the current to the child.
                 current = child;
             }
+            
+            SetIdForPath(id, path);
+        }
+
+        private void SetIdForPath(int id, string path)
+        {
+            var charSeparators = new char[] {'/'};
+            
+            var parts = path.Split(charSeparators, 
+                StringSplitOptions.RemoveEmptyEntries);
+
+            var nodeToChange = this;
+
+            nodeToChange = parts.Aggregate(nodeToChange, (current, part) => current.Nodes[part]);
+
+            nodeToChange.Id = id;
         }
 
     }
