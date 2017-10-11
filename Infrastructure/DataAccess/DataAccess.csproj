@@ -25,6 +25,10 @@
       <Project>{12BC374A-D7B8-4ACB-8F30-4123810E8FB9}</Project>
       <Name>PagesManagment</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Domain\StoriesManagment\StoriesManagment.csproj">
+      <Project>{F9792AD2-A2D9-4296-87E4-A2CFC1C6B5A5}</Project>
+      <Name>StoriesManagment</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domain\UserManagment\UserManagment.csproj" />
     <ProjectReference Include="..\..\NavigationHelper\NavigationHelper.csproj">
       <Project>{0F0B5271-5AE0-478A-B2FB-9AACCE5A3DBB}</Project>

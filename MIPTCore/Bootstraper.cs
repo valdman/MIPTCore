@@ -19,6 +19,7 @@ using NavigationHelper;
 using NewsManagment;
 using PagesManagment;
 using PagesManagment.Infrastructure;
+using StoriesManagment;
 using UserManagment;
 using UserManagment.Application;
 using UserManagment.Infrastructure;
@@ -55,6 +56,7 @@ namespace MIPTCore
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<INewsManager, NewsManager>()
+                .AddScoped<IStoriesManager, StoriesManager>()
                 .AddScoped<IDomainOptionsService, DomainOptionsService>()
                 .AddScoped<IAuthentificationService, AuthentificationService>()
                 .AddScoped<ITicketSender, TicketSender>()
@@ -92,8 +94,10 @@ namespace MIPTCore
                 cfg.CreateMap<Image, ImageModel>();
                 cfg.CreateMap<ImageModel, Image>();
                 
-                cfg.CreateMap<PersonModel, Person>();
-                cfg.CreateMap<Person, PersonModel>();
+                cfg.CreateMap<PersonModel, Person>()
+                    .ForMember(model => model.Image, o => o.ResolveUsing(p => Mapper.Map<Image>(p.Image)));
+                cfg.CreateMap<Person, PersonModel>()
+                    .ForMember(model => model.Image, o => o.ResolveUsing(p => Mapper.Map<ImageModel>(p.Image)));
 
                 cfg.CreateMap<Page, PageModel>();
                 cfg.CreateMap<PageUpdateModel, Page>();
@@ -107,6 +111,11 @@ namespace MIPTCore
 
                 cfg.CreateMap<News, NewsModel>();
                 cfg.CreateMap<NewsCreationModel, News>();
+                
+                cfg.CreateMap<Story, StoryModel>()
+                    .ForMember(model => model.Owner, o => o.ResolveUsing(p => Mapper.Map<PersonModel>(p.Owner)));;
+                cfg.CreateMap<StoryCreationModel, Story>();
+                cfg.CreateMap<StoryCreationModel, Story>();
             });
             
         }
@@ -127,6 +136,7 @@ namespace MIPTCore
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
                 .AddScoped<IGenericRepository<News>, NewsRepository>()
+                .AddScoped<IGenericRepository<Story>, StoriesRepository>()
                 .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<INavigationTableRepository, NavigationTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()

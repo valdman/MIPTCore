@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapitalManagment\CapitalManagment.csproj">
+      <Project>{8E1A98F3-560A-476B-91D6-014793FE91A4}</Project>
+      <Name>CapitalManagment</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
