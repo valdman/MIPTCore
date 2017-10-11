@@ -9,6 +9,8 @@ namespace PagesManagment
 
         public string Path { get; private set; }
 
+        public int Id { get; set; }
+
         public PageTreeNode()
         {
             Nodes =

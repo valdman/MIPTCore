@@ -7,6 +7,7 @@ using Common;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
+using NavigationHelper;
 using UserManagment;
 
 namespace DataAccess.Repositories

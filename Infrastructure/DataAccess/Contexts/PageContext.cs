@@ -23,7 +23,7 @@ namespace DataAccess.Contexts
             e.HasKey(c => c.Id);
             e.HasIndex(c => c.Name).IsUnique();
             e.HasIndex(c => c.Url).IsUnique();
-            e.Property(c => c.Data);
+            e.Property(c => c.Content);
         }
     }
 }

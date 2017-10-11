@@ -8,6 +8,7 @@ namespace DataAccess.Contexts
 {
     public class WithImageContext : DbContext
     {
+        public DbSet<Person> Persons { get; set; }
         public DbSet<Capital> Capitals { get; private set; }
         public DbSet<CapitalsTableEntry> CapitalsTableEntries { get; private set; }
         public DbSet<News> News { get; private set; }

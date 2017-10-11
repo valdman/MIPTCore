@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MIPTCore.Authentification.Handlers;
 using MIPTCore.Middlewares;
 using MIPTCore.Models;
+using NavigationHelper;
 using NewsManagment;
 using PagesManagment;
 using PagesManagment.Infrastructure;
@@ -64,7 +65,8 @@ namespace MIPTCore
                 .AddScoped<IImageResizer, ImageResizer>()
                 .AddScoped<IFileManager, FileManager>()
                 .AddScoped<IPageManager, PageManager>()
-                .AddScoped<ICapitalsTableHelper, CapitalsTableHelper.CapitalsTableHelper>();
+                .AddScoped<ICapitalsTableHelper, CapitalsTableHelper.CapitalsTableHelper>()
+                .AddScoped<INavigationHelper, NavigationHelper.NavigationHelper>();
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
         }
@@ -99,6 +101,9 @@ namespace MIPTCore
                 
                 cfg.CreateMap<CapitalsTableEntry, CapitalsTableEntryModel>();
                 cfg.CreateMap<CapitalsTableEntryModel, CapitalsTableEntry>();
+                
+                cfg.CreateMap<NavigationTableEntry, NavigationTableEntryModel>();
+                cfg.CreateMap<NavigationTableEntryModel, NavigationTableEntry>();
 
                 cfg.CreateMap<News, NewsModel>();
                 cfg.CreateMap<NewsCreationModel, News>();
@@ -117,11 +122,13 @@ namespace MIPTCore
                 .AddDbContext<WithImageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<PageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<TicketContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<NavigationTableContext>(options => options.UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
                 .AddScoped<IGenericRepository<News>, NewsRepository>()
                 .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
+                .AddScoped<INavigationTableRepository, NavigationTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
                 .AddScoped<IPageRepository, PageRepository>()

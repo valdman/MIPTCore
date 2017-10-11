@@ -8,6 +8,7 @@ using CapitalManagment.Infrastructure;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
+using NavigationHelper;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace DataAccess.Repositories
@@ -21,7 +22,9 @@ namespace DataAccess.Repositories
             return await Db
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
+                    .ThenInclude(f => f.Image)
                 .Include(u => u.Recivers)
+                    .ThenInclude(r => r.Image)
                 .Where(u => u.Id == id)
                 .SingleOrDefaultAsync();
         }
@@ -31,7 +34,9 @@ namespace DataAccess.Repositories
             return await Db
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
+                    .ThenInclude(f => f.Image)
                 .Include(u => u.Recivers)
+                    .ThenInclude(r => r.Image)
                 .ToListAsync();
         }
 
@@ -42,7 +47,9 @@ namespace DataAccess.Repositories
             return await Db
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
+                    .ThenInclude(f => f.Image)
                 .Include(u => u.Recivers)
+                    .ThenInclude(r => r.Image)
                 .Where(predicate)
                 .ToListAsync();
         }

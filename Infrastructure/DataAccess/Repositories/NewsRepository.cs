@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
+using NavigationHelper;
 using NewsManagment;
 
 namespace DataAccess.Repositories

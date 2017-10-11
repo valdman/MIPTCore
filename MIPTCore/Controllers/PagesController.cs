@@ -107,7 +107,7 @@ namespace MIPTCore.Controllers
             pageToUpdate.Name = pageModel.Name;
             pageToUpdate.Url = pageModel.Url;
             pageToUpdate.Description = pageModel.Description;
-            pageToUpdate.Data = pageModel.Data;
+            pageToUpdate.Content = pageModel.Content;
             
             await _pagesManager.UpdatePageAsync(pageToUpdate);
             

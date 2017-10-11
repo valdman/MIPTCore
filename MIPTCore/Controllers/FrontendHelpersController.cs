@@ -6,16 +6,19 @@ using CapitalsTableHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
+using NavigationHelper;
 
 namespace MIPTCore.Controllers
 {
     public class FrontendHelpersController : Controller
     {
         private readonly ICapitalsTableHelper _capitalsTableHelper;
+        private readonly INavigationHelper _navigationHelper;
 
-        public FrontendHelpersController(ICapitalsTableHelper capitalsTableHelper)
+        public FrontendHelpersController(ICapitalsTableHelper capitalsTableHelper, INavigationHelper navigationHelper)
         {
             _capitalsTableHelper = capitalsTableHelper;
+            _navigationHelper = navigationHelper;
         }
 
         [HttpGet("capitals-layout")]
@@ -27,11 +30,28 @@ namespace MIPTCore.Controllers
         
         [HttpPut("capitals-layout")]
         [Authorize("Admin")]
-        public async Task<IActionResult> CreateWholeTable([FromBody] IEnumerable<CapitalsTableEntryModel> capitalsTable)
+        public async Task<IActionResult> CreateWholeCapitalsTable([FromBody] IEnumerable<CapitalsTableEntryModel> capitalsTable)
         {
             var catitalTableToCreate = capitalsTable.Select(Mapper.Map<CapitalsTableEntry>);
             
             await _capitalsTableHelper.SaveTable(catitalTableToCreate);
+            return Ok();
+        }
+        
+        [HttpGet("navigation-layout")]
+        public async Task<IActionResult> GetNavigationTable()
+        {
+            var navigationTable = await _navigationHelper.GetNavigationTable();
+            return Ok(navigationTable.Select(Mapper.Map<NavigationTableEntryModel>));
+        }
+        
+        [HttpPut("navigation-layout")]
+        [Authorize("Admin")]
+        public async Task<IActionResult> CreateNavigationTable([FromBody] IEnumerable<NavigationTableEntryModel> navigationTable)
+        {
+            var navigationElements = navigationTable.Select(Mapper.Map<NavigationTableEntry>);
+            
+            await _navigationHelper.SaveTable(navigationElements);
             return Ok();
         }
     }
