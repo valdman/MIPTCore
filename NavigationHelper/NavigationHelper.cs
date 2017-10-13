@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Infrastructure;
+using Journalist;
 
 namespace NavigationHelper
 {
@@ -18,14 +19,32 @@ namespace NavigationHelper
             return _navigationTableRepository.GetAll();
         }
 
-        public async Task SaveTable(IEnumerable<NavigationTableEntry> table)
+        public Task<NavigationTableEntry> GetElementById(int id)
         {
-            await _navigationTableRepository.DeleteAllNavigatioTableEntriesAsync();
+            Require.Positive(id, nameof(id));
+
+            return _navigationTableRepository.GetByIdAsync(id);
+        }
+
+        public Task<int> CreateElement(NavigationTableEntry element)
+        {
+            Require.NotNull(element, nameof(element));
             
-            foreach (var capitalsTableEntry in table)
-            {
-                await _navigationTableRepository.CreateAsync(capitalsTableEntry);
-            }
+            return _navigationTableRepository.CreateAsync(element);
+        }
+
+        public Task UpdateElement(NavigationTableEntry element)
+        {
+            Require.NotNull(element, nameof(element));
+            
+            return _navigationTableRepository.UpdateAsync(element);
+        }
+
+        public Task DeleteElement(int id)
+        {
+            Require.Positive(id, nameof(id));
+
+            return _navigationTableRepository.DeleteAsync(id);
         }
     }
 }

@@ -94,8 +94,8 @@ namespace MIPTCore
             app.UseCors(
                 options => options
                     .WithOrigins("http://localhost:3000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
-                    .WithOrigins("http://127.0.0.1:5000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
-                    .WithOrigins("http://185.204.0.35:5000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://127.0.0.1").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://185.204.0.35").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
             );
 
             app.UseMvc();
