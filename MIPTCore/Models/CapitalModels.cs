@@ -9,6 +9,7 @@ namespace MIPTCore.Models
 
         public string Content { get; set; }
         public string Description { get; set; }
+        public decimal Given { get; set; }
 
         public ImageModel Image { get; set; }
 
@@ -21,13 +22,11 @@ namespace MIPTCore.Models
     public class CapitalModel : AbstractCapitalModel
     {
         public int Id { get; set; }
-        public decimal Given { get; set; }
         public DateTimeOffset CreatingTime { get; set; }
     }
     
     public class CapitalCreatingModel : AbstractCapitalModel
     {
-        public decimal Given { get; set; }
     }
 
     public class CapitalUpdatingModel : AbstractCapitalModel {}

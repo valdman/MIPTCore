@@ -8,4 +8,9 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0">
+      <HintPath>..\..\..\..\..\.nuget\packages\fluentvalidation\7.1.1\lib\netstandard1.0\FluentValidation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
