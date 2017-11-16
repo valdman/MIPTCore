@@ -48,7 +48,10 @@ namespace MIPTCore.Controllers
 			}
 
 			var createdFileName = await _fileManager.UploadFileAsync(file);
-            return Ok(createdFileName);
+            return Ok(new FileModel
+            {
+                FileName = createdFileName
+            });
         }
 
         [HttpPost("image")]

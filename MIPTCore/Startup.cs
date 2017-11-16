@@ -87,15 +87,15 @@ namespace MIPTCore
             //Middlewares
             app.DomainErrorHandlingMiddleware();
 
-            EnsureSchemaCreated(app);
+            //EnsureSchemaCreated(app);
 
             app.UseAuthentication();
             
             app.UseCors(
                 options => options
-                    .WithOrigins("http://localhost:3000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
-                    .WithOrigins("http://127.0.0.1").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
-                    .WithOrigins("http://185.204.0.35").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://93.175.29.155").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://fund.mipt.ru").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://fund.mipt.ru:3000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
             );
 
             app.UseMvc();
