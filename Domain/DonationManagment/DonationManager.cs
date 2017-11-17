@@ -50,7 +50,7 @@ namespace DonationManagment
             await _donationRepository.UpdateAsync(donationToConfirm);
         }
 
-        public async Task UpdateDonation(Donation donationToUpdate)
+        public async Task UpdateDonationAsync(Donation donationToUpdate)
         {
             Require.NotNull(donationToUpdate, nameof(donationToUpdate));
 

@@ -4,16 +4,20 @@ using Common.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using MGSUCore.Models;
 using MGSUCore.Models.Mappers;
 using MGSUCore.Filters;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using CapitalManagment;
 using ProjectManagment.Application;
 using UserManagment.Application;
 using Common;
+using DonationManagment;
 using Newtonsoft.Json;
 using MGSUCore.Models.Convertors;
+using MIPTCore.Models;
 using UserManagment;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,48 +30,34 @@ namespace MGSUCore.Controllers
     public class DonationsController : Controller
     {
         private readonly IDonationManager _donationManager;
-        private readonly IProjectManager _projectManager;
+        private readonly ICapitalManager _capitalManager;
         private readonly IUserManager _userManager;
 
-        public DonationsController(IDonationManager donationManager, IProjectManager projectManager, IUserManager userManager)
+        public DonationsController(IDonationManager donationManager, ICapitalManager capitalManager, IUserManager userManager)
         {
             _donationManager = donationManager;
-            _projectManager = projectManager;
+            _capitalManager = capitalManager;
             _userManager = userManager;
         }
 
         [HttpPost("registration")]
-        public IActionResult ComboDonation(DonationWithRegistrationModel comboModel)
+        public async Task<IActionResult> ComboDonation(DonationWithRegistrationModel comboModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userToCreate = new User
-            {
-                FirstName = comboModel.FirstName,
-                LastName = comboModel.LastName,
-                Email = comboModel.Email,
-                IsEmailConfirmed = comboModel.Confirmed,
-                //простите меня
-                Password = new Password
-                (
-                    //crutches.js
-                    Guid.NewGuid().ToString("n").Substring(0, 10)
-                ),
-                Role = UserRole.User
-            };
+            var userToCreate = Mapper.Map<User>(comboModel);
+            //простите меня
+            userToCreate.Password = new Password
+            (
+                //crutches.js
+                Guid.NewGuid().ToString("n").Substring(0, 10)
+            );
+            userToCreate.Role = UserRole.User;
 
-            var newuserId = _userManager.CreateUser(userToCreate);
+            var newuserId = await _userManager.CreateUserAsync(userToCreate);
 
-            var donationToCreate = new SaveDonationModel
-            {
-                UserId = newuserId,
-                ProjectId = comboModel.ProjectId,
-                Value = comboModel.Value,
-                Date = comboModel.Date,
-                Recursive = comboModel.Recursive,
-                Confirmed = comboModel.Confirmed
-            };
+            var donationToCreate = Mapper.Map<SaveDonationModel>(comboModel);
 
             return CreateDonation(donationToCreate);
         }
@@ -75,16 +65,16 @@ namespace MGSUCore.Controllers
         // GET: api/values
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult GetAllDonations()
+        public async Task<OkObjectResult> GetAllDonations()
         {
             IEnumerable<Donation> donationsToReturn;
             if(User.IsInRole("Admin"))
             {
-                donationsToReturn = _donationManager.GetDonationsByPredicate();
+                donationsToReturn = await _donationManager.GetDonationsByPredicate();
             }
             else
             {
-                donationsToReturn = _donationManager.GetDonationsByPredicate(donation => donation.Confirmed);
+                donationsToReturn = await _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed);
             }
 
             var expandedDonationModels = new List<ExpandedDonationModel>();
@@ -92,8 +82,8 @@ namespace MGSUCore.Controllers
             {
                 expandedDonationModels.Add(new ExpandedDonationModel
                 {
-                    Project = ProjectMapper.ProjectToProjectModel(
-                                    _projectManager.GetProjectById(donation.ProjectId)),
+                    Capital = ProjectMapper.ProjectToProjectModel(
+                                    _capitalManager.GetProjectById(donation.ProjectId)),
                     User = UserMapper.UserToUserModel(
                                     _userManager.GetUserById(donation.UserId)),
                     Value = donation.Value,
@@ -115,7 +105,7 @@ namespace MGSUCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
                 
-            if(!ObjectId.TryParse(id, out var objectId))
+            if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
             var donationToReturn = _donationManager.GetDonation(objectId);
@@ -123,7 +113,7 @@ namespace MGSUCore.Controllers
             if (donationToReturn == null)
                 return NotFound();
 
-            return Ok(DonationMapper.DonationToDonationModel(donationToReturn));
+            return Ok(Mapper.Map<SaveDonationModel>(donationToReturn));
         }
 
         // POST api/values
@@ -133,34 +123,34 @@ namespace MGSUCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var postToCreate = DonationMapper.DonationModelToDonation(donationModel);
+            var postToCreate = Mapper.Map<Donation>(donationModel);
 
             return Ok(_donationManager.CreateDonation(postToCreate).ToString());
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody]SaveDonationModel donationModel)
+        public async Task<IActionResult> Put(string id, [FromBody]SaveDonationModel donationModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            if(!ObjectId.TryParse(id, out var objectId))
+            if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = _donationManager.GetDonation(objectId);
+            var oldDonation = await _donationManager.GetDonation(objectId);
 
             if (oldDonation == null)
                 return NotFound();
 
-            oldDonation.UserId = donationModel.UserId == ObjectId.Empty ? oldDonation.UserId : donationModel.UserId;
-            oldDonation.ProjectId = donationModel.ProjectId == ObjectId.Empty ? oldDonation.ProjectId : donationModel.ProjectId;
-            oldDonation.Value = donationModel.Value == 0 ? oldDonation.Value : donationModel.Value;
+            oldDonation.UserId = donationModel.UserId;
+            oldDonation.CapitalId = donationModel.CapitalId;
+            oldDonation.Value = donationModel.Value;
             oldDonation.Date = donationModel.Date;
-            oldDonation.Recursive = donationModel.Recursive;
-            oldDonation.Confirmed = donationModel.Confirmed;
+            oldDonation.IsRecursive = donationModel.Recursive;
+            oldDonation.IsConfirmed = donationModel.Confirmed;
 
-            _donationManager.UpdateDonation(oldDonation);
+            await _donationManager.UpdateDonationAsync(oldDonation);
             return Ok(id);
         }
 
@@ -168,7 +158,7 @@ namespace MGSUCore.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            if(!ObjectId.TryParse(id, out var objectId))
+            if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
             var oldDonation = _donationManager.GetDonation(objectId);

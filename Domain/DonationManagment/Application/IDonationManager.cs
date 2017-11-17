@@ -12,7 +12,7 @@ namespace DonationManagment.Application
         Task<int> CreateDonation(Donation donationToCreate);
         Task ConfirmDonation(Donation donationToConfirm);
 
-        Task UpdateDonation(Donation donationToUpdate);
+        Task UpdateDonationAsync(Donation donationToUpdate);
         Task DeleteDonation(int donationToDeleteId);
     }
 }
