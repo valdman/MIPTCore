@@ -12,6 +12,11 @@ namespace DonationManagment
 {
     public class DonationManager : IDonationManager
     {
+        public async Task<IEnumerable<Donation>> GetAllDonations()
+        {
+            return await _donationRepository.GetAll();
+        }
+
         public Task<Donation> GetDonation(int donationId)
         {
             Require.NotNull(donationId, nameof(donationId));
@@ -19,7 +24,7 @@ namespace DonationManagment
             return _donationRepository.GetByIdAsync(donationId);
         }
 
-        public async Task<int> CreateDonation(Donation donationToCreate)
+        public async Task<int> CreateDonationAsync(Donation donationToCreate)
         {
             Require.NotNull(donationToCreate, nameof(donationToCreate));
 
@@ -38,13 +43,10 @@ namespace DonationManagment
 
         public async Task ConfirmDonation(Donation donationToConfirm)
         {
-            throw new NotImplementedException();
-            
             Require.NotNull(donationToConfirm, nameof(donationToConfirm));
-            var targetProject = _projectManager.GetCapitalByIdAsync(donationToConfirm.CapitalId);
+            var targetProject = _capitalManager.GetCapitalByIdAsync(donationToConfirm.CapitalId);
 
             Require.NotNull(targetProject, nameof(targetProject));
-            //_projectManager.GiveMoneyToCapital(donationToConfirm.CapitalId, donationToConfirm.Value);
 
             donationToConfirm.IsConfirmed = true;
             await _donationRepository.UpdateAsync(donationToConfirm);
@@ -62,7 +64,7 @@ namespace DonationManagment
 
                 if (!donationToUpdate.IsConfirmed)
                 {
-                    throw new RollbackdonationException();
+                    throw new RollbackDonationException();
                 }
 
                await ConfirmDonation(donationToUpdate);
@@ -85,16 +87,12 @@ namespace DonationManagment
         }
 
         private readonly IGenericRepository<Donation> _donationRepository;
-        private readonly ICapitalManager _projectManager;
+        private readonly ICapitalManager _capitalManager;
 
-        public DonationManager(IGenericRepository<Donation> donationRepository, ICapitalManager projectManager)
+        public DonationManager(IGenericRepository<Donation> donationRepository, ICapitalManager capitalManager)
         {
             _donationRepository = donationRepository;
-            _projectManager = projectManager;
+            _capitalManager = capitalManager;
         }
-    }
-
-    public class RollbackdonationException : Exception
-    {
     }
 }

@@ -1,28 +1,18 @@
 ﻿using System;
-using DonationManagment.Application;
-using Common.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using MGSUCore.Models.Mappers;
-using MGSUCore.Filters;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CapitalManagment;
-using ProjectManagment.Application;
-using UserManagment.Application;
 using Common;
 using DonationManagment;
-using Newtonsoft.Json;
-using MGSUCore.Models.Convertors;
+using DonationManagment.Application;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
 using UserManagment;
+using UserManagment.Application;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace MGSUCore.Controllers
+namespace MIPTCore.Controllers
 {
 
     [Authorize("Admin")]
@@ -57,12 +47,12 @@ namespace MGSUCore.Controllers
 
             var newuserId = await _userManager.CreateUserAsync(userToCreate);
 
-            var donationToCreate = Mapper.Map<SaveDonationModel>(comboModel);
+            var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
 
-            return CreateDonation(donationToCreate);
+            return await CreateDonation(donationToCreate);
         }
 
-        // GET: api/values
+        // GET: donations
         [HttpGet]
         [AllowAnonymous]
         public async Task<OkObjectResult> GetAllDonations()
@@ -70,7 +60,7 @@ namespace MGSUCore.Controllers
             IEnumerable<Donation> donationsToReturn;
             if(User.IsInRole("Admin"))
             {
-                donationsToReturn = await _donationManager.GetDonationsByPredicate();
+                donationsToReturn = await _donationManager.GetAllDonations();
             }
             else
             {
@@ -82,15 +72,14 @@ namespace MGSUCore.Controllers
             {
                 expandedDonationModels.Add(new ExpandedDonationModel
                 {
-                    Capital = ProjectMapper.ProjectToProjectModel(
-                                    _capitalManager.GetProjectById(donation.ProjectId)),
-                    User = UserMapper.UserToUserModel(
-                                    _userManager.GetUserById(donation.UserId)),
+                    Capital = Mapper.Map<CapitalModel>(
+                                    await _capitalManager.GetCapitalByIdAsync(donation.CapitalId)),
+                    User = Mapper.Map<UserModel>(
+                                    await _userManager.GetUserByIdAsync(donation.UserId)),
                     Value = donation.Value,
-                    Date = donation.Date,
-                    Confirmed = donation.Confirmed,
-                    Recursive = donation.Recursive,
-                    CreatingDate = donation.CreatingDate,
+                    IsConfirmed = donation.IsConfirmed,
+                    IsRecursive = donation.IsRecursive,
+                    CreatingTime = donation.CreatingTime,
                     Id = donation.Id
                 });
             }
@@ -98,9 +87,9 @@ namespace MGSUCore.Controllers
             return Ok(expandedDonationModels);
         }
 
-        // GET api/values/5
+        // GET donations/5
         [HttpGet("{id}")]
-        public IActionResult GetDonationbyId(string id)
+        public async Task<IActionResult> GetDonationbyId(string id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -108,29 +97,30 @@ namespace MGSUCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var donationToReturn = _donationManager.GetDonation(objectId);
+            var donationToReturn = await _donationManager.GetDonation(objectId);
 
             if (donationToReturn == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<SaveDonationModel>(donationToReturn));
+            return Ok(Mapper.Map<CreateDonationModel>(donationToReturn));
         }
 
-        // POST api/values
+        // POST donations
         [HttpPost]
-        public IActionResult CreateDonation([FromBody]SaveDonationModel donationModel)
+        public async Task<IActionResult> CreateDonation([FromBody]CreateDonationModel donationModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var postToCreate = Mapper.Map<Donation>(donationModel);
+            var donationToCreate = Mapper.Map<Donation>(donationModel);
+            var createdDonationId = await _donationManager.CreateDonationAsync(donationToCreate);
 
-            return Ok(_donationManager.CreateDonation(postToCreate).ToString());
+            return Ok(createdDonationId.ToString());
         }
 
-        // PUT api/values/5
+        // PUT donations/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody]SaveDonationModel donationModel)
+        public async Task<IActionResult> Put(string id, [FromBody]UpdateDonationModel donationModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -146,15 +136,13 @@ namespace MGSUCore.Controllers
             oldDonation.UserId = donationModel.UserId;
             oldDonation.CapitalId = donationModel.CapitalId;
             oldDonation.Value = donationModel.Value;
-            oldDonation.Date = donationModel.Date;
-            oldDonation.IsRecursive = donationModel.Recursive;
-            oldDonation.IsConfirmed = donationModel.Confirmed;
+            oldDonation.IsRecursive = donationModel.IsRecursive;
 
             await _donationManager.UpdateDonationAsync(oldDonation);
             return Ok(id);
         }
 
-        // DELETE api/values/5
+        // DELETE donations/5
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {

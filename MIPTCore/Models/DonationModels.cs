@@ -8,11 +8,7 @@ namespace MIPTCore.Models
 		[Required]
 		public decimal Value { get; set; }
 
-		public DateTimeOffset Date { get; set; }
-
-		public bool Recursive { get; set; }
-		
-		public bool Confirmed { get; set; }
+		public bool IsRecursive { get; set; }
 	}
 	
     public class DonationWithRegistrationModel : AbstractDonationModel
@@ -23,38 +19,58 @@ namespace MIPTCore.Models
         [Required]
         public string FirstName { get; set; }
 
-        public string MiddleName { get; set; }
-        
-        [Required]        
+	    [Required]        
         public string LastName { get; set; }
 
         [Required]        
         [EmailAddress]
         public string Email { get; set; }
     }
-    
-    public class SaveDonationModel : AbstractDonationModel
+	
+	public class ShortDonationModel : AbstractDonationModel
     {
         [Required]
         public int UserId { get; set; }
 
         [Required]
         public int CapitalId { get; set; }
+	    
+	    public bool IsConfirmed { get; set; }
 
-        public DateTime CreatingDate { get; set; }
+	    public DateTimeOffset CreatingTime { get; set; }
     }
     
-    public class ExpandedDonationModel : AbstractDonationModel
-    {
+	public class ExpandedDonationModel : AbstractDonationModel
+	{
 		[Required]
 		public int Id { get; set; }
 
-        [Required]
-        public UserModel User { get; set; }
+		[Required]
+		public UserModel User { get; set; }
 
 		[Required]	
 		public CapitalModel Capital { get; set; }
+		
+		public bool IsConfirmed { get; set; }
 
-		public DateTime CreatingDate { get; set; }
+		public DateTimeOffset CreatingTime { get; set; }
+	}
+    
+    public class CreateDonationModel : AbstractDonationModel
+    {
+        [Required]
+        public int UserId { get; set; }
+
+        [Required]
+        public int CapitalId { get; set; }
     }
+	
+	public class UpdateDonationModel : AbstractDonationModel
+	{
+		[Required]
+		public int UserId { get; set; }
+
+		[Required]
+		public int CapitalId { get; set; }
+	}
 }

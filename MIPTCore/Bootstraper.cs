@@ -6,6 +6,8 @@ using Common;
 using Common.Infrastructure;
 using DataAccess.Contexts;
 using DataAccess.Repositories;
+using DonationManagment;
+using DonationManagment.Application;
 using FileManagment;
 using Mailer;
 using Microsoft.AspNetCore.Authorization;
@@ -55,6 +57,7 @@ namespace MIPTCore
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<IDonationManager, DonationManager>()
                 .AddScoped<INewsManager, NewsManager>()
                 .AddScoped<IStoriesManager, StoriesManager>()
                 .AddScoped<IDomainOptionsService, DomainOptionsService>()
@@ -116,6 +119,11 @@ namespace MIPTCore
                     .ForMember(model => model.Owner, o => o.ResolveUsing(p => Mapper.Map<PersonModel>(p.Owner)));;
                 cfg.CreateMap<StoryCreationModel, Story>();
                 cfg.CreateMap<StoryCreationModel, Story>();
+
+                cfg.CreateMap<DonationWithRegistrationModel, CreateDonationModel>();
+                cfg.CreateMap<DonationWithRegistrationModel, UserModel>();
+                cfg.CreateMap<Donation, CreateDonationModel>();
+                cfg.CreateMap<CreateDonationModel, Donation>();
             });
             
         }
@@ -132,11 +140,13 @@ namespace MIPTCore
                 .AddDbContext<PageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<TicketContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<NavigationTableContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<DonationContext>(options => options.UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
                 .AddScoped<IGenericRepository<News>, NewsRepository>()
                 .AddScoped<IGenericRepository<Story>, StoriesRepository>()
+                .AddScoped<IGenericRepository<Donation>, DonationRepository>()
                 .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<INavigationTableRepository, NavigationTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
