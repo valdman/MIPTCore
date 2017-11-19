@@ -8,6 +8,7 @@ using DataAccess.Contexts;
 using DataAccess.Repositories;
 using DonationManagment;
 using DonationManagment.Application;
+using DonationManagment.Infrastructure;
 using FileManagment;
 using Mailer;
 using Microsoft.AspNetCore.Authorization;
@@ -21,6 +22,7 @@ using NavigationHelper;
 using NewsManagment;
 using PagesManagment;
 using PagesManagment.Infrastructure;
+using PaymentGateway;
 using StoriesManagment;
 using UserManagment;
 using UserManagment.Application;
@@ -74,6 +76,7 @@ namespace MIPTCore
                 .AddScoped<INavigationHelper, NavigationHelper.NavigationHelper>();
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
+            _services.Configure<PaymentGatewaySettings>(_configuration.GetSection("PaymentGatewaySettings"));
         }
 
         private void ConfigureAutoMapper()
@@ -121,7 +124,7 @@ namespace MIPTCore
                 cfg.CreateMap<StoryCreationModel, Story>();
 
                 cfg.CreateMap<DonationWithRegistrationModel, CreateDonationModel>();
-                cfg.CreateMap<DonationWithRegistrationModel, UserModel>();
+                cfg.CreateMap<DonationWithRegistrationModel, User>();
                 cfg.CreateMap<Donation, CreateDonationModel>();
                 cfg.CreateMap<CreateDonationModel, Donation>();
             });
@@ -152,7 +155,9 @@ namespace MIPTCore
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
                 .AddScoped<IPageRepository, PageRepository>()
-                .AddScoped<ITicketRepository, TicketRepository>();
+                .AddScoped<ITicketRepository, TicketRepository>()
+                
+                .AddScoped<IPaymentProvider, PaymentProvider>();
         }
     }
 }

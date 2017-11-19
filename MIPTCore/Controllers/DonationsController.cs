@@ -31,7 +31,7 @@ namespace MIPTCore.Controllers
         }
 
         [HttpPost("registration")]
-        public async Task<IActionResult> ComboDonation(DonationWithRegistrationModel comboModel)
+        public async Task<IActionResult> ComboDonation([FromBody]DonationWithRegistrationModel comboModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -97,7 +97,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var donationToReturn = await _donationManager.GetDonation(objectId);
+            var donationToReturn = await _donationManager.GetDonationByIdAsync(objectId);
 
             if (donationToReturn == null)
                 return NotFound();
@@ -113,9 +113,9 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
 
             var donationToCreate = Mapper.Map<Donation>(donationModel);
-            var createdDonationId = await _donationManager.CreateDonationAsync(donationToCreate);
+            var createdDonationPaymentInformation = await _donationManager.CreateDonationAsync(donationToCreate);
 
-            return Ok(createdDonationId.ToString());
+            return Ok(createdDonationPaymentInformation);
         }
 
         // PUT donations/5
@@ -128,7 +128,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = await _donationManager.GetDonation(objectId);
+            var oldDonation = await _donationManager.GetDonationByIdAsync(objectId);
 
             if (oldDonation == null)
                 return NotFound();
@@ -149,7 +149,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = _donationManager.GetDonation(objectId);
+            var oldDonation = _donationManager.GetDonationByIdAsync(objectId);
 
             if (oldDonation == null)
                 return NotFound();

@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CapitalManagment;
 using Common.Infrastructure;
+using DonationManagment.Infrastructure;
 using Journalist;
 
 namespace DonationManagment
@@ -17,14 +18,14 @@ namespace DonationManagment
             return await _donationRepository.GetAll();
         }
 
-        public Task<Donation> GetDonation(int donationId)
+        public Task<Donation> GetDonationByIdAsync(int donationId)
         {
             Require.NotNull(donationId, nameof(donationId));
 
             return _donationRepository.GetByIdAsync(donationId);
         }
 
-        public async Task<int> CreateDonationAsync(Donation donationToCreate)
+        public async Task<DonationPaymentInformation> CreateDonationAsync(Donation donationToCreate)
         {
             Require.NotNull(donationToCreate, nameof(donationToCreate));
 
@@ -38,7 +39,7 @@ namespace DonationManagment
                 await ConfirmDonation(donationToCreate);
             }
 
-            return id;
+            return _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate);;
         }
 
         public async Task ConfirmDonation(Donation donationToConfirm)
@@ -88,11 +89,13 @@ namespace DonationManagment
 
         private readonly IGenericRepository<Donation> _donationRepository;
         private readonly ICapitalManager _capitalManager;
+        private readonly IPaymentProvider _paymentProvider;
 
-        public DonationManager(IGenericRepository<Donation> donationRepository, ICapitalManager capitalManager)
+        public DonationManager(IGenericRepository<Donation> donationRepository, ICapitalManager capitalManager, IPaymentProvider paymentProvider)
         {
             _donationRepository = donationRepository;
             _capitalManager = capitalManager;
+            _paymentProvider = paymentProvider;
         }
     }
 }

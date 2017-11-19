@@ -8,14 +8,15 @@ namespace MIPTCore.Models
 		[Required]
 		public decimal Value { get; set; }
 
+		[Required]
 		public bool IsRecursive { get; set; }
 	}
 	
     public class DonationWithRegistrationModel : AbstractDonationModel
     {
-        [Required]
-        public int ProjectId { get;  set; }
-
+	    [Required]
+	    public int CapitalId { get; set; }
+	    
         [Required]
         public string FirstName { get; set; }
 
@@ -25,6 +26,11 @@ namespace MIPTCore.Models
         [Required]        
         [EmailAddress]
         public string Email { get; set; }
+	    
+	    [Required]
+	    public bool IsMiptAlumni { get; set; }
+
+	    public AlumniProfileModel AlumniProfile { get; set; }
     }
 	
 	public class ShortDonationModel : AbstractDonationModel
