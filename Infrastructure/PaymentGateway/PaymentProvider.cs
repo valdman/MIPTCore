@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Microsoft.Extensions.Options;
-using System.Threading.Tasks;
 using DonationManagment;
 using DonationManagment.Infrastructure;
 using Journalist.Extensions;
@@ -32,7 +31,7 @@ namespace PaymentGateway
             {
                 OrderNumber = donation.Id,
                 Amount = (int) Math.Round(donation.Value * 100),
-                ReturnUrl = "http://test.com/success"
+                ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString()
             };
 
             var bankResponse = RequestBankAsync(targetRoute, payload);
@@ -54,7 +53,8 @@ namespace PaymentGateway
                 OrderNumber = donation.Id,
                 Amount = (int) Math.Round(donation.Value * 100),
                 ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString(),
-                JsonParams = JsonConvert.SerializeObject(requrrenParameters)
+                JsonParams = JsonConvert.SerializeObject(requrrenParameters),
+                ClientId = donation.UserId
             };
 
             var bankResponse = RequestBankAsync(targetRoute, payload);
@@ -74,7 +74,7 @@ namespace PaymentGateway
             var payload = authentificationPayload.Union(keyValuePayload);
             payload = payload.Select(pair => new KeyValuePair<string, string>(FirstCharacterToLower(pair.Key), pair.Value));
 
-            var client = new RestClient(requestUri); // {Proxy = new WebProxy("http://127.0.0.1:8080")} //For test uses;
+            var client = new RestClient(requestUri) {Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
 
             var request = new RestRequest("", Method.GET);
             foreach (var querryParam in payload)
@@ -100,7 +100,7 @@ namespace PaymentGateway
             return response;
         }
         
-        private static string FirstCharacterToLower(string str)
+        private string FirstCharacterToLower(string str)
         {
             if (String.IsNullOrEmpty(str) || Char.IsLower(str, 0))
                 return str;

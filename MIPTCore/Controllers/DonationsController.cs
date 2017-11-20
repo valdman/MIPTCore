@@ -6,6 +6,7 @@ using CapitalManagment;
 using Common;
 using DonationManagment;
 using DonationManagment.Application;
+using Journalist.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
@@ -49,7 +50,7 @@ namespace MIPTCore.Controllers
 
             var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
 
-            return await CreateDonation(donationToCreate);
+            return await CreateDonation(donationToCreate, isAutocompleted: false);
         }
 
         // GET: donations
@@ -107,15 +108,19 @@ namespace MIPTCore.Controllers
 
         // POST donations
         [HttpPost]
-        public async Task<IActionResult> CreateDonation([FromBody]CreateDonationModel donationModel)
+        public async Task<IActionResult> CreateDonation([FromBody]CreateDonationModel donationModel,[FromQuery]bool isAutocompleted)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var donationToCreate = Mapper.Map<Donation>(donationModel);
-            var createdDonationPaymentInformation = await _donationManager.CreateDonationAsync(donationToCreate);
+            if (isAutocompleted && !User.IsInRole("Admin"))
+                return Unauthorized();
 
-            return Ok(createdDonationPaymentInformation);
+            var donationToCreate = Mapper.Map<Donation>(donationModel);
+
+            return !isAutocompleted ?
+                Ok(await _donationManager.CreateDonationAsync(donationToCreate)) :
+                Ok(await _donationManager.CreateCompletedSingleDonation(donationToCreate));
         }
 
         // PUT donations/5

@@ -29,7 +29,7 @@ namespace DonationManagment
         {
             Require.NotNull(donationToCreate, nameof(donationToCreate));
 
-            var id = await _donationRepository.CreateAsync(donationToCreate);
+            await _donationRepository.CreateAsync(donationToCreate);
 
             
             if (donationToCreate.IsConfirmed)
@@ -39,7 +39,19 @@ namespace DonationManagment
                 await ConfirmDonation(donationToCreate);
             }
 
-            return _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate);;
+            return donationToCreate.IsRecursive
+                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate)
+                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate);
+        }
+
+        public async Task<int> CreateCompletedSingleDonation(Donation donationToCreate)
+        {
+            Require.NotNull(donationToCreate, nameof(donationToCreate));
+
+            donationToCreate.IsConfirmed = true;
+            donationToCreate.IsRecursive = false;
+
+            return await _donationRepository.CreateAsync(donationToCreate);
         }
 
         public async Task ConfirmDonation(Donation donationToConfirm)
