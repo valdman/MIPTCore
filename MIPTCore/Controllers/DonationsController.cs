@@ -9,6 +9,7 @@ using DonationManagment.Application;
 using Journalist.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MIPTCore.Authentification;
 using MIPTCore.Models;
 using UserManagment;
 using UserManagment.Application;
@@ -32,6 +33,7 @@ namespace MIPTCore.Controllers
         }
 
         [HttpPost("registration")]
+        [AllowAnonymous]
         public async Task<IActionResult> ComboDonation([FromBody]DonationWithRegistrationModel comboModel)
         {
             if (!ModelState.IsValid)
@@ -108,6 +110,7 @@ namespace MIPTCore.Controllers
 
         // POST donations
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateDonation([FromBody]CreateDonationModel donationModel,[FromQuery]bool isAutocompleted)
         {
             if (!ModelState.IsValid)

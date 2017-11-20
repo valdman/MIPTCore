@@ -74,15 +74,17 @@ namespace PaymentGateway
             var payload = authentificationPayload.Union(keyValuePayload);
             payload = payload.Select(pair => new KeyValuePair<string, string>(FirstCharacterToLower(pair.Key), pair.Value));
 
-            var client = new RestClient(requestUri) {Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
+            var client = new RestClient(requestUri); //{Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
 
             var request = new RestRequest("", Method.GET);
-            foreach (var querryParam in payload)
+            var payloadArray = payload as KeyValuePair<string, string>[] ?? payload.ToArray();
+            
+            foreach (var querryParam in payloadArray)
             {
                 request.AddParameter(querryParam.Key, querryParam.Value);
             }
             
-            _logger.LogInformation($"Payment operation to {requestUri} with query data {keyValuePayload.JoinStringsWith(",")}");
+            _logger.LogInformation($"Payment operation to {requestUri} with query data {payloadArray.JoinStringsWith(",")}");
 
             var httpResponse = client.Execute(request);
 
