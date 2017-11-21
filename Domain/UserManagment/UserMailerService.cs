@@ -69,6 +69,30 @@ namespace UserManagment
             await _ticketSender.SendTicketAsync(userToChangePassword.Email, passwordRecoveyTicket);
         }
 
+        public async Task BeginPasswordSettingAndEmailVerification(int userId)
+        {
+            Require.Positive(userId, nameof(userId));
+
+            var userToConfirmAndSetPassword = await _userManager.GetUserByIdAsync(userId);
+
+            if (userToConfirmAndSetPassword == null)
+                throw new OperationOnUserThatNotExistsException("start email confirmation & setting password");
+
+            if (userToConfirmAndSetPassword.IsEmailConfirmed)
+                throw new EmailAlreadyConfirmedException();
+
+            var comboTicket = new Ticket
+            {
+                TicketType = TicketType.CombinatedTicket,
+                EmailToSend = userToConfirmAndSetPassword.Email,
+                Token = GenerateToken(),
+                IsCompleted = false
+            };
+
+            await _ticketRepository.CreateAsync(comboTicket);
+            await _ticketSender.SendTicketAsync(comboTicket.EmailToSend, comboTicket);
+        }
+
         private string GenerateToken()
         {
             return Guid.NewGuid().ToString("N");

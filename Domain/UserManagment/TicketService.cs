@@ -49,6 +49,17 @@ namespace UserManagment
                 ).SingleOrDefault()?.EmailToSend;
         }
 
+        public async Task<string> GetUserEmailByCombinatedTicket(string token)
+        {
+            Require.NotEmpty(token, nameof(token));
+
+            return (await _ticketRepository.FindByAsync(
+                ticket => 
+                    ticket.TicketType == TicketType.CombinatedTicket
+                    && ticket.Token == token)
+            ).SingleOrDefault()?.EmailToSend;
+        }
+
         public async Task CompleteAllTicketsByEmailAndType(string email, TicketType ticketType)
         {
             var allTicketsForThatTask = (await GetTicketsByEmailAndType(email, ticketType)).ToList();

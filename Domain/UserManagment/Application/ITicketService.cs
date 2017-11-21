@@ -8,7 +8,8 @@ namespace UserManagment.Application
         Task<IEnumerable<Ticket>> GetTicketsByEmailAndType(string email, TicketType ticketType);
         Task<string> GetUserEmailByPasswordRecoveyToken(string token);
         Task<string> GetUserEmailByEmailConfirmationToken(string token);
-
+        Task<string> GetUserEmailByCombinatedTicket(string token);
+        
         Task CompleteAllTicketsByEmailAndType(string email, TicketType ticketType);
     }
 }

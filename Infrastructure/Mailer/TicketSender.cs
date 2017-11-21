@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -38,12 +39,20 @@ namespace Mailer
             {
                 case TicketType.EmailConfirmation:
                     mail.Subject = "Подтверждение почты на сайте Эндаумент Фонда МФТИ";
-                    mail.Body = $"Ваш токен, сэр: {ticket.Token}";
+                    mail.Body = $"Ваш токен для подтверждения почты, сэр: {ticket.Token}";
                     break;
                 case TicketType.PasswordRecovery:
                     mail.Subject = "Восстановление пароля на сайте Эндаумент Фонда МФТИ";
-                    mail.Body = $"Ваш токен, сэр: {ticket.Token}";
+                    mail.Body = $"Ваш токен для восстановления пароля, сэр: {ticket.Token}";
                     break;
+                case TicketType.CombinatedTicket:
+                    mail.Subject = "Регистрация на сайте Эндаумент Фонда МФТИ";
+                    mail.Body = $"Ваш токен для подтверждения почты и установления пароля, сэр: {ticket.Token}";
+                break;
+                    
+                default:
+                    throw new ArgumentException("Trying to send ivalid ticket type");
+                break;
             }
         }
 
