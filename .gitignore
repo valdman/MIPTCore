@@ -272,3 +272,5 @@ MIPTCore/efcore-mipt-log\.txt
 **/app/
 
 MIPTCore/appsettings\.Production\.json
+
+MIPTCore/paymentSettings\.json

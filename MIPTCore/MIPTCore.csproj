@@ -20,10 +20,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\CapitalManagment\CapitalManagment.csproj" />
     <ProjectReference Include="..\Domain\Common\Common.csproj" />
+    <ProjectReference Include="..\Domain\DonationManagment\DonationManagment.csproj" />
     <ProjectReference Include="..\Domain\FileManagment\FileManagment.csproj" />
     <ProjectReference Include="..\Infrastructure\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
     <ProjectReference Include="..\Infrastructure\Mailer\Mailer.csproj" />
+    <ProjectReference Include="..\Infrastructure\PaymentGateway\PaymentGateway.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="efcore-mipt-log.txt" />
@@ -33,5 +35,8 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="paymentSettings.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

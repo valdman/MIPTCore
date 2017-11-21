@@ -6,6 +6,9 @@ using Common;
 using Common.Infrastructure;
 using DataAccess.Contexts;
 using DataAccess.Repositories;
+using DonationManagment;
+using DonationManagment.Application;
+using DonationManagment.Infrastructure;
 using FileManagment;
 using Mailer;
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +22,7 @@ using NavigationHelper;
 using NewsManagment;
 using PagesManagment;
 using PagesManagment.Infrastructure;
+using PaymentGateway;
 using StoriesManagment;
 using UserManagment;
 using UserManagment.Application;
@@ -55,6 +59,7 @@ namespace MIPTCore
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<IDonationManager, DonationManager>()
                 .AddScoped<INewsManager, NewsManager>()
                 .AddScoped<IStoriesManager, StoriesManager>()
                 .AddScoped<IDomainOptionsService, DomainOptionsService>()
@@ -71,6 +76,7 @@ namespace MIPTCore
                 .AddScoped<INavigationHelper, NavigationHelper.NavigationHelper>();
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
+            _services.Configure<PaymentGatewaySettings>(_configuration.GetSection("PaymentGatewaySettings"));
         }
 
         private void ConfigureAutoMapper()
@@ -116,6 +122,11 @@ namespace MIPTCore
                     .ForMember(model => model.Owner, o => o.ResolveUsing(p => Mapper.Map<PersonModel>(p.Owner)));;
                 cfg.CreateMap<StoryCreationModel, Story>();
                 cfg.CreateMap<StoryCreationModel, Story>();
+
+                cfg.CreateMap<DonationWithRegistrationModel, CreateDonationModel>();
+                cfg.CreateMap<DonationWithRegistrationModel, User>();
+                cfg.CreateMap<Donation, CreateDonationModel>();
+                cfg.CreateMap<CreateDonationModel, Donation>();
             });
             
         }
@@ -132,17 +143,21 @@ namespace MIPTCore
                 .AddDbContext<PageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<TicketContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<NavigationTableContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<DonationContext>(options => options.UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
                 .AddScoped<IGenericRepository<Capital>, CapitalRepository>()
                 .AddScoped<IGenericRepository<News>, NewsRepository>()
                 .AddScoped<IGenericRepository<Story>, StoriesRepository>()
+                .AddScoped<IGenericRepository<Donation>, DonationRepository>()
                 .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<INavigationTableRepository, NavigationTableRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
                 .AddScoped<IPageRepository, PageRepository>()
-                .AddScoped<ITicketRepository, TicketRepository>();
+                .AddScoped<ITicketRepository, TicketRepository>()
+                
+                .AddScoped<IPaymentProvider, PaymentProvider>();
         }
     }
 }

@@ -8,12 +8,12 @@ namespace MIPTCore.Models.ModelValidators
         {
             RuleFor(c => c.Description).NotEmpty()
                 .WithMessage(c => $"'{nameof(c.Description)}' should not be empty");
-            RuleFor(c => c.Description).Must(description => description?.Length < 120)
+            RuleFor(c => c.Description).Must(description => description?.Length < 240)
                 .WithMessage(c => $"'{nameof(c.Description)}' should not be shorther than 120 characters");
 
             RuleFor(c => c.Name).NotEmpty()
                 .WithMessage(c => $"'{nameof(c.Name)}' should not be empty");
-            RuleFor(c => c.Name).Must(name => name?.Length < 60)
+            RuleFor(c => c.Name).Must(name => name?.Length < 120)
                 .WithMessage(c => $"'{nameof(c.Name)}' should not be shorther than 60 characters");
         }
     }
