@@ -1,0 +1,13 @@
+﻿{
+  "PaymentGatewaySettings" : {
+    
+    "MerchantLogin" : "fund_mipt-api",
+    "MerchantPassword" : "fund_mipt",
+    
+    "BankApiUri" : "https://web.rbsuat.com/rebpayment/rest/",
+    "SinglePaymentRouteUri" : "register.do",
+    "RecurrentPaymentRouteUri" : "register.do",
+    
+    "ReturnUrl" : "http://fund.mipt.ru:3000/payment/success/"
+  }
+}
