@@ -7,7 +7,6 @@ namespace MIPTCore.Models
         public string MdOrder { get; set; }
         public int OrderNumber { get; set; }
         
-        [Required]
         public string Checksum { get; set; }
         public string Operation { get; set; }
 
