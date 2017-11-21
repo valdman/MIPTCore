@@ -6,5 +6,6 @@ namespace UserManagment.Application
     {
         Task BeginEmailConfirmation(int userId);
         Task BeginPasswordRecovery(int userId);
+        Task BeginPasswordSettingAndEmailVerification(int userId);
     }
 }

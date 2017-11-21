@@ -24,12 +24,14 @@ namespace MIPTCore.Controllers
         private readonly IDonationManager _donationManager;
         private readonly ICapitalManager _capitalManager;
         private readonly IUserManager _userManager;
+        private readonly IUserMailerService _userMailerService;
 
-        public DonationsController(IDonationManager donationManager, ICapitalManager capitalManager, IUserManager userManager)
+        public DonationsController(IDonationManager donationManager, ICapitalManager capitalManager, IUserManager userManager, IUserMailerService userMailerService)
         {
             _donationManager = donationManager;
             _capitalManager = capitalManager;
             _userManager = userManager;
+            _userMailerService = userMailerService;
         }
 
         [HttpPost("registration")]
@@ -49,6 +51,7 @@ namespace MIPTCore.Controllers
             userToCreate.Role = UserRole.User;
 
             var newuserId = await _userManager.CreateUserAsync(userToCreate);
+            await _userMailerService.BeginPasswordSettingAndEmailVerification(newuserId);
 
             var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
 

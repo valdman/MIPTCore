@@ -15,6 +15,7 @@ namespace UserManagment
     public enum TicketType
     {
         EmailConfirmation = 2,
-        PasswordRecovery = 3
+        PasswordRecovery = 3,
+        CombinatedTicket = 4
     }
 }
