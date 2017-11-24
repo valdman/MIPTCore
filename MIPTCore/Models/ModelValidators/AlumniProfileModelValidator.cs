@@ -9,8 +9,7 @@ namespace MIPTCore.Models.ModelValidators
         public AlumniProfileModelValidator()
         {
             RuleFor(alumniProfileModel => alumniProfileModel.Faculty)
-                .Must(m => Enum.IsDefined(typeof(FacultyType), m))
-                .WithMessage(m => $"'{nameof(m.Faculty)}' must be vaild faculty code");
+                .NotEmpty();
             
             RuleFor(alumniProfileModel => alumniProfileModel.YearOfGraduation).Must(BePositive)
                 .Must(m => m <= DateTime.Now.Year)

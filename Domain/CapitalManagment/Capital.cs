@@ -18,6 +18,8 @@ namespace CapitalManagment
         [DataType(DataType.Url)]
         public string FullPageUri { get; set; }
 
+        public CapitalCredentials CapitalCredentials { get; set; }
+
         public IEnumerable<Person> Founders { get; set; }
         public IEnumerable<Person> Recivers { get; set; }
     }

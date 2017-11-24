@@ -20,6 +20,7 @@ namespace DataAccess.Repositories
             Require.Positive(id, nameof(id));
 
             return await Db
+                .Include(u => u.CapitalCredentials)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
                     .ThenInclude(f => f.Image)
@@ -32,6 +33,7 @@ namespace DataAccess.Repositories
         public override async Task<IEnumerable<Capital>> GetAll()
         {
             return await Db
+                .Include(u => u.CapitalCredentials)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
                     .ThenInclude(f => f.Image)
@@ -45,6 +47,7 @@ namespace DataAccess.Repositories
             Require.NotNull(predicate, nameof(predicate));
 
             return await Db
+                .Include(u => u.CapitalCredentials)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
                     .ThenInclude(f => f.Image)

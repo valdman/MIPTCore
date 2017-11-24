@@ -54,6 +54,7 @@ namespace MIPTCore.Controllers
             await _userMailerService.BeginPasswordSettingAndEmailVerification(newuserId);
 
             var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
+            donationToCreate.UserId = newuserId;
 
             return await CreateDonation(donationToCreate, isAutocompleted: false);
         }

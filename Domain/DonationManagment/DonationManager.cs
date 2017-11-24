@@ -39,9 +39,11 @@ namespace DonationManagment
                 await ConfirmDonation(donationToCreate);
             }
 
+            var capitalToProvideDonation = await _capitalManager.GetCapitalByIdAsync(donationToCreate.CapitalId);
+
             return donationToCreate.IsRecursive
-                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate)
-                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate);
+                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials)
+                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials);
         }
 
         public async Task<int> CreateCompletedSingleDonation(Donation donationToCreate)

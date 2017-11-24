@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using CapitalManagment;
 using Microsoft.Extensions.Options;
 using DonationManagment;
 using DonationManagment.Infrastructure;
@@ -24,7 +25,7 @@ namespace PaymentGateway
             _paymentGatewaySettings = paymentOptions.Value;
         }
         
-        public DonationPaymentInformation InitiateSinglePaymentForDonation(Donation donation)
+        public DonationPaymentInformation InitiateSinglePaymentForDonation(Donation donation, CapitalCredentials credentials)
         {
             var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.SinglePaymentRouteUri);
             var payload = new PaymentRequestModel
@@ -34,12 +35,12 @@ namespace PaymentGateway
                 ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString()
             };
 
-            var bankResponse = RequestBankAsync(targetRoute, payload);
+            var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
 
             return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl);
         }
 
-        public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation)
+        public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials)
         {
             var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.RecurrentPaymentRouteUri);
             var requrrenParameters = new RequrrentPaymetParameters
@@ -57,18 +58,18 @@ namespace PaymentGateway
                 ClientId = donation.UserId
             };
 
-            var bankResponse = RequestBankAsync(targetRoute, payload);
+            var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
 
             return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl);
         }
 
-        private PaymentResponse RequestBankAsync(Uri requestUri, object requestPayload)
+        private PaymentResponse RequestBankAsync(Uri requestUri, CapitalCredentials credentials, object requestPayload)
         {
             var keyValuePayload = requestPayload.ToKeyValue();
             var authentificationPayload = new MerchantCredentials
             {
-                UserName = _paymentGatewaySettings.MerchantLogin,
-                Password = _paymentGatewaySettings.MerchantPassword
+                UserName = credentials.MerchantLogin,
+                Password = credentials.MerchantPassword
             }.ToKeyValue();
 
             var payload = authentificationPayload.Union(keyValuePayload);

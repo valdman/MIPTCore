@@ -62,7 +62,7 @@ namespace IntegrationTestProject
             var updatedUser = await _genericRepository.GetByIdAsync(id);
 
             notAlumniUser.FirstName = Guid.NewGuid().ToString().Substring(0, 10);
-            notAlumniUser.AlumniProfile.Faculty = FacultyType.Faculty3;
+            notAlumniUser.AlumniProfile.Faculty = "ФАКИ";
             await _genericRepository.UpdateAsync(notAlumniUser);
             Thread.Sleep(5000);
             
@@ -107,7 +107,7 @@ namespace IntegrationTestProject
                 IsMiptAlumni = true,
                 AlumniProfile = new AlumniProfile
                 {
-                    Faculty = FacultyType.Faculty2,
+                    Faculty = "ФОПФ",
                     YearOfGraduation = 2016
                 }
             };
