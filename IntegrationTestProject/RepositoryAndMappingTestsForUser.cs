@@ -107,7 +107,6 @@ namespace IntegrationTestProject
                 IsMiptAlumni = true,
                 AlumniProfile = new AlumniProfile
                 {
-                    Diploma = DiplomaType.EngeenerResarcher,
                     Faculty = FacultyType.Faculty2,
                     YearOfGraduation = 2016
                 }

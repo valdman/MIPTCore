@@ -2,12 +2,12 @@
   "PaymentGatewaySettings" : {
     
     "MerchantLogin" : "fund_mipt-api",
-    "MerchantPassword" : "fund_mipt",
+    "MerchantPassword" : "ora0;Chasidim",
     
-    "BankApiUri" : "https://web.rbsuat.com/rebpayment/rest/",
+    "BankApiUri" : "https://3dsec.paymentgate.ru/ipay/",
     "SinglePaymentRouteUri" : "register.do",
     "RecurrentPaymentRouteUri" : "register.do",
     
-    "ReturnUrl" : "http://fund.mipt.ru:3000/payment/success/"
+    "ReturnUrl" : "http://fund.mipt.ru/payment/success/"
   }
 }

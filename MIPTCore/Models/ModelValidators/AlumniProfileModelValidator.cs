@@ -8,10 +8,6 @@ namespace MIPTCore.Models.ModelValidators
     {
         public AlumniProfileModelValidator()
         {
-            RuleFor(alumniProfileModel => alumniProfileModel.Diploma)
-                .Must(m => Enum.IsDefined(typeof(DiplomaType), m))
-                .WithMessage(m => $"'{nameof(m.Diploma)}' must be vaild dimploma code");
-            
             RuleFor(alumniProfileModel => alumniProfileModel.Faculty)
                 .Must(m => Enum.IsDefined(typeof(FacultyType), m))
                 .WithMessage(m => $"'{nameof(m.Faculty)}' must be vaild faculty code");
