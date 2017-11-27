@@ -8,6 +8,7 @@ using CapitalManagment;
 using Common.Infrastructure;
 using DonationManagment.Infrastructure;
 using Journalist;
+using UserManagment.Application;
 
 namespace DonationManagment
 {
@@ -40,10 +41,11 @@ namespace DonationManagment
             }
 
             var capitalToProvideDonation = await _capitalManager.GetCapitalByIdAsync(donationToCreate.CapitalId);
+            var intendedUser = await _userManager.GetUserByIdAsync(donationToCreate.UserId);
 
             return donationToCreate.IsRecursive
-                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials)
-                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials);
+                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials, intendedUser)
+                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials, intendedUser);
         }
 
         public async Task<int> CreateCompletedSingleDonation(Donation donationToCreate)
@@ -104,12 +106,14 @@ namespace DonationManagment
         private readonly IGenericRepository<Donation> _donationRepository;
         private readonly ICapitalManager _capitalManager;
         private readonly IPaymentProvider _paymentProvider;
+        private readonly IUserManager _userManager;
 
-        public DonationManager(IGenericRepository<Donation> donationRepository, ICapitalManager capitalManager, IPaymentProvider paymentProvider)
+        public DonationManager(IGenericRepository<Donation> donationRepository, ICapitalManager capitalManager, IPaymentProvider paymentProvider, IUserManager userManager)
         {
             _donationRepository = donationRepository;
             _capitalManager = capitalManager;
             _paymentProvider = paymentProvider;
+            _userManager = userManager;
         }
     }
 }

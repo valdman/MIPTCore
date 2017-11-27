@@ -43,11 +43,11 @@ namespace Mailer
                     break;
                 case TicketType.PasswordRecovery:
                     mail.Subject = "Восстановление пароля на сайте Эндаумент Фонда МФТИ";
-                    mail.Body = $"Ваш токен для восстановления пароля, сэр: {ticket.Token}";
+                    mail.Body = $"Для восстановления пароля на сайте Эндаумент фонда МФТИ {ticket.Token}";
                     break;
                 case TicketType.CombinatedTicket:
                     mail.Subject = "Регистрация на сайте Эндаумент Фонда МФТИ";
-                    mail.Body = $"Ваш токен для подтверждения почты и установления пароля, сэр: {ticket.Token}";
+                    mail.Body = $"Эндаумент фонд МФТИ благодарит Вас за внесенный вклад! Для подтверждения почты и установления пароля пройдите по ссылке: http://fund.mipt.ru/user-confirmation/{ticket.Token}";
                 break;
                     
                 default:

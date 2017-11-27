@@ -41,20 +41,32 @@ namespace MIPTCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userToCreate = Mapper.Map<User>(comboModel);
-            //простите меня
-            userToCreate.Password = new Password
-            (
-                //crutches.js
-                Guid.NewGuid().ToString("n").Substring(0, 10)
-            );
-            userToCreate.Role = UserRole.User;
+            var existingUser = await _userManager.GetUserByEmailAsync(comboModel.Email);
 
-            var newuserId = await _userManager.CreateUserAsync(userToCreate);
-            await _userMailerService.BeginPasswordSettingAndEmailVerification(newuserId);
+            int userIntendedToDonateId;
+
+            if (existingUser == null)
+            {
+                var userToCreate = Mapper.Map<User>(comboModel);
+                
+                userToCreate.Password = new Password
+                (
+                    //crutches.js
+                    Guid.NewGuid().ToString("n").Substring(0, 10)
+                );
+                userToCreate.Role = UserRole.User;
+                
+                userIntendedToDonateId = await _userManager.CreateUserAsync(userToCreate);
+
+                await _userMailerService.BeginPasswordSettingAndEmailVerification(userIntendedToDonateId);
+            }
+            else
+            {
+                userIntendedToDonateId = existingUser.Id;
+            }
 
             var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
-            donationToCreate.UserId = newuserId;
+            donationToCreate.UserId = userIntendedToDonateId;
 
             return await CreateDonation(donationToCreate, isAutocompleted: false);
         }

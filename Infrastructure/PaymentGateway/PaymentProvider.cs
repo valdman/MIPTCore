@@ -9,8 +9,10 @@ using DonationManagment.Infrastructure;
 using Journalist.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PaymentGateway.Models;
 using RestSharp;
+using UserManagment;
 
 namespace PaymentGateway
 {
@@ -25,28 +27,13 @@ namespace PaymentGateway
             _paymentGatewaySettings = paymentOptions.Value;
         }
         
-        public DonationPaymentInformation InitiateSinglePaymentForDonation(Donation donation, CapitalCredentials credentials)
+        public DonationPaymentInformation InitiateSinglePaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser)
         {
             var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.SinglePaymentRouteUri);
-            var payload = new PaymentRequestModel
+            
+            var userDataParameters = new PaymentJsonParams
             {
-                OrderNumber = donation.Id,
-                Amount = (int) Math.Round(donation.Value * 100),
-                ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString()
-            };
-
-            var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
-
-            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl);
-        }
-
-        public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials)
-        {
-            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.RecurrentPaymentRouteUri);
-            var requrrenParameters = new RequrrentPaymetParameters
-            {
-                RecurringExpiry = 21200101,
-                RecurringFrequency = 28
+                Email = fromUser.Email
             };
             
             var payload = new ParametrizedPaymentRequestModel()
@@ -54,7 +41,30 @@ namespace PaymentGateway
                 OrderNumber = donation.Id,
                 Amount = (int) Math.Round(donation.Value * 100),
                 ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString(),
-                JsonParams = JsonConvert.SerializeObject(requrrenParameters),
+                JsonParams = SerializeWithoutNullToLowCamelcase(userDataParameters)
+            };
+
+            var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
+
+            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl);
+        }
+
+        public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser)
+        {
+            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.RecurrentPaymentRouteUri);
+            var requrrentParametersAndUserData = new PaymentJsonParams
+            {
+                RecurringExpiry = 21200101,
+                RecurringFrequency = 28,
+                Email = fromUser.Email
+            };
+            
+            var payload = new ParametrizedPaymentRequestModel()
+            {
+                OrderNumber = donation.Id,
+                Amount = (int) Math.Round(donation.Value * 100),
+                ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString(),
+                JsonParams = SerializeWithoutNullToLowCamelcase(requrrentParametersAndUserData),
                 ClientId = donation.UserId
             };
 
@@ -109,6 +119,17 @@ namespace PaymentGateway
                 return str;
 
             return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+        }
+
+        private string SerializeWithoutNullToLowCamelcase(object @object)
+        {
+            return JsonConvert.SerializeObject(@object,
+                Formatting.None,
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                });
         }
     }
 }

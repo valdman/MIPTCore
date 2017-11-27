@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using DonationManagment.Application;
+using Journalist.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MIPTCore.Models;
