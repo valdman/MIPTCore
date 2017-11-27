@@ -46,7 +46,7 @@ namespace PaymentGateway
 
             var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
 
-            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl);
+            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl, bankResponse.OrderId);
         }
 
         public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser)
@@ -70,7 +70,7 @@ namespace PaymentGateway
 
             var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
 
-            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl);
+            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl, bankResponse.OrderId);
         }
 
         private PaymentResponse RequestBankAsync(Uri requestUri, CapitalCredentials credentials, object requestPayload)

@@ -41,6 +41,10 @@ namespace MIPTCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            var targetCapital = await _capitalManager.GetCapitalByIdAsync(comboModel.CapitalId);
+            if (targetCapital == null)
+                return NotFound("CapitalNotFound");
+
             var existingUser = await _userManager.GetUserByEmailAsync(comboModel.Email);
 
             int userIntendedToDonateId;
@@ -134,6 +138,10 @@ namespace MIPTCore.Controllers
 
             if (isAutocompleted && !User.IsInRole("Admin"))
                 return Unauthorized();
+
+            var targetCapital = await _capitalManager.GetCapitalByIdAsync(donationModel.CapitalId);
+            if (targetCapital == null)
+                return NotFound("CapitalNotFound");
 
             var donationToCreate = Mapper.Map<Donation>(donationModel);
 

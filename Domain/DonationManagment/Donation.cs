@@ -9,6 +9,8 @@ namespace DonationManagment
 
         public int CapitalId { get; set; }
 
+        public string BankOrderId { get; set; }
+
         public decimal Value { get; set; }
 
         public bool IsRecursive { get; set; }

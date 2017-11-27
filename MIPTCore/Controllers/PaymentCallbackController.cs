@@ -1,8 +1,6 @@
-﻿using System.Security.Cryptography;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using DonationManagment.Application;
-using Journalist.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MIPTCore.Models;
@@ -44,6 +42,18 @@ namespace MIPTCore.Controllers
                 
             _logger.LogInformation($"Donation {JsonConvert.SerializeObject(donationToConfirm)} confirmed via callback");
             return Ok("Donation confirmed");
+        }
+
+        [HttpGet("~/payment/status")]
+        public async Task<IActionResult> GetPaymentStatus([FromQuery] string orderId)
+        {
+            var donation = (await _donationManager.GetDonationsByPredicate(d => d.BankOrderId.Equals(orderId)))
+                .SingleOrDefault();
+
+            if (donation?.IsConfirmed ?? false)
+                return Ok();
+            
+            return NotFound();
         }
 
         private bool CheckCallBackIntegrity(PaymentCallbackModel paymentCallbackModel)

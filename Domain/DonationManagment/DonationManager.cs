@@ -43,9 +43,16 @@ namespace DonationManagment
             var capitalToProvideDonation = await _capitalManager.GetCapitalByIdAsync(donationToCreate.CapitalId);
             var intendedUser = await _userManager.GetUserByIdAsync(donationToCreate.UserId);
 
-            return donationToCreate.IsRecursive
-                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials, intendedUser)
-                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate, capitalToProvideDonation.CapitalCredentials, intendedUser);
+            var donationFromBank = donationToCreate.IsRecursive
+                ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, 
+                    capitalToProvideDonation.CapitalCredentials, intendedUser)
+                : _paymentProvider.InitiateSinglePaymentForDonation(donationToCreate,
+                    capitalToProvideDonation.CapitalCredentials, intendedUser);
+
+            donationToCreate.BankOrderId = donationFromBank.OrderId;
+            await _donationRepository.UpdateAsync(donationToCreate);
+
+            return donationFromBank;
         }
 
         public async Task<int> CreateCompletedSingleDonation(Donation donationToCreate)
