@@ -40,7 +40,7 @@ namespace MIPTCore.Controllers
         
         // GET capitals/5 or capitals/nameOfCapital
         [HttpGet("{*capitalIndex}")]
-        public async Task<IActionResult> Get(string capitalIndex)
+        public async Task<IActionResult> Get(string capitalIndex, [FromQuery]bool withCredentials)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +63,9 @@ namespace MIPTCore.Controllers
                 return NotFound("Capital with this ID or Name is not exists");
             }
             
-            return Ok(Mapper.Map<CapitalModel>(capitalToReturn));
+            return Ok(User.IsInRole("Admin") && withCredentials 
+                ? Mapper.Map<CapitalModelForAdmin>(capitalToReturn) 
+                : Mapper.Map<CapitalModel>(capitalToReturn));
         }
         
         // POST capitals
@@ -103,6 +105,9 @@ namespace MIPTCore.Controllers
 
             capitalToUpdate.Name = capitalModel.Name;
             capitalToUpdate.Description = capitalModel.Description;
+            capitalToUpdate.BankAccountInformation = capitalModel.BankAccountInformation;
+            capitalToUpdate.OfferLink = capitalModel.OfferLink;
+            capitalToUpdate.CapitalCredentials = Mapper.Map<CapitalCredentials>(capitalModel.CapitalCredentials);
             capitalToUpdate.Given = capitalModel.Given;
             capitalToUpdate.Image = Mapper.Map<Image>(capitalModel.Image);
             capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);
@@ -112,7 +117,7 @@ namespace MIPTCore.Controllers
 
             await _capitalManager.UpdateCapitalAsync(capitalToUpdate);
 
-            return Ok(Mapper.Map<CapitalModel>(capitalToUpdate));
+            return Ok(Mapper.Map<CapitalModelForAdmin>(capitalToUpdate));
         }
         
         // DELETE capitals/5

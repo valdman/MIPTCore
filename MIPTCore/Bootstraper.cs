@@ -93,9 +93,15 @@ namespace MIPTCore
                 cfg.CreateMap<CredentialsModel, Credentials>();
 
 
-                cfg.CreateMap<CapitalUpdatingModel, Capital>();
-                cfg.CreateMap<CapitalCreatingModel, Capital>();
+                cfg.CreateMap<CapitalUpdatingModel, Capital>()
+                    .ForMember(model => model.CapitalCredentials, o => o.ResolveUsing(p => Mapper.Map<CapitalCredentials>(p.CapitalCredentials)));
+                cfg.CreateMap<CapitalCreatingModel, Capital>()
+                    .ForMember(model => model.CapitalCredentials, o => o.ResolveUsing(p => Mapper.Map<CapitalCredentials>(p.CapitalCredentials)));
                 cfg.CreateMap<Capital, CapitalModel>();
+                cfg.CreateMap<Capital, CapitalModelForAdmin>();
+
+                cfg.CreateMap<CapitalCredentials, CapitalCredentialsModel>();
+                cfg.CreateMap<CapitalCredentialsModel, CapitalCredentials>();
 
                 cfg.CreateMap<Image, ImageModel>();
                 cfg.CreateMap<ImageModel, Image>();

@@ -15,6 +15,10 @@ namespace CapitalManagment
 
         public decimal Given { get; set; }
 
+        public string BankAccountInformation { get; set; }
+
+        public string OfferLink { get; set; }
+
         [DataType(DataType.Url)]
         public string FullPageUri { get; set; }
 

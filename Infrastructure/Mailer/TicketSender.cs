@@ -27,6 +27,9 @@ namespace Mailer
 
         public Task SendTicketAsync(string email, Ticket ticketToSend)
         {
+            if(!_mailerConfiguration.IsMailerEnabled)
+                return Task.CompletedTask;
+            
             var mailMessage = InitMailMessageTo(email);
             AddMessageBodyForTicket(ref mailMessage, ticketToSend);
             
