@@ -16,42 +16,42 @@ namespace NewsManagment
             _newsRepository = newsRepository;
         }
 
-        public Task<News> GetNewsByIdAsync(int newsId)
+        public News GetNewsById(int newsId)
         {
             Require.Positive(newsId, nameof(newsId));
 
-            return _newsRepository.GetByIdAsync(newsId);
+            return _newsRepository.GetById(newsId);
         }
 
-        public Task<IEnumerable<News>> GetAllNewsAsync()
+        public IEnumerable<News> GetAllNews()
         {
             return _newsRepository.GetAll();
         }
 
-        public Task<IEnumerable<News>> GetNewsByPredicateAsync(Expression<Func<News, bool>> predicate)
+        public IEnumerable<News> GetNewsByPredicate(Expression<Func<News, bool>> predicate)
         {
-            return _newsRepository.FindByAsync(predicate);
+            return _newsRepository.FindBy(predicate);
         }
 
-        public Task<int> CreateNewsAsync(News newsToCreate)
-        {
-            Require.NotNull(newsToCreate, nameof(newsToCreate));
-
-            return _newsRepository.CreateAsync(newsToCreate);
-        }
-
-        public Task UpdateNewsAsync(News newsToCreate)
+        public int CreateNews(News newsToCreate)
         {
             Require.NotNull(newsToCreate, nameof(newsToCreate));
 
-            return _newsRepository.UpdateAsync(newsToCreate);
+            return _newsRepository.Create(newsToCreate);
         }
 
-        public Task DeleteNewsAsync(int newsId)
+        public void UpdateNews(News newsToCreate)
+        {
+            Require.NotNull(newsToCreate, nameof(newsToCreate));
+
+            _newsRepository.Update(newsToCreate);
+        }
+
+        public void DeleteNews(int newsId)
         {
             Require.Positive(newsId, nameof(newsId));
 
-            return _newsRepository.DeleteAsync(newsId);
+            _newsRepository.Delete(newsId);
         }
     }
 }

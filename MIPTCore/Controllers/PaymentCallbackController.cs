@@ -11,7 +11,7 @@ namespace MIPTCore.Controllers
     public class PaymentCallbackController : Controller
     {
         [HttpGet("~/payment/callback")]
-        public async Task<IActionResult> HandlePaymentCallback([FromQuery] PaymentCallbackModel paymentCallbackModel)
+        public IActionResult HandlePaymentCallback([FromQuery] PaymentCallbackModel paymentCallbackModel)
         {
             _logger.LogInformation($"Callback {JsonConvert.SerializeObject(paymentCallbackModel)}");
             
@@ -29,7 +29,7 @@ namespace MIPTCore.Controllers
                 return Ok();
             }
 
-            var donationToConfirm = await _donationManager.GetDonationByIdAsync(paymentCallbackModel.OrderNumber);
+            var donationToConfirm = _donationManager.GetDonationByIdAsync(paymentCallbackModel.OrderNumber);
             if (donationToConfirm == null)
             {
                 _logger.LogError($"Donation #{paymentCallbackModel.OrderNumber} not found");
@@ -37,7 +37,7 @@ namespace MIPTCore.Controllers
                     $"Donation with id {paymentCallbackModel.OrderNumber} doesn't exist (OrderNumber ivalid)");
             }
 
-            await _donationManager.ConfirmDonation(donationToConfirm);
+            _donationManager.ConfirmDonation(donationToConfirm);
                 
                 
             _logger.LogInformation($"Donation {JsonConvert.SerializeObject(donationToConfirm)} confirmed via callback");
@@ -45,9 +45,9 @@ namespace MIPTCore.Controllers
         }
 
         [HttpGet("~/payment/status")]
-        public async Task<IActionResult> GetPaymentStatus([FromQuery] string orderId)
+        public IActionResult GetPaymentStatus([FromQuery] string orderId)
         {
-            var donation = (await _donationManager.GetDonationsByPredicate(d => d.BankOrderId.Equals(orderId)))
+            var donation = _donationManager.GetDonationsByPredicate(d => d.BankOrderId.Equals(orderId))
                 .SingleOrDefault();
 
             if (donation?.IsConfirmed ?? false)

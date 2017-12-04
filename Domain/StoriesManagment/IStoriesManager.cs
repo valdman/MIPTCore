@@ -7,12 +7,12 @@ namespace StoriesManagment
 {
     public interface IStoriesManager
     {
-        Task<Story> GetStoryByIdAsync(int storyId);
-        Task<IEnumerable<Story>> GetAllStoriesAsync();
-        Task<IEnumerable<Story>> GetStoriesByPredicateAsync(Expression<Func<Story, bool>> predicate);
+        Story GetStoryById(int storyId);
+        IEnumerable<Story> GetAllStories();
+        IEnumerable<Story> GetStoriesByPredicate(Expression<Func<Story, bool>> predicate);
 
-        Task<int> CreateStoryAsync(Story storyToCreate);
-        Task UpdateStoryAsync(Story storyToUpdate);
-        Task DeleteStoryAsync(int storyId);
+        int CreateStory(Story storyToCreate);
+        void UpdateStory(Story storyToUpdate);
+        void DeleteStory(int storyId);
     }
 }

@@ -4,6 +4,6 @@ namespace UserManagment.Infrastructure
 {
     public interface ITicketSender
     {
-        Task SendTicketAsync(string email, Ticket ticketToSend);
+        Task SendTicket(string email, Ticket ticketToSend);
     }
 }

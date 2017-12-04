@@ -22,16 +22,16 @@ namespace MIPTCore.Controllers
         
         // GET news
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var allNews = await _newsManager.GetAllNewsAsync();
+            var allNews = _newsManager.GetAllNews();
 
             return Ok(allNews.Select(Mapper.Map<NewsModel>));
         }
 
         // GET news/5
         [HttpGet("{newsId}")]
-        public async Task<IActionResult> Get(int newsId)
+        public IActionResult Get(int newsId)
         {   
             this.CheckIdViaModel(newsId);
             if (!ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newsToReturn = await _newsManager.GetNewsByIdAsync(newsId);
+            var newsToReturn = _newsManager.GetNewsById(newsId);
 
             if (newsToReturn == null)
             {
@@ -52,7 +52,7 @@ namespace MIPTCore.Controllers
         // POST news
         [HttpPost]
         [Authorize("Admin")]
-        public async Task<IActionResult> Post([FromBody] NewsCreationModel newsModel)
+        public IActionResult Post([FromBody] NewsCreationModel newsModel)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace MIPTCore.Controllers
 
             var newsToCreate = Mapper.Map<News>(newsModel);
 
-            var pageId = await _newsManager.CreateNewsAsync(newsToCreate);
+            var pageId = _newsManager.CreateNews(newsToCreate);
 
             return Ok(pageId);
         }
@@ -69,7 +69,7 @@ namespace MIPTCore.Controllers
         // PUT news/5
         [HttpPut("{id}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Put(int id, [FromBody] NewsUpdateModel newsModel)
+        public IActionResult Put(int id, [FromBody] NewsUpdateModel newsModel)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newsToUpdate = await _newsManager.GetNewsByIdAsync(id);
+            var newsToUpdate = _newsManager.GetNewsById(id);
 
             if (newsToUpdate == null)
             {
@@ -93,10 +93,10 @@ namespace MIPTCore.Controllers
             newsToUpdate.Date = newsModel.Date;
             newsToUpdate.Image = newImage;
 
-            await _newsManager.UpdateNewsAsync(newsToUpdate);
+            _newsManager.UpdateNews(newsToUpdate);
             
             //!!!
-            var updatedNews = await _newsManager.GetNewsByIdAsync(id);
+            var updatedNews = _newsManager.GetNewsById(id);
 
             return Ok(Mapper.Map<NewsModel>(updatedNews));
         }
@@ -104,7 +104,7 @@ namespace MIPTCore.Controllers
         // DELETE news/5
         [HttpDelete("{id}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -112,14 +112,14 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var pageToDelete = await _newsManager.GetNewsByIdAsync(id);
+            var pageToDelete = _newsManager.GetNewsById(id);
             
             if (pageToDelete == null)
             {
                 return NotFound("News not found");
             }
 
-            await _newsManager.DeleteNewsAsync(id);
+            _newsManager.DeleteNews(id);
 
             return Ok();
         }

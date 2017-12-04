@@ -22,16 +22,16 @@ namespace MIPTCore.Controllers
 
         // GET stories
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var allStories = await _storiesManager.GetAllStoriesAsync();
+            var allStories = _storiesManager.GetAllStories();
 
             return Ok(allStories.Select(Mapper.Map<StoryModel>));
         }
 
         // GET stories/5
         [HttpGet("{storyId}")]
-        public async Task<IActionResult> Get(int storyId)
+        public IActionResult Get(int storyId)
         {   
             this.CheckIdViaModel(storyId);
             if (!ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var storyToReturn = await _storiesManager.GetStoryByIdAsync(storyId);
+            var storyToReturn = _storiesManager.GetStoryById(storyId);
 
             if (storyToReturn == null)
             {
@@ -52,7 +52,7 @@ namespace MIPTCore.Controllers
         // POST stories
         [HttpPost]
         [Authorize("Admin")]
-        public async Task<IActionResult> Post([FromBody] StoryCreationModel storyModel)
+        public IActionResult Post([FromBody] StoryCreationModel storyModel)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace MIPTCore.Controllers
 
             var storyToCreate = Mapper.Map<Story>(storyModel);
 
-            var storyId = await _storiesManager.CreateStoryAsync(storyToCreate);
+            var storyId = _storiesManager.CreateStory(storyToCreate);
 
             return Ok(storyId);
         }
@@ -69,7 +69,7 @@ namespace MIPTCore.Controllers
         // PUT stories/5
         [HttpPut("{id}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Put(int id, [FromBody] StoryUpdateModel storyModel)
+        public IActionResult Put(int id, [FromBody] StoryUpdateModel storyModel)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var storyToUpdate = await _storiesManager.GetStoryByIdAsync(id);
+            var storyToUpdate = _storiesManager.GetStoryById(id);
 
             if (storyToUpdate == null)
             {
@@ -90,10 +90,10 @@ namespace MIPTCore.Controllers
             storyToUpdate.Owner = newStoryOwner;
             storyToUpdate.Content = storyModel.Content;
 
-            await _storiesManager.UpdateStoryAsync(storyToUpdate);
+            _storiesManager.UpdateStory(storyToUpdate);
             
             //!!!
-            var updatedStory = await _storiesManager.GetStoryByIdAsync(id);
+            var updatedStory = _storiesManager.GetStoryById(id);
 
             return Ok(Mapper.Map<StoryModel>(updatedStory));
         }
@@ -101,7 +101,7 @@ namespace MIPTCore.Controllers
         // DELETE stories/5
         [HttpDelete("{id}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -109,14 +109,14 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var storyToDelete = await _storiesManager.GetStoryByIdAsync(id);
+            var storyToDelete = _storiesManager.GetStoryById(id);
             
             if (storyToDelete == null)
             {
                 return NotFound("Story not found");
             }
 
-            await _storiesManager.DeleteStoryAsync(id);
+            _storiesManager.DeleteStory(id);
 
             return Ok();
         }

@@ -28,7 +28,7 @@ namespace UserManagment
         {
             Require.Positive(userId, nameof(userId));
 
-            var userToConfirm = await _userManager.GetUserByIdAsync(userId);
+            var userToConfirm = _userManager.GetUserById(userId);
 
             if (userToConfirm == null)
                 throw new OperationOnUserThatNotExistsException("start email confirmation");
@@ -44,15 +44,15 @@ namespace UserManagment
                 IsCompleted = false
             };
 
-            await _ticketRepository.CreateAsync(confirmationTicket);
-            await _ticketSender.SendTicketAsync(confirmationTicket.EmailToSend, confirmationTicket);
+            _ticketRepository.Create(confirmationTicket);
+            await _ticketSender.SendTicket(confirmationTicket.EmailToSend, confirmationTicket);
         }
 
         public async Task BeginPasswordRecovery(int userId)
         {
             Require.Positive(userId, nameof(userId));
 
-            var userToChangePassword = await _userManager.GetUserByIdAsync(userId);
+            var userToChangePassword = _userManager.GetUserById(userId);
 
             if (userToChangePassword == null)
                 throw new OperationOnUserThatNotExistsException("start password changing");
@@ -65,15 +65,15 @@ namespace UserManagment
                 IsCompleted = false
             };
 
-            await _ticketRepository.CreateAsync(passwordRecoveyTicket);
-            await _ticketSender.SendTicketAsync(userToChangePassword.Email, passwordRecoveyTicket);
+            _ticketRepository.Create(passwordRecoveyTicket);
+            await _ticketSender.SendTicket(userToChangePassword.Email, passwordRecoveyTicket);
         }
 
         public async Task BeginPasswordSettingAndEmailVerification(int userId)
         {
             Require.Positive(userId, nameof(userId));
 
-            var userToConfirmAndSetPassword = await _userManager.GetUserByIdAsync(userId);
+            var userToConfirmAndSetPassword = _userManager.GetUserById(userId);
 
             if (userToConfirmAndSetPassword == null)
                 throw new OperationOnUserThatNotExistsException("start email confirmation & setting password");
@@ -89,8 +89,8 @@ namespace UserManagment
                 IsCompleted = false
             };
 
-            await _ticketRepository.CreateAsync(comboTicket);
-            await _ticketSender.SendTicketAsync(comboTicket.EmailToSend, comboTicket);
+            _ticketRepository.Create(comboTicket);
+            await _ticketSender.SendTicket(comboTicket.EmailToSend, comboTicket);
         }
 
         private string GenerateToken()

@@ -14,37 +14,37 @@ namespace NavigationHelper
             _navigationTableRepository = navigationTableRepository;
         }
         
-        public Task<IEnumerable<NavigationTableEntry>> GetNavigationTable()
+        public IEnumerable<NavigationTableEntry> GetNavigationTable()
         {
             return _navigationTableRepository.GetAll();
         }
 
-        public Task<NavigationTableEntry> GetElementById(int id)
+        public NavigationTableEntry GetElementById(int id)
         {
             Require.Positive(id, nameof(id));
 
-            return _navigationTableRepository.GetByIdAsync(id);
+            return _navigationTableRepository.GetById(id);
         }
 
-        public Task<int> CreateElement(NavigationTableEntry element)
+        public int CreateElement(NavigationTableEntry element)
         {
             Require.NotNull(element, nameof(element));
             
-            return _navigationTableRepository.CreateAsync(element);
+            return _navigationTableRepository.Create(element);
         }
 
-        public Task UpdateElement(NavigationTableEntry element)
+        public void UpdateElement(NavigationTableEntry element)
         {
             Require.NotNull(element, nameof(element));
             
-            return _navigationTableRepository.UpdateAsync(element);
+            _navigationTableRepository.Update(element);
         }
 
-        public Task DeleteElement(int id)
+        public void DeleteElement(int id)
         {
             Require.Positive(id, nameof(id));
 
-            return _navigationTableRepository.DeleteAsync(id);
+            _navigationTableRepository.Delete(id);
         }
     }
 }

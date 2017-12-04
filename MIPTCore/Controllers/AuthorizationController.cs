@@ -78,10 +78,10 @@ namespace MIPTCore.Controllers
         // POST me
         [HttpGet("me")]
         [Authorize("User")]
-        public async Task<IActionResult> Current()
+        public IActionResult Current()
         {
             var currentUserId = User.GetId();
-            var currentUser = await _userManager.GetUserByIdAsync(currentUserId);
+            var currentUser = _userManager.GetUserById(currentUserId);
 
             if (currentUser == null)
             {

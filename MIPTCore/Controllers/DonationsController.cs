@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CapitalManagment;
@@ -41,11 +42,11 @@ namespace MIPTCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var targetCapital = await _capitalManager.GetCapitalByIdAsync(comboModel.CapitalId);
+            var targetCapital = _capitalManager.GetCapitalById(comboModel.CapitalId);
             if (targetCapital == null)
                 return NotFound("CapitalNotFound");
 
-            var existingUser = await _userManager.GetUserByEmailAsync(comboModel.Email);
+            var existingUser = _userManager.GetUserByEmail(comboModel.Email);
 
             int userIntendedToDonateId;
 
@@ -60,7 +61,7 @@ namespace MIPTCore.Controllers
                 );
                 userToCreate.Role = UserRole.User;
                 
-                userIntendedToDonateId = await _userManager.CreateUserAsync(userToCreate);
+                userIntendedToDonateId = _userManager.CreateUser(userToCreate);
 
                 await _userMailerService.BeginPasswordSettingAndEmailVerification(userIntendedToDonateId);
             }
@@ -72,47 +73,36 @@ namespace MIPTCore.Controllers
             var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
             donationToCreate.UserId = userIntendedToDonateId;
 
-            return await CreateDonation(donationToCreate, isAutocompleted: false);
+            return CreateDonation(donationToCreate, isAutocompleted: false);
         }
 
         // GET: donations
         [HttpGet]
         [AllowAnonymous]
-        public async Task<OkObjectResult> GetAllDonations()
+        public IActionResult GetAllDonations()
         {
-            IEnumerable<Donation> donationsToReturn;
-            if(User.IsInRole("Admin"))
-            {
-                donationsToReturn = await _donationManager.GetAllDonations();
-            }
-            else
-            {
-                donationsToReturn = await _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed);
-            }
+            var donationsToReturn = User.IsInRole("Admin") 
+                ? _donationManager.GetAllDonations() 
+                : _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed);
 
-            var expandedDonationModels = new List<ExpandedDonationModel>();
-            foreach (var donation in donationsToReturn)
-            {
-                expandedDonationModels.Add(new ExpandedDonationModel
+            var expandedDonationModels = donationsToReturn.Select(donation => new ExpandedDonationModel
                 {
-                    Capital = Mapper.Map<CapitalModel>(
-                                    await _capitalManager.GetCapitalByIdAsync(donation.CapitalId)),
-                    User = Mapper.Map<UserModel>(
-                                    await _userManager.GetUserByIdAsync(donation.UserId)),
+                    Capital = Mapper.Map<CapitalModel>(_capitalManager.GetCapitalById(donation.CapitalId)),
+                    User = Mapper.Map<UserModel>(_userManager.GetUserById(donation.UserId)),
                     Value = donation.Value,
                     IsConfirmed = donation.IsConfirmed,
                     IsRecursive = donation.IsRecursive,
                     CreatingTime = donation.CreatingTime,
                     Id = donation.Id
-                });
-            }
+                })
+                .ToList();
 
             return Ok(expandedDonationModels);
         }
 
         // GET donations/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDonationbyId(string id)
+        public IActionResult GetDonationbyId(string id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -120,7 +110,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var donationToReturn = await _donationManager.GetDonationByIdAsync(objectId);
+            var donationToReturn = _donationManager.GetDonationByIdAsync(objectId);
 
             if (donationToReturn == null)
                 return NotFound();
@@ -131,7 +121,7 @@ namespace MIPTCore.Controllers
         // POST donations
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateDonation([FromBody]CreateDonationModel donationModel,[FromQuery]bool isAutocompleted)
+        public IActionResult CreateDonation([FromBody]CreateDonationModel donationModel,[FromQuery]bool isAutocompleted)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -139,20 +129,20 @@ namespace MIPTCore.Controllers
             if (isAutocompleted && !User.IsInRole("Admin"))
                 return Unauthorized();
 
-            var targetCapital = await _capitalManager.GetCapitalByIdAsync(donationModel.CapitalId);
+            var targetCapital = _capitalManager.GetCapitalById(donationModel.CapitalId);
             if (targetCapital == null)
                 return NotFound("CapitalNotFound");
 
             var donationToCreate = Mapper.Map<Donation>(donationModel);
 
             return !isAutocompleted ?
-                Ok(await _donationManager.CreateDonationAsync(donationToCreate)) :
-                Ok(await _donationManager.CreateCompletedSingleDonation(donationToCreate));
+                Ok(_donationManager.CreateDonationAsync(donationToCreate)) :
+                Ok(_donationManager.CreateCompletedSingleDonation(donationToCreate));
         }
 
         // PUT donations/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody]UpdateDonationModel donationModel)
+        public IActionResult Put(string id, [FromBody]UpdateDonationModel donationModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -160,7 +150,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = await _donationManager.GetDonationByIdAsync(objectId);
+            var oldDonation = _donationManager.GetDonationByIdAsync(objectId);
 
             if (oldDonation == null)
                 return NotFound();
@@ -171,7 +161,7 @@ namespace MIPTCore.Controllers
             oldDonation.IsRecursive = donationModel.IsRecursive;
             oldDonation.PaymentType = donationModel.PaymentType;
 
-            await _donationManager.UpdateDonationAsync(oldDonation);
+            _donationManager.UpdateDonationAsync(oldDonation);
             return Ok(id);
         }
 

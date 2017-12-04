@@ -17,7 +17,7 @@ namespace UserManagment
 
         public async Task<User> AuthentificateAsync(Credentials credentials)
         {
-            var userToAuthentificate = await _userManager.GetUserByEmailAsync(credentials.Email);
+            var userToAuthentificate = _userManager.GetUserByEmail(credentials.Email);
             if(userToAuthentificate == null)
             {
                 throw new OperationOnUserThatNotExistsException("login");
@@ -32,18 +32,18 @@ namespace UserManagment
             
             userToAuthentificate.AuthentificatedAt = DateTimeOffset.Now;
 
-            await _userManager.UpdateUserAsync(userToAuthentificate);
+            _userManager.UpdateUser(userToAuthentificate);
 
             return userToAuthentificate;
         }
 
         public async Task DeauthentificateAsync(int userId)
         {
-            var userToDeauthentificate = await _userManager.GetUserByIdAsync(userId);
+            var userToDeauthentificate = _userManager.GetUserById(userId);
             
             userToDeauthentificate.AuthentificatedAt = null;
 
-            await _userManager.UpdateUserAsync(userToDeauthentificate);
+            _userManager.UpdateUser(userToDeauthentificate);
             
         }
     }

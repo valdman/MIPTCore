@@ -12,11 +12,11 @@ namespace DataAccess.Repositories
         {
         }
 
-        public async Task UpdateManyTicketsAsync(IEnumerable<Ticket> tickets)
+        public void UpdateManyTickets(IEnumerable<Ticket> tickets)
         {
             Db.UpdateRange(tickets);
             
-            await Save();
+            Save();
         }
     }
 }

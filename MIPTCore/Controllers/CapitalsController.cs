@@ -23,9 +23,9 @@ namespace MIPTCore.Controllers
 
         // GET capitals
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var capitalsToReturn = await _capitalManager.GetAllCapitalsAsync();
+            var capitalsToReturn = _capitalManager.GetAllCapitals();
             return Ok(capitalsToReturn.Select(Mapper.Map<CapitalModel>));
         }
         
@@ -40,7 +40,7 @@ namespace MIPTCore.Controllers
         
         // GET capitals/5 or capitals/nameOfCapital
         [HttpGet("{*capitalIndex}")]
-        public async Task<IActionResult> Get(string capitalIndex, [FromQuery]bool withCredentials)
+        public IActionResult Get(string capitalIndex, [FromQuery]bool withCredentials)
         {
             if (!ModelState.IsValid)
             {
@@ -51,11 +51,11 @@ namespace MIPTCore.Controllers
             if (int.TryParse(capitalIndex, out var capitalId))
             {
                 this.CheckIdViaModel(capitalId);
-                capitalToReturn = await _capitalManager.GetCapitalByIdAsync(capitalId);
+                capitalToReturn = _capitalManager.GetCapitalById(capitalId);
             }
             else
             {
-                capitalToReturn = await _capitalManager.GetCapitalByFullUriAsync(capitalIndex);
+                capitalToReturn = _capitalManager.GetCapitalByFullUri(capitalIndex);
             }
             
             if (capitalToReturn == null)
@@ -71,7 +71,7 @@ namespace MIPTCore.Controllers
         // POST capitals
         [HttpPost]
         [Authorize("Admin")]
-        public async Task<IActionResult> Post([FromBody] CapitalCreatingModel capitalModel)
+        public IActionResult Post([FromBody] CapitalCreatingModel capitalModel)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace MIPTCore.Controllers
 
             var capitalToCreate = Mapper.Map<Capital>(capitalModel);
 
-            var capitalId = await _capitalManager.CreateCapitalAsync(capitalToCreate);
+            var capitalId = _capitalManager.CreateCapital(capitalToCreate);
 
             return Ok(capitalId);
         }
@@ -88,7 +88,7 @@ namespace MIPTCore.Controllers
         // PUT capitals/5
         [HttpPut("{capitalId}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Put(int capitalId, [FromBody] CapitalUpdatingModel capitalModel)
+        public IActionResult Put(int capitalId, [FromBody] CapitalUpdatingModel capitalModel)
         {
             this.CheckIdViaModel(capitalId);
             if (!ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var capitalToUpdate = await _capitalManager.GetCapitalByIdAsync(capitalId);
+            var capitalToUpdate = _capitalManager.GetCapitalById(capitalId);
             
             if (capitalToUpdate == null)
             {
@@ -115,7 +115,7 @@ namespace MIPTCore.Controllers
             capitalToUpdate.FullPageUri = capitalModel.FullPageUri;
             capitalToUpdate.Content = capitalModel.Content;
 
-            await _capitalManager.UpdateCapitalAsync(capitalToUpdate);
+            _capitalManager.UpdateCapital(capitalToUpdate);
 
             return Ok(Mapper.Map<CapitalModelForAdmin>(capitalToUpdate));
         }
@@ -123,7 +123,7 @@ namespace MIPTCore.Controllers
         // DELETE capitals/5
         [HttpDelete("{capitalId}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Delete(int capitalId)
+        public IActionResult Delete(int capitalId)
         {
             this.CheckIdViaModel(capitalId);
             if (!ModelState.IsValid)
@@ -131,14 +131,14 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var capitalToDelete = await _capitalManager.GetCapitalByIdAsync(capitalId);
+            var capitalToDelete = _capitalManager.GetCapitalById(capitalId);
             
             if (capitalToDelete == null)
             {
                 return NotFound("Capital not found");
             }
 
-            await _capitalManager.DeleteCapitalAsync(capitalId);
+            _capitalManager.DeleteCapital(capitalId);
 
             return Ok();
         }

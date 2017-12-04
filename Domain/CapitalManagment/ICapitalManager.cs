@@ -7,14 +7,14 @@ namespace CapitalManagment
 {
     public interface ICapitalManager
     {
-        Task<Capital> GetCapitalByIdAsync(int capitalId);
-        Task<Capital> GetCapitalByFullUriAsync(string capitalName);
-        Task<IEnumerable<Capital>> GetAllCapitalsAsync();
-        Task<IEnumerable<Capital>> GetCapitalsByPredicateAsync(Expression<Func<Capital, bool>> predicate);
+        Capital GetCapitalById(int capitalId);
+        Capital GetCapitalByFullUri(string capitalName);
+        IEnumerable<Capital> GetAllCapitals();
+        IEnumerable<Capital> GetCapitalsByPredicate(Expression<Func<Capital, bool>> predicate);
 
         Volume GetFundVolumeCapital();
-        Task<int> CreateCapitalAsync(Capital capitalToCreate);
-        Task UpdateCapitalAsync(Capital capitalToUpdate);
-        Task DeleteCapitalAsync(int capitalToDeleteId);
+        int CreateCapital(Capital capitalToCreate);
+        void UpdateCapital(Capital capitalToUpdate);
+        void DeleteCapital(int capitalToDeleteId);
     }
 }

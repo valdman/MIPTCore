@@ -17,30 +17,30 @@ namespace DataAccess.Repositories
         {
         }
 
-        public override async Task<Story> GetByIdAsync(int id)
+        public override Story GetById(int id)
         {
             Require.Positive(id, nameof(id));
 
-            return (await FindByAsync(news => news.Id == id)).SingleOrDefault();
+            return FindBy(news => news.Id == id).SingleOrDefault();
         }
 
-        public override async Task<IEnumerable<Story>> GetAll()
+        public override IEnumerable<Story> GetAll()
         {
-            return await Db
+            return Db
                 .Include(c => c.Owner).ThenInclude(o => o.Image)
                 .Where(@object => !@object.IsDeleted)
-                .ToListAsync();
+                .ToList();
         }
 
-        public override async Task<IEnumerable<Story>> FindByAsync(Expression<Func<Story, bool>> predicate)
+        public override IEnumerable<Story> FindBy(Expression<Func<Story, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return await Db
+            return Db
                 .Include(c => c.Owner).ThenInclude(o => o.Image)
                 .Where(predicate)
                 .Where(@object => !@object.IsDeleted)
-                .ToListAsync();
+                .ToList();
         }
     }
 }

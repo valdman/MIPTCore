@@ -23,16 +23,16 @@ namespace MIPTCore.Controllers
 
         // GET users
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var all = await _userManager.GetAllUsersAsync();
+            var all = _userManager.GetAllUsers();
             
             return Ok(all.Select(Mapper.Map<UserModel>));
         }
 
         // GET users/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public IActionResult Get(int id)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -40,7 +40,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var userToReturn = await _userManager.GetUserByIdAsync(id);
+            var userToReturn = _userManager.GetUserById(id);
 
             if (userToReturn == null)
             {
@@ -52,7 +52,7 @@ namespace MIPTCore.Controllers
 
         // POST users
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserRegistrationModel userModel)
+        public IActionResult Post([FromBody] UserRegistrationModel userModel)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace MIPTCore.Controllers
 
             var userToCreate = Mapper.Map<User>(userModel);
 
-            var userId = await _userManager.CreateUserAsync(userToCreate);
+            var userId = _userManager.CreateUser(userToCreate);
 
             return Ok(userId);
         }
@@ -69,7 +69,7 @@ namespace MIPTCore.Controllers
         // PUT users/5
         [HttpPut("{id}")]
         [Authorize("User")]
-        public async Task<IActionResult> Put(int id, [FromBody] UserUpdateModel userModel)
+        public IActionResult Put(int id, [FromBody] UserUpdateModel userModel)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userToUpdate = await _userManager.GetUserByIdAsync(id);
+            var userToUpdate = _userManager.GetUserById(id);
 
             if (userToUpdate == null)
             {
@@ -95,10 +95,10 @@ namespace MIPTCore.Controllers
             userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
             userToUpdate.AlumniProfile = Mapper.Map<AlumniProfile>(userModel.AlumniProfile);
             
-            await _userManager.UpdateUserAsync(userToUpdate);
+            _userManager.UpdateUser(userToUpdate);
             
             //!!!
-            var updatedUser = await _userManager.GetUserByIdAsync(id);
+            var updatedUser = _userManager.GetUserById(id);
 
             return Ok(Mapper.Map<UserModel>(updatedUser));
         }
@@ -106,7 +106,7 @@ namespace MIPTCore.Controllers
         // DELETE users/5
         [HttpDelete("{id}")]
         [Authorize("User")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var userToDelete = await _userManager.GetUserByIdAsync(id);
+            var userToDelete = _userManager.GetUserById(id);
             
             if (userToDelete == null)
             {
@@ -126,7 +126,7 @@ namespace MIPTCore.Controllers
                 return Unauthorized();
             }
 
-            await _userManager.DeleteUserAsync(id);
+            _userManager.DeleteUser(id);
 
             return Ok();
         }

@@ -15,28 +15,28 @@ namespace PagesManagment
             _pageRepository = pageRepository;
         }
 
-        public Task<Page> GetPageByIdAsync(int pageId)
+        public Page GetPageById(int pageId)
         {
             Require.Positive(pageId, nameof(pageId));
 
-            return _pageRepository.GetByIdAsync(pageId);
+            return _pageRepository.GetById(pageId);
         }
 
-        public async Task<Page> GetPageByUrlAsync(string pageUrl)
+        public Page GetPageByUrl(string pageUrl)
         {
             Require.NotEmpty(pageUrl, nameof(pageUrl));
             
             if (pageUrl.Last() == '/')
                 pageUrl = pageUrl.Remove(pageUrl.Length - 1);
             
-            var pagesWithThisName = await _pageRepository.FindByAsync(c => c.Url == pageUrl);
+            var pagesWithThisName = _pageRepository.FindBy(c => c.Url == pageUrl);
             return pagesWithThisName.SingleOrDefault();
         }
 
-        public async Task<PageTreeNode> GetTreeOfPages()
+        public PageTreeNode GetTreeOfPages()
         {
             var tree = new PageTreeNode();
-            var allPages = await _pageRepository.GetAll();
+            var allPages = _pageRepository.GetAll();
             foreach (var path in allPages.Select(p => new {p.Url, p.Id}))
             {
                 tree.AddPath(path.Id, path.Url);
@@ -44,31 +44,31 @@ namespace PagesManagment
             return tree;
         }
 
-        public Task<IEnumerable<Page>> GetAllPagesAsync()
+        public IEnumerable<Page> GetAllPages()
         {
             return _pageRepository.GetAll();
         }
 
-        public async Task<int> CreatePageByAddressAsync(Page pageToCreate)
+        public int CreatePageByAddress(Page pageToCreate)
         {
             Require.NotNull(pageToCreate, nameof(pageToCreate));
             Require.NotEmpty(pageToCreate.Url, nameof(pageToCreate.Url));
             
-            return await _pageRepository.CreateAsync(pageToCreate);
+            return _pageRepository.Create(pageToCreate);
         }
 
-        public async Task UpdatePageAsync(Page pageToUpadte)
+        public void UpdatePage(Page pageToUpadte)
         {
             Require.NotNull(pageToUpadte, nameof(pageToUpadte));
 
-            await _pageRepository.UpdateAsync(pageToUpadte);
+            _pageRepository.Update(pageToUpadte);
         }
 
-        public async Task DeletePageAsync(int idPageToDelete)
+        public void DeletePage(int idPageToDelete)
         {
             Require.Positive(idPageToDelete, nameof(idPageToDelete));
 
-            await _pageRepository.DeleteAsync(idPageToDelete);
+            _pageRepository.Delete(idPageToDelete);
         }
         
     }

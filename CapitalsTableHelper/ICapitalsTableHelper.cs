@@ -5,7 +5,7 @@ namespace CapitalsTableHelper
 {
     public interface ICapitalsTableHelper
     {
-        Task<IEnumerable<CapitalsTableEntry>> GetTableForCapitals();
-        Task SaveTable(IEnumerable<CapitalsTableEntry> table);
+        IEnumerable<CapitalsTableEntry> GetTableForCapitals();
+        void SaveTable(IEnumerable<CapitalsTableEntry> table);
     }
 }

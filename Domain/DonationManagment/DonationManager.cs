@@ -15,46 +15,47 @@ namespace DonationManagment
 {
     public class DonationManager : IDonationManager
     {
-        public async Task<IEnumerable<Donation>> GetAllDonations()
+        public IEnumerable<Donation> GetAllDonations()
         {
-            return await _donationRepository.GetAll();
+            return _donationRepository.GetAll();
         }
 
-        public Task<Donation> GetDonationByIdAsync(int donationId)
+        public Donation GetDonationByIdAsync(int donationId)
         {
             Require.NotNull(donationId, nameof(donationId));
 
-            return _donationRepository.GetByIdAsync(donationId);
+            return _donationRepository.GetById(donationId);
         }
 
-        public async Task<DonationPaymentInformation> CreateDonationAsync(Donation donationToCreate)
+        public DonationPaymentInformation CreateDonationAsync(Donation donationToCreate)
         {
             Require.NotNull(donationToCreate, nameof(donationToCreate));
             
             if(donationToCreate.PaymentType == PaymentType.Unknown)
                 throw new IvalidPaymentType();
             
-            var capitalToProvideDonation = await _capitalManager.GetCapitalByIdAsync(donationToCreate.CapitalId);
-            var intendedUser = await _userManager.GetUserByIdAsync(donationToCreate.UserId);
+            var capitalToProvideDonation = _capitalManager.GetCapitalById(donationToCreate.CapitalId);
+            var intendedUser = _userManager.GetUserById(donationToCreate.UserId);
 
             if (capitalToProvideDonation == null || intendedUser == null)
             {
                 throw new IvalidDonationTarget();
             }
 
-            await _donationRepository.CreateAsync(donationToCreate);
+            _donationRepository.Create(donationToCreate);
 
             
             if (donationToCreate.IsConfirmed)
             {
                 Debug.WriteLine("Autoconfirmed donation creation");
 
-                await ConfirmDonation(donationToCreate);
+                ConfirmDonation(donationToCreate);
             }
 
             if (donationToCreate.PaymentType == PaymentType.ByBankTransfer)
                 return new DonationPaymentInformation(donationToCreate.Id, null, null);
 
+            //todo: async
             var donationFromBank = donationToCreate.IsRecursive
                 ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, 
                     capitalToProvideDonation.CapitalCredentials, intendedUser)
@@ -62,37 +63,37 @@ namespace DonationManagment
                     capitalToProvideDonation.CapitalCredentials, intendedUser);
 
             donationToCreate.BankOrderId = donationFromBank.OrderId;
-            await _donationRepository.UpdateAsync(donationToCreate);
+            _donationRepository.Update(donationToCreate);
 
             return donationFromBank;
         }
 
-        public async Task<int> CreateCompletedSingleDonation(Donation donationToCreate)
+        public int CreateCompletedSingleDonation(Donation donationToCreate)
         {
             Require.NotNull(donationToCreate, nameof(donationToCreate));
 
             donationToCreate.IsConfirmed = true;
             donationToCreate.IsRecursive = false;
 
-            return await _donationRepository.CreateAsync(donationToCreate);
+            return _donationRepository.Create(donationToCreate);
         }
 
-        public async Task ConfirmDonation(Donation donationToConfirm)
+        public void ConfirmDonation(Donation donationToConfirm)
         {
             Require.NotNull(donationToConfirm, nameof(donationToConfirm));
-            var targetProject = _capitalManager.GetCapitalByIdAsync(donationToConfirm.CapitalId);
+            var targetProject = _capitalManager.GetCapitalById(donationToConfirm.CapitalId);
 
             Require.NotNull(targetProject, nameof(targetProject));
 
             donationToConfirm.IsConfirmed = true;
-            await _donationRepository.UpdateAsync(donationToConfirm);
+            _donationRepository.Update(donationToConfirm);
         }
 
-        public async Task UpdateDonationAsync(Donation donationToUpdate)
+        public void UpdateDonationAsync(Donation donationToUpdate)
         {
             Require.NotNull(donationToUpdate, nameof(donationToUpdate));
 
-            var oldDonation = await _donationRepository.GetByIdAsync(donationToUpdate.Id);
+            var oldDonation = _donationRepository.GetById(donationToUpdate.Id);
 
             if (oldDonation.IsConfirmed != donationToUpdate.IsConfirmed)
             {
@@ -103,23 +104,23 @@ namespace DonationManagment
                     throw new RollbackDonationException();
                 }
 
-               await ConfirmDonation(donationToUpdate);
+               ConfirmDonation(donationToUpdate);
 
             }
 
-            await _donationRepository.UpdateAsync(donationToUpdate);
+            _donationRepository.Update(donationToUpdate);
         }
 
-        public async Task DeleteDonation(int donationToDeleteId)
+        public void DeleteDonation(int donationToDeleteId)
         {
             Require.NotNull(donationToDeleteId, nameof(donationToDeleteId));
 
-            await _donationRepository.DeleteAsync(donationToDeleteId);
+            _donationRepository.Delete(donationToDeleteId);
         }
 
-        public async Task<IEnumerable<Donation>> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate = null)
+        public IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate = null)
         {
-            return await _donationRepository.FindByAsync(predicate);
+            return _donationRepository.FindBy(predicate);
         }
 
         private readonly IGenericRepository<Donation> _donationRepository;

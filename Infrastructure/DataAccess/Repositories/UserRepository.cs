@@ -14,39 +14,38 @@ namespace DataAccess.Repositories
 {
     public class UserRepository : GenericRepository<User>
     {
-        public override Task<User> GetByIdAsync(int id)
+        public override User GetById(int id)
         {
             Require.Positive(id, nameof(id));
 
             return Db
                 .Include(u => u.AlumniProfile)
                 .Include(u => u.Password)
-                .Where(u => u.Id == id)
-                .SingleOrDefaultAsync();
+                .SingleOrDefault(u => u.Id == id);
         }
 
-        public override async Task<IEnumerable<User>> GetAll()
+        public override IEnumerable<User> GetAll()
         {
-            return await Db
+            return Db
                 .Include(u => u.AlumniProfile)
-                .ToListAsync();
+                .ToList();
         }
 
-        public override async Task<IEnumerable<User>> FindByAsync(Expression<Func<User, bool>> predicate)
+        public override IEnumerable<User> FindBy(Expression<Func<User, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return await Db
+            return Db
                 .Include(u => u.AlumniProfile)
                 .Include(u => u.Password)                
-                .Where(predicate).ToListAsync();
+                .Where(predicate).ToList();
         }
 
-        public override async Task UpdateAsync(User @object)
+        public override void Update(User @object)
         {
             Require.NotNull(@object, nameof(@object));
 
-            await Save();
+            Save();
         }
 
         public UserRepository(UserContext context) : base(context)

@@ -5,6 +5,6 @@ namespace CapitalsTableHelper
 {
     public interface ICapitalsTableEntryRepository : IGenericRepository<CapitalsTableEntry>
     {
-        Task DeleteAllCapitalTableEntriesAsync();
+        void DeleteAllCapitalTableEntries();
     }
 }

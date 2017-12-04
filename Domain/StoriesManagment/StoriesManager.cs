@@ -16,44 +16,44 @@ namespace StoriesManagment
             _storiesRepository = storiesRepository;
         }
 
-        public Task<Story> GetStoryByIdAsync(int storyId)
+        public Story GetStoryById(int storyId)
         {
             Require.Positive(storyId, nameof(storyId));
             
-            return _storiesRepository.GetByIdAsync(storyId);
+            return _storiesRepository.GetById(storyId);
         }
 
-        public Task<IEnumerable<Story>> GetAllStoriesAsync()
+        public IEnumerable<Story> GetAllStories()
         {
             return _storiesRepository.GetAll();
         }
 
-        public Task<IEnumerable<Story>> GetStoriesByPredicateAsync(Expression<Func<Story, bool>> predicate)
+        public IEnumerable<Story> GetStoriesByPredicate(Expression<Func<Story, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return _storiesRepository.FindByAsync(predicate);
+            return _storiesRepository.FindBy(predicate);
         }
 
-        public Task<int> CreateStoryAsync(Story storyToCreate)
+        public int CreateStory(Story storyToCreate)
         {
             Require.NotNull(storyToCreate, nameof(storyToCreate));
             
-            return _storiesRepository.CreateAsync(storyToCreate);
+            return _storiesRepository.Create(storyToCreate);
         }
 
-        public Task UpdateStoryAsync(Story storyToUpdate)
+        public void UpdateStory(Story storyToUpdate)
         {
             Require.NotNull(storyToUpdate, nameof(storyToUpdate));
             
-            return _storiesRepository.UpdateAsync(storyToUpdate);
+            _storiesRepository.Update(storyToUpdate);
         }
 
-        public Task DeleteStoryAsync(int storyId)
+        public void DeleteStory(int storyId)
         {
             Require.Positive(storyId, nameof(storyId));
             
-            return _storiesRepository.DeleteAsync(storyId);
+            _storiesRepository.Delete(storyId);
         }
     }
 }

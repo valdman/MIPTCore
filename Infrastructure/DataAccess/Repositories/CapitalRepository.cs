@@ -15,38 +15,37 @@ namespace DataAccess.Repositories
 {
     public class CapitalRepository : GenericRepository<Capital>, ICapitalRepository
     {
-        public override async Task<Capital> GetByIdAsync(int id)
+        public override Capital GetById(int id)
         {
             Require.Positive(id, nameof(id));
 
-            return await Db
+            return Db
                 .Include(u => u.CapitalCredentials)
                 .Include(u => u.Image)
-                .Include(u => u.Founders)
-                    .ThenInclude(f => f.Image)
-                .Include(u => u.Recivers)
-                    .ThenInclude(r => r.Image)
-                .Where(u => u.Id == id)
-                .SingleOrDefaultAsync();
+                    .Include(u => u.Founders)
+                .ThenInclude(f => f.Image)
+                    .Include(u => u.Recivers)
+                .ThenInclude(r => r.Image)
+                .SingleOrDefault(u => u.Id == id);
         }
 
-        public override async Task<IEnumerable<Capital>> GetAll()
+        public override IEnumerable<Capital> GetAll()
         {
-            return await Db
+            return Db
                 .Include(u => u.CapitalCredentials)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
                     .ThenInclude(f => f.Image)
                 .Include(u => u.Recivers)
                     .ThenInclude(r => r.Image)
-                .ToListAsync();
+                .ToList();
         }
 
-        public override async Task<IEnumerable<Capital>> FindByAsync(Expression<Func<Capital, bool>> predicate)
+        public override IEnumerable<Capital> FindBy(Expression<Func<Capital, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return await Db
+            return Db
                 .Include(u => u.CapitalCredentials)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
@@ -54,10 +53,10 @@ namespace DataAccess.Repositories
                 .Include(u => u.Recivers)
                     .ThenInclude(r => r.Image)
                 .Where(predicate)
-                .ToListAsync();
+                .ToList();
         }
 
-        public override async Task UpdateAsync(Capital @object)
+        public override void Update(Capital @object)
         {
             Require.NotNull(@object, nameof(@object));
 
@@ -74,14 +73,14 @@ namespace DataAccess.Repositories
             Context.TryUpdateManyToMany(model.Recivers, recievers,a => a.Id);
             
             Db.Update(@object);
-            await Save();
+            Save();
         }
 
-        public async Task<Capital> GetCapitalByFullUriAsync(string name)
+        public Capital GetCapitalByFullUri(string name)
         {
             Require.NotEmpty(name, nameof(name));
 
-            return await Db.SingleOrDefaultAsync(c => c.FullPageUri.Equals(name));
+            return Db.SingleOrDefault(c => c.FullPageUri.Equals(name));
         }
 
         public decimal CoutSumGivenToWholeFund()
