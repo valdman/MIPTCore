@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using DonationManagment;
 
 namespace MIPTCore.Models
 {
@@ -8,6 +9,8 @@ namespace MIPTCore.Models
 		public decimal Value { get; set; }
 
 		public bool IsRecursive { get; set; }
+
+		public PaymentType PaymentType { get; set; }
 	}
 	
     public class DonationWithRegistrationModel : AbstractDonationModel

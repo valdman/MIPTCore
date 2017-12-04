@@ -169,6 +169,7 @@ namespace MIPTCore.Controllers
             oldDonation.CapitalId = donationModel.CapitalId;
             oldDonation.Value = donationModel.Value;
             oldDonation.IsRecursive = donationModel.IsRecursive;
+            oldDonation.PaymentType = donationModel.PaymentType;
 
             await _donationManager.UpdateDonationAsync(oldDonation);
             return Ok(id);

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DonationManagment;
+using FluentValidation;
 
 namespace MIPTCore.Models.ModelValidators
 {
@@ -10,8 +11,13 @@ namespace MIPTCore.Models.ModelValidators
             {   
                 RuleFor(_ => _).NotNull();
             
-                RuleFor(donationModel => donationModel.Value)
-                    .GreaterThan(0).WithMessage(p => $"'{nameof(p.Value)}' must be valid positive. {p.Value} is not");
+                RuleFor(donationModel => donationModel)
+                    .Must(IsValidValue);
+            }
+
+            private bool IsValidValue(AbstractDonationModel d)
+            {
+                return d.Value > 0 || d.PaymentType == PaymentType.ByBankTransfer;
             }
         }
 

@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using CapitalsTableHelper;
 using Common;
+using DonationManagment;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -24,8 +25,10 @@ namespace MIPTCore.Middlewares
             else if (exception is OperationOnUserThatNotExistsException)   code = HttpStatusCode.BadRequest;            
             else if (exception is ProfileNotProvidedException)             code = HttpStatusCode.BadRequest;
             else if (exception is ProfileShouldNotBeProvidedException)     code = HttpStatusCode.BadRequest;    
-            else if (exception is RelatedCapitalNotExists)                 code = HttpStatusCode.BadRequest;    
-            else return Task.CompletedTask;
+            else if (exception is RelatedCapitalNotExists)                 code = HttpStatusCode.BadRequest;
+            else if (exception is IvalidDonationTarget)                    code = HttpStatusCode.BadRequest;
+            else if (exception is IvalidPaymentType)                       code = HttpStatusCode.BadRequest;
+            else                                                           code = (HttpStatusCode) 500;
 
             var result = JsonConvert.SerializeObject(new KeyValuePair<string, string>(exception.FieldName, exception.Message));
             context.Response.ContentType = "application/json";

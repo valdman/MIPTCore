@@ -13,6 +13,8 @@ namespace DonationManagment
 
         public decimal Value { get; set; }
 
+        public PaymentType PaymentType { get; set; }
+
         public bool IsRecursive { get; set; }
 
         public bool IsConfirmed { get; set; }

@@ -33,7 +33,8 @@ namespace PaymentGateway
             
             var userDataParameters = new PaymentJsonParams
             {
-                Email = fromUser.Email
+                Email = fromUser.Email,
+                FullName = $"{fromUser.FirstName} {fromUser.LastName}"
             };
             
             var payload = new ParametrizedPaymentRequestModel()
@@ -56,7 +57,8 @@ namespace PaymentGateway
             {
                 RecurringExpiry = 21200101,
                 RecurringFrequency = 28,
-                Email = fromUser.Email
+                Email = fromUser.Email,
+                FullName = $"{fromUser.FirstName} {fromUser.LastName}"
             };
             
             var payload = new ParametrizedPaymentRequestModel()

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CapitalManagment;
+using Common;
 using Common.Infrastructure;
 using DonationManagment.Infrastructure;
 using Journalist;
@@ -29,6 +30,17 @@ namespace DonationManagment
         public async Task<DonationPaymentInformation> CreateDonationAsync(Donation donationToCreate)
         {
             Require.NotNull(donationToCreate, nameof(donationToCreate));
+            
+            if(donationToCreate.PaymentType == PaymentType.Unknown)
+                throw new IvalidPaymentType();
+            
+            var capitalToProvideDonation = await _capitalManager.GetCapitalByIdAsync(donationToCreate.CapitalId);
+            var intendedUser = await _userManager.GetUserByIdAsync(donationToCreate.UserId);
+
+            if (capitalToProvideDonation == null || intendedUser == null)
+            {
+                throw new IvalidDonationTarget();
+            }
 
             await _donationRepository.CreateAsync(donationToCreate);
 
@@ -40,8 +52,8 @@ namespace DonationManagment
                 await ConfirmDonation(donationToCreate);
             }
 
-            var capitalToProvideDonation = await _capitalManager.GetCapitalByIdAsync(donationToCreate.CapitalId);
-            var intendedUser = await _userManager.GetUserByIdAsync(donationToCreate.UserId);
+            if (donationToCreate.PaymentType == PaymentType.ByBankTransfer)
+                return new DonationPaymentInformation(donationToCreate.Id, null, null);
 
             var donationFromBank = donationToCreate.IsRecursive
                 ? _paymentProvider.InitiateRequrrentPaymentForDonation(donationToCreate, 
