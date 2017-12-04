@@ -8,6 +8,7 @@ namespace NewsManagment
     public interface INewsManager
     {
         News GetNewsById(int newsId);
+        News GetNewsByUrl(string newsUrl);
         IEnumerable<News> GetAllNews();
         IEnumerable<News> GetNewsByPredicate(Expression<Func<News, bool>> predicate);
 

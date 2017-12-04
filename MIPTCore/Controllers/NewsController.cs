@@ -29,21 +29,29 @@ namespace MIPTCore.Controllers
             return Ok(allNews.Select(Mapper.Map<NewsModel>));
         }
 
-        // GET news/5
-        [HttpGet("{newsId}")]
-        public IActionResult Get(int newsId)
-        {   
-            this.CheckIdViaModel(newsId);
+        // GET news/5 or news/page/url
+        [HttpGet("{*newsIndex}")]
+        public IActionResult Get(string newsIndex)
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var newsToReturn = _newsManager.GetNewsById(newsId);
+            News newsToReturn;
+            if (int.TryParse(newsIndex, out var newsId))
+            {
+                this.CheckIdViaModel(newsId);
+                newsToReturn = _newsManager.GetNewsById(newsId);
+            }
+            else
+            {
+                newsToReturn = _newsManager.GetNewsByUrl(newsIndex);
+            }
 
             if (newsToReturn == null)
             {
-                return NotFound("News with this ID is not exists");
+                return NotFound("News with this ID or Name is not exists");
             }
             
             return Ok(Mapper.Map<NewsModel>(newsToReturn));
@@ -88,6 +96,7 @@ namespace MIPTCore.Controllers
             var newImage = Mapper.Map<Image>(newsModel.Image);
             
             newsToUpdate.Name = newsModel.Name;
+            newsToUpdate.FullPageUri = newsModel.FullPageUri;
             newsToUpdate.Content = newsModel.Content;
             newsToUpdate.Description = newsModel.Description;
             newsToUpdate.Date = newsModel.Date;
