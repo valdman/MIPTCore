@@ -17,59 +17,55 @@ namespace UserManagment
             _ticketRepository = ticketRepository;
         }
 
-        public async Task<IEnumerable<Ticket>> GetTicketsByEmailAndType(string email, TicketType ticketType)
+        public IEnumerable<Ticket> GetTicketsByEmailAndType(string email, TicketType ticketType)
         {
-            return (await _ticketRepository.FindByAsync(
+            return _ticketRepository.FindBy(
                 ticket => 
                     ticket.TicketType == ticketType
-                    && ticket.EmailToSend == email)
-            ).ToList();
+                    && ticket.EmailToSend == email).ToList();
         }
 
-        public async Task<string> GetUserEmailByPasswordRecoveyToken(string token)
+        public string GetUserEmailByPasswordRecoveyToken(string token)
         {
             Require.NotEmpty(token, nameof(token));
 
-            return (await _ticketRepository.FindByAsync(
-                    ticket =>
-                        ticket.TicketType == TicketType.PasswordRecovery
-                        && ticket.Token == token)
-                ).SingleOrDefault()?.EmailToSend;
+            return _ticketRepository.FindBy(
+                ticket =>
+                    ticket.TicketType == TicketType.PasswordRecovery
+                    && ticket.Token == token).SingleOrDefault()?.EmailToSend;
         }
 
-        public async Task<string> GetUserEmailByEmailConfirmationToken(string token)
+        public string GetUserEmailByEmailConfirmationToken(string token)
         {
             
             Require.NotEmpty(token, nameof(token));
 
-            return (await _ticketRepository.FindByAsync(
-                    ticket => 
-                        ticket.TicketType == TicketType.EmailConfirmation
-                        && ticket.Token == token)
-                ).SingleOrDefault()?.EmailToSend;
+            return _ticketRepository.FindBy(
+                ticket => 
+                    ticket.TicketType == TicketType.EmailConfirmation
+                    && ticket.Token == token).SingleOrDefault()?.EmailToSend;
         }
 
-        public async Task<string> GetUserEmailByCombinatedTicket(string token)
+        public string GetUserEmailByCombinatedTicket(string token)
         {
             Require.NotEmpty(token, nameof(token));
 
-            return (await _ticketRepository.FindByAsync(
+            return _ticketRepository.FindBy(
                 ticket => 
                     ticket.TicketType == TicketType.CombinatedTicket
-                    && ticket.Token == token)
-            ).SingleOrDefault()?.EmailToSend;
+                    && ticket.Token == token).SingleOrDefault()?.EmailToSend;
         }
 
-        public async Task CompleteAllTicketsByEmailAndType(string email, TicketType ticketType)
+        public void CompleteAllTicketsByEmailAndType(string email, TicketType ticketType)
         {
-            var allTicketsForThatTask = (await GetTicketsByEmailAndType(email, ticketType)).ToList();
+            var allTicketsForThatTask = GetTicketsByEmailAndType(email, ticketType).ToList();
 
             foreach (var ticket in allTicketsForThatTask)
             {
                 ticket.IsCompleted = true;
             }
 
-            await _ticketRepository.UpdateManyTicketsAsync(allTicketsForThatTask);
+            _ticketRepository.UpdateManyTickets(allTicketsForThatTask);
         }
     }
 }

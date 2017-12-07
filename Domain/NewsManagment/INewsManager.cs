@@ -7,12 +7,13 @@ namespace NewsManagment
 {
     public interface INewsManager
     {
-        Task<News> GetNewsByIdAsync(int newsId);
-        Task<IEnumerable<News>> GetAllNewsAsync();
-        Task<IEnumerable<News>> GetNewsByPredicateAsync(Expression<Func<News, bool>> predicate);
+        News GetNewsById(int newsId);
+        News GetNewsByUrl(string newsUrl);
+        IEnumerable<News> GetAllNews();
+        IEnumerable<News> GetNewsByPredicate(Expression<Func<News, bool>> predicate);
 
-        Task<int> CreateNewsAsync(News newsToCreate);
-        Task UpdateNewsAsync(News newsToCreate);
-        Task DeleteNewsAsync(int newsId);
+        int CreateNews(News newsToCreate);
+        void UpdateNews(News newsToCreate);
+        void DeleteNews(int newsId);
     }
 }

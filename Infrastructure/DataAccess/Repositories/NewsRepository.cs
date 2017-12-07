@@ -17,27 +17,27 @@ namespace DataAccess.Repositories
         {
         }
 
-        public override async Task<News> GetByIdAsync(int id)
+        public override News GetById(int id)
         {
             Require.Positive(id, nameof(id));
 
-            return (await FindByAsync(news => news.Id == id)).SingleOrDefault();
+            return FindBy(news => news.Id == id).SingleOrDefault();
         }
 
-        public override async Task<IEnumerable<News>> GetAll()
+        public override IEnumerable<News> GetAll()
         {
-            return await Db.Include(c => c.Image)
+            return Db.Include(c => c.Image)
                 .Where(@object => !@object.IsDeleted)
-                .ToListAsync();
+                .ToList();
         }
 
-        public override async Task<IEnumerable<News>> FindByAsync(Expression<Func<News, bool>> predicate)
+        public override IEnumerable<News> FindBy(Expression<Func<News, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return await Db.Include(c => c.Image).Where(predicate)
+            return Db.Include(c => c.Image).Where(predicate)
                 .Where(@object => !@object.IsDeleted)
-                .ToListAsync();
+                .ToList();
         }
     }
 }

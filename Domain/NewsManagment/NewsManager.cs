@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Common.Infrastructure;
 using Journalist;
+using Journalist.Extensions;
 
 namespace NewsManagment
 {
@@ -16,42 +18,66 @@ namespace NewsManagment
             _newsRepository = newsRepository;
         }
 
-        public Task<News> GetNewsByIdAsync(int newsId)
+        public News GetNewsById(int newsId)
         {
             Require.Positive(newsId, nameof(newsId));
 
-            return _newsRepository.GetByIdAsync(newsId);
+            return _newsRepository.GetById(newsId);
         }
 
-        public Task<IEnumerable<News>> GetAllNewsAsync()
+        public News GetNewsByUrl(string newsUrl)
+        {
+            Require.NotEmpty(newsUrl, nameof(newsUrl));
+            
+            if (newsUrl.Last() == '/')
+                newsUrl = newsUrl.Remove(newsUrl.Length - 1);
+            
+            var newsWithThisUrl = _newsRepository.FindBy(c => c.FullPageUri == newsUrl);
+            return newsWithThisUrl.SingleOrDefault();
+        }
+
+        public IEnumerable<News> GetAllNews()
         {
             return _newsRepository.GetAll();
         }
 
-        public Task<IEnumerable<News>> GetNewsByPredicateAsync(Expression<Func<News, bool>> predicate)
+        public IEnumerable<News> GetNewsByPredicate(Expression<Func<News, bool>> predicate)
         {
-            return _newsRepository.FindByAsync(predicate);
+            return _newsRepository.FindBy(predicate);
         }
 
-        public Task<int> CreateNewsAsync(News newsToCreate)
-        {
-            Require.NotNull(newsToCreate, nameof(newsToCreate));
-
-            return _newsRepository.CreateAsync(newsToCreate);
-        }
-
-        public Task UpdateNewsAsync(News newsToCreate)
+        public int CreateNews(News newsToCreate)
         {
             Require.NotNull(newsToCreate, nameof(newsToCreate));
+            MustBeValidNews(newsToCreate);
 
-            return _newsRepository.UpdateAsync(newsToCreate);
+            return _newsRepository.Create(newsToCreate);
         }
 
-        public Task DeleteNewsAsync(int newsId)
+        public void UpdateNews(News newsToCreate)
+        {
+            Require.NotNull(newsToCreate, nameof(newsToCreate));
+            MustBeValidNews(newsToCreate);
+
+            _newsRepository.Update(newsToCreate);
+        }
+
+        public void DeleteNews(int newsId)
         {
             Require.Positive(newsId, nameof(newsId));
 
-            return _newsRepository.DeleteAsync(newsId);
+            _newsRepository.Delete(newsId);
+        }
+
+        void MustBeValidNews(News news)
+        {
+            var newWithSameUrl = _newsRepository.FindBy(n => n.FullPageUri == news.FullPageUri).ToList();
+            
+            if(newWithSameUrl.IsEmpty())
+                return;
+            
+            if(newWithSameUrl.Count() == 1 && newWithSameUrl.Single().Id != news.Id)
+                throw new ArgumentException("Duplicate url");
         }
     }
 }

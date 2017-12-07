@@ -23,53 +23,53 @@ namespace DataAccess.Repositories
             _db = context.CapitalsTableEntries;
         }
         
-        public Task<CapitalsTableEntry> GetByIdAsync(int id)
+        public CapitalsTableEntry GetById(int id)
         {
-            return _db.FindAsync(id);
+            return _db.Find(id);
         }
 
-        public Task<IEnumerable<CapitalsTableEntry>> GetAll()
+        public IEnumerable<CapitalsTableEntry> GetAll()
         {
             var enriesToReturn = _db.ToList();
-            return Task.FromResult((IEnumerable<CapitalsTableEntry>) enriesToReturn);
+            return enriesToReturn;
         }
 
-        public Task<IEnumerable<CapitalsTableEntry>> FindByAsync(Expression<Func<CapitalsTableEntry, bool>> predicate)
+        public IEnumerable<CapitalsTableEntry> FindBy(Expression<Func<CapitalsTableEntry, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
             var enriesToReturn = _db.Where(predicate).ToList();
-            return Task.FromResult((IEnumerable<CapitalsTableEntry>) enriesToReturn);
+            return enriesToReturn;
         }
 
-        public async Task<int> CreateAsync(CapitalsTableEntry @object)
+        public int Create(CapitalsTableEntry @object)
         {
             _db.Add(@object);
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return @object.CapitalId;
         }
 
-        public async Task DeleteAsync(int objectId)
+        public void Delete(int objectId)
         {
-            var entryToDelete = await GetByIdAsync(objectId);
+            var entryToDelete = GetById(objectId);
             if(entryToDelete != null)
                 _db.Remove(entryToDelete);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public Task UpdateAsync(CapitalsTableEntry @object)
+        public void Update(CapitalsTableEntry @object)
         {
             _db.Update(@object);
 
-            return _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public Task DeleteAllCapitalTableEntriesAsync()
+        public void DeleteAllCapitalTableEntries()
         {
             _db.RemoveRange(_db);
-            return _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

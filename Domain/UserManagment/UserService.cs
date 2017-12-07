@@ -19,35 +19,35 @@ namespace UserManagment
             _ticketService = ticketService;
         }
 
-        public async Task ConfirmEmail(string emailToConfirm)
+        public void ConfirmEmail(string emailToConfirm)
         {
             Require.NotEmpty(emailToConfirm, nameof(emailToConfirm));
 
-            var userToConfirmEmail = await _userManager.GetUserByEmailAsync(emailToConfirm);
+            var userToConfirmEmail = _userManager.GetUserByEmail(emailToConfirm);
 
             if (userToConfirmEmail == null)
                 throw new OperationOnUserThatNotExistsException("confirm email");
             
             userToConfirmEmail.IsEmailConfirmed = true;
-            await _userManager.UpdateUserAsync(userToConfirmEmail);
+            _userManager.UpdateUser(userToConfirmEmail);
             
-            await _ticketService.CompleteAllTicketsByEmailAndType(emailToConfirm, TicketType.EmailConfirmation);
+            _ticketService.CompleteAllTicketsByEmailAndType(emailToConfirm, TicketType.EmailConfirmation);
         }
 
-        public async Task ChangePassword(int userIdToChangePassword, Password newPassword)
+        public void ChangePassword(int userIdToChangePassword, Password newPassword)
         {
             Require.Positive(userIdToChangePassword, nameof(userIdToChangePassword));
             Require.NotNull(newPassword, nameof(newPassword));
 
-            var userToChangePassword = await _userManager.GetUserByIdAsync(userIdToChangePassword);
+            var userToChangePassword = _userManager.GetUserById(userIdToChangePassword);
 
             if (userToChangePassword == null)
                 throw new OperationOnUserThatNotExistsException("change password");
 
             userToChangePassword.Password = newPassword;
-            await _userManager.UpdateUserAsync(userToChangePassword);
+            _userManager.UpdateUser(userToChangePassword);
 
-            await _ticketService.CompleteAllTicketsByEmailAndType(userToChangePassword.Email, TicketType.PasswordRecovery);
+            _ticketService.CompleteAllTicketsByEmailAndType(userToChangePassword.Email, TicketType.PasswordRecovery);
         }
     }
 }

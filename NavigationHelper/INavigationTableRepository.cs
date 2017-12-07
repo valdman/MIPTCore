@@ -5,6 +5,6 @@ namespace NavigationHelper
 {
     public interface INavigationTableRepository : IGenericRepository<NavigationTableEntry>
     {
-        Task DeleteAllNavigatioTableEntriesAsync();
+        void DeleteAllNavigatioTableEntries();
     }
 }

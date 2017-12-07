@@ -8,6 +8,6 @@ namespace UserManagment.Infrastructure
 {
     public interface ITicketRepository : IGenericRepository<Ticket>
     {
-        Task UpdateManyTicketsAsync(IEnumerable<Ticket> tickets);
+        void UpdateManyTickets(IEnumerable<Ticket> tickets);
     }
 }

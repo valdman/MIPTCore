@@ -24,33 +24,33 @@ namespace CapitalManagment
             _domainOptions = _domainOptionsService.GetDomainOptions();
         }
 
-        public Task<Capital> GetCapitalByIdAsync(int capitalId)
+        public Capital GetCapitalById(int capitalId)
         {
             Require.Positive(capitalId, nameof(capitalId));
 
-            return _capitalRepository.GetByIdAsync(capitalId);
+            return _capitalRepository.GetById(capitalId);
         }
 
-        public Task<Capital> GetCapitalByFullUriAsync(string capitalName)
+        public Capital GetCapitalByFullUri(string capitalName)
         {
             Require.NotEmpty(capitalName, nameof(capitalName));
             
             if (capitalName.Last() == '/')
                 capitalName = capitalName.Remove(capitalName.Length - 1);
 
-            return _capitalRepository.GetCapitalByFullUriAsync(capitalName);
+            return _capitalRepository.GetCapitalByFullUri(capitalName);
         }
 
-        public Task<IEnumerable<Capital>> GetAllCapitalsAsync()
+        public IEnumerable<Capital> GetAllCapitals()
         {
             return _capitalRepository.GetAll();
         }
 
-        public Task<IEnumerable<Capital>> GetCapitalsByPredicateAsync(Expression<Func<Capital, bool>> predicate)
+        public IEnumerable<Capital> GetCapitalsByPredicate(Expression<Func<Capital, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return _capitalRepository.FindByAsync(predicate);
+            return _capitalRepository.FindBy(predicate);
         }
 
         public Volume GetFundVolumeCapital()
@@ -62,40 +62,40 @@ namespace CapitalManagment
             };
         }
 
-        public async Task GiveMoneyToCapitalAsync(int capitalToGiveId, decimal sumToGive)
+        public void GiveMoneyToCapitalAsync(int capitalToGiveId, decimal sumToGive)
         {
             Require.Positive(capitalToGiveId, nameof(capitalToGiveId));
             Require.True(sumToGive > 0, nameof(sumToGive), $"'{nameof(sumToGive)} is not positive'");
 
-            var capitalToGive = await _capitalRepository.GetByIdAsync(capitalToGiveId);
+            var capitalToGive = _capitalRepository.GetById(capitalToGiveId);
             
             if(capitalToGive == null)
                 throw new CapitalNotFoundException();
 
             capitalToGive.Given += sumToGive;
 
-            await _capitalRepository.UpdateAsync(capitalToGive);
+            _capitalRepository.Update(capitalToGive);
         }
 
-        public Task<int> CreateCapitalAsync(Capital capitalToCreate)
+        public int CreateCapital(Capital capitalToCreate)
         {
             Require.NotNull(capitalToCreate, nameof(capitalToCreate));
 
-            return _capitalRepository.CreateAsync(capitalToCreate);
+            return _capitalRepository.Create(capitalToCreate);
         }
 
-        public Task UpdateCapitalAsync(Capital capitalToUpdate)
+        public void UpdateCapital(Capital capitalToUpdate)
         {
             Require.NotNull(capitalToUpdate, nameof(capitalToUpdate));
 
-            return _capitalRepository.UpdateAsync(capitalToUpdate);
+            _capitalRepository.Update(capitalToUpdate);
         }
 
-        public Task DeleteCapitalAsync(int capitalToDeleteId)
+        public void DeleteCapital(int capitalToDeleteId)
         {
             Require.Positive(capitalToDeleteId, nameof(capitalToDeleteId));
 
-            return _capitalRepository.DeleteAsync(capitalToDeleteId);
+            _capitalRepository.Delete(capitalToDeleteId);
         }
     }
 }

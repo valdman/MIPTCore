@@ -22,52 +22,52 @@ namespace DataAccess.Repositories
             _db = context.NavigationTable;
         }
         
-        public Task<NavigationTableEntry> GetByIdAsync(int id)
+        public NavigationTableEntry GetById(int id)
         {
-            return _db.FindAsync(id);
+            return _db.Find(id);
         }
 
-        public Task<IEnumerable<NavigationTableEntry>> GetAll()
+        public IEnumerable<NavigationTableEntry> GetAll()
         {
             var enriesToReturn = _db.ToList();
-            return Task.FromResult((IEnumerable<NavigationTableEntry>) enriesToReturn);
+            return enriesToReturn;
         }
 
-        public Task<IEnumerable<NavigationTableEntry>> FindByAsync(Expression<Func<NavigationTableEntry, bool>> predicate)
+        public IEnumerable<NavigationTableEntry> FindBy(Expression<Func<NavigationTableEntry, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
             var enriesToReturn = _db.Where(predicate).ToList();
-            return Task.FromResult((IEnumerable<NavigationTableEntry>) enriesToReturn);
+            return enriesToReturn;
         }
 
-        public async Task<int> CreateAsync(NavigationTableEntry @object)
+        public int Create(NavigationTableEntry @object)
         {
-            await _db.AddAsync(@object);
-            await _context.SaveChangesAsync();
+            _db.AddAsync(@object);
+            _context.SaveChangesAsync();
 
             return @object.Id;
         }
 
-        public async Task DeleteAsync(int objectId)
+        public void Delete(int objectId)
         {
-            var entryToDelete = await GetByIdAsync(objectId);
+            var entryToDelete = GetById(objectId);
             if(entryToDelete != null)
                 _db.Remove(entryToDelete);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(NavigationTableEntry @object)
+        public void Update(NavigationTableEntry @object)
         {
             _db.Update(@object);
 
-            return _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public Task DeleteAllNavigatioTableEntriesAsync()
+        public void DeleteAllNavigatioTableEntries()
         {
             _db.RemoveRange(_db);
-            return _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

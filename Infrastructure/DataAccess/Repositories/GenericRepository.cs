@@ -23,66 +23,66 @@ namespace DataAccess.Repositories
             Db = Context.Set<TEntity>();
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(int id)
+        public virtual TEntity GetById(int id)
         {
             Require.Positive(id, nameof(id));
             
-            var foundedObject = await Db.FindAsync(id);
+            var foundedObject = Db.Find(id);
             if (foundedObject == null || !foundedObject.IsDeleted)
             {
                 return foundedObject;
             }
-            return await Task.FromResult<TEntity>(null);
+            return null;
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
-            return await Db
+            return Db
                 .Where(@object => !@object.IsDeleted)
-                .ToListAsync();
+                .ToList();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return await Db.Where(predicate)
+            return Db.Where(predicate)
                 .Where(@object => !@object.IsDeleted)
-                .ToListAsync();
+                .ToList();
         }
 
-        public virtual async Task<int> CreateAsync(TEntity @object)
+        public virtual int Create(TEntity @object)
         {
             Require.NotNull(@object, nameof(@object));
             
             @object.CreatingTime = DateTimeOffset.Now;
             Db.Add(@object);
             
-            await Save();
+            Save();
             return @object.Id;
         }
 
-        public virtual async Task DeleteAsync(int objectId)
+        public virtual void Delete(int objectId)
         {
             Require.Positive(objectId, nameof(objectId));
             
-            var objectToDelete = await GetByIdAsync(objectId);
+            var objectToDelete = GetById(objectId);
             if(objectToDelete != null)
                 objectToDelete.IsDeleted = true;
             
-            await Save();
+            Save();
         }
 
-        public virtual async Task UpdateAsync(TEntity @object)
+        public virtual void Update(TEntity @object)
         {
             Require.NotNull(@object, nameof(@object));
 
-            await Save();
+            Save();
         }
 
-        protected async Task Save()
+        protected void Save()
         {
-            await Context.SaveChangesAsync();
+            Context.SaveChanges();
         }
     }
 }

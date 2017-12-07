@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -124,16 +122,6 @@ namespace MIPTCore
                 {
                     await dbContext.Database.EnsureCreatedAsync();
                     await dbContext.Database.MigrateAsync();
-                }
-            }
-        
-            async Task ForceCreateTablesFor(params DbContext[] contexts)
-            {
-                foreach (var dbContext in contexts)
-                {
-                    var databaseCreator = 
-                        (RelationalDatabaseCreator) dbContext.Database.GetService<IDatabaseCreator>();
-                    await databaseCreator.CreateTablesAsync();
                 }
             }
         }

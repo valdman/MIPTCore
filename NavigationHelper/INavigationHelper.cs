@@ -5,12 +5,12 @@ namespace NavigationHelper
 {
     public interface INavigationHelper
     {
-        Task<IEnumerable<NavigationTableEntry>> GetNavigationTable();
-        Task<NavigationTableEntry> GetElementById(int id);
+        IEnumerable<NavigationTableEntry> GetNavigationTable();
+        NavigationTableEntry GetElementById(int id);
 
-        Task<int> CreateElement(NavigationTableEntry element);
-        Task UpdateElement(NavigationTableEntry element);
+        int CreateElement(NavigationTableEntry element);
+        void UpdateElement(NavigationTableEntry element);
         
-        Task DeleteElement(int id);
+        void DeleteElement(int id);
     }
 }

@@ -17,23 +17,23 @@ namespace CapitalsTableHelper
             _capitalsManager = capitalsManager;
         }
 
-        public Task<IEnumerable<CapitalsTableEntry>> GetTableForCapitals()
+        public IEnumerable<CapitalsTableEntry> GetTableForCapitals()
         {
             return _captalsTableRepository.GetAll();
         }
 
-        public async Task SaveTable(IEnumerable<CapitalsTableEntry> table)
+        public void SaveTable(IEnumerable<CapitalsTableEntry> table)
         {
-            await _captalsTableRepository.DeleteAllCapitalTableEntriesAsync();
+            _captalsTableRepository.DeleteAllCapitalTableEntries();
             
             foreach (var capitalsTableEntry in table)
             {
-                var relatedCapital = await _capitalsManager.GetCapitalByIdAsync(capitalsTableEntry.CapitalId);
+                var relatedCapital = _capitalsManager.GetCapitalById(capitalsTableEntry.CapitalId);
                 if (relatedCapital == null)
                 {
                     throw new RelatedCapitalNotExists();
                 }
-                await _captalsTableRepository.CreateAsync(capitalsTableEntry);
+                _captalsTableRepository.Create(capitalsTableEntry);
             }
         }
     }

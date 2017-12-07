@@ -5,14 +5,14 @@ namespace PagesManagment
 {
     public interface IPageManager
     {
-        Task<Page> GetPageByIdAsync(int pageId); 
-        Task<Page> GetPageByUrlAsync(string pageUrl);
-        Task<PageTreeNode> GetTreeOfPages();
-        Task<IEnumerable<Page>> GetAllPagesAsync();
+        Page GetPageById(int pageId); 
+        Page GetPageByUrl(string pageUrl);
+        PageTreeNode GetTreeOfPages();
+        IEnumerable<Page> GetAllPages();
         
-        Task<int> CreatePageByAddressAsync(Page pageToCreate);
+        int CreatePageByAddress(Page pageToCreate);
         
-        Task UpdatePageAsync(Page pageToUpadte);
-        Task DeletePageAsync(int idPageToDelete);
+        void UpdatePage(Page pageToUpadte);
+        void DeletePage(int idPageToDelete);
     }
 }

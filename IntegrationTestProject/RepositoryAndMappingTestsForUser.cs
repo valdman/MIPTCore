@@ -15,15 +15,15 @@ namespace IntegrationTestProject
     public class RepositoryAndMappingTestsForUser
     {
         [Fact]
-        public async void CreatingAndThanDeletingUserCreateAndThanDeleteUser()
+        public void CreatingAndThanDeletingUserCreateAndThanDeleteUser()
         {
             //Act
-            var id = await _genericRepository.CreateAsync(alumniUser);
-            var createdUser = await _genericRepository.GetByIdAsync(id);
+            var id = _genericRepository.Create(alumniUser);
+            var createdUser = _genericRepository.GetById(id);
             //alumniUser.Id = id;
 
-            await _genericRepository.DeleteAsync(id);
-            var deletedUser = await _genericRepository.GetByIdAsync(id);
+            _genericRepository.Delete(id);
+            var deletedUser = _genericRepository.GetById(id);
             
             //Assert
             Assert.Equal(alumniUser, createdUser);
@@ -31,18 +31,18 @@ namespace IntegrationTestProject
         }
 
         [Fact]
-        public async void CreatingAndThanUpdatingUserCreateAndThanUpdateUser()
+        public void CreatingAndThanUpdatingUserCreateAndThanUpdateUser()
         {
             //Act
-            var id = await _genericRepository.CreateAsync(notAlumniUser);
+            var id = _genericRepository.Create(notAlumniUser);
 
             notAlumniUser.IsMiptAlumni = true;
             notAlumniUser.AlumniProfile = alumniUser.AlumniProfile;
 
-            await _genericRepository.UpdateAsync(notAlumniUser);
-            var updatedUser = await _genericRepository.GetByIdAsync(id);
+            _genericRepository.Update(notAlumniUser);
+            var updatedUser = _genericRepository.GetById(id);
             
-            await _genericRepository.DeleteAsync(id);
+            _genericRepository.Delete(id);
             
             //Assert
             Assert.Equal(updatedUser, notAlumniUser);
@@ -50,25 +50,25 @@ namespace IntegrationTestProject
         }
         
         [Fact]
-        public async void CreatingAndThanDoubleUpdatingUserCreateAndThanDoubleUpdateUser()
+        public void CreatingAndThanDoubleUpdatingUserCreateAndThanDoubleUpdateUser()
         {
             //Act
-            var id = await _genericRepository.CreateAsync(notAlumniUser);
+            var id = _genericRepository.Create(notAlumniUser);
 
             notAlumniUser.IsMiptAlumni = true;
             notAlumniUser.AlumniProfile = alumniUser.AlumniProfile;
-            await _genericRepository.UpdateAsync(notAlumniUser);
+            _genericRepository.Update(notAlumniUser);
             
-            var updatedUser = await _genericRepository.GetByIdAsync(id);
+            var updatedUser = _genericRepository.GetById(id);
 
             notAlumniUser.FirstName = Guid.NewGuid().ToString().Substring(0, 10);
             notAlumniUser.AlumniProfile.Faculty = "ФАКИ";
-            await _genericRepository.UpdateAsync(notAlumniUser);
+            _genericRepository.Update(notAlumniUser);
             Thread.Sleep(5000);
             
-            var secondTimeUpdatedUser = await _genericRepository.GetByIdAsync(id);
+            var secondTimeUpdatedUser = _genericRepository.GetById(id);
             
-            await _genericRepository.DeleteAsync(id);
+            _genericRepository.Delete(id);
             
             //Assert
             Assert.Equal(updatedUser, notAlumniUser);

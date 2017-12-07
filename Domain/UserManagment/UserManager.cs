@@ -19,18 +19,18 @@ namespace UserManagment
             _userRepository = userRepository;
         }
 
-        public async Task<User> GetUserByIdAsync(int userId)
+        public User GetUserById(int userId)
         {
             Require.Positive(userId, nameof(userId));
 
-            return await _userRepository.GetByIdAsync(userId);
+            return _userRepository.GetById(userId);
         }
 
-        public async Task<User> GetUserByEmailAsync(string email)
+        public User GetUserByEmail(string email)
         {
             Require.NotEmpty(email, nameof(email));
 
-            var foundedUsers = await _userRepository.FindByAsync(user => user.Email.Equals(email));
+            var foundedUsers = _userRepository.FindBy(user => user.Email.Equals(email));
             var users = foundedUsers as User[] ?? foundedUsers.ToArray();
             
             var numberOfFoundedUsers = users.Count();
@@ -43,48 +43,48 @@ namespace UserManagment
             return users.SingleOrDefault();
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        public IEnumerable<User> GetAllUsers()
         {
-            return await _userRepository.GetAll();
+            return _userRepository.GetAll();
         }
 
-        public async Task<IEnumerable<User>> GetUsersByPredicateAsync(Expression<Func<User, bool>> predicate)
+        public IEnumerable<User> GetUsersByPredicate(Expression<Func<User, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return await _userRepository.FindByAsync(predicate);
+            return _userRepository.FindBy(predicate);
         }
 
-        public async Task UpdateUserAsync(User userToUpdate)
+        public void UpdateUser(User userToUpdate)
         {
             Require.NotNull(userToUpdate, nameof(userToUpdate));
 
-            await MustHaveUniqueEmail(userToUpdate);
+            MustHaveUniqueEmail(userToUpdate);
             MustContainConsistentProfile(userToUpdate);
 
-            await _userRepository.UpdateAsync(userToUpdate);
+            _userRepository.Update(userToUpdate);
         }
 
-        public async Task<int> CreateUserAsync(User userToCreate)
+        public int CreateUser(User userToCreate)
         {
             Require.NotNull(userToCreate, nameof(userToCreate));
 
-            await MustHaveUniqueEmail(userToCreate);
+            MustHaveUniqueEmail(userToCreate);
             MustContainConsistentProfile(userToCreate);
 
-            return await _userRepository.CreateAsync(userToCreate);
+            return _userRepository.Create(userToCreate);
         }
 
-        public async Task DeleteUserAsync(int userToDeleteId)
+        public void DeleteUser(int userToDeleteId)
         {
             Require.Positive(userToDeleteId, nameof(userToDeleteId));
 
-            await _userRepository.DeleteAsync(userToDeleteId);
+            _userRepository.Delete(userToDeleteId);
         }
 
-        private async Task MustHaveUniqueEmail(User userToCheck)
+        private void MustHaveUniqueEmail(User userToCheck)
         {
-            var sameEmailUser = await GetUserByEmailAsync(userToCheck.Email);
+            var sameEmailUser = GetUserByEmail(userToCheck.Email);
 
             if (sameEmailUser != null && sameEmailUser.Id != userToCheck.Id)
             {

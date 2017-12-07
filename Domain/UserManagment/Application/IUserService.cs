@@ -5,7 +5,7 @@ namespace UserManagment.Application
 {
     public interface IUserService
     {
-        Task ConfirmEmail(string emailToConfirm);
-        Task ChangePassword(int userIdToChangePassword, Password newPassword);
+        void ConfirmEmail(string emailToConfirm);
+        void ChangePassword(int userIdToChangePassword, Password newPassword);
     }
 }

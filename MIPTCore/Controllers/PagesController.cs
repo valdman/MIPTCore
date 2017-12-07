@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,25 +22,25 @@ namespace MIPTCore.Controllers
         // GET pages/tree
         [HttpGet]
         [Route("tree")]
-        public async Task<IActionResult> GetTree()
+        public IActionResult GetTree()
         {
-            var pageTree = await _pagesManager.GetTreeOfPages();
+            var pageTree = _pagesManager.GetTreeOfPages();
             
             return Ok(PageTreeMapper.PageTreeToModel(pageTree));
         }
         
         // GET pages
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var allPages = await _pagesManager.GetAllPagesAsync();
+            var allPages = _pagesManager.GetAllPages();
 
             return Ok(allPages.Select(Mapper.Map<PageModel>));
         }
 
         // GET pages/5 or pages/page/url
         [HttpGet("{*pageIndex}")]
-        public async Task<IActionResult> Get(string pageIndex)
+        public IActionResult Get(string pageIndex)
         {
             if (!ModelState.IsValid)
             {
@@ -53,11 +51,11 @@ namespace MIPTCore.Controllers
             if (int.TryParse(pageIndex, out var pageId))
             {
                 this.CheckIdViaModel(pageId);
-                pageToReturn = await _pagesManager.GetPageByIdAsync(pageId);
+                pageToReturn = _pagesManager.GetPageById(pageId);
             }
             else
             {
-               pageToReturn = await _pagesManager.GetPageByUrlAsync(pageIndex);
+               pageToReturn = _pagesManager.GetPageByUrl(pageIndex);
             }
 
             if (pageToReturn == null)
@@ -71,7 +69,7 @@ namespace MIPTCore.Controllers
         // POST pages
         [HttpPost]
         [Authorize("Admin")]
-        public async Task<IActionResult> Post([FromBody] PageCreationModel pageModel)
+        public IActionResult Post([FromBody] PageCreationModel pageModel)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +78,7 @@ namespace MIPTCore.Controllers
 
             var pageToCreate = Mapper.Map<Page>(pageModel);
 
-            var pageId = await _pagesManager.CreatePageByAddressAsync(pageToCreate);
+            var pageId = _pagesManager.CreatePageByAddress(pageToCreate);
 
             return Ok(pageId);
         }
@@ -88,7 +86,7 @@ namespace MIPTCore.Controllers
         // PUT pages/5
         [HttpPut("{id}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Put(int id, [FromBody] PageUpdateModel pageModel)
+        public IActionResult Put(int id, [FromBody] PageUpdateModel pageModel)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -96,7 +94,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var pageToUpdate = await _pagesManager.GetPageByIdAsync(id);
+            var pageToUpdate = _pagesManager.GetPageById(id);
 
             if (pageToUpdate == null)
             {
@@ -109,10 +107,10 @@ namespace MIPTCore.Controllers
             pageToUpdate.Description = pageModel.Description;
             pageToUpdate.Content = pageModel.Content;
             
-            await _pagesManager.UpdatePageAsync(pageToUpdate);
+            _pagesManager.UpdatePage(pageToUpdate);
             
             //!!!
-            var updatedPage = await _pagesManager.GetPageByIdAsync(id);
+            var updatedPage = _pagesManager.GetPageById(id);
 
             return Ok(Mapper.Map<PageModel>(updatedPage));
         }
@@ -120,7 +118,7 @@ namespace MIPTCore.Controllers
         // DELETE pages/5
         [HttpDelete("{id}")]
         [Authorize("Admin")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             this.CheckIdViaModel(id);
             if (!ModelState.IsValid)
@@ -128,14 +126,14 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var pageToDelete = await _pagesManager.GetPageByIdAsync(id);
+            var pageToDelete = _pagesManager.GetPageById(id);
             
             if (pageToDelete == null)
             {
                 return NotFound("User not found");
             }
 
-            await _pagesManager.DeletePageAsync(id);
+            _pagesManager.DeletePage(id);
 
             return Ok();
         }

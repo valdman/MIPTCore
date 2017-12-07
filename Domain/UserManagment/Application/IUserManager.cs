@@ -7,14 +7,14 @@ namespace UserManagment.Application
 {
     public interface IUserManager
     {
-        Task<User> GetUserByIdAsync(int userId);
-        Task<User> GetUserByEmailAsync(string email);
-        Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<IEnumerable<User>> GetUsersByPredicateAsync(Expression<Func<User, bool>> predicate);
+        User GetUserById(int userId);
+        User GetUserByEmail(string email);
+        IEnumerable<User> GetAllUsers();
+        IEnumerable<User> GetUsersByPredicate(Expression<Func<User, bool>> predicate);
 
-        Task UpdateUserAsync(User userToUpdate);
-        Task<int> CreateUserAsync(User userToCreate);
+        void UpdateUser(User userToUpdate);
+        int CreateUser(User userToCreate);
 
-        Task DeleteUserAsync(int userToDeleteId);
+        void DeleteUser(int userToDeleteId);
     }
 }
