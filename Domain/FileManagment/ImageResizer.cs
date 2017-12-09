@@ -1,6 +1,8 @@
 ﻿using System.IO;
-using ImageSharp;
+using SixLabors.ImageSharp;
 using Microsoft.Extensions.Options;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.Primitives;
 
 namespace FileManagment
 {
@@ -15,20 +17,18 @@ namespace FileManagment
                 Height = image.Width > image.Height ? 0 : _fileStorageSettings.MaxImageSize
             };
 
-            image.Resize(new ImageSharp.Processing.ResizeOptions
-            {
-                Size = newSize,
-                Mode = ImageSharp.Processing.ResizeMode.Pad
-            });
+            image.Mutate(i =>
+                i.Resize(new ResizeOptions
+                {
+                    Size = newSize,
+                    Mode = ResizeMode.Pad
+                }));
 
             var extension = Path.GetExtension(imageToResizeInfo.ToString());
             var newFileName = Path.GetRandomFileName();
             var fullPath = Path.Combine(_fileStorageSettings.ImageStorageFolder, newFileName) + $".{extension}";
 
-            using (var fileStream = new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write))
-            {
-                image.Save(fileStream);
-            }
+            image.Save(fullPath);
 
             return new FileInfo(fullPath);
         }
