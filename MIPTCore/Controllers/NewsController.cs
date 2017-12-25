@@ -24,7 +24,7 @@ namespace MIPTCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var allNews = _newsManager.GetAllNews();
+            var allNews = _newsManager.GetAllNews().OrderByDescending(n => n.CreatingTime);
 
             return Ok(allNews.Select(Mapper.Map<NewsModel>));
         }

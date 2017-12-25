@@ -24,7 +24,7 @@ namespace MIPTCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var allStories = _storiesManager.GetAllStories();
+            var allStories = _storiesManager.GetAllStories().OrderByDescending(s => s.CreatingTime);
 
             return Ok(allStories.Select(Mapper.Map<StoryModel>));
         }
