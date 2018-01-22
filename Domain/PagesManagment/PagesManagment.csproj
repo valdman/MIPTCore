@@ -13,4 +13,7 @@
       <HintPath>..\..\..\..\..\.nuget\packages\fluentvalidation\7.1.1\lib\netstandard1.0\FluentValidation.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
+  </ItemGroup>
 </Project>

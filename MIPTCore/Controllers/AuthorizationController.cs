@@ -37,7 +37,7 @@ namespace MIPTCore.Controllers
             User intentedUser;
             try
             {
-                intentedUser = await _authentificationService.AuthentificateAsync(Mapper.Map<Credentials>(credentials));
+                intentedUser = _authentificationService.AuthentificateAsync(Mapper.Map<Credentials>(credentials));
             }
             catch (OperationOnUserThatNotExistsException)
             {
@@ -68,7 +68,7 @@ namespace MIPTCore.Controllers
         {
             var currentUserId = User.GetId();
             
-            await _authentificationService.DeauthentificateAsync(currentUserId);
+            _authentificationService.DeauthentificateAsync(currentUserId);
             
             await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
             

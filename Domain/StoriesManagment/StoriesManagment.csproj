@@ -8,4 +8,7 @@
       <Name>CapitalManagment</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
+  </ItemGroup>
 </Project>
