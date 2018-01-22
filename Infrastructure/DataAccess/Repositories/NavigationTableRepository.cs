@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Linq.Dynamic.Core;
 using CapitalsTableHelper;
 using Common;
 using DataAccess.Contexts;
 using Journalist;
-using Journalist.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NavigationHelper;
 
@@ -35,17 +33,22 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
-        public IEnumerable<NavigationTableEntry> GetAll(PaginationAndFilteringParams filteringParams)
+        public (int, IEnumerable<NavigationTableEntry>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<NavigationTableEntry, bool>> predicate = null)
         {
-            IOrderedQueryable<NavigationTableEntry> querry;
+            Require.NotNull(predicate, nameof(predicate));
             
-            if (filteringParams.Field.IsNotNullOrEmpty())
-                return _db.OrderBy($"{filteringParams.Field} {filteringParams.Order}")   
-                        .Skip(filteringParams.Skip)
-                        .Take(filteringParams.Take)
-                        .ToList();
-            
-            return _db.ToList();
+            var querry = predicate != null
+                ? _db.Where(predicate)
+                : _db;
+
+            var total = querry.Count();
+
+            querry = querry
+                .OrderBy(n => n.Id)
+                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page, 1))
+                .Take(filteringParams.PerPage);
+
+            return (total, querry.ToList());
         }
 
         public IEnumerable<NavigationTableEntry> FindBy(Expression<Func<NavigationTableEntry, bool>> predicate)
@@ -54,25 +57,6 @@ namespace DataAccess.Repositories
             
             var enriesToReturn = _db.Where(predicate).ToList();
             return enriesToReturn;
-        }
-
-        public IEnumerable<NavigationTableEntry> FindBy(Expression<Func<NavigationTableEntry, bool>> predicate,
-            PaginationAndFilteringParams filteringParams)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            var querry = predicate != null
-                ? _db.Where(predicate)
-                : _db;
-
-            if (!filteringParams.Field.IsNotNullOrEmpty())
-                querry = querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}");
-
-            querry = querry
-                .Skip(filteringParams.Skip)
-                .Take(filteringParams.Take);
-
-            return querry.AsEnumerable<NavigationTableEntry>();
         }
 
         public int Create(NavigationTableEntry @object)

@@ -43,20 +43,22 @@ namespace DataAccess.Repositories
                 .ToList();
         }
 
-        public IEnumerable<TEntity> GetAll(PaginationAndFilteringParams filteringParams)
+        public (int, IEnumerable<TEntity>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<TEntity, bool>> predicate = null)
         {
-            var querry = Db
-                .Where(@object => !@object.IsDeleted);
-                
-            querry = filteringParams.Field.IsNotNullOrEmpty() 
-                    ? querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}") 
-                    : querry.OrderByDescending(@object => @object.CreatingTime);
+            var aliveObjects = Db.Where(@object => !@object.IsDeleted);
             
-            return querry
-                .Skip(filteringParams.Skip)
-                .Take(filteringParams.Take)
-                
-                .ToList();
+            var querry = predicate != null
+                ? aliveObjects.Where(predicate)
+                : aliveObjects;
+
+            var total = querry.Count();
+
+            querry = querry
+                .OrderBy($"{filteringParams.Field}, CreatingTime, Id {filteringParams.Order}")
+                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page, 1))
+                .Take(filteringParams.PerPage);
+
+            return (total, querry.ToList());
         }
 
         public virtual IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
@@ -66,27 +68,6 @@ namespace DataAccess.Repositories
             return Db.Where(predicate)
                 .Where(@object => !@object.IsDeleted)
                 .ToList();
-        }
-
-        public IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate, PaginationAndFilteringParams filteringParams)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            var aliveObjects = Db.Where(@object => !@object.IsDeleted);
-            
-            var querry = predicate != null
-                ? aliveObjects.Where(predicate)
-                : aliveObjects;
-
-            querry = !filteringParams.Field.IsNotNullOrEmpty() 
-                ? querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}") 
-                : querry.OrderByDescending(@object => @object.CreatingTime);
-            
-            querry = querry
-                .Skip(filteringParams.Skip)
-                .Take(filteringParams.Take);
-
-            return querry.ToList();
         }
 
         public virtual int Create(TEntity @object)

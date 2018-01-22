@@ -8,8 +8,9 @@ namespace DonationManagment.Application
 {
     public interface IDonationManager
     {
-        IEnumerable<Donation> GetAllDonations(PaginationAndFilteringParams filteringParams = null);
-        IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate, PaginationAndFilteringParams filteringParams = null);
+        IEnumerable<Donation> GetAllDonations();
+        IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate);
+        PaginatedList<Donation> GetPaginated(PaginationAndFilteringParams filteringParams, Expression<Func<Donation, bool>> predicate = null);
         Donation GetDonationById(int donationId);
         
         DonationPaymentInformation CreateDonationAsync(Donation donationToCreate);

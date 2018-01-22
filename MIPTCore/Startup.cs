@@ -107,6 +107,7 @@ namespace MIPTCore
                 options => options
                     .WithOrigins("http://fund.mipt.ru").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
                     .WithOrigins("http://localhost:3000").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
+                    .WithOrigins("http://185.204.0.35:5002").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
             );
 
             app.UseMvc();

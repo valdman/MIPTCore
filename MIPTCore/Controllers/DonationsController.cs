@@ -77,23 +77,38 @@ namespace MIPTCore.Controllers
         // GET: donations
         [HttpGet, FormatFilter]
         [AllowAnonymous]
-        public IActionResult GetAllDonations([FromQuery] PaginationAndFilteringParams filteringParams, string format)
+        public IActionResult GetAllDonations([FromQuery] PaginationAndFilteringParams filteringParams, string format, bool isPaginationDisabled)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             IEnumerable<Donation> donationsToReturn;
-            try
+            int total = -1;
+            
+            if (isPaginationDisabled)
             {
                 donationsToReturn = User.IsInRole("Admin") 
-                    ? _donationManager.GetAllDonations(filteringParams) 
-                    : _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed, filteringParams);
+                    ? _donationManager.GetAllDonations()
+                    : _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed);
             }
-            catch (System.Linq.Dynamic.Core.Exceptions.ParseException)
+            else
             {
-                return BadRequest("Ivalid filtering parameters");
+                try
+                {
+                    var donationsPage = User.IsInRole("Admin") 
+                        ? _donationManager.GetPaginated(filteringParams)
+                        : _donationManager.GetPaginated(filteringParams, donation => donation.IsConfirmed);
+    
+                    donationsToReturn = donationsPage.Docs;
+                    total = donationsPage.Total;
+                }
+                catch (System.Linq.Dynamic.Core.Exceptions.ParseException)
+                {
+                    return BadRequest("Ivalid filtering parameters");
+                }
             }
             
+
             var expandedDonationModels = donationsToReturn.Select(donation => new ExpandedDonationModel
                 {
                     Capital = Mapper.Map<CapitalModel>(_capitalManager.GetCapitalById(donation.CapitalId)),
@@ -106,7 +121,11 @@ namespace MIPTCore.Controllers
                 })
                 .ToList();
 
-            return Ok(expandedDonationModels);
+            if (isPaginationDisabled)
+                return Ok(expandedDonationModels);
+            
+            var paginated = new PaginatedList<ExpandedDonationModel>(filteringParams, expandedDonationModels, total);
+            return Ok(paginated);
         }
 
         // GET donations/5

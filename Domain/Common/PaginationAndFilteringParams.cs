@@ -5,7 +5,7 @@
         public string Field { get; set; }
         public string Order { get; set; }
 
-        public int Take { get; set; }
-        public int Skip { get; set; }
+        public int Page { get; set; }
+        public int PerPage { get; set; }
     }
 }

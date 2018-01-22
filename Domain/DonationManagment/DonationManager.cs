@@ -15,9 +15,16 @@ namespace DonationManagment
 {
     public class DonationManager : IDonationManager
     {
-        public IEnumerable<Donation> GetAllDonations(PaginationAndFilteringParams filteringParams)
+        public IEnumerable<Donation> GetAllDonations()
         {
-            return _donationRepository.GetAll(filteringParams);
+            return _donationRepository.GetAll();
+        }
+
+        public PaginatedList<Donation> GetPaginated(PaginationAndFilteringParams filteringParams,
+            Expression<Func<Donation, bool>> predicate = null)
+        {
+            var (total, donations) = _donationRepository.GetAllForPagination(filteringParams, predicate);
+            return new PaginatedList<Donation>(filteringParams, donations, total);
         }
 
         public Donation GetDonationById(int donationId)
@@ -26,6 +33,7 @@ namespace DonationManagment
 
             return _donationRepository.GetById(donationId);
         }
+
 
         public DonationPaymentInformation CreateDonationAsync(Donation donationToCreate)
         {
@@ -118,10 +126,9 @@ namespace DonationManagment
             _donationRepository.Delete(donationToDeleteId);
         }
 
-        public IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate,
-            PaginationAndFilteringParams filteringParams)
+        public IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate)
         {
-            return _donationRepository.FindBy(predicate, filteringParams);
+            return _donationRepository.FindBy(predicate);
         }
 
         private readonly IGenericRepository<Donation> _donationRepository;

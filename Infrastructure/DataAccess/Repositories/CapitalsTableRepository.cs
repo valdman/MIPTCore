@@ -9,8 +9,6 @@ using Common.Infrastructure;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
-using Journalist.Extensions;
 
 namespace DataAccess.Repositories
 {
@@ -36,17 +34,27 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
-        public IEnumerable<CapitalsTableEntry> GetAll(PaginationAndFilteringParams filteringParams)
+        public (int, IEnumerable<CapitalsTableEntry>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<CapitalsTableEntry, bool>> predicate = null)
         {
-            IOrderedQueryable<CapitalsTableEntry> querry;
+            Require.NotNull(predicate, nameof(predicate));
             
-            if (filteringParams.Field.IsNotNullOrEmpty())
-                return _db.OrderBy($"{filteringParams.Field} {filteringParams.Order}")   
-                    .Skip(filteringParams.Skip)
-                    .Take(filteringParams.Take)
-                    .ToList();
-            
-            return _db.ToList();
+            var querry = predicate != null
+                ? _db.Where(predicate)
+                : _db;
+
+            var total = querry.Count();
+
+            querry = querry
+                .OrderBy(n => n.CapitalId)
+                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page, 1))
+                .Take(filteringParams.PerPage);
+
+            return (total, querry.ToList());
+        }
+
+        public int Count()
+        {
+            return _db.Count();
         }
 
         public IEnumerable<CapitalsTableEntry> FindBy(Expression<Func<CapitalsTableEntry, bool>> predicate)
@@ -55,25 +63,6 @@ namespace DataAccess.Repositories
             
             var enriesToReturn = _db.Where(predicate).ToList();
             return enriesToReturn;
-        }
-
-        public IEnumerable<CapitalsTableEntry> FindBy(Expression<Func<CapitalsTableEntry, bool>> predicate,
-            PaginationAndFilteringParams filteringParams)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            var querry = predicate != null
-                ? _db.Where(predicate)
-                : _db;
-
-            if (!filteringParams.Field.IsNotNullOrEmpty())
-                querry = querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}");
-
-            querry = querry
-                .Skip(filteringParams.Skip)
-                .Take(filteringParams.Take);
-
-            return querry.AsEnumerable<CapitalsTableEntry>();
         }
 
         public int Create(CapitalsTableEntry @object)
