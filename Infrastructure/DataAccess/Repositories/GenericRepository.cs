@@ -7,7 +7,8 @@ using Common;
 using Common.Infrastructure;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
-using NavigationHelper;
+using System.Linq.Dynamic.Core;
+using Journalist.Extensions;
 
 namespace DataAccess.Repositories
 {
@@ -42,6 +43,22 @@ namespace DataAccess.Repositories
                 .ToList();
         }
 
+        public IEnumerable<TEntity> GetAll(PaginationAndFilteringParams filteringParams)
+        {
+            var querry = Db
+                .Where(@object => !@object.IsDeleted);
+                
+            querry = filteringParams.Field.IsNotNullOrEmpty() 
+                    ? querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}") 
+                    : querry.OrderByDescending(@object => @object.CreatingTime);
+            
+            return querry
+                .Skip(filteringParams.Skip)
+                .Take(filteringParams.Take)
+                
+                .ToList();
+        }
+
         public virtual IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
@@ -49,6 +66,27 @@ namespace DataAccess.Repositories
             return Db.Where(predicate)
                 .Where(@object => !@object.IsDeleted)
                 .ToList();
+        }
+
+        public IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate, PaginationAndFilteringParams filteringParams)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            var aliveObjects = Db.Where(@object => !@object.IsDeleted);
+            
+            var querry = predicate != null
+                ? aliveObjects.Where(predicate)
+                : aliveObjects;
+
+            querry = !filteringParams.Field.IsNotNullOrEmpty() 
+                ? querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}") 
+                : querry.OrderByDescending(@object => @object.CreatingTime);
+            
+            querry = querry
+                .Skip(filteringParams.Skip)
+                .Take(filteringParams.Take);
+
+            return querry.ToList();
         }
 
         public virtual int Create(TEntity @object)

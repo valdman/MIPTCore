@@ -29,7 +29,7 @@ namespace MIPTCore.Controllers
                 return Ok();
             }
 
-            var donationToConfirm = _donationManager.GetDonationByIdAsync(paymentCallbackModel.OrderNumber);
+            var donationToConfirm = _donationManager.GetDonationById(paymentCallbackModel.OrderNumber);
             if (donationToConfirm == null)
             {
                 _logger.LogError($"Donation #{paymentCallbackModel.OrderNumber} not found");

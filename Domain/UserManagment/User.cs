@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Security.Claims;
-using System.Security.Principal;
 using Common;
 
 namespace UserManagment

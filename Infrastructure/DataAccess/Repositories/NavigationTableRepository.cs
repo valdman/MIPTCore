@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
 using CapitalsTableHelper;
+using Common;
 using DataAccess.Contexts;
 using Journalist;
+using Journalist.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NavigationHelper;
 
@@ -33,12 +35,44 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
+        public IEnumerable<NavigationTableEntry> GetAll(PaginationAndFilteringParams filteringParams)
+        {
+            IOrderedQueryable<NavigationTableEntry> querry;
+            
+            if (filteringParams.Field.IsNotNullOrEmpty())
+                return _db.OrderBy($"{filteringParams.Field} {filteringParams.Order}")   
+                        .Skip(filteringParams.Skip)
+                        .Take(filteringParams.Take)
+                        .ToList();
+            
+            return _db.ToList();
+        }
+
         public IEnumerable<NavigationTableEntry> FindBy(Expression<Func<NavigationTableEntry, bool>> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
             
             var enriesToReturn = _db.Where(predicate).ToList();
             return enriesToReturn;
+        }
+
+        public IEnumerable<NavigationTableEntry> FindBy(Expression<Func<NavigationTableEntry, bool>> predicate,
+            PaginationAndFilteringParams filteringParams)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            var querry = predicate != null
+                ? _db.Where(predicate)
+                : _db;
+
+            if (!filteringParams.Field.IsNotNullOrEmpty())
+                querry = querry.OrderBy($"{filteringParams.Field} {filteringParams.Order}");
+
+            querry = querry
+                .Skip(filteringParams.Skip)
+                .Take(filteringParams.Take);
+
+            return querry.AsEnumerable<NavigationTableEntry>();
         }
 
         public int Create(NavigationTableEntry @object)

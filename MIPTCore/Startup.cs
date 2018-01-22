@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +40,14 @@ namespace MIPTCore
         public void ConfigureServices(IServiceCollection services)
         {   
             // Add framework services.
-            services.AddMvc()
+            services.AddMvc(options =>
+                {
+                    options.RespectBrowserAcceptHeader = true;
+                    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+
+                    options.FormatterMappings.SetMediaTypeMappingForFormat(
+                        "xml", "application/xml");
+                })   
                 .AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
@@ -62,6 +71,10 @@ namespace MIPTCore
                     "Admin",
                     policyBuilder => policyBuilder.AddRequirements(
                         new IsInRole(UserRole.Admin)));
+                options.AddPolicy(
+                    "Supervisor",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new IsInRole(UserRole.Supervisor)));
                 options.AddPolicy(
                     "User",
                     policyBuilder => policyBuilder.AddRequirements(

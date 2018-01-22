@@ -7,10 +7,8 @@ using CapitalManagment;
 using Common;
 using DonationManagment;
 using DonationManagment.Application;
-using Journalist.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MIPTCore.Authentification;
 using MIPTCore.Models;
 using UserManagment;
 using UserManagment.Application;
@@ -77,14 +75,25 @@ namespace MIPTCore.Controllers
         }
 
         // GET: donations
-        [HttpGet]
+        [HttpGet, FormatFilter]
         [AllowAnonymous]
-        public IActionResult GetAllDonations()
+        public IActionResult GetAllDonations([FromQuery] PaginationAndFilteringParams filteringParams, string format)
         {
-            var donationsToReturn = User.IsInRole("Admin") 
-                ? _donationManager.GetAllDonations() 
-                : _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            IEnumerable<Donation> donationsToReturn;
+            try
+            {
+                donationsToReturn = User.IsInRole("Admin") 
+                    ? _donationManager.GetAllDonations(filteringParams) 
+                    : _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed, filteringParams);
+            }
+            catch (System.Linq.Dynamic.Core.Exceptions.ParseException)
+            {
+                return BadRequest("Ivalid filtering parameters");
+            }
+            
             var expandedDonationModels = donationsToReturn.Select(donation => new ExpandedDonationModel
                 {
                     Capital = Mapper.Map<CapitalModel>(_capitalManager.GetCapitalById(donation.CapitalId)),
@@ -101,7 +110,7 @@ namespace MIPTCore.Controllers
         }
 
         // GET donations/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}.{format?}"), FormatFilter]
         public IActionResult GetDonationbyId(string id)
         {
             if (!ModelState.IsValid)
@@ -110,7 +119,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var donationToReturn = _donationManager.GetDonationByIdAsync(objectId);
+            var donationToReturn = _donationManager.GetDonationById(objectId);
 
             if (donationToReturn == null)
                 return NotFound();
@@ -150,7 +159,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = _donationManager.GetDonationByIdAsync(objectId);
+            var oldDonation = _donationManager.GetDonationById(objectId);
 
             if (oldDonation == null)
                 return NotFound();
@@ -161,7 +170,7 @@ namespace MIPTCore.Controllers
             oldDonation.IsRecursive = donationModel.IsRecursive;
             oldDonation.PaymentType = donationModel.PaymentType;
 
-            _donationManager.UpdateDonationAsync(oldDonation);
+            _donationManager.UpdateDonation(oldDonation);
             return Ok(id);
         }
 
@@ -172,7 +181,7 @@ namespace MIPTCore.Controllers
             if(!int.TryParse(id, out var objectId))
                 return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = _donationManager.GetDonationByIdAsync(objectId);
+            var oldDonation = _donationManager.GetDonationById(objectId);
 
             if (oldDonation == null)
                 return NotFound();

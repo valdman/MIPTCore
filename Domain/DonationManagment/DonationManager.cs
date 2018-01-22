@@ -15,12 +15,12 @@ namespace DonationManagment
 {
     public class DonationManager : IDonationManager
     {
-        public IEnumerable<Donation> GetAllDonations()
+        public IEnumerable<Donation> GetAllDonations(PaginationAndFilteringParams filteringParams)
         {
-            return _donationRepository.GetAll();
+            return _donationRepository.GetAll(filteringParams);
         }
 
-        public Donation GetDonationByIdAsync(int donationId)
+        public Donation GetDonationById(int donationId)
         {
             Require.NotNull(donationId, nameof(donationId));
 
@@ -89,7 +89,7 @@ namespace DonationManagment
             _donationRepository.Update(donationToConfirm);
         }
 
-        public void UpdateDonationAsync(Donation donationToUpdate)
+        public void UpdateDonation(Donation donationToUpdate)
         {
             Require.NotNull(donationToUpdate, nameof(donationToUpdate));
 
@@ -118,9 +118,10 @@ namespace DonationManagment
             _donationRepository.Delete(donationToDeleteId);
         }
 
-        public IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate = null)
+        public IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate,
+            PaginationAndFilteringParams filteringParams)
         {
-            return _donationRepository.FindBy(predicate);
+            return _donationRepository.FindBy(predicate, filteringParams);
         }
 
         private readonly IGenericRepository<Donation> _donationRepository;
