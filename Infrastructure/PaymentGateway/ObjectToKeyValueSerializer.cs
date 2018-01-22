@@ -45,7 +45,6 @@ namespace PaymentGateway
                     jValue?.ToString(CultureInfo.InvariantCulture);
 
                 return new Dictionary<string, string> {{token.Path, value}};
-                break;
             }
         }
     }

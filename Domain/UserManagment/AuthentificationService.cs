@@ -15,7 +15,7 @@ namespace UserManagment
             _userManager = userManager;
         }
 
-        public async Task<User> AuthentificateAsync(Credentials credentials)
+        public User AuthentificateAsync(Credentials credentials)
         {
             var userToAuthentificate = _userManager.GetUserByEmail(credentials.Email);
             if(userToAuthentificate == null)
@@ -37,7 +37,7 @@ namespace UserManagment
             return userToAuthentificate;
         }
 
-        public async Task DeauthentificateAsync(int userId)
+        public void DeauthentificateAsync(int userId)
         {
             var userToDeauthentificate = _userManager.GetUserById(userId);
             
