@@ -46,7 +46,7 @@ namespace DataAccess.Repositories
 
             querry = querry
                 .OrderBy(n => n.CapitalId)
-                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page, 1))
+                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page - 1, 0))
                 .Take(filteringParams.PerPage);
 
             return (total, querry.ToList());
