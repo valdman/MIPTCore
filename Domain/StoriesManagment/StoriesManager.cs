@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Common.Infrastructure;
 using Journalist;
+using Journalist.Extensions;
 
 namespace StoriesManagment
 {
@@ -23,6 +25,17 @@ namespace StoriesManagment
             return _storiesRepository.GetById(storyId);
         }
 
+        public Story GetStoryByUrl(string storyUrl)
+        {
+            Require.NotEmpty(storyUrl, nameof(storyUrl));
+            
+            if (storyUrl.Last() == '/')
+                storyUrl = storyUrl.Remove(storyUrl.Length - 1);
+            
+            var newsWithThisUrl = _storiesRepository.FindBy(c => c.FullPageUri == storyUrl);
+            return newsWithThisUrl.SingleOrDefault();
+        }
+
         public IEnumerable<Story> GetAllStories()
         {
             return _storiesRepository.GetAll();
@@ -38,6 +51,7 @@ namespace StoriesManagment
         public int CreateStory(Story storyToCreate)
         {
             Require.NotNull(storyToCreate, nameof(storyToCreate));
+            MustBeValidStory(storyToCreate);
             
             return _storiesRepository.Create(storyToCreate);
         }
@@ -54,6 +68,17 @@ namespace StoriesManagment
             Require.Positive(storyId, nameof(storyId));
             
             _storiesRepository.Delete(storyId);
+        }
+        
+        void MustBeValidStory(Story story)
+        {
+            var newWithSameUrl = _storiesRepository.FindBy(n => n.FullPageUri == story.FullPageUri).ToList();
+            
+            if(newWithSameUrl.IsEmpty())
+                return;
+            
+            if(newWithSameUrl.Count() == 1 && newWithSameUrl.Single().Id != story.Id)
+                throw new ArgumentException("Duplicate url");
         }
     }
 }

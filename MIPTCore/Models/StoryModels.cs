@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using CapitalManagment;
 
 namespace MIPTCore.Models
 {
@@ -11,6 +10,8 @@ namespace MIPTCore.Models
         
         [Required]
         public string Content { get; set; }
+        
+        public string FullPageUri { get; set; }
     }
 
     public class StoryModel : AbstractStoryModel

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using CapitalManagment;
 using Microsoft.AspNetCore.Authorization;
@@ -29,21 +28,29 @@ namespace MIPTCore.Controllers
             return Ok(allStories.Select(Mapper.Map<StoryModel>));
         }
 
-        // GET stories/5
-        [HttpGet("{storyId}")]
-        public IActionResult Get(int storyId)
-        {   
-            this.CheckIdViaModel(storyId);
+        // GET stories/5 or stories/page/url
+        [HttpGet("{*storyIndex}")]
+        public IActionResult Get(string storyIndex)
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var storyToReturn = _storiesManager.GetStoryById(storyId);
+            Story storyToReturn;
+            if (int.TryParse(storyIndex, out var storyId))
+            {
+                this.CheckIdViaModel(storyId);
+                storyToReturn = _storiesManager.GetStoryById(storyId);
+            }
+            else
+            {
+                storyToReturn = _storiesManager.GetStoryByUrl(storyIndex);
+            }
 
             if (storyToReturn == null)
             {
-                return NotFound("Story with this ID is not exists");
+                return NotFound("Story with this ID or Name is not exists");
             }
             
             return Ok(Mapper.Map<StoryModel>(storyToReturn));
@@ -89,6 +96,7 @@ namespace MIPTCore.Controllers
 
             storyToUpdate.Owner = newStoryOwner;
             storyToUpdate.Content = storyModel.Content;
+            storyToUpdate.FullPageUri = storyModel.FullPageUri;
 
             _storiesManager.UpdateStory(storyToUpdate);
             

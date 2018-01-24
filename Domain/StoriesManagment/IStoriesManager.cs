@@ -8,6 +8,7 @@ namespace StoriesManagment
     public interface IStoriesManager
     {
         Story GetStoryById(int storyId);
+        Story GetStoryByUrl(string storyUrl);
         IEnumerable<Story> GetAllStories();
         IEnumerable<Story> GetStoriesByPredicate(Expression<Func<Story, bool>> predicate);
 
