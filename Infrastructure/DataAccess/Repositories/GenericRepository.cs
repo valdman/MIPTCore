@@ -54,7 +54,7 @@ namespace DataAccess.Repositories
             var total = querry.Count();
 
             querry = querry
-                .OrderBy($"{filteringParams.Field}, CreatingTime, Id {filteringParams.Order}")
+                .OrderBy($"{filteringParams.Field} {filteringParams.Order}, CreatingTime DESC, Id DESC")
                 .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page - 1, 0))
                 .Take(filteringParams.PerPage);
 
