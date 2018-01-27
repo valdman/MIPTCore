@@ -64,5 +64,7 @@ namespace MIPTCore.Models
 		public int UserId { get; set; }
 
 		public int CapitalId { get; set; }
+		
+		public bool IsConfirmed { get; set; }
 	}
 }

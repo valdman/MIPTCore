@@ -172,6 +172,7 @@ namespace MIPTCore.Controllers
             oldDonation.CapitalId = donationModel.CapitalId;
             oldDonation.Value = donationModel.Value;
             oldDonation.IsRecursive = donationModel.IsRecursive;
+            oldDonation.IsConfirmed = donationModel.IsConfirmed;
             oldDonation.PaymentType = donationModel.PaymentType;
 
             _donationManager.UpdateDonation(oldDonation);
