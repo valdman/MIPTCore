@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using Common.Entities;
 using Microsoft.AspNetCore.Http;
-using Common;
 
 namespace FileManagment
 {

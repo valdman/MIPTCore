@@ -1,5 +1,5 @@
 ﻿using CapitalManagment;
-using Common;
+using Common.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.Mappings

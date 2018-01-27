@@ -97,7 +97,7 @@ namespace PaymentGateway
                 request.AddParameter(querryParam.Key, querryParam.Value);
             }
             
-            _logger.LogInformation($"Payment operation to {requestUri} with query data {payloadArray.JoinStringsWith(",")}");
+            _logger.LogInformation($"Payment operation To {requestUri} with query data {payloadArray.JoinStringsWith(",")}");
 
             var httpResponse = client.Execute(request);
 

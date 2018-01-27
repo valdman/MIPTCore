@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Common;
+using Common.Entities;
+using Common.Entities.Entities;
 using FluentValidation;
 using Journalist.Extensions;
 using Microsoft.EntityFrameworkCore.Internal;

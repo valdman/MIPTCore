@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using MIPTCore.Authentification;
 using MIPTCore.Extensions;
 using MIPTCore.Middlewares;
+using Newtonsoft.Json.Serialization;
 using UserManagment;
 
 namespace MIPTCore
@@ -36,18 +37,15 @@ namespace MIPTCore
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method To add services To the container.
         public void ConfigureServices(IServiceCollection services)
-        {   
-            // Add framework services.
-            services.AddMvc(options =>
+        {
+            services.AddMvc(options => { options.RespectBrowserAcceptHeader = true; })
+                .AddXmlDataContractSerializerFormatters()
+                .AddJsonOptions(options =>
                 {
-                    options.RespectBrowserAcceptHeader = true;
-                    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
-
-                    options.FormatterMappings.SetMediaTypeMappingForFormat(
-                        "xml", "application/xml");
-                })   
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                })
                 .AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
@@ -64,7 +62,7 @@ namespace MIPTCore
                     };
                     options.Cookie.SameSite = SameSiteMode.None;
                 });
-            
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(
@@ -80,29 +78,29 @@ namespace MIPTCore
                     policyBuilder => policyBuilder.AddRequirements(
                         new IsAuthentificated()));
             });
-            
+
             //Add DI starter
             new Bootstraper(services, Configuration).Configure();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method gets called by the runtime. Use this method To configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             //Middlewares
             app.DomainErrorHandlingMiddleware();
 
             //EnsureSchemaCreated(app);
 
             app.UseAuthentication();
-            
+
             app.UseCors(
                 options => options
                     .WithOrigins("http://fund.mipt.ru").AllowAnyMethod().AllowCredentials().AllowAnyHeader()
@@ -125,10 +123,11 @@ namespace MIPTCore
                 var dbTicketContext = serviceScope.ServiceProvider.GetService<TicketContext>();
                 var dbDomainOptionsContext = serviceScope.ServiceProvider.GetService<DomainOptionsContext>();
 
-                EnsureSchemaFor(dbCapitalContext, dbUsersContext, dbPageContext, dbTicketContext, dbDomainOptionsContext).Wait();
+                EnsureSchemaFor(dbCapitalContext, dbUsersContext, dbPageContext, dbTicketContext,
+                    dbDomainOptionsContext).Wait();
                 //ForceCreateTablesFor(dbFrontendHelperContext).Wait();
             }
-            
+
 
             async Task EnsureSchemaFor(params DbContext[] contexts)
             {
@@ -139,6 +138,5 @@ namespace MIPTCore
                 }
             }
         }
-       
     }
 }

@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.Entities;
 
 namespace CapitalsTableHelper
 {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Threading;
-using Common;
+using Common.Entities;
 using Common.Infrastructure;
-using DataAccess;
 using DataAccess.Contexts;
 using DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using UserManagment;
 using Xunit;
-using Xunit.Sdk;
 
 namespace IntegrationTestProject
 {

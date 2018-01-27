@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Common;
+using Common.Abstractions;
+using Common.Entities;
 
 namespace CapitalManagment
 {

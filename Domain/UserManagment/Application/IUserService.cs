@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Common;
+﻿using Common.Entities;
 
 namespace UserManagment.Application
 {

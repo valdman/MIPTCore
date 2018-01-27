@@ -3,10 +3,10 @@ using System.Diagnostics;
 using DonationManagment.Application;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using CapitalManagment;
-using Common;
+using Common.Entities.Entities.ReadModifiers;
 using Common.Infrastructure;
+using Common.ReadModifiers;
 using DonationManagment.Infrastructure;
 using Journalist;
 using UserManagment.Application;
@@ -20,11 +20,18 @@ namespace DonationManagment
             return _donationRepository.GetAll();
         }
 
-        public PaginatedList<Donation> GetPaginated(PaginationAndFilteringParams filteringParams,
+        public IEnumerable<Donation> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams = null)
+        {
+            Require.NotNull(filteringParams, nameof(filteringParams));
+
+            return _donationRepository.GetWithFilterAndOrder(filteringParams, orderingParams);
+        }
+
+        public PaginatedList<Donation> GetPaginatedDonations(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams,
             Expression<Func<Donation, bool>> predicate = null)
         {
-            var (total, donations) = _donationRepository.GetAllForPagination(filteringParams, predicate);
-            return new PaginatedList<Donation>(filteringParams, donations, total);
+            var (total, donations) = _donationRepository.GetAllForPagination(paginationParams, orderingParams, filteringParams, predicate);
+            return new PaginatedList<Donation>(paginationParams, donations, total);
         }
 
         public Donation GetDonationById(int donationId)

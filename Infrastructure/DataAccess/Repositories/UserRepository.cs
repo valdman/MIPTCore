@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Common;
+using Common.Entities;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;

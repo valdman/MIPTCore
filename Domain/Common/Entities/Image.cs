@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using Common.Abstractions;
 
-namespace Common
+namespace Common.Entities
 {
     public class Image : AbstractIdentifyable
     {

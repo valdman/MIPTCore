@@ -2,7 +2,8 @@
 using CapitalManagment;
 using CapitalManagment.Infrastructure;
 using CapitalsTableHelper;
-using Common;
+using Common.DomainSteroids;
+using Common.Entities;
 using Common.Infrastructure;
 using DataAccess.Contexts;
 using DataAccess.Repositories;

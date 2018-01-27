@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.Abstractions
 {
     public class AbstractIdentifyable
     {

@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Common.Abstractions;
+using Common.Entities;
 
 namespace CapitalManagment
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Linq.Expressions;
-using CapitalsTableHelper;
-using Common;
+using Common.Entities.Entities.ReadModifiers;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
@@ -33,22 +33,36 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
-        public (int, IEnumerable<NavigationTableEntry>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<NavigationTableEntry, bool>> predicate = null)
+        public (int, IEnumerable<NavigationTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<NavigationTableEntry, bool>> predicate = null)
         {
             Require.NotNull(predicate, nameof(predicate));
             
             var querry = predicate != null
                 ? _db.Where(predicate)
                 : _db;
+            
+            querry = !filteringParams.IsEmpty()
+                ? querry.Where(filteringParams.Linq())
+                : querry; 
 
             var total = querry.Count();
+            
 
             querry = querry
                 .OrderBy(n => n.Id)
-                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page - 1, 0))
-                .Take(filteringParams.PerPage);
+                .Skip(paginationParams.PerPage * Math.Max(paginationParams.Page - 1, 0))
+                .Take(paginationParams.PerPage);
 
             return (total, querry.ToList());
+        }
+
+        public IEnumerable<NavigationTableEntry> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams)
+        {
+            var querry = !filteringParams.IsEmpty()
+                ? _db.Where(filteringParams.Linq())
+                : _db; 
+
+            return querry.OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC");
         }
 
         public IEnumerable<NavigationTableEntry> FindBy(Expression<Func<NavigationTableEntry, bool>> predicate)

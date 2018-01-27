@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CapitalManagment;
-using Common;
+using Common.Entities;
+using Common.Entities.Entities.ReadModifiers;
+using Common.ReadModifiers;
 using DonationManagment;
 using DonationManagment.Application;
 using Microsoft.AspNetCore.Authorization;
@@ -75,70 +77,56 @@ namespace MIPTCore.Controllers
         }
 
         // GET: donations
-        [HttpGet, FormatFilter]
-        [AllowAnonymous]
-        public IActionResult GetAllDonations([FromQuery] PaginationAndFilteringParams filteringParams, string format, bool isPaginationDisabled)
+        [HttpGet]
+        public IActionResult GetAllDonations([FromQuery] FilteringParams filteringParams,
+                                            [FromQuery] PaginationParams paginationParams,
+                                            [FromQuery] OrderingParams orderingParams,
+                                            bool isPaginationDisabled)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             IEnumerable<Donation> donationsToReturn;
             int total = -1;
-            
-            if (isPaginationDisabled)
-            {
-                donationsToReturn = User.IsInRole("Admin") 
-                    ? _donationManager.GetAllDonations()
-                    : _donationManager.GetDonationsByPredicate(donation => donation.IsConfirmed);
-            }
-            else
-            {
-                try
-                {
-                    var donationsPage = User.IsInRole("Admin") 
-                        ? _donationManager.GetPaginated(filteringParams)
-                        : _donationManager.GetPaginated(filteringParams, donation => donation.IsConfirmed);
-    
-                    donationsToReturn = donationsPage.Docs;
-                    total = donationsPage.Total;
-                }
-                catch (System.Linq.Dynamic.Core.Exceptions.ParseException)
-                {
-                    return BadRequest("Ivalid filtering parameters");
-                }
-            }
-            
 
-            var expandedDonationModels = donationsToReturn.Select(donation => new ExpandedDonationModel
+            try
+            {
+                if (isPaginationDisabled)
                 {
-                    Capital = Mapper.Map<CapitalModel>(_capitalManager.GetCapitalById(donation.CapitalId)),
-                    User = Mapper.Map<UserModel>(_userManager.GetUserById(donation.UserId)),
-                    Value = donation.Value,
-                    IsConfirmed = donation.IsConfirmed,
-                    IsRecursive = donation.IsRecursive,
-                    CreatingTime = donation.CreatingTime,
-                    Id = donation.Id
-                })
-                .ToList();
+                    donationsToReturn = _donationManager.GetWithFilterAndOrder(filteringParams, orderingParams);
+                    return Ok(ExpandDonations(donationsToReturn));
+                }
 
-            if (isPaginationDisabled)
-                return Ok(expandedDonationModels);
-            
-            var paginated = new PaginatedList<ExpandedDonationModel>(filteringParams, expandedDonationModels, total);
+                var donationsPage =
+                    _donationManager.GetPaginatedDonations(paginationParams, orderingParams, filteringParams);
+
+                donationsToReturn = donationsPage.Docs;
+                total = donationsPage.Total;
+            }
+            catch (System.Linq.Dynamic.ParseException e)
+            {
+                return BadRequest(e.ToString());
+            }
+            catch (Exception)
+            {
+                return BadRequest("An error has occured");
+            }
+
+            var expandedDonationModels = ExpandDonations(donationsToReturn);
+
+            var paginated = new PaginatedList<ExpandedDonationModel>(paginationParams, expandedDonationModels, total);
+
             return Ok(paginated);
         }
 
         // GET donations/5
-        [HttpGet("{id}.{format?}"), FormatFilter]
-        public IActionResult GetDonationbyId(string id)
+        [HttpGet("{id:int}")]
+        public IActionResult GetDonationbyId(int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-                
-            if(!int.TryParse(id, out var objectId))
-                return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var donationToReturn = _donationManager.GetDonationById(objectId);
+            var donationToReturn = _donationManager.GetDonationById(id);
 
             if (donationToReturn == null)
                 return NotFound();
@@ -169,16 +157,13 @@ namespace MIPTCore.Controllers
         }
 
         // PUT donations/5
-        [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody]UpdateDonationModel donationModel)
+        [HttpPut("{id:int}")]
+        public IActionResult Put(int id, [FromBody]UpdateDonationModel donationModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            
-            if(!int.TryParse(id, out var objectId))
-                return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = _donationManager.GetDonationById(objectId);
+            var oldDonation = _donationManager.GetDonationById(id);
 
             if (oldDonation == null)
                 return NotFound();
@@ -194,19 +179,32 @@ namespace MIPTCore.Controllers
         }
 
         // DELETE donations/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
         {
-            if(!int.TryParse(id, out var objectId))
-                return BadRequest("'Id' parameter is ivalid ObjectId");
 
-            var oldDonation = _donationManager.GetDonationById(objectId);
+            var oldDonation = _donationManager.GetDonationById(id);
 
             if (oldDonation == null)
                 return NotFound();
 
-            _donationManager.DeleteDonation(objectId);
+            _donationManager.DeleteDonation(id);
             return Ok(id);
+        }
+
+        private IEnumerable<ExpandedDonationModel> ExpandDonations(IEnumerable<Donation> donationsToReturn)
+        {
+            return donationsToReturn.Select(donation => new ExpandedDonationModel
+                {
+                    Capital = Mapper.Map<CapitalModel>(_capitalManager.GetCapitalById(donation.CapitalId)),
+                    User = Mapper.Map<UserModel>(_userManager.GetUserById(donation.UserId)),
+                    Value = donation.Value,
+                    IsConfirmed = donation.IsConfirmed,
+                    IsRecursive = donation.IsRecursive,
+                    CreatingTime = donation.CreatingTime,
+                    Id = donation.Id
+                })
+                .ToList();
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using Common;
+using Common.DomainSteroids;
 using Common.Infrastructure;
 using DataAccess.Contexts;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {

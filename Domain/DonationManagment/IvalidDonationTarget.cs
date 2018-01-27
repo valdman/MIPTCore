@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.DomainSteroids;
 
 namespace DonationManagment
 {
@@ -9,6 +9,6 @@ namespace DonationManagment
             FieldName = "UserId or CapitalId";
         }
         
-        public override string Message => $"Trying to donate to capital that not exists/from user that not exists";
+        public override string Message => $"Trying To donate To capital that not exists/from user that not exists";
     }
 }

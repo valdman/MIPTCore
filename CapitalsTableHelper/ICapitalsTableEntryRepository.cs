@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Common.Infrastructure;
+﻿using Common.Infrastructure;
 
 namespace CapitalsTableHelper
 {

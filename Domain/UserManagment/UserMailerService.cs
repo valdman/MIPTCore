@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Common;
-using Common.Infrastructure;
+using Common.Entities;
 using Journalist;
 using UserManagment.Application;
 using UserManagment.Exceptions;

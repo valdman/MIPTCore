@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using CapitalManagment.Exceptions;
 using CapitalManagment.Infrastructure;
-using Common;
-using Common.Infrastructure;
+using Common.DomainSteroids;
 using Journalist;
 
 namespace CapitalManagment

@@ -54,7 +54,7 @@ namespace Mailer
                 break;
                     
                 default:
-                    throw new ArgumentException("Trying to send ivalid ticket type");
+                    throw new ArgumentException("Trying To send ivalid ticket type");
             }
         }
 

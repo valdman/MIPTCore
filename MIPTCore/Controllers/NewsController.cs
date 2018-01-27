@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using Common;
+using Common.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Extensions;

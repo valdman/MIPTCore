@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UserManagment;
 

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Common;
-using Common.Infrastructure;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
-using Journalist.Extensions;
+using System.Linq.Dynamic;
+using Common.Abstractions;
+using Common.Entities.Entities.ReadModifiers;
+using Common.Infrastructure;
 
 namespace DataAccess.Repositories
 {
@@ -43,7 +42,7 @@ namespace DataAccess.Repositories
                 .ToList();
         }
 
-        public (int, IEnumerable<TEntity>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<TEntity, bool>> predicate = null)
+        public (int, IEnumerable<TEntity>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<TEntity, bool>> predicate = null)
         {
             var aliveObjects = Db.Where(@object => !@object.IsDeleted);
             
@@ -51,14 +50,34 @@ namespace DataAccess.Repositories
                 ? aliveObjects.Where(predicate)
                 : aliveObjects;
 
+            querry = !filteringParams.IsEmpty()
+                ? querry.Where(filteringParams.Linq())
+                : querry; 
+
             var total = querry.Count();
 
-            querry = querry
-                .OrderBy($"{filteringParams.Field} {filteringParams.Order}, CreatingTime DESC, Id DESC")
-                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page - 1, 0))
-                .Take(filteringParams.PerPage);
+            var orderedResult = querry
+                .OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC")
+                .Skip(paginationParams.PerPage * Math.Max(paginationParams.Page - 1, 0))
+                .Take(paginationParams.PerPage);
 
-            return (total, querry.ToList());
+            return (total, orderedResult);
+        }
+
+        public IEnumerable<TEntity> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams)
+        {
+            var aliveObjects = Db.Where(@object => !@object.IsDeleted);
+
+            aliveObjects = !filteringParams.IsEmpty()
+                ? aliveObjects.Where(filteringParams.Linq())
+                : aliveObjects; 
+
+            var total = aliveObjects.Count();
+
+            var orderedResult = aliveObjects
+                .OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC");
+
+            return orderedResult;
         }
 
         public virtual IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)

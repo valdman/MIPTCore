@@ -38,18 +38,18 @@ namespace PagesManagment
                 // not, then add.
                 if (!current.Nodes.TryGetValue(part, out var child))
                 {
-                    //todo: Throw if trying to create sequence of leaf
+                    //todo: Throw if trying To create sequence of leaf
                     
                     // Add the child.
                     child = new PageTreeNode {
                         Path = part
                     };
                   
-                    // Add to the dictionary.
+                    // Add To the dictionary.
                     current.Nodes[part] = child;
                 }
 
-                // Set the current to the child.
+                // Set the current To the child.
                 current = child;
             }
             

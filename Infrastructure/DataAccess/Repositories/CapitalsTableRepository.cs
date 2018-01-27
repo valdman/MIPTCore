@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using CapitalsTableHelper;
-using Common;
-using Common.Infrastructure;
+using Common.Entities.Entities.ReadModifiers;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +33,7 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
-        public (int, IEnumerable<CapitalsTableEntry>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<CapitalsTableEntry, bool>> predicate = null)
+        public (int, IEnumerable<CapitalsTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<CapitalsTableEntry, bool>> predicate = null)
         {
             Require.NotNull(predicate, nameof(predicate));
             
@@ -46,15 +45,19 @@ namespace DataAccess.Repositories
 
             querry = querry
                 .OrderBy(n => n.CapitalId)
-                .Skip(filteringParams.PerPage * Math.Max(filteringParams.Page - 1, 0))
-                .Take(filteringParams.PerPage);
+                .Skip(paginationParams.PerPage * Math.Max(paginationParams.Page - 1, 0))
+                .Take(paginationParams.PerPage);
 
             return (total, querry.ToList());
         }
 
-        public int Count()
+        public IEnumerable<CapitalsTableEntry> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams)
         {
-            return _db.Count();
+            var querry = !filteringParams.IsEmpty()
+                ? _db.Where(filteringParams.Linq())
+                : _db; 
+
+            return querry.OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC");
         }
 
         public IEnumerable<CapitalsTableEntry> FindBy(Expression<Func<CapitalsTableEntry, bool>> predicate)

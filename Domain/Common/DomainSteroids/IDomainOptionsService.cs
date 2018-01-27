@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.DomainSteroids
 {
     public interface IDomainOptionsService
     {

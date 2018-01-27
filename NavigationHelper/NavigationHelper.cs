@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Common.Infrastructure;
 using Journalist;
 
 namespace NavigationHelper

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CapitalManagment;
-using Common;
+using Common.Abstractions;
 
 namespace StoriesManagment
 {

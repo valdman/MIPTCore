@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.DomainSteroids;
 
 namespace UserManagment.Exceptions
 {
@@ -10,7 +10,7 @@ namespace UserManagment.Exceptions
             _operationName = operationName;
         }
         
-        public override string Message => $"Trying to {_operationName} on user that not exists";
+        public override string Message => $"Trying To {_operationName} on user that not exists";
         private readonly string _operationName;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Common;
+﻿using Common.DomainSteroids;
 
 namespace UserManagment.Exceptions
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common
+namespace Common.DomainSteroids
 {
     public class DomainException : Exception
     {

@@ -1,4 +1,6 @@
-﻿namespace Common.Infrastructure
+﻿using Common.DomainSteroids;
+
+namespace Common.Infrastructure
 {
     public interface IDomainOptionsRepository
     {

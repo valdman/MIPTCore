@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
+using Common.Entities.Entities.ReadModifiers;
 
 namespace Common.Infrastructure
 {
@@ -10,7 +10,8 @@ namespace Common.Infrastructure
 
         T GetById(int id);
         IEnumerable<T> GetAll();
-        (int, IEnumerable<T>) GetAllForPagination(PaginationAndFilteringParams filteringParams, Expression<Func<T, bool>> predicate = null);
+        (int, IEnumerable<T>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<T, bool>> predicate = null);
+        IEnumerable<T> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams);
         
         IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
         int Create(T @object);

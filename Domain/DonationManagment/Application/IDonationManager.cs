@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Common;
+using Common.Entities.Entities.ReadModifiers;
+using Common.ReadModifiers;
 
 namespace DonationManagment.Application
 {
@@ -10,7 +10,10 @@ namespace DonationManagment.Application
     {
         IEnumerable<Donation> GetAllDonations();
         IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate);
-        PaginatedList<Donation> GetPaginated(PaginationAndFilteringParams filteringParams, Expression<Func<Donation, bool>> predicate = null);
+        
+        IEnumerable<Donation> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams = null);
+        PaginatedList<Donation> GetPaginatedDonations(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<Donation, bool>> predicate = null);
+        
         Donation GetDonationById(int donationId);
         
         DonationPaymentInformation CreateDonationAsync(Donation donationToCreate);

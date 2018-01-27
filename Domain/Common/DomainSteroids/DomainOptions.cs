@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Common.Abstractions;
 
-namespace Common
+namespace Common.DomainSteroids
 {
     public class DomainOptions : AbstractIdentifyable
     {

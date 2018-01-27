@@ -1,6 +1,7 @@
 ﻿using System;
-using Common;
 using System.ComponentModel.DataAnnotations;
+using Common.Abstractions;
+using Common.Entities;
 
 namespace NewsManagment
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common
+namespace Common.Abstractions
 {
     public abstract class PersistentEntity : AbstractIdentifyable
     {

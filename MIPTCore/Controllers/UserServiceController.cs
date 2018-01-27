@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Common;
+using Common.Entities;
 using Journalist.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Extensions;
@@ -50,7 +49,7 @@ namespace MIPTCore.Controllers
         public IActionResult BeginRecoveringPassword(string emailToRecover)
         {
             if (emailToRecover.IsEmpty())
-                return BadRequest("Email to recover can't be empty");
+                return BadRequest("Email To recover can't be empty");
             
             var userToRecovery = _userManager.GetUserByEmail(emailToRecover);
 

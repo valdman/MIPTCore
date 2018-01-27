@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Common.Entities;
+using Common.Entities.Entities;
 using FluentValidation;
 using UserManagment;
 

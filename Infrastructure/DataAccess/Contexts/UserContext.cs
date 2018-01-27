@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.Entities;
 using DataAccess.Mappings;
 using Microsoft.EntityFrameworkCore;
 using UserManagment;

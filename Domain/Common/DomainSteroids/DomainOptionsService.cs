@@ -1,6 +1,6 @@
 ﻿using Common.Infrastructure;
 
-namespace Common
+namespace Common.DomainSteroids
 {
     public class DomainOptionsService : IDomainOptionsService
     {

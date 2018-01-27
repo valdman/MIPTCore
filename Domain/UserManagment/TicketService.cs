@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Journalist;
 using UserManagment.Application;
-using UserManagment.Exceptions;
 using UserManagment.Infrastructure;
 
 namespace UserManagment

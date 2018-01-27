@@ -2,9 +2,10 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Common.Abstractions;
 using Journalist;
 
-namespace Common
+namespace Common.Entities
 {
     public class Password : AbstractIdentifyable
     {   
