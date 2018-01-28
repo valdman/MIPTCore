@@ -11,8 +11,8 @@ namespace DonationManagment.Application
         IEnumerable<Donation> GetAllDonations();
         IEnumerable<Donation> GetDonationsByPredicate(Expression<Func<Donation, bool>> predicate);
         
-        IEnumerable<Donation> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams = null);
-        PaginatedList<Donation> GetPaginatedDonations(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<Donation, bool>> predicate = null);
+        IEnumerable<Donation> GetWithFiltersAndOrder(IEnumerable<FilteringParams> filteringParams, OrderingParams orderingParams = null);
+        PaginatedList<Donation> GetPaginatedDonations(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<Donation, bool>> predicate = null);
         
         Donation GetDonationById(int donationId);
         

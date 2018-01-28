@@ -20,15 +20,14 @@ namespace DonationManagment
             return _donationRepository.GetAll();
         }
 
-        public IEnumerable<Donation> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams = null)
+        public IEnumerable<Donation> GetWithFiltersAndOrder(IEnumerable<FilteringParams> filteringParams, OrderingParams orderingParams = null)
         {
             Require.NotNull(filteringParams, nameof(filteringParams));
 
-            return _donationRepository.GetWithFilterAndOrder(filteringParams, orderingParams);
+            return _donationRepository.GetWithFiltersAndOrder(filteringParams, orderingParams);
         }
 
-        public PaginatedList<Donation> GetPaginatedDonations(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams,
-            Expression<Func<Donation, bool>> predicate = null)
+        public PaginatedList<Donation> GetPaginatedDonations(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<Donation, bool>> predicate = null)
         {
             var (total, donations) = _donationRepository.GetAllForPagination(paginationParams, orderingParams, filteringParams, predicate);
             return new PaginatedList<Donation>(paginationParams, donations, total);

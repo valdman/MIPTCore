@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
-        public (int, IEnumerable<CapitalsTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<CapitalsTableEntry, bool>> predicate = null)
+        public (int, IEnumerable<CapitalsTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<CapitalsTableEntry, bool>> predicate = null)
         {
             Require.NotNull(predicate, nameof(predicate));
             
@@ -51,11 +51,13 @@ namespace DataAccess.Repositories
             return (total, querry.ToList());
         }
 
-        public IEnumerable<CapitalsTableEntry> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams)
+        public IEnumerable<CapitalsTableEntry> GetWithFiltersAndOrder(IEnumerable<FilteringParams> filteringParams, OrderingParams orderingParams)
         {
-            var querry = !filteringParams.IsEmpty()
-                ? _db.Where(filteringParams.Linq())
-                : _db; 
+            var querry = _db.AsQueryable();
+            
+            querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
+                ? current.Where(filter.Linq())
+                : current);
 
             return querry.OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC");
         }

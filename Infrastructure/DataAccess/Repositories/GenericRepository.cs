@@ -42,7 +42,7 @@ namespace DataAccess.Repositories
                 .ToList();
         }
 
-        public (int, IEnumerable<TEntity>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<TEntity, bool>> predicate = null)
+        public (int, IEnumerable<TEntity>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<TEntity, bool>> predicate = null)
         {
             var aliveObjects = Db.Where(@object => !@object.IsDeleted);
             
@@ -50,9 +50,9 @@ namespace DataAccess.Repositories
                 ? aliveObjects.Where(predicate)
                 : aliveObjects;
 
-            querry = !filteringParams.IsEmpty()
-                ? querry.Where(filteringParams.Linq())
-                : querry; 
+            querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
+                ? current.Where(filter.Linq())
+                : current);
 
             var total = querry.Count();
 
@@ -64,13 +64,13 @@ namespace DataAccess.Repositories
             return (total, orderedResult);
         }
 
-        public IEnumerable<TEntity> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams)
+        public IEnumerable<TEntity> GetWithFiltersAndOrder(IEnumerable<FilteringParams> filteringParams, OrderingParams orderingParams)
         {
             var aliveObjects = Db.Where(@object => !@object.IsDeleted);
 
-            aliveObjects = !filteringParams.IsEmpty()
-                ? aliveObjects.Where(filteringParams.Linq())
-                : aliveObjects; 
+            aliveObjects = filteringParams.Aggregate(aliveObjects, (current, filter) => !filter.IsEmpty()
+                ? current.Where(filter.Linq())
+                : current);
 
             var total = aliveObjects.Count();
 

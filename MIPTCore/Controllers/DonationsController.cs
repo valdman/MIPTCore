@@ -12,6 +12,7 @@ using DonationManagment.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
+using RestSharp.Deserializers;
 using UserManagment;
 using UserManagment.Application;
 
@@ -78,13 +79,16 @@ namespace MIPTCore.Controllers
 
         // GET: donations
         [HttpGet]
-        public IActionResult GetAllDonations([FromQuery] FilteringParams filteringParams,
+        public IActionResult GetAllDonations([FromQuery] string filteringParamsString,
                                             [FromQuery] PaginationParams paginationParams,
                                             [FromQuery] OrderingParams orderingParams,
                                             bool isPaginationDisabled)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            var filteringParams = (FilteringParams[])Newtonsoft.Json.JsonConvert.
+                DeserializeObject(filteringParamsString, typeof(FilteringParams[]));
 
             IEnumerable<Donation> donationsToReturn;
             int total = -1;
@@ -93,7 +97,7 @@ namespace MIPTCore.Controllers
             {
                 if (isPaginationDisabled)
                 {
-                    donationsToReturn = _donationManager.GetWithFilterAndOrder(filteringParams, orderingParams);
+                    donationsToReturn = _donationManager.GetWithFiltersAndOrder(filteringParams, orderingParams);
                     return Ok(ExpandDonations(donationsToReturn));
                 }
 

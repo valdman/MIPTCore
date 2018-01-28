@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
-        public (int, IEnumerable<NavigationTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, FilteringParams filteringParams, Expression<Func<NavigationTableEntry, bool>> predicate = null)
+        public (int, IEnumerable<NavigationTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<NavigationTableEntry, bool>> predicate = null)
         {
             Require.NotNull(predicate, nameof(predicate));
             
@@ -41,10 +41,9 @@ namespace DataAccess.Repositories
                 ? _db.Where(predicate)
                 : _db;
             
-            querry = !filteringParams.IsEmpty()
-                ? querry.Where(filteringParams.Linq())
-                : querry; 
-
+            querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
+                ? current.Where(filter.Linq())
+                : current);
             var total = querry.Count();
             
 
@@ -56,11 +55,13 @@ namespace DataAccess.Repositories
             return (total, querry.ToList());
         }
 
-        public IEnumerable<NavigationTableEntry> GetWithFilterAndOrder(FilteringParams filteringParams, OrderingParams orderingParams)
+        public IEnumerable<NavigationTableEntry> GetWithFiltersAndOrder(IEnumerable<FilteringParams> filteringParams, OrderingParams orderingParams)
         {
-            var querry = !filteringParams.IsEmpty()
-                ? _db.Where(filteringParams.Linq())
-                : _db; 
+            var querry = _db.AsQueryable();
+            
+            querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
+                ? current.Where(filter.Linq())
+                : current);
 
             return querry.OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC");
         }
