@@ -1,6 +1,6 @@
 ﻿using Journalist.Extensions;
 
-namespace Common.Entities.Entities.ReadModifiers
+namespace Common.ReadModifiers
 {
     public class FilteringParams
     {
@@ -22,13 +22,10 @@ namespace Common.Entities.Entities.ReadModifiers
             if (FilterField.ToLower().Equals("creatingtime"))
             {
                 if (EqualTo.IsNotNullOrEmpty())
-                    return $"{FilterField}.Year = {EqualTo}.Year && " +
-                           $"{FilterField}.Month = {EqualTo}.Month && " +
-                           $"{FilterField}.Day = {EqualTo}.Day";
+                    return $"{FilterField}.Date = {EqualTo}.Date";
 
-                return $"{FilterField}.Year >= {From}.Year && {FilterField}.Year <= {To}.Year && " +
-                       $"{FilterField}.Month >= {From}.Month && {FilterField}.Month <= {To}.Month && " +
-                       $"{FilterField}.Day >= {From}.Day && {FilterField}.Day <= {To}.Day";
+                return $"{FilterField}.Date >= {From}.Date && " +
+                       $"{FilterField}.Date <= {To}.Date";
             }
 
             if (EqualTo.IsNotNullOrEmpty())

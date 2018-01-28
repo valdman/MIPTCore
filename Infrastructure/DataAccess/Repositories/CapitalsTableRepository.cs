@@ -5,6 +5,7 @@ using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using CapitalsTableHelper;
 using Common.Entities.Entities.ReadModifiers;
+using Common.ReadModifiers;
 using DataAccess.Contexts;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
@@ -40,11 +41,15 @@ namespace DataAccess.Repositories
             var querry = predicate != null
                 ? _db.Where(predicate)
                 : _db;
+            
+            querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
+                ? current.Where(filter.Linq(), filter.FilterField, filter.EqualTo, filter.From, filter.To)
+                : current);
 
             var total = querry.Count();
 
             querry = querry
-                .OrderBy(n => n.CapitalId)
+                .OrderBy($"{orderingParams.Field} {orderingParams.Order}, Id DESC")
                 .Skip(paginationParams.PerPage * Math.Max(paginationParams.Page - 1, 0))
                 .Take(paginationParams.PerPage);
 
@@ -56,10 +61,10 @@ namespace DataAccess.Repositories
             var querry = _db.AsQueryable();
             
             querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
-                ? current.Where(filter.Linq())
+                ? current.Where(filter.Linq(), filter.FilterField, filter.EqualTo, filter.From, filter.To)
                 : current);
 
-            return querry.OrderBy($"{orderingParams.Field} {orderingParams.Order}, CreatingTime DESC, Id DESC");
+            return querry.OrderBy($"{orderingParams.Field} {orderingParams.Order}, Id DESC");
         }
 
         public IEnumerable<CapitalsTableEntry> FindBy(Expression<Func<CapitalsTableEntry, bool>> predicate)

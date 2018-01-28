@@ -12,6 +12,7 @@ using DonationManagment.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
+using Newtonsoft.Json;
 using RestSharp.Deserializers;
 using UserManagment;
 using UserManagment.Application;
@@ -87,8 +88,16 @@ namespace MIPTCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var filteringParams = (FilteringParams[])Newtonsoft.Json.JsonConvert.
-                DeserializeObject(filteringParamsString, typeof(FilteringParams[]));
+            IEnumerable<>
+            try
+            {
+                filteringParams = (FilteringParams[])JsonConvert.
+                    DeserializeObject(filteringParamsString, typeof(FilteringParams[]));
+            }
+            catch (Exception e)
+            {
+                
+            }
 
             IEnumerable<Donation> donationsToReturn;
             int total = -1;
@@ -135,7 +144,7 @@ namespace MIPTCore.Controllers
             if (donationToReturn == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<CreateDonationModel>(donationToReturn));
+            return Ok(Mapper.Map<ShortDonationModel>(donationToReturn));
         }
 
         // POST donations
@@ -207,6 +216,7 @@ namespace MIPTCore.Controllers
                     IsConfirmed = donation.IsConfirmed,
                     IsRecursive = donation.IsRecursive,
                     CreatingTime = donation.CreatingTime,
+                    PaymentType = donation.PaymentType,
                     Id = donation.Id
                 })
                 .ToList();

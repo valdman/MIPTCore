@@ -80,7 +80,9 @@ namespace DataAccess.Repositories
         {
             Require.NotEmpty(name, nameof(name));
 
-            return Db.SingleOrDefault(c => c.FullPageUri.Equals(name));
+            return Db
+                .Include(c => c.Image)
+                .SingleOrDefault(c => c.FullPageUri.Equals(name));
         }
 
         public decimal CoutSumGivenToWholeFund()

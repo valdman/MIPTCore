@@ -30,6 +30,8 @@ namespace MIPTCore.Models
 	
 	public class ShortDonationModel : AbstractDonationModel
     {
+	    public int Id { get; set; }
+	    
         public int UserId { get; set; }
 
         public int CapitalId { get; set; }

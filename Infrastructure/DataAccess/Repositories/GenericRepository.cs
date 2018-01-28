@@ -8,6 +8,7 @@ using System.Linq.Dynamic;
 using Common.Abstractions;
 using Common.Entities.Entities.ReadModifiers;
 using Common.Infrastructure;
+using Common.ReadModifiers;
 
 namespace DataAccess.Repositories
 {
@@ -49,9 +50,9 @@ namespace DataAccess.Repositories
             var querry = predicate != null
                 ? aliveObjects.Where(predicate)
                 : aliveObjects;
-
+            
             querry = filteringParams.Aggregate(querry, (current, filter) => !filter.IsEmpty()
-                ? current.Where(filter.Linq())
+                ? current.Where(filter.Linq(), filter.FilterField, filter.EqualTo, filter.From, filter.To)
                 : current);
 
             var total = querry.Count();
@@ -69,7 +70,7 @@ namespace DataAccess.Repositories
             var aliveObjects = Db.Where(@object => !@object.IsDeleted);
 
             aliveObjects = filteringParams.Aggregate(aliveObjects, (current, filter) => !filter.IsEmpty()
-                ? current.Where(filter.Linq())
+                ? current.Where(filter.Linq(), filter.FilterField, filter.EqualTo, filter.From, filter.To)
                 : current);
 
             var total = aliveObjects.Count();

@@ -132,7 +132,7 @@ namespace MIPTCore
 
                 cfg.CreateMap<DonationWithRegistrationModel, CreateDonationModel>();
                 cfg.CreateMap<DonationWithRegistrationModel, User>();
-                cfg.CreateMap<Donation, CreateDonationModel>();
+                cfg.CreateMap<Donation, ShortDonationModel>();
                 cfg.CreateMap<CreateDonationModel, Donation>();
             });
             

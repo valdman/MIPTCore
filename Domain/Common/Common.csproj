@@ -10,5 +10,6 @@
   <ItemGroup>
     <PackageReference Include="Journalist.LanguageExtensions" Version="0.20.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.2" />
   </ItemGroup>
 </Project>
