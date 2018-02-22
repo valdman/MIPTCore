@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Models;
 using Newtonsoft.Json;
-using RestSharp.Deserializers;
+using System.Xml.Serialization;
 using UserManagment;
 using UserManagment.Application;
 
@@ -83,21 +84,13 @@ namespace MIPTCore.Controllers
         public IActionResult GetAllDonations([FromQuery] string filteringParamsString,
                                             [FromQuery] PaginationParams paginationParams,
                                             [FromQuery] OrderingParams orderingParams,
-                                            bool isPaginationDisabled)
+                                            bool isPaginationDisabled,
+                                            bool download)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            IEnumerable<>
-            try
-            {
-                filteringParams = (FilteringParams[])JsonConvert.
-                    DeserializeObject(filteringParamsString, typeof(FilteringParams[]));
-            }
-            catch (Exception e)
-            {
-                
-            }
+            var filteringParams = ParseFilterParamsString(filteringParamsString);
 
             IEnumerable<Donation> donationsToReturn;
             int total = -1;
@@ -107,7 +100,10 @@ namespace MIPTCore.Controllers
                 if (isPaginationDisabled)
                 {
                     donationsToReturn = _donationManager.GetWithFiltersAndOrder(filteringParams, orderingParams);
-                    return Ok(ExpandDonations(donationsToReturn));
+                    var expandedDonationToReturn = ExpandDonations(donationsToReturn).ToList();
+                    if (download)
+                        return DumpDonationsInXml(expandedDonationToReturn);
+                    return Ok(expandedDonationToReturn);
                 }
 
                 var donationsPage =
@@ -129,6 +125,8 @@ namespace MIPTCore.Controllers
 
             var paginated = new PaginatedList<ExpandedDonationModel>(paginationParams, expandedDonationModels, total);
 
+            if (download)
+                return DumpDonationsInXml(paginated);
             return Ok(paginated);
         }
 
@@ -208,18 +206,55 @@ namespace MIPTCore.Controllers
 
         private IEnumerable<ExpandedDonationModel> ExpandDonations(IEnumerable<Donation> donationsToReturn)
         {
-            return donationsToReturn.Select(donation => new ExpandedDonationModel
+            var donationsList = donationsToReturn as IList<Donation> ?? donationsToReturn.ToList();
+            
+            var capitalToJoinIds = donationsList.Select(d => d.CapitalId).ToHashSet();
+            var userToJoinIds = donationsList.Select(d => d.UserId).ToHashSet();
+
+            var capitalsToJoin = _capitalManager.GetCapitalsByPredicate(c => capitalToJoinIds.Any(i => i.Equals(c.Id))).ToList();
+            var usersToJoin = _userManager.GetUsersByPredicate(u => userToJoinIds.Any(i => i.Equals(u.Id))).ToList();
+
+            foreach (var donation in donationsList)
+            {
+                yield return new ExpandedDonationModel
                 {
-                    Capital = Mapper.Map<CapitalModel>(_capitalManager.GetCapitalById(donation.CapitalId)),
-                    User = Mapper.Map<UserModel>(_userManager.GetUserById(donation.UserId)),
+                    Capital = Mapper.Map<ShortCapitalModel>(capitalsToJoin.SingleOrDefault(c => c.Id == donation.CapitalId)),
+                    User = Mapper.Map<UserModel>(usersToJoin.SingleOrDefault(u => u.Id == donation.UserId)),
                     Value = donation.Value,
                     IsConfirmed = donation.IsConfirmed,
                     IsRecursive = donation.IsRecursive,
                     CreatingTime = donation.CreatingTime,
                     PaymentType = donation.PaymentType,
                     Id = donation.Id
-                })
-                .ToList();
+                };
+            }
+        }
+
+        private IEnumerable<FilteringParams> ParseFilterParamsString(string filteringParamsString)
+        {
+            IEnumerable<FilteringParams> filteringParams;
+            try
+            {
+                filteringParams =
+                    (FilteringParams[]) JsonConvert.DeserializeObject(filteringParamsString, typeof(FilteringParams[]));
+            }
+            catch (Exception e)
+            {
+                filteringParams = new FilteringParams[0];
+            }
+            return filteringParams;
+        }
+
+        private FileStreamResult DumpDonationsInXml(object expandedDonationModels)
+        {
+            var serializer = new XmlSerializer(expandedDonationModels.GetType());
+
+            var xmlStream = new MemoryStream();
+
+            serializer.Serialize(xmlStream, expandedDonationModels);
+            xmlStream.Seek(0, 0);
+
+            return new FileStreamResult(xmlStream, "application/octet-stream");
         }
     }
 }

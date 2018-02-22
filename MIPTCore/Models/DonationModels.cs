@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 using DonationManagment;
+using Newtonsoft.Json;
 
 namespace MIPTCore.Models
 {
@@ -47,10 +49,19 @@ namespace MIPTCore.Models
 
 		public UserModel User { get; set; }
 
-		public CapitalModel Capital { get; set; }
+		public ShortCapitalModel Capital { get; set; }
 		
 		public bool IsConfirmed { get; set; }
+		
+		[XmlElement("CreatingTime")]
+		[JsonIgnore]
+		public string CreatingTimeXmlString
+		{
+			get => CreatingTime.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz");
+			set => CreatingTime = DateTimeOffset.Parse(value);
+		}
 
+		[XmlIgnore]
 		public DateTimeOffset CreatingTime { get; set; }
 	}
     

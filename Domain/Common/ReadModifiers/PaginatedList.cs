@@ -18,5 +18,7 @@ namespace Common.ReadModifiers
             PerPage = filteringParams.PerPage;
             Docs = objects.ToArray();
         }
+        
+        protected PaginatedList() {}
     }
 }

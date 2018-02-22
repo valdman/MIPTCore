@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 using UserManagment;
 
 namespace MIPTCore.Models
@@ -21,7 +23,16 @@ namespace MIPTCore.Models
         public int Id { get; set; }
 
         public UserRole Role { get; set; }
+        
+        [XmlElement("CreatingTime")]
+        [JsonIgnore]
+        public string CreatingTimeXmlString
+        {
+            get => CreatingTime.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz");
+            set => CreatingTime = DateTimeOffset.Parse(value);
+        }
 
+        [XmlIgnore]
         public DateTimeOffset CreatingTime { get; set; }
     }
     

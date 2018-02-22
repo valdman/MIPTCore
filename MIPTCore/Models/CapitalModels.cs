@@ -23,6 +23,13 @@ namespace MIPTCore.Models
         public IEnumerable<PersonModel> Founders { get; set; }
         public IEnumerable<PersonModel> Recivers { get; set; }
     }
+    
+    public class ShortCapitalModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
 
     public class CapitalModel : AbstractCapitalModel
     {

@@ -40,12 +40,7 @@ namespace MIPTCore
         // This method gets called by the runtime. Use this method To add services To the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => { options.RespectBrowserAcceptHeader = true; })
-                .AddXmlDataContractSerializerFormatters()
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                })
+            services.AddMvc()
                 .AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
