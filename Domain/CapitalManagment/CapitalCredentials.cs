@@ -1,4 +1,5 @@
 ﻿using Common.Abstractions;
+using Journalist.Extensions;
 
 namespace CapitalManagment
 {
@@ -6,5 +7,7 @@ namespace CapitalManagment
     {
         public string MerchantLogin { get; set; }
         public string MerchantPassword { get; set; }
+
+        public bool IsAcquiringEnabled => MerchantLogin.IsNotNullOrEmpty() && MerchantPassword.IsNotNullOrEmpty();
     }
 }

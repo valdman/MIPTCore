@@ -35,6 +35,8 @@ namespace MIPTCore.Models
     {
         public int Id { get; set; }
         
+        public bool IsAcquiringEnabled { get; set; }
+        
         public DateTimeOffset CreatingTime { get; set; }
     }
     

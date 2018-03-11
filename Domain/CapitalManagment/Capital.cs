@@ -24,6 +24,7 @@ namespace CapitalManagment
         public string FullPageUri { get; set; }
 
         public CapitalCredentials CapitalCredentials { get; set; }
+        public bool IsAcquiringEnabled => CapitalCredentials?.IsAcquiringEnabled == true;
 
         public IEnumerable<Person> Founders { get; set; }
         public IEnumerable<Person> Recivers { get; set; }
