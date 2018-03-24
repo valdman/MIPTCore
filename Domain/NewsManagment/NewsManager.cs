@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Common.DomainSteroids;
 using Common.Infrastructure;
 using Journalist;
 using Journalist.Extensions;
@@ -17,32 +18,39 @@ namespace NewsManagment
             _newsRepository = newsRepository;
         }
 
-        public News GetNewsById(int newsId)
+        public News GetNewsById(int newsId, bool includeHidden = false)
         {
             Require.Positive(newsId, nameof(newsId));
+            
+            var news = _newsRepository.GetById(newsId);
 
-            return _newsRepository.GetById(newsId);
+            return ShouldIncludeHidden(includeHidden).Compile().Invoke(news) 
+                ? news 
+                : null;
         }
 
-        public News GetNewsByUrl(string newsUrl)
+        public News GetNewsByUrl(string newsUrl, bool includeHidden = false)
         {
             Require.NotEmpty(newsUrl, nameof(newsUrl));
             
             if (newsUrl.Last() == '/')
                 newsUrl = newsUrl.Remove(newsUrl.Length - 1);
             
-            var newsWithThisUrl = _newsRepository.FindBy(c => c.FullPageUri == newsUrl);
+            var newsWithThisUrl = _newsRepository
+                .FindBy(
+                    ShouldIncludeHidden(includeHidden)
+                        .And(c => c.FullPageUri == newsUrl));
             return newsWithThisUrl.SingleOrDefault();
         }
 
-        public IEnumerable<News> GetAllNews()
+        public IEnumerable<News> GetAllNews(bool includeHidden = false)
         {
-            return _newsRepository.GetAll();
+            return _newsRepository.FindBy(ShouldIncludeHidden(includeHidden));
         }
 
-        public IEnumerable<News> GetNewsByPredicate(Expression<Func<News, bool>> predicate)
+        public IEnumerable<News> GetNewsByPredicate(Expression<Func<News, bool>> predicate, bool includeHidden = false)
         {
-            return _newsRepository.FindBy(predicate);
+            return _newsRepository.FindBy(predicate.And(ShouldIncludeHidden(includeHidden)));
         }
 
         public int CreateNews(News newsToCreate)
@@ -68,7 +76,10 @@ namespace NewsManagment
             _newsRepository.Delete(newsId);
         }
 
-        void MustBeValidNews(News news)
+        private Expression<Func<News, bool>> ShouldIncludeHidden(bool includeHidden) =>
+            news => news.IsVisible || includeHidden;
+
+        private void MustBeValidNews(News news)
         {
             var newWithSameUrl = _newsRepository.FindBy(n => n.FullPageUri == news.FullPageUri).ToList();
             

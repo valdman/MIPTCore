@@ -15,6 +15,7 @@ namespace NewsManagment
         public string Description { get; set; }
         public string Content { get; set; }
         public DateTimeOffset? Date { get; set; }
+        public bool IsVisible { get; set; }
 
         public Image Image { get; set; }
     }

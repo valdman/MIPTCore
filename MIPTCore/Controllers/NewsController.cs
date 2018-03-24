@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Extensions;
 using MIPTCore.Models;
 using NewsManagment;
+using UserManagment;
 
 namespace MIPTCore.Controllers
 {
@@ -23,10 +24,13 @@ namespace MIPTCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var allNews = _newsManager.GetAllNews().OrderByDescending(n => n.CreatingTime);
+            var isAdmin = User.IsInRole("Admin");
+            var allNews = _newsManager.GetAllNews(includeHidden: isAdmin).OrderByDescending(n => n.CreatingTime);
 
-            return Ok(allNews.Select(Mapper.Map<NewsModel>));
-        }
+            return isAdmin
+                ? Ok(allNews.Select(Mapper.Map<NewsModelForAdmin>))
+                : Ok(allNews.Select(Mapper.Map<NewsModel>));
+        }    
 
         // GET news/5 or news/page/url
         [HttpGet("{*newsIndex}")]
@@ -37,15 +41,17 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
+            var isAdmin = User.IsInRole("Admin");
+
             News newsToReturn;
             if (int.TryParse(newsIndex, out var newsId))
             {
                 this.CheckIdViaModel(newsId);
-                newsToReturn = _newsManager.GetNewsById(newsId);
+                newsToReturn = _newsManager.GetNewsById(newsId, includeHidden: isAdmin);
             }
             else
             {
-                newsToReturn = _newsManager.GetNewsByUrl(newsIndex);
+                newsToReturn = _newsManager.GetNewsByUrl(newsIndex, includeHidden: isAdmin);
             }
 
             if (newsToReturn == null)
@@ -53,7 +59,9 @@ namespace MIPTCore.Controllers
                 return NotFound("News with this ID or Name is not exists");
             }
             
-            return Ok(Mapper.Map<NewsModel>(newsToReturn));
+            return isAdmin
+                ? Ok(Mapper.Map<NewsModelForAdmin>(newsToReturn))
+                : Ok(Mapper.Map<NewsModel>(newsToReturn));
         }
         
         // POST news
@@ -84,7 +92,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newsToUpdate = _newsManager.GetNewsById(id);
+            var newsToUpdate = _newsManager.GetNewsById(id, includeHidden: true);
 
             if (newsToUpdate == null)
             {
@@ -99,6 +107,7 @@ namespace MIPTCore.Controllers
             newsToUpdate.Content = newsModel.Content;
             newsToUpdate.Description = newsModel.Description;
             newsToUpdate.Date = newsModel.Date;
+            newsToUpdate.IsVisible = newsModel.IsVisible;
             newsToUpdate.Image = newImage;
 
             _newsManager.UpdateNews(newsToUpdate);
@@ -106,7 +115,7 @@ namespace MIPTCore.Controllers
             //!!!
             var updatedNews = _newsManager.GetNewsById(id);
 
-            return Ok(Mapper.Map<NewsModel>(updatedNews));
+            return Ok(Mapper.Map<NewsModelForAdmin>(updatedNews));
         }
 
         // DELETE news/5
@@ -120,7 +129,7 @@ namespace MIPTCore.Controllers
                 return BadRequest(ModelState);
             }
             
-            var pageToDelete = _newsManager.GetNewsById(id);
+            var pageToDelete = _newsManager.GetNewsById(id, includeHidden: true);
             
             if (pageToDelete == null)
             {

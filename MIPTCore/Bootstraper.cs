@@ -124,6 +124,7 @@ namespace MIPTCore
                 cfg.CreateMap<NavigationTableEntryModel, NavigationTableEntry>();
 
                 cfg.CreateMap<News, NewsModel>();
+                cfg.CreateMap<News, NewsModelForAdmin>();
                 cfg.CreateMap<NewsCreationModel, News>();
                 
                 cfg.CreateMap<Story, StoryModel>()

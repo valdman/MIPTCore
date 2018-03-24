@@ -26,9 +26,18 @@ namespace MIPTCore.Models
         public DateTimeOffset CreatingTime { get; set; }
     }
     
+    public class NewsModelForAdmin : NewsModel
+    {
+        public bool IsVisible { get; set; }
+    }
+
     public class NewsCreationModel : AbstractNewsModel
-    {}
+    {
+        public bool IsVisible { get; set; }
+    }
 
     public class NewsUpdateModel : AbstractNewsModel
-    {}
+    {
+        public bool IsVisible { get; set; }
+    }
 }
