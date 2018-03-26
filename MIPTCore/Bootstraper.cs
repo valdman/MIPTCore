@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BannerHelper;
 using CapitalManagment;
 using CapitalManagment.Infrastructure;
 using CapitalsTableHelper;
@@ -74,7 +75,8 @@ namespace MIPTCore
                 .AddScoped<IFileManager, FileManager>()
                 .AddScoped<IPageManager, PageManager>()
                 .AddScoped<ICapitalsTableHelper, CapitalsTableHelper.CapitalsTableHelper>()
-                .AddScoped<INavigationHelper, NavigationHelper.NavigationHelper>();
+                .AddScoped<INavigationHelper, NavigationHelper.NavigationHelper>()
+                .AddScoped<IBannerHelper, BannerHelper.BannerHelper>();
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
             _services.Configure<PaymentGatewaySettings>(_configuration.GetSection("PaymentGatewaySettings"));
@@ -122,6 +124,9 @@ namespace MIPTCore
                 
                 cfg.CreateMap<NavigationTableEntry, NavigationTableEntryModel>();
                 cfg.CreateMap<NavigationTableEntryModel, NavigationTableEntry>();
+                
+                cfg.CreateMap<BannerElement, BannerElementModel>();
+                cfg.CreateMap<BannerElementModel, BannerElement>();
 
                 cfg.CreateMap<News, NewsModel>();
                 cfg.CreateMap<News, NewsModelForAdmin>();
@@ -152,6 +157,7 @@ namespace MIPTCore
                 .AddDbContext<PageContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<TicketContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<NavigationTableContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<BannerContext>(options => options.UseNpgsql(connectionString))
                 .AddDbContext<DonationContext>(options => options.UseNpgsql(connectionString))
 
                 .AddScoped<IGenericRepository<User>, UserRepository>()
@@ -161,6 +167,7 @@ namespace MIPTCore
                 .AddScoped<IGenericRepository<Donation>, DonationRepository>()
                 .AddScoped<ICapitalsTableEntryRepository, CapitalsTableRepository>()
                 .AddScoped<INavigationTableRepository, NavigationTableRepository>()
+                .AddScoped<IBannerRepository, BannerRepository>()
                 .AddScoped<ICapitalRepository, CapitalRepository>()
                 .AddScoped<IDomainOptionsRepository, DomainOptionsRepository>()
                 .AddScoped<IPageRepository, PageRepository>()

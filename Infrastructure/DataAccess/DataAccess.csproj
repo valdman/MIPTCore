@@ -11,6 +11,10 @@
     <PackageReference Include="wilx.System.Linq.Dynamic.Core" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BannerHelper\BannerHelper.csproj">
+      <Project>{76D1F9E7-D62C-4169-A892-27DC03F5A5F8}</Project>
+      <Name>BannerHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CapitalsTableHelper\CapitalsTableHelper.csproj">
       <Project>{6CBD3B8B-8F3B-4CA1-B71C-C578C7026860}</Project>
       <Name>CapitalsTableHelper</Name>
