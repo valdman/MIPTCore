@@ -19,6 +19,8 @@ namespace MIPTCore.Models
         public string OfferLink { get; set; }
 
         public string FullPageUri { get; set; }
+        
+        public bool IsAcquiringEnabled { get; set; }
 
         public IEnumerable<PersonModel> Founders { get; set; }
         public IEnumerable<PersonModel> Recivers { get; set; }
@@ -35,12 +37,10 @@ namespace MIPTCore.Models
     {
         public int Id { get; set; }
         
-        public bool IsAcquiringEnabled { get; set; }
-        
         public DateTimeOffset CreatingTime { get; set; }
     }
     
-    public class CapitalModelForAdmin : CapitalModel
+    public class CapitalModelWithCredentials : CapitalModel
     {
         public CapitalCredentialsModel CapitalCredentials { get; set; }
     }

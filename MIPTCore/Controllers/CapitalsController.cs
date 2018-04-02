@@ -63,7 +63,7 @@ namespace MIPTCore.Controllers
             }
             
             return Ok(User.IsInRole("Admin") && withCredentials 
-                ? Mapper.Map<CapitalModelForAdmin>(capitalToReturn) 
+                ? Mapper.Map<CapitalModelWithCredentials>(capitalToReturn) 
                 : Mapper.Map<CapitalModel>(capitalToReturn));
         }
         
@@ -116,7 +116,7 @@ namespace MIPTCore.Controllers
 
             _capitalManager.UpdateCapital(capitalToUpdate);
 
-            return Ok(Mapper.Map<CapitalModelForAdmin>(capitalToUpdate));
+            return Ok(Mapper.Map<CapitalModelWithCredentials>(capitalToUpdate));
         }
         
         // DELETE capitals/5

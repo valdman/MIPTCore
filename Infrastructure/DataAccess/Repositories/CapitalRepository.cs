@@ -82,6 +82,7 @@ namespace DataAccess.Repositories
 
             return Db
                 .Include(c => c.Image)
+                .Include(c => c.CapitalCredentials)
                 .SingleOrDefault(c => c.FullPageUri.Equals(name));
         }
 
