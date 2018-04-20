@@ -12,6 +12,8 @@ using DonationManagment;
 using DonationManagment.Application;
 using DonationManagment.Infrastructure;
 using FileManagment;
+using Loggly;
+using Loggly.Config;
 using Mailer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MIPTCore.Authentification.Handlers;
 using MIPTCore.Middlewares;
 using MIPTCore.Models;
+using MIPTCore.Settings;
 using NavigationHelper;
 using NewsManagment;
 using PagesManagment;
@@ -47,6 +50,7 @@ namespace MIPTCore
         {
             ConfigureDatebase();
             ConfigureAutoMapper();
+            ConfigureLoggly();
 
             _services
                 //Register auth middleware
@@ -80,6 +84,23 @@ namespace MIPTCore
 
             _services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageSettings"));
             _services.Configure<PaymentGatewaySettings>(_configuration.GetSection("PaymentGatewaySettings"));
+        }
+
+        private void ConfigureLoggly()
+        {
+            var settings = new LogglySettings();
+            _configuration.GetSection("LogglySettings").Bind(settings);
+            
+            var config = LogglyConfig.Instance;
+            config.CustomerToken = settings.CustomerToken;
+            config.ApplicationName = $"MIPT_{settings.Location}";
+            
+            config.Transport.EndpointHostname = settings.EndpointHostname;
+            config.Transport.EndpointPort = settings.EndpointPort;
+            config.Transport.LogTransport = LogTransport.Https;
+
+            var ct = new ApplicationNameTag {Formatter = "application-{0}"};
+            config.TagConfig.Tags.Add(ct);
         }
 
         private void ConfigureAutoMapper()

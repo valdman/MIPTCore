@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using CapitalsTableHelper;
@@ -7,6 +8,7 @@ using DonationManagment;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using UserManagment.Exceptions;
+using Loggly;
 
 namespace MIPTCore.Middlewares
 {
@@ -43,6 +45,18 @@ namespace MIPTCore.Middlewares
             {
                 await HandleExceptionAsync(context, ex);
             }
+            catch(Exception e) when (LogToLoggly(e)) {}
+        }
+
+        private bool LogToLoggly(Exception e)
+        {
+            ILogglyClient loggly = new LogglyClient();
+            var logEvent = new LogglyEvent();
+            logEvent.Data.Add("description", "Non-Domain Exception", DateTime.Now);
+            logEvent.Data.Add("exception", e);
+            loggly.Log(logEvent);
+
+            return false;
         }
     }
 }
