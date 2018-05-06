@@ -12,6 +12,7 @@ using MIPTCore.Models;
 
 namespace MIPTCore.Controllers
 {
+    [Route("api")]
     public class FilesController : Controller
     {
         private readonly IFileManager _fileManager;

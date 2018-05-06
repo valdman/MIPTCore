@@ -9,7 +9,7 @@ using PagesManagment;
 
 namespace MIPTCore.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PagesController : Controller
     {
         private readonly IPageManager _pagesManager;

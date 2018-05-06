@@ -22,7 +22,7 @@ namespace MIPTCore.Controllers
 {
 
     [Authorize("Admin")]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class DonationsController : Controller
     {
         private readonly IDonationManager _donationManager;

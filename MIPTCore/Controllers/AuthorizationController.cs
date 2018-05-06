@@ -14,6 +14,7 @@ using UserManagment.Exceptions;
 
 namespace MIPTCore.Controllers
 {
+    [Route("api")]
     public class AuthentificationController : Controller
     {
         private readonly IUserManager _userManager;

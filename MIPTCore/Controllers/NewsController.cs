@@ -10,7 +10,7 @@ using UserManagment;
 
 namespace MIPTCore.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class NewsController : Controller
     {
         private readonly INewsManager _newsManager;

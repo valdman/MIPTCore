@@ -12,6 +12,7 @@ using NavigationHelper;
 
 namespace MIPTCore.Controllers
 {
+    [Route("api")]
     public class FrontendHelpersController : Controller
     {
         private readonly ICapitalsTableHelper _capitalsTableHelper;

@@ -9,7 +9,7 @@ using StoriesManagment;
 
 namespace MIPTCore.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class StoriesController : Controller
     {
         private readonly IStoriesManager _storiesManager;

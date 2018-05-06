@@ -6,7 +6,7 @@ using MIPTCore.Models;
 namespace MIPTCore.Controllers
 {
     [Authorize("Admin")]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class DomainOptionsController : Controller
     {
         private readonly IDomainOptionsService _domainOptionsService;

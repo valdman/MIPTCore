@@ -7,7 +7,7 @@ using UserManagment.Application;
 
 namespace MIPTCore.Controllers
 {
-    [Route("Users")]
+    [Route("api/Users")]
     public class UserServiceController : Controller
     {
         private readonly IUserManager _userManager;

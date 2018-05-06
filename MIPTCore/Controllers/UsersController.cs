@@ -11,7 +11,7 @@ using Mapper = AutoMapper.Mapper;
 
 namespace MIPTCore.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : Controller
     {
         private readonly IUserManager _userManager;

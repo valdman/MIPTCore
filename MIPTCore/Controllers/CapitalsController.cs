@@ -10,7 +10,7 @@ using MIPTCore.Models;
 
 namespace MIPTCore.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CapitalsController : Controller
     {
         private readonly ICapitalManager _capitalManager;
