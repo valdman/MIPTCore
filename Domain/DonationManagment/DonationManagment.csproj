@@ -3,14 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CapitalManagment\CapitalManagment.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\UserManagment\UserManagment.csproj">
-      <Project>{7D0FECFF-1D81-449A-9A88-DDF047ECB7EB}</Project>
-      <Name>UserManagment</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
+    <ProjectReference Include="..\CapitalManagment\CapitalManagment.csproj" />
   </ItemGroup>
 </Project>

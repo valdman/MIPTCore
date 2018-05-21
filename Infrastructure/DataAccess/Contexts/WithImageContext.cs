@@ -1,6 +1,7 @@
 ﻿using CapitalManagment;
 using CapitalsTableHelper;
 using DataAccess.Mappings;
+using DonationManagment;
 using Microsoft.EntityFrameworkCore;
 using NewsManagment;
 using StoriesManagment;
@@ -13,7 +14,8 @@ namespace DataAccess.Contexts
         public DbSet<Capital> Capitals { get; private set; }
         public DbSet<CapitalsTableEntry> CapitalsTableEntries { get; private set; }
         public DbSet<News> News { get; private set; }
-        public DbSet<Story> Stories { get; private set; }
+		public DbSet<Story> Stories { get; private set; }
+        public DbSet<Donation> Donations { get; private set; }
         
         public WithImageContext(DbContextOptions<WithImageContext> connectionOptions) : base(connectionOptions)
         {

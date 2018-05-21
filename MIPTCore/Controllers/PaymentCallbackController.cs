@@ -8,9 +8,10 @@ using Newtonsoft.Json;
 
 namespace MIPTCore.Controllers
 {
+    [Route("api/payment")]
     public class PaymentCallbackController : Controller
     {
-        [HttpGet("~/payment/callback")]
+        [HttpGet("callback")]
         public IActionResult HandlePaymentCallback([FromQuery] PaymentCallbackModel paymentCallbackModel)
         {
             _logger.LogInformation($"Callback {JsonConvert.SerializeObject(paymentCallbackModel)}");
@@ -44,7 +45,7 @@ namespace MIPTCore.Controllers
             return Ok("Donation confirmed");
         }
 
-        [HttpGet("~/payment/status")]
+        [HttpGet("status")]
         public IActionResult GetPaymentStatus([FromQuery] string orderId)
         {
             var donation = _donationManager.GetDonationsByPredicate(d => d.BankOrderId.Equals(orderId))

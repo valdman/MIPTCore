@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using CapitalManagment;
 using CapitalManagment.Infrastructure;
 using DataAccess.Contexts;
+using DonationManagment;
 using Journalist;
 using Microsoft.EntityFrameworkCore;
-using NavigationHelper;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace DataAccess.Repositories
 {
@@ -88,12 +86,14 @@ namespace DataAccess.Repositories
 
         public decimal CoutSumGivenToWholeFund()
         {
-            return Db.Sum(c => c.Given);
+			return Db.Sum(c => c.Given) + _donationDb.Where(d => d.IsConfirmed && !d.IsDeleted).Sum(d => d.Value);
         }
+
+		private readonly DbSet<Donation> _donationDb;
 
         public CapitalRepository(WithImageContext context) : base(context)
         {
-        }
-
+			_donationDb = context.Donations;
+        }      
     }
 }
