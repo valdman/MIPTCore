@@ -23,7 +23,8 @@ namespace FileManagment
         public async Task<string> UploadFileAsync(IFormFile content)
         {
             var fileInfo = await UploadAnyFileAsync(content,
-                                                        _fileStorageSettings.AllowedFileExtensions,
+			                                        _fileStorageSettings.AllowedFileExtensions //Images can be treated as files
+			                                        .Concat(_fileStorageSettings.AllowedImageExtensions).ToArray(),
                                                         _fileStorageSettings.FileStorageFolder);
 
             return fileInfo.Name;
