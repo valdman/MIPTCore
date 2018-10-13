@@ -20,7 +20,7 @@ namespace Mailer
             {
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(_mailerConfiguration.Login, _mailerConfiguration.Password),
-                Port = 25,
+                Port = _mailerConfiguration.Port != 0 ? _mailerConfiguration.Port : 25,
                 EnableSsl = true
             };
         }
