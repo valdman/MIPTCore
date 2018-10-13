@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MIPTCore.Authentification;
 using MIPTCore.Extensions;
-using MIPTCore.Middlewares;
-using Newtonsoft.Json.Serialization;
 using UserManagment;
 
 namespace MIPTCore
@@ -40,6 +35,11 @@ namespace MIPTCore
         // This method gets called by the runtime. Use this method To add services To the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(configuration =>
+            {
+                configuration.UsePostgreSqlStorage(Configuration.GetConnectionString("Postgres"));
+            });
+            
             services.AddMvc()
                 .AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -88,6 +88,13 @@ namespace MIPTCore
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            //Hangfire Web-admin
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions()
+            {
+                Authorization = new[] { new HangfireAuthHandler() }
+            });
+            app.UseHangfireServer();
 
             //Middlewares
             app.DomainErrorHandlingMiddleware();

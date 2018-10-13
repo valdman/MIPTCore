@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -74,22 +73,6 @@ namespace MIPTCore.Controllers
             await HttpContext.SignOutAsync("MIPTCoreCookieAuthenticationScheme");
             
             return Ok();
-        }
-
-        // POST me
-        [HttpGet("me")]
-        [Authorize("User")]
-        public IActionResult Current()
-        {
-            var currentUserId = User.GetId();
-            var currentUser = _userManager.GetUserById(currentUserId);
-
-            if (currentUser == null)
-            {
-                return Unauthorized();
-            }
-
-            return Ok(Mapper.Map<UserModel>(currentUser));
         }
     }
 }

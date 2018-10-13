@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Entities;
+using Hangfire;
 using Journalist.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MIPTCore.Extensions;
@@ -40,7 +41,7 @@ namespace MIPTCore.Controllers
                 return NotFound("User with this ID is not exists");
             }
             
-            _userMailerService.BeginEmailConfirmation(userId).Start();
+            BackgroundJob.Enqueue(() => _userMailerService.BeginEmailConfirmation(userId));
             return Ok();
         }
         
@@ -57,8 +58,8 @@ namespace MIPTCore.Controllers
             {
                 return NotFound("User with this ID is not exists");
             }
-            
-            _userMailerService.BeginPasswordRecovery(userToRecovery.Id).Start();
+
+            BackgroundJob.Enqueue(() => _userMailerService.BeginPasswordRecovery(userToRecovery.Id));
             return Ok();
         }
         

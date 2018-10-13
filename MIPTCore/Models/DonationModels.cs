@@ -42,7 +42,14 @@ namespace MIPTCore.Models
 
 	    public DateTimeOffset CreatingTime { get; set; }
     }
-    
+
+	public class DonationRelatedToUserModdel : AbstractDonationModel
+	{
+		public int CapitalId { get; set; }
+
+		public DateTimeOffset CreatingTime { get; set; }
+	}
+	
 	public class ExpandedDonationModel : AbstractDonationModel
 	{
 		public int Id { get; set; }
