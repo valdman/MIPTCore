@@ -15,6 +15,8 @@ namespace UserManagment
         public AlumniProfile AlumniProfile { get; set; }
         public bool IsEmailConfirmed { get; set; }
         
+        public string Bio { get; set; }
+        
         public UserRole Role { get; set; }
 
         public DateTimeOffset? AuthentificatedAt { get; set; }

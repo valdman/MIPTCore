@@ -13,6 +13,7 @@ namespace DataAccess.Mappings
             e.HasKey(t => t.Id);
             e.Property(t => t.FirstName).IsRequired();
             e.Property(t => t.LastName).IsRequired();
+            e.Property(t => t.Bio);
             e.HasIndex(t => t.Email);
             e.Property(t => t.IsMiptAlumni).IsRequired();
 

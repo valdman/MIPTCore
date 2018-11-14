@@ -91,6 +91,7 @@ namespace MIPTCore.Controllers
 
             userToUpdate.FirstName = userModel.FirstName;
             userToUpdate.LastName = userModel.LastName;
+            userToUpdate.Bio = userModel.Bio;
             userToUpdate.Email = userModel.Email;
             userToUpdate.IsMiptAlumni = userModel.IsMiptAlumni;
             userToUpdate.AlumniProfile = Mapper.Map<AlumniProfile>(userModel.AlumniProfile);
