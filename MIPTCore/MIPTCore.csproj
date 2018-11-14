@@ -28,6 +28,7 @@
     <ProjectReference Include="..\Domain\Common\Common.csproj" />
     <ProjectReference Include="..\Domain\DonationManagment\DonationManagment.csproj" />
     <ProjectReference Include="..\Domain\FileManagment\FileManagment.csproj" />
+    <ProjectReference Include="..\Domain\UserReadModel\UserReadModel.csproj" />
     <ProjectReference Include="..\Infrastructure\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Domain\UserManagment\UserManagment.csproj" />
     <ProjectReference Include="..\Infrastructure\Mailer\Mailer.csproj" />

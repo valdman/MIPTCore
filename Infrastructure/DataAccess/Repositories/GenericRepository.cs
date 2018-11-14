@@ -43,6 +43,11 @@ namespace DataAccess.Repositories
                 .ToList();
         }
 
+        public IQueryable<TEntity> AsQueryable()
+        {
+            return Db.AsQueryable();
+        }
+
         public (int, IEnumerable<TEntity>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<TEntity, bool>> predicate = null)
         {
             var aliveObjects = Db.Where(@object => !@object.IsDeleted);

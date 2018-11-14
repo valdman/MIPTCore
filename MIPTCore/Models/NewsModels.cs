@@ -16,6 +16,7 @@ namespace MIPTCore.Models
         public DateTimeOffset? Date { get; set; }
 
         public ImageModel Image { get; set; }
+        public ImageModel PreviewImage { get; set; }
         
         public string FullPageUri { get; set; }
     }

@@ -16,6 +16,7 @@ namespace DataAccess.Mappings
 
             mapping.Property(t => t.Date).IsRequired(false);
             mapping.HasOne(c => c.Image).WithMany().IsRequired(false);
+            mapping.HasOne(c => c.PreviewImage).WithMany().IsRequired(false);
         }
     }
 }

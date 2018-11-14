@@ -40,18 +40,21 @@ namespace MIPTCore.Models
         public DateTimeOffset CreatingTime { get; set; }
     }
     
-    public class CapitalModelWithCredentials : CapitalModel
+    public class CapitalModelForAdmin : CapitalModel
     {
         public CapitalCredentialsModel CapitalCredentials { get; set; }
+        public IEnumerable<CapitalizationModel> Capitalizations { get; set; }
     }
     
     public class CapitalCreatingModel : AbstractCapitalModel
     {
         public CapitalCredentialsModel CapitalCredentials { get; set; }
+        public IEnumerable<CapitalizationModel> Capitalizations { get; set; }
     }
 
     public class CapitalUpdatingModel : AbstractCapitalModel
     {
         public CapitalCredentialsModel CapitalCredentials { get; set; }
+        public IEnumerable<CapitalizationModel> Capitalizations { get; set; }
     }
 }

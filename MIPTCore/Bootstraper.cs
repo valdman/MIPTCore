@@ -32,6 +32,7 @@ using StoriesManagment;
 using UserManagment;
 using UserManagment.Application;
 using UserManagment.Infrastructure;
+using UserReadModel;
 
 namespace MIPTCore
 {
@@ -61,6 +62,9 @@ namespace MIPTCore
                 //Register settings
                 .Configure<BackendSettings>(_configuration.GetSection("BackendSettings"))
                 .Configure<MailerSettings>(_configuration.GetSection("MailerSettings"))
+                
+                //Read model
+                .AddScoped<IUserAccountingReadModel, UserAccountingReadModel>()
                 
                 //RegisterDomain
                 .AddScoped<IUserManager, UserManager>()
@@ -123,8 +127,11 @@ namespace MIPTCore
                     .ForMember(model => model.CapitalCredentials, o => o.ResolveUsing(p => Mapper.Map<CapitalCredentials>(p.CapitalCredentials)));
                 cfg.CreateMap<Capital, CapitalModel>();
                 cfg.CreateMap<Capital, ShortCapitalModel>();
-                cfg.CreateMap<Capital, CapitalModelWithCredentials>()
-                    .ForMember(model => model.CapitalCredentials, o => o.ResolveUsing(p => Mapper.Map<CapitalCredentialsModel>(p.CapitalCredentials)));;
+                cfg.CreateMap<Capital, CapitalModelForAdmin>()
+                    .ForMember(model => model.CapitalCredentials, o => o.ResolveUsing(p => Mapper.Map<CapitalCredentialsModel>(p.CapitalCredentials)));
+
+                cfg.CreateMap<CapitalizationModel, Capitalization>();
+                cfg.CreateMap<Capitalization, CapitalizationModel>();
 
                 cfg.CreateMap<CapitalCredentials, CapitalCredentialsModel>();
                 cfg.CreateMap<CapitalCredentialsModel, CapitalCredentials>();
@@ -150,7 +157,9 @@ namespace MIPTCore
                 cfg.CreateMap<BannerElement, BannerElementModel>();
                 cfg.CreateMap<BannerElementModel, BannerElement>();
 
-                cfg.CreateMap<News, NewsModel>();
+                cfg.CreateMap<News, NewsModel>()
+                    .ForMember(model => model.Image, o => o.ResolveUsing(p => Mapper.Map<ImageModel>(p.Image)))
+                    .ForMember(model => model.PreviewImage, o => o.ResolveUsing(p => Mapper.Map<ImageModel>(p.PreviewImage)));
                 cfg.CreateMap<News, NewsModelForAdmin>();
                 cfg.CreateMap<NewsCreationModel, News>();
                 

@@ -23,7 +23,7 @@ namespace NewsManagment
             Require.Positive(newsId, nameof(newsId));
             
             var news = _newsRepository.GetById(newsId);
-
+            
             return ShouldIncludeHidden(includeHidden).Compile().Invoke(news) 
                 ? news 
                 : null;
@@ -77,7 +77,7 @@ namespace NewsManagment
         }
 
         private Expression<Func<News, bool>> ShouldIncludeHidden(bool includeHidden) =>
-            news => news.IsVisible || includeHidden;
+            news => news != null && (news.IsVisible || includeHidden);
 
         private void MustBeValidNews(News news)
         {

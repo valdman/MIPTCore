@@ -18,5 +18,6 @@ namespace NewsManagment
         public bool IsVisible { get; set; }
 
         public Image Image { get; set; }
+        public Image PreviewImage { get; set; }
     }
 }

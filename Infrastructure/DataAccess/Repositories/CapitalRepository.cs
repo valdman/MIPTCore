@@ -19,6 +19,7 @@ namespace DataAccess.Repositories
 
             return Db
                 .Include(u => u.CapitalCredentials)
+                .Include(u => u.Capitalizations)
                 .Include(u => u.Image)
                     .Include(u => u.Founders)
                 .ThenInclude(f => f.Image)
@@ -31,6 +32,7 @@ namespace DataAccess.Repositories
         {
             return Db
                 .Include(u => u.CapitalCredentials)
+                .Include(u => u.Capitalizations)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
                     .ThenInclude(f => f.Image)
@@ -45,6 +47,7 @@ namespace DataAccess.Repositories
 
             return Db
                 .Include(u => u.CapitalCredentials)
+                .Include(u => u.Capitalizations)
                 .Include(u => u.Image)
                 .Include(u => u.Founders)
                     .ThenInclude(f => f.Image)
@@ -80,6 +83,7 @@ namespace DataAccess.Repositories
 
             return Db
                 .Include(c => c.Image)
+                .Include(u => u.Capitalizations)
                 .Include(c => c.CapitalCredentials)
                 .SingleOrDefault(c => c.FullPageUri.Equals(name));
         }

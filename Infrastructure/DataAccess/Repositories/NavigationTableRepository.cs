@@ -34,6 +34,11 @@ namespace DataAccess.Repositories
             return enriesToReturn;
         }
 
+        public IQueryable<NavigationTableEntry> AsQueryable()
+        {
+            return _db.AsQueryable();
+        }
+
         public (int, IEnumerable<NavigationTableEntry>) GetAllForPagination(PaginationParams paginationParams, OrderingParams orderingParams, IEnumerable<FilteringParams> filteringParams, Expression<Func<NavigationTableEntry, bool>> predicate = null)
         {
             Require.NotNull(predicate, nameof(predicate));

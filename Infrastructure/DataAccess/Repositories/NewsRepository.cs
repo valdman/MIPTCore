@@ -26,7 +26,9 @@ namespace DataAccess.Repositories
 
         public override IEnumerable<News> GetAll()
         {
-            return Db.Include(c => c.Image)
+            return Db
+                .Include(c => c.Image)
+                .Include(c => c.PreviewImage)
                 .Where(@object => !@object.IsDeleted)
                 .ToList();
         }
@@ -35,7 +37,10 @@ namespace DataAccess.Repositories
         {
             Require.NotNull(predicate, nameof(predicate));
             
-            return Db.Include(c => c.Image).Where(predicate)
+            return Db
+                .Include(c => c.Image)
+                .Include(c => c.PreviewImage)
+                .Where(predicate)
                 .Where(@object => !@object.IsDeleted)
                 .ToList();
         }

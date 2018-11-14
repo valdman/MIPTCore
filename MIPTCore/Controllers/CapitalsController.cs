@@ -63,7 +63,7 @@ namespace MIPTCore.Controllers
             }
             
             return Ok(User.IsInRole("Admin") && withCredentials 
-                ? Mapper.Map<CapitalModelWithCredentials>(capitalToReturn) 
+                ? Mapper.Map<CapitalModelForAdmin>(capitalToReturn) 
                 : Mapper.Map<CapitalModel>(capitalToReturn));
         }
         
@@ -111,12 +111,13 @@ namespace MIPTCore.Controllers
             capitalToUpdate.Image = Mapper.Map<Image>(capitalModel.Image);
             capitalToUpdate.Founders = Mapper.Map<IEnumerable<Person>>(capitalModel.Founders);
             capitalToUpdate.Recivers = Mapper.Map<IEnumerable<Person>>(capitalModel.Recivers);
+            capitalToUpdate.Capitalizations = Mapper.Map<IEnumerable<Capitalization>>(capitalModel.Capitalizations);
             capitalToUpdate.FullPageUri = capitalModel.FullPageUri;
             capitalToUpdate.Content = capitalModel.Content;
 
             _capitalManager.UpdateCapital(capitalToUpdate);
 
-            return Ok(Mapper.Map<CapitalModelWithCredentials>(capitalToUpdate));
+            return Ok(Mapper.Map<CapitalModelForAdmin>(capitalToUpdate));
         }
         
         // DELETE capitals/5
