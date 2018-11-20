@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 using CapitalManagment;
 using Microsoft.Extensions.Options;
 using DonationManagment;
@@ -9,9 +11,11 @@ using DonationManagment.Infrastructure;
 using Journalist.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using PaymentGateway.Models;
 using RestSharp;
+using RestSharp.Deserializers;
+using RestSharp.Extensions;
+using RestSharp.Serializers;
 using UserManagment;
 
 namespace PaymentGateway
@@ -26,78 +30,66 @@ namespace PaymentGateway
             _logger = logger;
             _paymentGatewaySettings = paymentOptions.Value;
         }
-        
+
         public DonationPaymentInformation InitiateSinglePaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser)
-        {
-            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.SinglePaymentRouteUri);
-            
-            var userDataParameters = new PaymentJsonParams
+            => RegisterOrder(new PaymentRequestModel
             {
+                Sector = credentials.MerchantLogin,
+                Password = credentials.MerchantPassword,
+                Reference = donation.Id,
+
+                Amount = (int) Math.Ceiling(donation.Value * 100),
+                Currency = (int) CurrencyCodes.Rub,
+                Description = $"Однократное пожертвование в капитал",
                 Email = fromUser.Email,
-                FullName = $"{fromUser.FirstName} {fromUser.LastName}"
-            };
-            
-            var payload = new ParametrizedPaymentRequestModel()
+                FirstName = fromUser.FirstName,
+                LastName = fromUser.LastName,
+                Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString()
+            }, donation, credentials);
+
+        public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser) 
+            => RegisterOrder(new PaymentRequestModel
             {
-                OrderNumber = donation.Id,
-                Amount = (int) Math.Round(donation.Value * 100),
-                ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString(),
-                JsonParams = SerializeWithoutNullToLowCamelcase(userDataParameters)
-            };
+                Sector = credentials.MerchantLogin,
+                Password = credentials.MerchantPassword,
+                Reference = donation.Id,
+                
+                Amount = (int)Math.Ceiling(donation.Value * 100), 
+                Currency = (int)CurrencyCodes.Rub,
+                Description = $"Регулярное пожертвование в капитал",
+                Email = fromUser.Email,
+                FirstName = fromUser.FirstName,
+                LastName = fromUser.LastName,
+                RecurringPeriod = DateTime.Now.Day.ToString(),
+                Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString()
+            }, donation, credentials);
 
-            var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
+        private DonationPaymentInformation RegisterOrder(PaymentRequestModel requestModel, Donation donation, CapitalCredentials credentials)
+        {
+            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.RegisterOrderRoute);
+            
+            var bankResponse = RequestBankAsync(targetRoute, requestModel);
 
-            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl, bankResponse.OrderId);
+            return new DonationPaymentInformation(
+                donation.Id, 
+                CreatePaymentUri(bankResponse.Id, credentials.MerchantLogin, credentials.MerchantPassword),
+                bankResponse.Id);
         }
 
-        public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser)
-        {
-            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.RecurrentPaymentRouteUri);
-            var requrrentParametersAndUserData = new PaymentJsonParams
-            {
-                RecurringExpiry = 21200101,
-                RecurringFrequency = 28,
-                Email = fromUser.Email,
-                FullName = $"{fromUser.FirstName} {fromUser.LastName}"
-            };
-            
-            var payload = new ParametrizedPaymentRequestModel()
-            {
-                OrderNumber = donation.Id,
-                Amount = (int) Math.Round(donation.Value * 100),
-                ReturnUrl = _paymentGatewaySettings.ReturnUrl.ToString(),
-                JsonParams = SerializeWithoutNullToLowCamelcase(requrrentParametersAndUserData),
-                ClientId = donation.UserId
-            };
-
-            var bankResponse = RequestBankAsync(targetRoute, credentials, payload);
-
-            return new DonationPaymentInformation(donation.Id, bankResponse.FormUrl, bankResponse.OrderId);
-        }
-
-        private PaymentResponse RequestBankAsync(Uri requestUri, CapitalCredentials credentials, object requestPayload)
+        private PaymentResponse RequestBankAsync(Uri requestUri, object requestPayload)
         {
             var keyValuePayload = requestPayload.ToKeyValue();
-            var authentificationPayload = new MerchantCredentials
+
+            var client = new RestClient(requestUri) {Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
+
+            var request = new RestRequest("", Method.POST);
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            foreach (var bodyKeyValue in keyValuePayload)
             {
-                UserName = credentials.MerchantLogin,
-                Password = credentials.MerchantPassword
-            }.ToKeyValue();
-
-            var payload = authentificationPayload.Union(keyValuePayload);
-            payload = payload.Select(pair => new KeyValuePair<string, string>(FirstCharacterToLower(pair.Key), pair.Value));
-
-            var client = new RestClient(requestUri); //{Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
-
-            var request = new RestRequest("", Method.GET);
-            var payloadArray = payload as KeyValuePair<string, string>[] ?? payload.ToArray();
-            
-            foreach (var querryParam in payloadArray)
-            {
-                request.AddParameter(querryParam.Key, querryParam.Value);
+                request.AddParameter(PascalToSnake(bodyKeyValue.Key), bodyKeyValue.Value);
             }
             
-            _logger.LogInformation($"Payment operation To {requestUri} with query data {payloadArray.JoinStringsWith(",")}");
+            _logger.LogInformation($"Payment operation To {requestUri} with query data {null}");
 
             var httpResponse = client.Execute(request);
 
@@ -108,30 +100,35 @@ namespace PaymentGateway
                 throw new PaymentGatewayException(errorMessage);
             }
             
-            var response = JsonConvert.DeserializeObject<PaymentResponse>(httpResponse.Content);
+            var response = new XmlDeserializer().Deserialize<PaymentResponse>(httpResponse);
+            
+            if (response.Code > 0)
+            {
+                var errorMessage = $"Payment failed with code '{response.Code}': {response.Description}";
+                _logger.LogError(errorMessage);
+                throw new PaymentGatewayException(errorMessage);
+            }
             
             _logger.LogInformation($"Payment gateway responded {JsonConvert.SerializeObject(response)}");
             
             return response;
         }
-        
-        private string FirstCharacterToLower(string str)
-        {
-            if (String.IsNullOrEmpty(str) || Char.IsLower(str, 0))
-                return str;
 
-            return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+        private string CreatePaymentUri(string bankOrderId, string sectorLogin, string sectorPass)
+        {
+            var signature = SignatureHelper.SignVia(sectorLogin, bankOrderId, sectorPass);
+            var baseUrl = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.PaymentRoute);
+            return baseUrl + $"?sector={sectorLogin}&id={bankOrderId}&signature={signature}";
         }
 
-        private string SerializeWithoutNullToLowCamelcase(object @object)
+        private string PascalToSnake(string stringInPascalCase)
         {
-            return JsonConvert.SerializeObject(@object,
-                Formatting.None,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+            const string strRegex = @"((?<=.)[A-Z][a-zA-Z]*)|((?<=[a-zA-Z])\d+)";
+            var transformRegex = new Regex(strRegex, RegexOptions.Multiline);
+
+            const string strReplace = @"_$1$2";
+
+            return transformRegex.Replace(stringInPascalCase, strReplace).ToLower();
         }
     }
 }

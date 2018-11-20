@@ -5,8 +5,9 @@ namespace PaymentGateway
     public class PaymentGatewaySettings
     {
         public Uri BankApiUri { get; set; }
-        public Uri SinglePaymentRouteUri { get; set; }
-        public Uri RecurrentPaymentRouteUri { get; set; }
-        public Uri ReturnUrl { get; set; }
+        public Uri RegisterOrderRoute { get; set; }
+        public Uri PaymentRoute { get; set; }
+        public Uri CancellationRoute { get; set; }
+        public Uri ReturnSuccessUrl { get; set; }
     }
 }
