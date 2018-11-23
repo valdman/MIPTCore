@@ -45,7 +45,7 @@ namespace PaymentGateway
                 FirstName = fromUser.FirstName,
                 LastName = fromUser.LastName,
                 Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString()
-            }, donation, credentials);
+            }, donation, credentials, _paymentGatewaySettings.RegisterOrderRoute);
 
         public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser) 
             => RegisterOrder(new PaymentRequestModel
@@ -62,11 +62,19 @@ namespace PaymentGateway
                 LastName = fromUser.LastName,
                 RecurringPeriod = DateTime.Now.Day.ToString(),
                 Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString()
-            }, donation, credentials);
+            }, donation, credentials, _paymentGatewaySettings.RegisterOrderRoute);
 
-        private DonationPaymentInformation RegisterOrder(PaymentRequestModel requestModel, Donation donation, CapitalCredentials credentials)
+        public void CancelRequrrentPayment(Donation donation, CapitalCredentials credentials)
+            => RegisterOrder(new CancelRecurringPaymentModel
+            {
+                Sector = credentials.MerchantLogin,
+                Id = donation.Id.ToString(),
+                Password = credentials.MerchantPassword,
+            }, donation, credentials, _paymentGatewaySettings.CancellationRoute);
+
+        private DonationPaymentInformation RegisterOrder(object requestModel, Donation donation, CapitalCredentials credentials, Uri to)
         {
-            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, _paymentGatewaySettings.RegisterOrderRoute);
+            var targetRoute = new Uri(_paymentGatewaySettings.BankApiUri, to);
             
             var bankResponse = RequestBankAsync(targetRoute, requestModel);
 
