@@ -18,7 +18,7 @@ namespace DataAccess.Mappings
             e.Property(t => t.FullPageUri);
 
             e.HasOne(c => c.Image).WithMany().IsRequired(false);
-            e.HasOne(c => c.CapitalCredentials).WithMany().IsRequired();
+            e.HasOne(c => c.CapitalCredentials).WithMany().IsRequired(false);    
             
             e.HasMany(c => c.Capitalizations).WithOne().HasForeignKey("CapitalId").IsRequired(false);
 
