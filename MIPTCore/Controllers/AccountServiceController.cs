@@ -5,12 +5,14 @@ using CapitalManagment;
 using Dapper;
 using DataAccess.Contexts;
 using DonationManagment;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MIPTCore.Authentification;
 using MIPTCore.Models;
 using UserManagment;
+using UserManagment.Application;
 using UserReadModel;
 
 namespace MIPTCore.Controllers
@@ -20,13 +22,15 @@ namespace MIPTCore.Controllers
     public class AccountServiceController : Controller
     {
         private readonly IUserAccountingReadModel _userAccountingReadModel;
+        private readonly IUserService _userService;
         
         //Read directly from context when its just Query request
         private readonly DbSet<User> _userSet;
 
-        public AccountServiceController(UserContext userContext, IUserAccountingReadModel userAccountingReadModel)
+        public AccountServiceController(UserContext userContext, IUserAccountingReadModel userAccountingReadModel, IUserService userService)
         {
             _userAccountingReadModel = userAccountingReadModel;
+            _userService = userService;
             _userSet = userContext.Set<User>();
         }
 
@@ -50,7 +54,8 @@ namespace MIPTCore.Controllers
         [HttpPost("request-bill")]
         public IActionResult RequestBill()
         {
-            throw new NotImplementedException();
+            BackgroundJob.Enqueue(() => _userService.RequestEmailBill(User.GetId()));
+            return Ok();
         }
 
         //GET me/donations

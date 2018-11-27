@@ -92,7 +92,7 @@ namespace MIPTCore
             //Hangfire Web-admin
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()
             {
-                Authorization = new[] { new HangfireAuthHandler(env) },
+                Authorization = env.IsProduction() ? new[] { new HangfireAuthHandler(env) } : null,
                 DisplayStorageConnectionString = false
             });
             app.UseHangfireServer();

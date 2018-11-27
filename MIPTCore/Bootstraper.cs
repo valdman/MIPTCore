@@ -33,6 +33,7 @@ using UserManagment;
 using UserManagment.Application;
 using UserManagment.Infrastructure;
 using UserReadModel;
+using MailerImpl = Mailer.Mailer;
 
 namespace MIPTCore
 {
@@ -77,6 +78,7 @@ namespace MIPTCore
                 .AddScoped<ITicketSender, TicketSender>()
                 .AddScoped<ITicketService, TicketService>()
                 .AddScoped<IUserMailerService, UserMailerService>()
+                .AddScoped<IMailer, MailerImpl>()
                 .AddScoped<ITicketSender, TicketSender>()
                 .AddScoped<ICapitalManager, CapitalManager>()
                 .AddScoped<IImageResizer, ImageResizer>()
