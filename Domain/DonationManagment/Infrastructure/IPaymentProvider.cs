@@ -8,5 +8,6 @@ namespace DonationManagment.Infrastructure
     {
         DonationPaymentInformation InitiateSinglePaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser);
         DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser);
+        void CancelRequrrentPayment(Donation donation, CapitalCredentials credentials);
     }
 }
