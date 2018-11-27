@@ -9,11 +9,13 @@ namespace UserManagment
     {
         private readonly IUserManager _userManager;
         private readonly ITicketService _ticketService;
+        private readonly IMailer _userMailerService;
 
-        public UserService(IUserManager userManager, ITicketService ticketService)
+        public UserService(IUserManager userManager, ITicketService ticketService, IMailer userMailerService)
         {
             _userManager = userManager;
             _ticketService = ticketService;
+            _userMailerService = userMailerService;
         }
 
         public void ConfirmEmail(string emailToConfirm)
@@ -45,6 +47,15 @@ namespace UserManagment
             _userManager.UpdateUser(userToChangePassword);
 
             _ticketService.CompleteAllTicketsByEmailAndType(userToChangePassword.Email, TicketType.PasswordRecovery);
+        }
+
+        public void RequestEmailBill(int userId)
+        {
+            Require.Positive(userId, nameof(userId));
+
+            var user = _userManager.GetUserById(userId);
+            
+            _userMailerService.RequestBill(user);
         }
     }
 }

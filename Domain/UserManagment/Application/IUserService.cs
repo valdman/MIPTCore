@@ -6,5 +6,6 @@ namespace UserManagment.Application
     {
         void ConfirmEmail(string emailToConfirm);
         void ChangePassword(int userIdToChangePassword, Password newPassword);
+        void RequestEmailBill(int userId);
     }
 }
