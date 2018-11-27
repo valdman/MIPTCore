@@ -13,7 +13,17 @@ namespace Common.Entities
         {
             if (Regex.IsMatch(pass, "^.{8,18}$"))
             {
-                Hash = CryptoHelper.GetMd5HexadecimalHash(pass);
+                var md5Hasher = MD5.Create();
+
+                var data = md5Hasher.ComputeHash(Encoding.Unicode.GetBytes(pass));
+
+                var sBuilder = new StringBuilder();
+
+                foreach (var t in data)
+                    sBuilder.Append(t.ToString("x2"));
+
+                // Return the hexadecimal string.
+                Hash = sBuilder.ToString();
             }
             else
             {
