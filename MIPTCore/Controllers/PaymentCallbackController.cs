@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Xml.Serialization;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using DonationManagment.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,51 +11,38 @@ namespace MIPTCore.Controllers
     [Route("api/payment")]
     public class PaymentCallbackController : Controller
     {
-        [HttpPost("callback")]
-        public IActionResult HandlePaymentCallback()
+        [HttpGet("callback")]
+        public IActionResult HandlePaymentCallback([FromQuery] PaymentCallbackModel paymentCallbackModel)
         {
-            PaymentCallbackModel operation;
-            try
-            {
-                operation =
-                    (PaymentCallbackModel) (new XmlSerializer(typeof(PaymentCallbackModel))).Deserialize(HttpContext.Request.Body);
-            }
-            catch (Exception e)
-            {
-                HttpContext.Request.Body.Seek(0, 0);
-                _logger.LogError($"Error parsing callback body #{HttpContext.Request.Body}");
-                return BadRequest();
-            }
-            
-            _logger.LogInformation($"Callback {JsonConvert.SerializeObject(operation)}");
+            _logger.LogInformation($"Callback {JsonConvert.SerializeObject(paymentCallbackModel)}");
             
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!CheckCallBackIntegrity(operation))
+            if (!CheckCallBackIntegrity(paymentCallbackModel))
                 return Forbid("Broken callback integrity");
 
-            if (!operation.State.Equals("COMPLETED") &&
-                !operation.State.Equals("APPROVED"))
+            if (!paymentCallbackModel.Operation.Equals("deposited") ||
+                paymentCallbackModel.Status != PaymentOperationStatus.Success)
             {
                 _logger.LogWarning(
-                    $"Callback {JsonConvert.SerializeObject(operation)} handled, nothing happend");
+                    $"Callback {JsonConvert.SerializeObject(paymentCallbackModel)} handled, nothing happend");
                 return Ok();
             }
 
-            var donationToConfirm = _donationManager.GetDonationById(operation.Reference);
+            var donationToConfirm = _donationManager.GetDonationById(paymentCallbackModel.OrderNumber);
             if (donationToConfirm == null)
             {
-                _logger.LogError($"Donation #{operation.Reference} (bank #{operation.Id}) not found");
+                _logger.LogError($"Donation #{paymentCallbackModel.OrderNumber} not found");
                 return BadRequest(
-                    $"Donation with id (reference) {operation.Reference} doesn't exist (OrderNumber ivalid)");
+                    $"Donation with id {paymentCallbackModel.OrderNumber} doesn't exist (OrderNumber ivalid)");
             }
 
             _donationManager.ConfirmDonation(donationToConfirm);
                 
                 
             _logger.LogInformation($"Donation {JsonConvert.SerializeObject(donationToConfirm)} confirmed via callback");
-            return Ok("ok");
+            return Ok("Donation confirmed");
         }
 
         [HttpGet("status")]
