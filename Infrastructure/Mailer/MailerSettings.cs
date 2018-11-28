@@ -7,6 +7,8 @@
         public string Login { get; set; }
         public string Password { get; set; }
 
+        public string ContactAdress { get; set; }
+
         public bool IsMailerEnabled { get; set; }
     }
 }
