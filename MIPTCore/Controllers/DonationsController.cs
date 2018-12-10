@@ -204,6 +204,26 @@ namespace MIPTCore.Controllers
             return Ok(id);
         }
 
+        [HttpPut("stop/{id:int}")]
+        public IActionResult StopRecurrentDonation(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var donation = _donationManager.GetDonationById(id);
+
+            if (donation == null)
+                return NotFound();
+
+            if (!donation.IsRecursive)
+            {
+                return BadRequest("Donation is not recurrent");
+            }
+
+            _donationManager.CancelRecurringDonation(donation);
+            return Ok(id);
+        }
+
         private IEnumerable<ExpandedDonationModel> ExpandDonations(IEnumerable<Donation> donationsToReturn)
         {
             var donationsList = donationsToReturn as IList<Donation> ?? donationsToReturn.ToList();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 using CapitalManagment;
 using Microsoft.Extensions.Options;
 using DonationManagment;
@@ -68,7 +69,7 @@ namespace PaymentGateway
             => RegisterOrder(new CancelRecurringPaymentModel
             {
                 Sector = credentials.MerchantLogin,
-                Id = donation.Id.ToString(),
+                Id = donation.BankOrderId,
                 Password = credentials.MerchantPassword,
             }, donation, credentials, _paymentGatewaySettings.CancellationRoute);
 
@@ -88,7 +89,7 @@ namespace PaymentGateway
         {
             var keyValuePayload = requestPayload.ToKeyValue();
 
-            var client = new RestClient(requestUri) {Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
+            var client = new RestClient(requestUri);// {Proxy = new WebProxy("http://127.0.0.1:8080")}; //For test uses;
 
             var request = new RestRequest("", Method.POST);
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -107,8 +108,23 @@ namespace PaymentGateway
                 _logger.LogError(errorMessage);
                 throw new PaymentGatewayException(errorMessage);
             }
-            
-            var response = new XmlDeserializer().Deserialize<PaymentResponse>(httpResponse);
+
+            PaymentResponse response;
+            try
+            {
+                response = new XmlDeserializer().Deserialize<PaymentResponse>(httpResponse);
+            }
+            catch (XmlException)
+            {
+                var text = httpResponse.Content;
+                if (text != "ok\n")
+                    throw;
+                response = new PaymentResponse
+                {
+                    Code = 0,
+                    Description = text
+                };
+            }
             
             if (response.Code > 0)
             {

@@ -103,6 +103,17 @@ namespace DonationManagment
             _donationRepository.Update(donationToConfirm);
         }
 
+        public void CancelRecurringDonation(Donation donationToCancel)
+        {
+            Require.NotNull(donationToCancel, nameof(donationToCancel));
+            var relatedCapital = _capitalManager.GetCapitalById(donationToCancel.CapitalId);
+
+            _paymentProvider.CancelRequrrentPayment(donationToCancel, credentials: relatedCapital.CapitalCredentials);
+            
+            donationToCancel.CancelDate = DateTimeOffset.Now;
+            _donationRepository.Update(donationToCancel);
+        }
+
         public void UpdateDonation(Donation donationToUpdate)
         {
             Require.NotNull(donationToUpdate, nameof(donationToUpdate));

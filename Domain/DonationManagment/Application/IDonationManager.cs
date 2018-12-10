@@ -19,6 +19,7 @@ namespace DonationManagment.Application
         DonationPaymentInformation CreateDonationAsync(Donation donationToCreate);
         int CreateCompletedSingleDonation(Donation donationToCreate);
         void ConfirmDonation(Donation donationToConfirm);
+        void CancelRecurringDonation(Donation donationToCancel);
 
         void UpdateDonation(Donation donationToUpdate);
         void DeleteDonation(int donationToDeleteId);

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace PaymentGateway.Models
+﻿namespace PaymentGateway.Models
 {
     public class PaymentRequestModel
     {
