@@ -15,6 +15,7 @@ namespace MIPTCore.Controllers
         [HttpPost("callback")]
         public IActionResult HandlePaymentCallback()
         {
+            _logger.LogInformation("Bank callback recivied");
             PaymentCallbackModel operation;
             try
             {
