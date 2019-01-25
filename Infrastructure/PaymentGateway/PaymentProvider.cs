@@ -45,7 +45,8 @@ namespace PaymentGateway
                 Email = fromUser.Email,
                 FirstName = fromUser.FirstName,
                 LastName = fromUser.LastName,
-                Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString()
+                Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString(),
+                Failurl = _paymentGatewaySettings.ReturnFailedUrl.ToString(),
             }, donation, credentials, _paymentGatewaySettings.RegisterOrderRoute);
 
         public DonationPaymentInformation InitiateRequrrentPaymentForDonation(Donation donation, CapitalCredentials credentials, User fromUser) 
@@ -62,7 +63,8 @@ namespace PaymentGateway
                 FirstName = fromUser.FirstName,
                 LastName = fromUser.LastName,
                 RecurringPeriod = DateTime.Now.Day.ToString(),
-                Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString()
+                Url = _paymentGatewaySettings.ReturnSuccessUrl.ToString(),
+                Failurl = _paymentGatewaySettings.ReturnFailedUrl.ToString(),
             }, donation, credentials, _paymentGatewaySettings.RegisterOrderRoute);
 
         public void CancelRequrrentPayment(Donation donation, CapitalCredentials credentials)
