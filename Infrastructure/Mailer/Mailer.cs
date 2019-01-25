@@ -25,13 +25,11 @@ namespace Mailer
         public void RequestBill(User user)
         {
             var userEmail = new MailAddress(user.Email);
-            var from = new MailAddress(_mailerConfiguration.Login);
-            
             var mailMessage = new MailMessage
             {
-                From = from,
+                From = userEmail,
                 ReplyToList = { userEmail },
-                To = {new MailAddress(_mailerConfiguration.ContactAdress)},
+                To = {new MailAddress(_mailerConfiguration.Login)},
                 Subject = $"Запрос выписки от {user.FirstName} {user.LastName}",
                 Body = $"Пользователь {user.FirstName} {user.LastName} запрашивет выписку о пожертвованиях. \n" +
                        $"Email: {user.Email}, Id: {user.Id}"
