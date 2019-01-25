@@ -14,7 +14,19 @@ namespace MIPTCore.Controllers
         [HttpGet("callback")]
         public IActionResult HandlePaymentCallback([FromQuery] PaymentCallbackModel paymentCallbackModel)
         {
-            _logger.LogInformation($"Callback {JsonConvert.SerializeObject(paymentCallbackModel)}");
+            _logger.LogInformation("Bank callback recivied");
+            PaymentCallbackModel operation;
+            try
+            {
+                operation =
+                    (PaymentCallbackModel) (new XmlSerializer(typeof(PaymentCallbackModel))).Deserialize(HttpContext.Request.Body);
+            }
+            catch (Exception e)
+            {
+                HttpContext.Request.Body.Seek(0, 0);
+                _logger.LogError($"Error parsing callback body #{HttpContext.Request.Body}");
+                return BadRequest();
+            }
             
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
