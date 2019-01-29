@@ -20,7 +20,7 @@ namespace UserReadModel
             _capitalsSet = capitalsRepository.AsQueryable();
         }
 
-        public (IEnumerable<CapitalizationInfo>, CapitalizationInfo) GetCapitalizationInfo(int userId)
+        public (IEnumerable<CapitalizationInfo>, OverallCapitalizationInfo) GetCapitalizationInfo(int userId)
         {
             var userDonationsByCapital = _donationsSet
                 .AsQueryable()
@@ -43,7 +43,7 @@ namespace UserReadModel
             var donationStats = userDonationsByCapital.Select(donationGroup => 
                 CountCapitalizationInfoForDonations(donationGroup, capitals.Single(c => c.Id == donationGroup.Key))).ToImmutableList();
             
-            return (donationStats, new CapitalizationInfo
+            return (donationStats, new OverallCapitalizationInfo
             {
                 Donated = donationStats.Sum(d => d.Donated),
                 Income = donationStats.Sum(d => d.Income),
