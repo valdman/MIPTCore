@@ -9,6 +9,7 @@ namespace CapitalManagment
         public int SpentPercentage { get; set; }
 
         public static readonly int DefaultPercentage = 0;
+        public static readonly int DefaultSpentPercentage = 0;
         public static readonly int YearOfStartFunding = 2017;
     }
 }

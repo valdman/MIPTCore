@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Linq.Dynamic;
 using CapitalManagment;
 using Common.Infrastructure;
 using DonationManagment;
@@ -61,25 +60,51 @@ namespace UserReadModel
 
         private CapitalizationInfo CountCapitalizationInfoForDonations(IEnumerable<Donation> donations, Capital capital)
         {   
-            var endOfPrevYear = new DateTime(DateTime.Now.Year, 12, 31, 23, 59, 0);
+            var capitalizations = capital.Capitalizations ?? new Capitalization[0];
+            var donationsMaterialized = donations?.ToList() ?? new List<Donation>();
             
-            
-            var info = new CapitalizationInfo();
-            info.CapitalId = capital.Id;
-            info.CapitalName = capital.Name;
-            info.CapitalDescription = capital.Description;
-
-            info.Donated = donations.Sum(d =>
+            return new CapitalizationInfo
             {
-                
-                if (!d.IsRecursive) return d.Value;
-                
-                var ends = d.CancelDate ?? DateTimeOffset.Now;
-                var monthPassed = decimal.Ceiling((ends - d.CreatingTime).Days / (decimal)28);
+                CapitalId = capital.Id,
+                CapitalName = capital.Name,
+                CapitalDescription = capital.Description,
+                Donated = donationsMaterialized.Sum(d =>
+                {
+                    if (!d.IsRecursive) return d.Value;
 
-                return monthPassed * d.Value;
-            });
-            
+                    var ends = d.CancelDate ?? DateTimeOffset.Now;
+                    var monthPassed = decimal.Ceiling((ends - d.CreatingTime).Days / (decimal) 28);
+
+                    return monthPassed * d.Value;
+                }),
+                Income = donationsMaterialized.Sum(d =>
+                {
+                    if (d.IsRecursive) return CalculateRecurrentDonationIncome(d);
+
+                    var cap = capitalizations.SingleOrDefault(c => c?.Year == d.CreatingTime.Year);
+                    var incomePercentage = cap?.IncomePercentage ?? Capitalization.DefaultPercentage;
+
+                    return (d.Value * incomePercentage) / (decimal) 100;
+                }),
+                Spent = donationsMaterialized.Sum(d =>
+                {
+                    if (d.IsRecursive) return CalculateRecurrentDonationSpent(d);
+
+                    var cap = capitalizations.SingleOrDefault(c => c?.Year == d.CreatingTime.Year);
+                    var spentPercentage = cap?.SpentPercentage ?? Capitalization.DefaultSpentPercentage;
+
+                    return (d.Value * spentPercentage) / (decimal) 100;
+                }),
+            };
+        }
+
+        private decimal CalculateRecurrentDonationSpent(Donation donation)
+        {
+            throw new NotImplementedException();
+        }
+
+        private decimal CalculateRecurrentDonationIncome(Donation donation)
+        {
             throw new NotImplementedException();
         }
     }
