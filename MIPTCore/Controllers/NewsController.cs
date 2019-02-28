@@ -101,7 +101,7 @@ namespace MIPTCore.Controllers
 
             //updation
             var newImage = Mapper.Map<Image>(newsModel.Image);
-            var newPreviewImage = Mapper.Map<Image>(newsModel.Image);
+            var newPreviewImage = Mapper.Map<Image>(newsModel.PreviewImage);
             
             newsToUpdate.Name = newsModel.Name;
             newsToUpdate.FullPageUri = newsModel.FullPageUri;
