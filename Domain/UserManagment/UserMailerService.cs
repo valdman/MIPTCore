@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Common.Entities;
+using Common.Infrastructure;
 using Journalist;
 using UserManagment.Application;
 using UserManagment.Exceptions;
@@ -11,23 +10,23 @@ namespace UserManagment
 {
     public class UserMailerService : IUserMailerService
     {
-        private readonly IUserManager _userManager;
+        private readonly IGenericRepository<User> _userRepository;
         private readonly ITicketRepository _ticketRepository;
         private readonly ITicketSender _ticketSender;
 
-        public UserMailerService(IUserManager userManager, ITicketSender ticketSender,
-            ITicketRepository ticketRepository)
+        public UserMailerService(ITicketSender ticketSender,
+            ITicketRepository ticketRepository, IGenericRepository<User> userRepository)
         {
-            _userManager = userManager;
             _ticketSender = ticketSender;
             _ticketRepository = ticketRepository;
+            _userRepository = userRepository;
         }
 
         public async Task BeginEmailConfirmation(int userId)
         {
             Require.Positive(userId, nameof(userId));
 
-            var userToConfirm = _userManager.GetUserById(userId);
+            var userToConfirm = _userRepository.GetById(userId);
 
             if (userToConfirm == null)
                 throw new OperationOnUserThatNotExistsException("start email confirmation");
@@ -51,7 +50,7 @@ namespace UserManagment
         {
             Require.Positive(userId, nameof(userId));
 
-            var userToChangePassword = _userManager.GetUserById(userId);
+            var userToChangePassword = _userRepository.GetById(userId);
 
             if (userToChangePassword == null)
                 throw new OperationOnUserThatNotExistsException("start password changing");
@@ -72,7 +71,7 @@ namespace UserManagment
         {
             Require.Positive(userId, nameof(userId));
 
-            var userToConfirmAndSetPassword = _userManager.GetUserById(userId);
+            var userToConfirmAndSetPassword = _userRepository.GetById(userId);
 
             if (userToConfirmAndSetPassword == null)
                 throw new OperationOnUserThatNotExistsException("start email confirmation & setting password");

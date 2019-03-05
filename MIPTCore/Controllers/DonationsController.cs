@@ -25,6 +25,8 @@ namespace MIPTCore.Controllers
     [Route("api/[controller]")]
     public class DonationsController : Controller
     {
+        private readonly object userReadLock = new object();
+        
         private readonly IDonationManager _donationManager;
         private readonly ICapitalManager _capitalManager;
         private readonly IUserManager _userManager;
@@ -40,7 +42,7 @@ namespace MIPTCore.Controllers
 
         [HttpPost("registration")]
         [AllowAnonymous]
-        public async Task<IActionResult> ComboDonation([FromBody]DonationWithRegistrationModel comboModel)
+        public IActionResult ComboDonation([FromBody]DonationWithRegistrationModel comboModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -49,32 +51,10 @@ namespace MIPTCore.Controllers
             if (targetCapital == null)
                 return NotFound("CapitalNotFound");
 
-            var existingUser = _userManager.GetUserByEmail(comboModel.Email);
-
-            int userIntendedToDonateId;
-
-            if (existingUser == null)
-            {
-                var userToCreate = Mapper.Map<User>(comboModel);
-                
-                userToCreate.Password = new Password
-                (
-                    //crutches.js
-                    Guid.NewGuid().ToString("n").Substring(0, 10)
-                );
-                userToCreate.Role = UserRole.User;
-                
-                userIntendedToDonateId = _userManager.CreateUser(userToCreate);
-
-                await _userMailerService.BeginPasswordSettingAndEmailVerification(userIntendedToDonateId);
-            }
-            else
-            {
-                userIntendedToDonateId = existingUser.Id;
-            }
+            var userIntendedToDonateId = _userManager.GetOrSaveUserWithoutCredentials(Mapper.Map<User>(comboModel));
 
             var donationToCreate = Mapper.Map<CreateDonationModel>(comboModel);
-            donationToCreate.UserId = userIntendedToDonateId;
+            donationToCreate.UserId = userIntendedToDonateId.Id;
 
             return CreateDonation(donationToCreate, isAutocompleted: false);
         }
@@ -194,7 +174,6 @@ namespace MIPTCore.Controllers
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
         {
-
             var oldDonation = _donationManager.GetDonationById(id);
 
             if (oldDonation == null)

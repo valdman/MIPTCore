@@ -14,6 +14,7 @@ namespace UserManagment.Application
 
         void UpdateUser(User userToUpdate);
         int CreateUser(User userToCreate);
+        User GetOrSaveUserWithoutCredentials(User userToSave);
 
         void DeleteUser(int userToDeleteId);
     }

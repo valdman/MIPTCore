@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
+using Common.Entities;
 using Common.Infrastructure;
 using Journalist;
 using UserManagment.Application;
@@ -13,10 +13,16 @@ namespace UserManagment
     public class UserManager : IUserManager
     {
         private readonly IGenericRepository<User> _userRepository;
+        private readonly IUserMailerService _userMailerService;
+        
+        private readonly object _userCreationLock = new object();
+        private readonly object _userUpdateLock = new object();
+        private readonly object _userSaveLock = new object();
 
-        public UserManager(IGenericRepository<User> userRepository)
+        public UserManager(IGenericRepository<User> userRepository, IUserMailerService userMailerService)
         {
             _userRepository = userRepository;
+            _userMailerService = userMailerService;
         }
 
         public User GetUserById(int userId)
@@ -59,20 +65,56 @@ namespace UserManagment
         {
             Require.NotNull(userToUpdate, nameof(userToUpdate));
 
-            MustHaveUniqueEmail(userToUpdate);
-            MustContainConsistentProfile(userToUpdate);
+            lock (_userUpdateLock)
+            {
+                MustHaveUniqueEmail(userToUpdate);
+                MustContainConsistentProfile(userToUpdate);
 
-            _userRepository.Update(userToUpdate);
+                _userRepository.Update(userToUpdate);
+            }
         }
 
         public int CreateUser(User userToCreate)
         {
             Require.NotNull(userToCreate, nameof(userToCreate));
 
-            MustHaveUniqueEmail(userToCreate);
-            MustContainConsistentProfile(userToCreate);
+            int userId;
+            lock (_userCreationLock)
+            {
+                MustHaveUniqueEmail(userToCreate);
+                MustContainConsistentProfile(userToCreate);
 
-            return _userRepository.Create(userToCreate);
+                userId = _userRepository.Create(userToCreate);
+                _userMailerService.BeginPasswordSettingAndEmailVerification(userId).Wait();
+            }
+            
+            return userId;
+        }
+
+        public User GetOrSaveUserWithoutCredentials(User userToSave)
+        {
+            Require.NotNull(userToSave, nameof(userToSave));
+
+            lock (_userSaveLock)
+            {
+                var existingUser = GetUserByEmail(userToSave.Email);
+
+                if (existingUser != null)
+                {
+                    return existingUser;
+                }
+            
+                userToSave.Password = new Password
+                (
+                    //crutches.js
+                    Guid.NewGuid().ToString("n").Substring(0, 10)
+                );
+                userToSave.Role = UserRole.User;
+            
+                var newCreatedUserId = CreateUser(userToSave);
+
+                return _userRepository.GetById(newCreatedUserId);
+            }
         }
 
         public void DeleteUser(int userToDeleteId)
